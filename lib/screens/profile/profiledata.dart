@@ -13,6 +13,8 @@ import 'package:likhit/screens/profile/contact/contact_page.dart';
 import 'package:likhit/screens/profile/banking.dart';
 import 'package:likhit/service/model/edit_profile.dart';
 import 'package:likhit/style/text_style.dart';
+
+import 'bank details/bank_details_screen.dart';
 class ProfileDisplayPage extends StatefulWidget {
   final File? image;
   final String userId;
@@ -84,7 +86,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: Text('Lawyer Profile', style: AppTextStyles.kBody17SemiBoldTextStyle,),
+        title: Text('Lawyer Profile', style: AppTextStyles.kBody15SemiBoldTextStyle,),
       ),
       body: Padding(
         padding: const EdgeInsets.all(11.0),
@@ -96,16 +98,20 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CircleAvatar(
                         radius: 60,
                         backgroundImage: widget.image != null ? FileImage(widget.image!) : null,
                       ),
-                      const SizedBox(width: 182,),
-                      InkWell(
-                          onTap:(){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInputPage()));
-                          },child: const Icon(Icons.edit, size: 35,))
+                      // const SizedBox(width: 182,),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: InkWell(
+                            onTap:(){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInputPage()));
+                            },child: const Icon(Icons.edit, size: 30,)),
+                      ),
                     ],
                   ),
                   SizedBox(height: h5),
@@ -132,6 +138,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                   ),
                   const SizedBox(height: 10.0),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Container(
@@ -141,8 +148,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                             color: Colors.grey,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                            child: CustomButton(text: "Pay Now", color: Colors.black, onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentHistory()));
+                            child: CustomButton(text: "BANK DETAILS", color: Colors.black, onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => BankDetailsScreen()));
                             },)),
                       ),
                       SizedBox(width: w3 ,),
@@ -154,7 +161,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Contact",color: Colors.black, onPressed: (){
+                            child: CustomButton(text: "CONTACT INFO",color: Colors.black, onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactPage()));
                             },)),
                       ),
@@ -162,6 +169,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                   ),
                   SizedBox(height: h5,),
                   Row (
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Container(
@@ -171,7 +179,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                               color: Colors.indigo,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Save Contact",color: Colors.white,  onPressed: (){},)),
+                            child: CustomButton(text: "LAWYER KYC",color: Colors.white,  onPressed: (){},)),
                       ),
                       SizedBox(width: w3 ,),
                       Expanded(
@@ -182,7 +190,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Book Appointment",color: Colors.black, onPressed: (){
+                            child: CustomButton(text: "EDIT PROFILE",color: Colors.black, onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) =>  AppointmentScreen()));
                             },)),
                       ),

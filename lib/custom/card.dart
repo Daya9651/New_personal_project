@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likhit/style/text_style.dart';
 
 class CardHome extends StatelessWidget {
   final Color? color;
@@ -20,35 +21,39 @@ class CardHome extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Image.asset('assets/logo/ailogo.png', ),
                         SizedBox(width: 1,),
                         Column(
                           children: [
                             Text('AI Contracts Likhit',
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                              style: AppTextStyles.kBody15RegularTextStyle,
                             ),
                             Text('Lorem ipsum is placeholder.' ,
-                              style: TextStyle(fontSize: 18,),
+                              style: AppTextStyles.kBody15RegularTextStyle,
                             ),
                           ],
                         ),
-                        SizedBox(width: 5,),
-                        Center(
-                          child: InkWell(onTap: (){},
-                            child: Container(
-                                height: 30,
-                                width: 55,
-                                decoration: BoxDecoration(
-                                  color: Colors.indigo,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-
-                                child: Center(child: Text('Try AI',
-                                  style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold ),))),
-                          ),
-                        )
+                        // SizedBox(width: 5,),
+                        // Center(
+                        //   child: InkWell(onTap: (){},
+                        //     child: Expanded(
+                        //       child: Container(
+                        //           height: 30,
+                        //           width: 55,
+                        //           decoration: BoxDecoration(
+                        //             color: Colors.indigo,
+                        //             borderRadius: BorderRadius.circular(10),
+                        //           ),
+                        //
+                        //           child: Center(child: Text('Try AI',
+                        //             style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold ),)),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),

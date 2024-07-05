@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/screens/splash/components/splash_componets.dart';
 import 'package:likhit/screens/splash/components/bottombar.dart';
+import 'package:likhit/style/text_style.dart';
 
 import '../../constants.dart';
 
@@ -35,14 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Image.asset('assets/logo/likhitlogo.png', height: 60, width: 60,), // Adjust the path to your image
+              icon: Image.asset('assets/logo/likhitlogo.png', height: 60, width: 70,), // Adjust the path to your image
               onPressed: () {
                 // Add your onPressed logic here
               },
             ),
-            const SizedBox(width: 210,),
             InkWell(onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomBar(userName: '',)));
             },
@@ -53,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: const Center(child: Text("Skip"))),
+                  child:  Center(child: Text("Skip", style: AppTextStyles.kBody15SemiBoldTextStyle,))),
             ),
           ],
         ),
@@ -65,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
           width: double.infinity,
           child: Column(
             children:[
-              const SizedBox(height: 15,),
+              // const SizedBox(height: 15,),
               Expanded(
                 flex: 1,
                 child: PageView.builder(
@@ -88,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                     children: [
                       // const Spacer(),
-                      const SizedBox(height: 10,),
+                      // const SizedBox(height: 10,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
@@ -107,27 +109,35 @@ class _SplashScreenState extends State<SplashScreen> {
                           ),
                         ),
                       ),
-                      // const Spacer(flex: 3),
-                      const SizedBox(height: 10,),
-                      const Center(child: Text("Streamlined", style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),)),
+                      const Spacer(flex: 1),
+
+                      const Center(child: Text("Streamlined", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),)),
                       const SizedBox(height: 0.1,),
-                      const Center(child: Text("Agreements", style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),)),
-                      const SizedBox(height: 5,),
-                      const SizedBox(height: 10,),
-                      const Center(
-                          child: Text("     Welcome to Likhit De, where\n  aggrements are made simple and\n"
-                              "                     efficient",
-                            style: TextStyle(fontSize: 25),)),
+                      const Center(child: Text("Agreements", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)),
+                      const Spacer(flex: 1),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text("Welcome to Likhit De, where aggrements are made simple and efficient",
+                                  style: TextStyle(fontSize: 18),),
+                          ),
+                        ],
+                      ),
                       const Spacer(flex: 3),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SizedBox(width: 25,),
                           InkWell(onTap: (){
                             Navigator.pop(context);
-                          },child: const Text("<", style: TextStyle(fontSize: 40),)),
-                          const SizedBox(width: 200,),
+                          },child:  const ConstantContainer(
+                            width: 110,
+                              height: 40,
+                              radiusBorder: 20,
+                              color: Colors.grey,
+                              child: Text("<", style: TextStyle(fontSize: 35),))),
                           Container(
-                              height:60, width:120,
+                              height:40, width:110,
                               decoration: BoxDecoration(
                                   color: Colors.indigo,
                                 borderRadius: BorderRadius.circular(30)
@@ -135,7 +145,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                   child: InkWell(onTap:(){
                                     Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomBar(userName: 'Daya',)));
                                   },
-                                      child: const Center(child: Text("Next", style: TextStyle(color: Colors.white, fontSize: 20),)))),
+                                      child: const Center(child: Text("Next", style: TextStyle(color: Colors.white, fontSize: 15),)))),
                         ],
                       ),
                       const Spacer(),

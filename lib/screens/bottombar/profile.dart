@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:likhit/screens/profile/profiledata.dart';
-import 'package:likhit/service/api_url.dart';
 import 'package:likhit/style/text_style.dart';
 
 class ProfileInputPage extends StatefulWidget {
@@ -30,7 +29,6 @@ class _ProfileInputPageState extends State<ProfileInputPage> {
   final TextEditingController _barstateController = TextEditingController();
   final TextEditingController _baridController = TextEditingController();
   final TextEditingController _baradmissionController = TextEditingController();
-
   final TextEditingController _servicesController = TextEditingController();
   final TextEditingController _experienceController = TextEditingController();
   File? _image =  null;
@@ -54,10 +52,12 @@ class _ProfileInputPageState extends State<ProfileInputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        title: Text('Profile', style: AppTextStyles.kBody15SemiBoldTextStyle,),
-      ),
+      backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   automaticallyImplyLeading: false,
+      //   // title: Text('Profile', style: AppTextStyles.kBody15SemiBoldTextStyle,),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(

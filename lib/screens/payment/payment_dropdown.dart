@@ -11,6 +11,7 @@ class ConstantDropdown extends StatefulWidget {
   final String? hint;
   final FocusNode? focusNode;
   final bool? validation;
+  final double? width;
 
   const ConstantDropdown({
     super.key,
@@ -22,6 +23,7 @@ class ConstantDropdown extends StatefulWidget {
     this.hint,
     this.focusNode,
     this.validation = true,
+    this.width,
   });
 
   @override
@@ -37,8 +39,8 @@ class _ConstantDropdownState extends State<ConstantDropdown> {
         child: DropdownButtonFormField<String>(
           focusNode: widget.focusNode,
           hint: Text(widget.hint ?? "Select",
-              style: TextStyle(color: Colors.black)),
-          decoration: InputDecoration(
+              style: const TextStyle(color: Colors.black)),
+          decoration: const InputDecoration(
             isDense: false,
             contentPadding: EdgeInsets.all(8),
             // enabledBorder: constFieldsBorder(),

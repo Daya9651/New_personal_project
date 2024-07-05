@@ -22,7 +22,6 @@ class _BarAssociationState extends State<BarAssociation> {
     // EmailService().barAssociation();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

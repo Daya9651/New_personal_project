@@ -35,6 +35,7 @@ class ConstTextField extends StatelessWidget {
   final double? cursorHeight;
   final double? cursorWidth;
   final double? height;
+  final double? width;
   final FocusNode? focusNode;
   final List<TextInputFormatter>? inputFormatters;
   final TextAlign? textAlign;
@@ -75,7 +76,7 @@ class ConstTextField extends StatelessWidget {
     this.initialValue,
     this.onSubmitted,
     this.height,
-    this.borderRadius,
+    this.borderRadius, this.width,
   });
 
   @override
@@ -115,7 +116,7 @@ class ConstTextField extends StatelessWidget {
         decoration: InputDecoration(
           filled: filled,
           fillColor: fillColor,
-          // hoverColor: AppColors.success100,
+          hoverColor: AppColors.success100,
           suffix: suffix,
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,

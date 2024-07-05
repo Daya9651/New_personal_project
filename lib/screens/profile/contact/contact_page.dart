@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/common/widget/const_dropdown.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/custom/datePicker.dart';
 import 'package:likhit/style/text_style.dart';
 
+import '../contact info/contact_info_screen.dart';
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
-
   @override
   State<ContactPage> createState() => _ContactPageState();
 }
 
 class _ContactPageState extends State<ContactPage> {
    late GoogleMapController mapController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text("Contact Information", style: AppTextStyles.kBody15SemiBoldTextStyle,),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -81,6 +85,15 @@ class _ContactPageState extends State<ContactPage> {
                 child: Text('Monday - Friday: 8AM - 5PM.\n Saturday & Sundat : Close',
                   style: AppTextStyles.kBody15RegularTextStyle,),
               ),
+              SizedBox(height: 10,),
+              ConstantContainer(
+                color: Colors.indigo,
+                  radiusBorder: 25,
+                  child: TextButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => ContactInfoScreen()),
+                    );}, child: Text('Save',
+                    style: AppTextStyles.kBody15RegularTextStyle.copyWith(color: Colors.white),))),
             ],
           ),
         ),

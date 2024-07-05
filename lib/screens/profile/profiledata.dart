@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/const/const_width.dart';
@@ -11,8 +12,12 @@ import 'package:likhit/screens/payment/payment_history.dart';
 import 'package:likhit/screens/profile/bar_association.dart';
 import 'package:likhit/screens/profile/contact/contact_page.dart';
 import 'package:likhit/screens/profile/banking.dart';
+import 'package:likhit/screens/profile/widget/profile_card.dart';
 import 'package:likhit/service/model/edit_profile.dart';
 import 'package:likhit/style/text_style.dart';
+
+import 'lawyer_edit_profile.dart';
+import 'lawyer_kyc_page.dart';
 class ProfileDisplayPage extends StatefulWidget {
   final File? image;
   final String userId;
@@ -138,7 +143,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                           height: h35,
                           width: 150,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.grey.shade300
+                            ,
                             borderRadius: BorderRadius.circular(15),
                           ),
                             child: CustomButton(text: "Pay Now", color: Colors.black, onPressed: (){
@@ -151,7 +157,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                             height: h35,
                             width: 175,
                             decoration: BoxDecoration(
-                              color: Colors.grey,
+                              color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: CustomButton(text: "Contact",color: Colors.black, onPressed: (){
@@ -171,7 +177,9 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                               color: Colors.indigo,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Save Contact",color: Colors.white,  onPressed: (){},)),
+                            child: CustomButton(text: "LAWYER KYC",color: Colors.white,  onPressed: (){
+                              Get.to(LawyerKycPage());
+                            },)),
                       ),
                       SizedBox(width: w3 ,),
                       Expanded(
@@ -179,11 +187,11 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                             height: h35,
                             width: 192,
                             decoration: BoxDecoration(
-                              color: Colors.grey,
+                              color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Book Appointment",color: Colors.black, onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) =>  AppointmentScreen()));
+                            child: CustomButton(text: "EDIT PROFILE",color: Colors.black, onPressed: (){
+                             Get.to(LawyerEditProfile());
                             },)),
                       ),
                     ],
@@ -293,140 +301,95 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                       ],
                     ),
                   ),
-                  Text("Education & Credentials", style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                  SizedBox(height: h8,),
+                  // todo inzamam specialities date 5 july
+                  constText15SemiBold(text: "Specialities"),
                   Container(
-                    height: h45,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.school_outlined, size: 30,),
-                        SizedBox(width: w8,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.university,
-                              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              widget.qualification,
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          ],
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+
+                            crossAxisCount: 2,
+                          mainAxisExtent: h40,
+                          crossAxisSpacing: w8,
+                          mainAxisSpacing: w5
                         ),
-                        SizedBox(width: w60,),
-                        Text(
-                          widget.passingyear,
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ],
-                    ),
+                        itemCount: 5,
+                        itemBuilder: (context, index){
+                          return specialitiesCard();
+                        }),
                   ),
-                  SizedBox(height: h5,),
+                  
+                  // todo education 5 july
+                  constText15SemiBold(text: "Education & Credentials"),
+                  SizedBox(
+                    child: ListView.builder(
+                      itemCount: 2,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context,index){
+                          return customListTile(title: 'Lucknow University',subtitle: "B.Tech",date: "2024",icon: Icons.school,onTap: (){});
+                        })
+                  ),
+                  SizedBox(
+                    child: customListTile(title: 'IIT Kanpur',subtitle: "M.Tech",date: "2024",icon: Icons.school,onTap: (){}),
+                  ),
+
+                  //todo language spoken 5 july
+                  constText15SemiBold(text: "Language Spoken"),
                   Container(
-                    height: h45,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.school_outlined, size: 30,),
-                        SizedBox(width: w8,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.academic,
-                              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              widget.acadqualification,
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          ],
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+
+                            crossAxisCount: 2,
+                            mainAxisExtent: h40,
+                            crossAxisSpacing: w8,
+                            mainAxisSpacing: w5
                         ),
-                        SizedBox(width: w60,),
-                        Text(
-                          widget.acadpasssing,
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ],
-                    ),
+                        itemCount: 3,
+                        itemBuilder: (context, index){
+                          return specialitiesCard();
+                        }),
                   ),
-                  SizedBox(height: h7,),
-                  Text("Language Spoken", style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                  Text("Language Written", style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                  Text("Experience", style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                  SizedBox(height: h8,),
+                  constText15SemiBold(text: "Written Language"),
                   Container(
-                    height: h35,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.star_border, size: 30,),
-                        SizedBox(width: w8,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.university,
-                              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              widget.qualification,
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          ],
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+
+                            crossAxisCount: 2,
+                            mainAxisExtent: h40,
+                            crossAxisSpacing: w8,
+                            mainAxisSpacing: w5
                         ),
-                        SizedBox(width: w60,),
-                        Text(
-                          widget.passingyear,
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ],
-                    ),
+                        itemCount: 4,
+                        itemBuilder: (context, index){
+                          return specialitiesCard();
+                        }),
                   ),
-                  SizedBox(height: h8,),
-                  Container(
-                    height: h45,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.star_border, size: 30,),
-                        SizedBox(width: w8,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.university,
-                              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              widget.qualification,
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: w60,),
-                        Text(
-                          widget.passingyear,
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ],
-                    ),
+
+                  //todo experience 5 july
+                  constText15SemiBold(text: "Experience"),
+                  SizedBox(
+                      child: ListView.builder(
+                          itemCount: 2,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context,index){
+                            return customListTile(title: 'Criminal Experience',subtitle: "Best Criminal lawyer Experience",date: "2022 - Present",icon: Icons.star_border,onTap: (){});
+                          })
                   ),
-                  Text("Client Review", style: AppTextStyles.kBody15SemiBoldTextStyle,),
+                 SizedBox(
+                   child: customListTile(title: 'Criminal Experience',subtitle: "Best Criminal lawyer Experience",date: "2022 - Present",icon: Icons.star_border,onTap: (){}),
+                 ),
+                  SizedBox(
+                    child: customListTile(title: 'XYX',subtitle: "Handle Company Cases ",date: "2024 - Present",icon: Icons.star_border,onTap: (){}),
+                  ),
+
+                  constText15SemiBold(text: "Client Review"),
 
                   // Text(
                   //   'Education: $education',

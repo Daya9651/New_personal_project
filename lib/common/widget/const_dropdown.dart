@@ -44,7 +44,7 @@ class _ConstantDropdownState extends State<ConstantDropdown> {
           child: DropdownButtonFormField<String>(
             focusNode: widget.focusNode,
             hint: Text(widget.hint ?? "Select",
-                style: AppTextStyles.kBody15RegularTextStyle
+                style: AppTextStyles.kSmall10RegularTextStyle
                     .copyWith(color: AppColors.white50)),
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(horizontal: 8),

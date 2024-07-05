@@ -122,7 +122,7 @@ class ConstTextField extends StatelessWidget {
           hintText: hintText,
           labelText: labelText,
           hintStyle: hintStyle ??
-              AppTextStyles.kBody15RegularTextStyle
+              AppTextStyles.kSmall10RegularTextStyle
                   .copyWith(color: AppColors.white50),
           counter: const Offstage(),
           enabledBorder: borderNone == true

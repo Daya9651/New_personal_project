@@ -87,10 +87,10 @@ class Verification extends StatelessWidget {
               ),
               constText12SemiBold(text: "Adhar Card Image"),
               chooseFileContainer(onTap: ()async{
-                await controller.getImage();
-                debugPrint(' imageFile1 ${controller.image.toString()}');
+                await controller.getAdharCardImage();
+                debugPrint(' imageFile1 ${controller.adharCardImage.toString()}');
               },
-                imageText: controller.image.toString()
+                imageText: controller.adharCardImage.toString()
               ),
         
               constText12SemiBold(text: "PAN Card"),
@@ -100,10 +100,10 @@ class Verification extends StatelessWidget {
               ),
               constText12SemiBold(text: "PAN Image"),
               chooseFileContainer(onTap: ()async{
-                await controller.getImage();
+                await controller.getPanCardImage();
                 debugPrint(' imageFile2 ${controller.image.toString()}');
               },
-                  imageText: controller.image.toString()
+                  imageText: controller.panCardImage.toString()
               ),
         
               constText12SemiBold(text: "Lawyer License"),
@@ -113,17 +113,20 @@ class Verification extends StatelessWidget {
               ),
               constText12SemiBold(text: "License Image"),
               chooseFileContainer(onTap: ()async{
-                await controller.getImage();
+                await controller.getLicenseImage();
                 debugPrint(' imageFile3 ${controller.image.toString()}');
               },
-                  imageText: controller.image.toString()
+                  imageText: controller.licenseImage.toString()
               ),
               SizedBox(height: h25,),
 
-              SizedBox(
+           Obx(()=>controller.isLoading.value? const Center(child: CircularProgressIndicator()) : SizedBox(
                 height: h50,
                 width: double.maxFinite,
-                  child: MyCustomButton(onTap: (){},color: AppColors.info80,text: "Save",)),
+                  child: MyCustomButton(onTap: (){
+                    // controller.uploadLawyerDoc();
+                    controller.updateLawyerProfile();
+                  },color: AppColors.info80,text: "Save",))),
               SizedBox(height: h25,),
             ],
           )),

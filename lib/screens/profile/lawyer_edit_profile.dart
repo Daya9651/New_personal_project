@@ -9,6 +9,8 @@ import '../../const/const_height.dart';
 import '../../style/color.dart';
 import 'controller/lawyer_profile_controller.dart';
 
+// const color = Color('#F0F2F5');
+
 class LawyerEditProfile extends StatelessWidget {
    LawyerEditProfile({super.key});
 

@@ -5,6 +5,9 @@ const String loginEmailUrl = "$baseUrl/get-otp-api/";
 const String otpVerify = "$baseUrl/verify-user-otp-api/";
 
 const String curdLawyerServices = "$baseUrl/crud-lawyer-fee-api/";
+const String addPhoneNumber = "$baseUrl/crud-lawyer-phone-number-api/";
+const String addEmail = "$baseUrl/crud-lawyer-email-api/";
+const String addSocialMedia = "$baseUrl/crud-lawyer-social-media/";
 
 
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";

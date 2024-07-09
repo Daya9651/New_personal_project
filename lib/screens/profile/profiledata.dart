@@ -152,7 +152,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                             ,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                            child: CustomButton(text: "Pay Now", color: Colors.black, onPressed: (){
+                            child: CustomButton(text: "BANK DETAILS", color: Colors.black, onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentHistory()));
                             },)),
                       ),
@@ -165,7 +165,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                               color: AppColors.white101,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Contact",color: Colors.black, onPressed: (){
+                            child: CustomButton(text: "CONTACT INFO",color: Colors.black, onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactPage()));
                             },)),
                       ),

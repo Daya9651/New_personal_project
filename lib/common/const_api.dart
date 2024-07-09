@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../const/api_urls.dart';
 import '../utils/const_toast.dart';
 
@@ -57,11 +56,11 @@ class ApiService {
       ),
     );
 
-    if (kDebugMode) {
-      _dio.interceptors.add(PrettyDioLogger(
-        requestBody: true,
-      ));
-    }
+  //   if (kDebugMode) {
+  //     _dio.interceptors.add(PrettyDioLogger(
+  //       requestBody: true,
+  //     ));
+  //   }
   }
 
   static Future<Response> getData(String path,

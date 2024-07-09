@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,17 +20,21 @@ Widget customListTile({
   String? subtitle,
   String? date,
   IconData? icon,
-  Function()? onTap
+  Function()? onTap,
+  bool? visibility ,
 
 }){
   return ListTile(
     contentPadding: EdgeInsets.only(left: h5),
-    leading: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(h5),
-        color: AppColors.white101
-      ),
-      child: IconButton(onPressed: onTap, icon: Icon(icon, color: AppColors.white100,)).marginAll(h2),),
+    leading: Visibility(
+      visible: visibility ?? true,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(h5),
+          color: AppColors.white101
+        ),
+        child: IconButton(onPressed: onTap, icon: Icon(icon, color: AppColors.white100,)).marginAll(h2),),
+    ),
     title: Container(child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

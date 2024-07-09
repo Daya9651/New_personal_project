@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/custom/botton.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
 
-import '../../service/api_url.dart';
+import '../../service/loginApi.dart';
 import '../otp generate/otp_screen.dart';
 
 class SignInPage extends StatelessWidget {
@@ -37,10 +38,10 @@ class SignInPage extends StatelessWidget {
                 const SizedBox(height: 35,),
                 Image.asset('assets/logo/likhitlogo.png', height: 160, width: 160,),
                 const SizedBox(height: 70,),
-                const Text(
+                 Text(
                   'Log in or sign up to Likhit De',
 
-                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
+                  style: AppTextStyles.kBody17SemiBoldTextStyle,
                 ),
                 const SizedBox(height: 10.0),
                // TextField(
@@ -87,22 +88,18 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.indigo
                       ),
-                      child: CustomButton(
+                      child:emailService.isLoading? CircularProgressIndicator():CustomButton(
                           text: 'Continue',
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               String email = emailController.text.trim();
                               if (email.isNotEmpty) {
-                                emailService.sendOtp(email); // Assuming emailService is correctly implemented
+                                emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
                                 // Clear the email field
-                                emailController.clear();
+                                // emailController.clear();
                                 // Navigate to the VerifyOtpPage after OTP is sent
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => VerifyOtpPage(email: 'email', verifyByOtp: '',),
-                              ),
-                            );
+
+
                           } else {
                             // Handle empty email case
                           }
@@ -115,29 +112,50 @@ class SignInPage extends StatelessWidget {
                         }
                         }, color: AppColors.white),),
                 SizedBox(height: h20),
-                 Text(
-                  'Or',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.kBody15SemiBoldTextStyle
+                 //todo changes
+                Row(
+                  children: [
+                    Divider(),
+                    // Text(
+                    //     'Or',
+                    //     style: AppTextStyles.kBody15SemiBoldTextStyle
+                    // ),
+                    Divider(),
+
+                  ],
                 ),
+
+                Text(
+                    'Or',
+                    style: AppTextStyles.kBody15SemiBoldTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+
                 SizedBox(height: h15),
                   // icon: Icon(Icons.g_translate),
                    Container(
+                     padding: EdgeInsets.all(h10),
                      decoration: BoxDecoration(
-                       color: Colors.grey,
+                       color: AppColors.white101,
                        borderRadius: BorderRadius.circular(15),
                      ),
-                     height: h40,
-                       child: CustomButton(text: 'Continue with Google', onPressed: () {}, color: Colors.black,)),
+                       child: CustomButton2(
+                         imageHeight: 25,
+                         imageWidth: 25,
+                         image: "assets/logo/google.png",
+                         text: 'Continue with Google', onPressed: () {}, color: Colors.black,)),
                 const SizedBox(height: 16.0),
                   // icon: Icon(Icons.apple),
                   Container(
-                    height: 55,
                       decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: CustomButton(text: 'Continue with Apple', onPressed: (){}, color: Colors.white,)),
+                      child: CustomButton2(
+                        imageHeight: 50,
+                        imageWidth: 50,
+                        image: "assets/logo/apple.png",
+                        text: 'Continue with Apple', onPressed: (){}, color: Colors.white,)),
               ],
             ),
           ),

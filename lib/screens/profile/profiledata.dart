@@ -12,11 +12,13 @@ import 'package:likhit/screens/payment/payment_history.dart';
 import 'package:likhit/screens/profile/bar_association.dart';
 import 'package:likhit/screens/profile/contact/contact_page.dart';
 import 'package:likhit/screens/profile/banking.dart';
+import 'package:likhit/screens/profile/controller/lawyer_profile_controller.dart';
 import 'package:likhit/screens/profile/widget/profile_card.dart';
 import 'package:likhit/service/model/edit_profile.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
 
+import '../../common/widget/const_text_field.dart';
 import 'lawyer_edit_profile.dart';
 import 'lawyer_kyc_page.dart';
 class ProfileDisplayPage extends StatefulWidget {
@@ -74,6 +76,8 @@ class ProfileDisplayPage extends StatefulWidget {
 
 class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTickerProviderStateMixin {
   late TabController tabController;
+
+  LawyerProfileController controller = Get.put(LawyerProfileController());
 
   @override
   void initState() {
@@ -211,17 +215,50 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                       showDialog(context: context,
                           builder: (BuildContext context){
                         return AlertDialog(
-                          title: Text('Add Services'),
-
+                          contentPadding: EdgeInsets.zero,
+                          title: Center(child: Text('Add Services',style: AppTextStyles.kBody15SemiBoldTextStyle,),),
                           actions: [
                             Container(
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Divider(),
+                                  constText12SemiBold(text: "Name"),
+                                  ConstTextField(
+                                    controller: controller.titleController.value,
+                                    hintText: "Enter Title",
+                                  ),
+                                  constText12SemiBold(text: "Sub Title"),
+                                  ConstTextField(
+                                    controller: controller.subtitleController.value,
+                                    hintText: "Enter Sub Title",
+                                  ),
+                                  constText12SemiBold(text: "Fees"),
+                                  ConstTextField(
+                                    controller: controller.feesController.value,
+                                    hintText: "Enter Fees",
+                                  ),
+                                  Divider(),
+
+                                  SizedBox(
+                                    width: double.maxFinite,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        MyCustomButton(onTap: (){
+                                          Get.back();
+                                        },color: Colors.grey,text: "Cancel",),
+                                        const Text("  "),
+                                        MyCustomButton(onTap: (){},color: AppColors.info80,text: "Save",)
+                                      ],
+                                    ),
+                                  ),
 
                                 ],
                               ),
                             )
                           ],
+
                         );
                           });
                     }, icon: Icon(Icons.edit,)),
@@ -351,7 +388,57 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                   ),
                   
                   // todo education 5 july
-                  constText15SemiBold(text: "Education & Credentials"),
+                  ListTile(
+                    title: constText15SemiBold(text: "Education & Credentials"),
+                    trailing: IconButton(onPressed: (){
+                      showDialog(context: context,
+                          builder: (BuildContext context){
+                            return AlertDialog(
+                              contentPadding: EdgeInsets.zero,
+                              title: Center(child: Text('Add Education',style: AppTextStyles.kBody15SemiBoldTextStyle,),),
+                              actions: [
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Divider(),
+                                      constText12SemiBold(text: "University/Collage"),
+                                      ConstTextField(
+                                        hintText: "Enter Your University",
+                                      ),
+                                      constText12SemiBold(text: " Course"),
+                                      ConstTextField(
+                                        hintText: "Enter Course",
+                                      ),
+                                      constText12SemiBold(text: "Years"),
+                                      ConstTextField(
+
+                                      ),
+                                      Divider(),
+
+                                      SizedBox(
+                                        width: double.maxFinite,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            MyCustomButton(onTap: (){
+                                              Get.back();
+                                            },color: Colors.grey,text: "Cancel",),
+                                            const Text("  "),
+                                            MyCustomButton(onTap: (){},color: AppColors.info80,text: "Save",)
+                                          ],
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                )
+                              ],
+
+                            );
+                          });
+                    }, icon: Icon(Icons.edit,)),
+                  ),
                   SizedBox(
                     child: ListView.builder(
                       itemCount: 2,

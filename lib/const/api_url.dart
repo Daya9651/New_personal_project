@@ -9,6 +9,15 @@ const String addPhoneNumber = "$baseUrl/crud-lawyer-phone-number-api/";
 const String addEmail = "$baseUrl/crud-lawyer-email-api/";
 const String addSocialMedia = "$baseUrl/crud-lawyer-social-media/";
 
+//todo for lawyer and client
+const String confirmationLawyerAndClientUrl = "$baseUrl/confirm-user-api/";
+
+//todo state api
+const String stateUrl = "$baseUrl/state-list-api/";
+//todo city api
+const String cityUrl = "$baseUrl/city-list-api/";
+
+
 
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likhit/style/color.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
+          backgroundColor: AppColors.info80,
           // elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),

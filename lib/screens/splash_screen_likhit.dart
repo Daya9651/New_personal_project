@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/screens/auth/choose_account_type.dart';
 import 'package:likhit/screens/signUpPage.dart';
 import 'package:likhit/screens/signup/signUp.dart';
 import 'package:likhit/screens/splash/splash_screen.dart';
@@ -33,7 +34,7 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
       final loggedIn = await UserDataService.getAuthToken() != null;
       if (loggedIn) {
         // If logged in, go to HomeScreen
-        Get.off(SplashScreen());
+        Get.off(ChoosePage());
       } else {
         // If not logged in, go to LoginScreen
         Get.off(SignInPage());

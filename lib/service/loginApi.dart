@@ -6,6 +6,7 @@ import 'package:likhit/screens/auth/save_auth_data.dart';
 import 'package:likhit/utils/const_toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/auth/choose_account_type.dart';
 import '../screens/otp generate/otp_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import 'model/banking_model.dart';
@@ -60,7 +61,7 @@ import 'model/edit_profile.dart';
         Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SplashScreen()));
+                  builder: (context) => const ChoosePage()));
         var token = response.data['token_key'];
         // debugPrint("tokenType $token");
         // authToken = token;

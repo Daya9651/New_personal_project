@@ -1,11 +1,9 @@
 import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/style/color.dart';
-
 import '../../../style/text_style.dart';
 
 Widget specialitiesCard(){
@@ -89,10 +87,17 @@ Widget constText15SemiBold({String? text}){
   );
 }
 
-Widget constText12SemiBold({String? text}){
+Widget constText12SemiBold({String? text, bool? imp}){
   return Container(
     margin: EdgeInsets.only(top: h8, left: h5 ),
-    child: Text(text??'', style: AppTextStyles.kCaption12SemiBoldTextStyle,),
+    child: Row(
+      children: [
+        Text(text??'', style: AppTextStyles.kCaption12SemiBoldTextStyle,),
+        Visibility(
+          visible: imp??false,
+            child: Text('*', style: AppTextStyles.kCaption12SemiBoldTextStyle.copyWith(color: AppColors.error40),))
+      ],
+    ),
   );
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:likhit/screens/auth/choose_account_type.dart';
 import 'package:likhit/screens/auth/save_auth_data.dart';
 import 'package:likhit/screens/bottombar/profile.dart';
 import 'package:likhit/screens/profile/banking.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
 
   checkLogin() async{
     if(await UserDataService.getAuthToken() != null){
-      Get.to(SplashScreen());
+      Get.to(ChoosePage());
 
     }else{
       Get.to(SignInPage());

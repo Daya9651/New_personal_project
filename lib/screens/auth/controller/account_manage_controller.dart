@@ -58,7 +58,6 @@ class AccountManageController extends GetxController{
       debugPrint("confirmUserApi ${response}");
       if(response.data['response_code']==200){
         ConstToast.to.showSuccess("${response.data['message']}");
-        debugPrint("200 ${response.data}");
 
       }else{
         debugPrint("else confirmUserApi ${response.data}");

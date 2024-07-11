@@ -6,6 +6,7 @@ import 'package:likhit/screens/auth/services/model/state_model.dart';
 import '../../common/widget/const_dropdown.dart';
 import '../../common/widget/const_text_field.dart';
 import '../../const/const_height.dart';
+import '../../helpers/literals.dart';
 import '../../style/color.dart';
 import '../profile/widget/profile_card.dart';
 
@@ -54,19 +55,9 @@ class LawyerAddProfile extends StatelessWidget {
 
               constText12SemiBold(text: "Select Speciality",imp: true),
 
-              ConstantDropdown(options: const ["Child Support",
-                'Domestic Voilence',
-                'DUI/DWI',
-                'Trafic Ticket',
-                'Wrongful Death',
-                "Wils and Trusts",
-                'Landlord-Tenant',
-                'Family Law',
-                'Criminal Law',
-                'Divorce',
-                'Property Law',
-                'Contracts','Corprate Law'
-              ], onChanged: (value) {
+              ConstantDropdown(options:
+              specialityLawyer,
+               onChanged: (value) {
                 //todo tasked
               },),
 
@@ -101,12 +92,10 @@ class LawyerAddProfile extends StatelessWidget {
                         (item) => item.name == newValue,
                   );
 
-                  if (selectedItem != null) {
-                    int? stateID = selectedItem.id; // Assuming `id` is the property holding the ID
-                    controller.state.value = newValue;
-                    controller.cityGet(stateID);
-                  }
-    // else {
+                  int? stateID = selectedItem.id; // Assuming `id` is the property holding the ID
+                  controller.state.value = newValue;
+                  controller.cityGet(stateID);
+                    // else {
                   //   controller.cityGet(null); // Handle case when selectedItem is null
                   // }
                 },)),

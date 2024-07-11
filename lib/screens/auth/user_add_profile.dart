@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/screens/client_screen/client_lawyer_list.dart';
 import '../../common/widget/const_dropdown.dart';
 import '../../common/widget/const_text_field.dart';
 import '../../common/widget/custom_date_picker.dart';
@@ -72,7 +73,7 @@ class UserAddProfile extends StatelessWidget {
                     MyCustomButton(onTap: (){},color: Colors.grey,text: "Cancel",),
                     const Text("  "),
                     MyCustomButton(onTap: (){
-
+                      Get.to(ClientLawyerList());
                       controller.confirmUserApi();
                     },color: AppColors.info80,text: "Save",)
                   ],

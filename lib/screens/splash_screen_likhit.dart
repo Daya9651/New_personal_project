@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:likhit/screens/auth/choose_account_type.dart';
-import 'package:likhit/screens/signUpPage.dart';
 import 'package:likhit/screens/signup/signUp.dart';
 import 'package:likhit/screens/splash/splash_screen.dart';
 
 import '../const/const_height.dart';
 import '../const/const_width.dart';
+import '../pending_review_page.dart';
 import 'auth/save_auth_data.dart';
-
+import 'client_screen/client_lawyer_list.dart';
 
 class SplashScreenLikhit extends StatefulWidget {
   const SplashScreenLikhit({super.key});
@@ -31,18 +29,36 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
 
     // Check login status
     try {
-      final loggedIn = await UserDataService.getAuthToken() != null;
-      if (loggedIn) {
-        // If logged in, go to HomeScreen
-        Get.off(ChoosePage());
-      } else {
-        // If not logged in, go to LoginScreen
-        Get.off(SignInPage());
-      }
+      await checkRole();
+      // final loggedIn = await UserDataService.getAuthToken() != null;
+      // if (loggedIn) {
+      //   // If logged in, go to HomeScreen
+      //   Get.off(ChoosePage());
+      // } else {
+      //   // If not logged in, go to LoginScreen
+      //   Get.off(SignInPage());
+      // }
     } catch (e) {
       debugPrint("Error checking login status: $e");
       // Navigate to login screen in case of error
       Get.off(SignInPage());
+    }
+  }
+
+  Future<void> checkRole() async {
+    final loggedIn = await UserDataService.getAuthToken() != null;
+    if (loggedIn) {
+      String? type =
+          await UserDataService.getUserType(); // Assuming this gets user type
+      if (type == "Client") {
+        Get.offAll(ClientLawyerList()); // Navigate to ClientLawyerList screen
+      } else if (type == "Lawyer") {
+        Get.offAll(SplashScreen2()); // Navigate to SplashScreen2 screen
+      } else {
+        Get.offAll(PendingReviewPage()); // Navigate to PendingReviewPage screen
+      }
+    } else {
+      Get.off(SignInPage()); // Navigate to SignInPage if not logged in
     }
   }
 
@@ -62,9 +78,9 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
     );
   }
 
-  Future<bool> checkLoggedIn() async {
-    // Check if user is logged in
-    final authToken = await UserDataService.getAuthToken();
-    return authToken != null;
-  }
+// Future<bool> checkLoggedIn() async {
+//   // Check if user is logged in
+//   final authToken = await UserDataService.getAuthToken();
+//   return authToken != null;
+// }
 }

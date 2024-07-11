@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/routes/routes.dart';
 import 'package:likhit/screens/auth/choose_account_type.dart';
-import 'package:likhit/screens/signUpPage.dart';
+import 'package:likhit/screens/sign_in_page.dart';
 import 'package:likhit/screens/signup/signUp.dart';
 import 'package:likhit/screens/splash/splash_screen.dart';
 
@@ -34,15 +35,16 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
       final loggedIn = await UserDataService.getAuthToken() != null;
       if (loggedIn) {
         // If logged in, go to HomeScreen
-        Get.off(ChoosePage());
+        Get.off(SplashScreen2());
+        // Get.offAllNamed(ApplicationPages.choosePage);
       } else {
         // If not logged in, go to LoginScreen
-        Get.off(SignInPage());
+        Get.offAllNamed(ApplicationPages.signUpPage);
       }
     } catch (e) {
       debugPrint("Error checking login status: $e");
       // Navigate to login screen in case of error
-      Get.off(SignInPage());
+      Get.offAllNamed(ApplicationPages.signUpPage);
     }
   }
 
@@ -62,9 +64,5 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
     );
   }
 
-  Future<bool> checkLoggedIn() async {
-    // Check if user is logged in
-    final authToken = await UserDataService.getAuthToken();
-    return authToken != null;
-  }
+
 }

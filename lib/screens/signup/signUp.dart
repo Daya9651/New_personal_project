@@ -10,13 +10,16 @@ import '../../service/loginApi.dart';
 import '../otp generate/otp_screen.dart';
 
 class SignInPage extends StatelessWidget {
+
+
+  SignInPage({super.key});
+
   final TextEditingController emailController = TextEditingController();
   final EmailService emailService = EmailService();
 
   final _formKey = GlobalKey<FormState>();
   late String email;
 
-  SignInPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/custom/botton.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
-
 import '../../service/loginApi.dart';
-import '../otp generate/otp_screen.dart';
 
 class SignInPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -109,7 +106,7 @@ class SignInPage extends StatelessWidget {
                           //   context,
                           //   MaterialPageRoute(builder: (context) =>  OTPVerificationPage()),
                           // );
-                        }
+                         }
                         }, color: AppColors.white),),
                 SizedBox(height: h20),
                  //todo changes

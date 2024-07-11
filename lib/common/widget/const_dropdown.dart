@@ -54,7 +54,7 @@ class _ConstantDropdownState extends State<ConstantDropdown> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
-                borderSide: BorderSide(color: AppColors.primary, width: 1),
+                borderSide: BorderSide(color: AppColors.info80, width: 1),
               ),
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.white100),

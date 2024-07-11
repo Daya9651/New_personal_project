@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/style/text_style.dart';
 
-import '../../service/api_url.dart';
+import '../../service/loginApi.dart';
 
 class BarAssociation extends StatefulWidget {
 

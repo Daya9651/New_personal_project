@@ -6,16 +6,16 @@ import 'package:likhit/style/text_style.dart';
 
 import '../../constants.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen2 extends StatefulWidget {
   static String routeName = "/splash";
 
-  const SplashScreen({super.key});
+  const SplashScreen2({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen2> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen2> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {

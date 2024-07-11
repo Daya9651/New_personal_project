@@ -24,7 +24,6 @@ class _CompanyReportPageState extends State<CompanyReportPage> with SingleTicker
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
-
         appBar: AppBar(
           toolbarHeight: 40,
           automaticallyImplyLeading: false,

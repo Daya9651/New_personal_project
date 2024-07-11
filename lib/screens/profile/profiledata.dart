@@ -12,10 +12,13 @@ import 'package:likhit/screens/payment/payment_history.dart';
 import 'package:likhit/screens/profile/bar_association.dart';
 import 'package:likhit/screens/profile/contact/contact_page.dart';
 import 'package:likhit/screens/profile/banking.dart';
+import 'package:likhit/screens/profile/controller/lawyer_profile_controller.dart';
 import 'package:likhit/screens/profile/widget/profile_card.dart';
 import 'package:likhit/service/model/edit_profile.dart';
+import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
 
+import '../../common/widget/const_text_field.dart';
 import 'lawyer_edit_profile.dart';
 import 'lawyer_kyc_page.dart';
 class ProfileDisplayPage extends StatefulWidget {
@@ -73,6 +76,8 @@ class ProfileDisplayPage extends StatefulWidget {
 
 class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTickerProviderStateMixin {
   late TabController tabController;
+
+  LawyerProfileController controller = Get.put(LawyerProfileController());
 
   @override
   void initState() {
@@ -143,11 +148,11 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                           height: h35,
                           width: 150,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300
+                            color: AppColors.white101
                             ,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                            child: CustomButton(text: "Pay Now", color: Colors.black, onPressed: (){
+                            child: CustomButton(text: "BANK DETAILS", color: Colors.black, onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentHistory()));
                             },)),
                       ),
@@ -157,10 +162,10 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                             height: h35,
                             width: 175,
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
+                              color: AppColors.white101,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: CustomButton(text: "Contact",color: Colors.black, onPressed: (){
+                            child: CustomButton(text: "CONTACT INFO",color: Colors.black, onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactPage()));
                             },)),
                       ),
@@ -187,7 +192,7 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                             height: h35,
                             width: 192,
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
+                              color: AppColors.white101,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: CustomButton(text: "EDIT PROFILE",color: Colors.black, onPressed: (){
@@ -204,103 +209,165 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                     style: const TextStyle(fontSize: 18.0),
                   ),
                   SizedBox(height: h10,),
-                  Text("Services Offered", style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                  SizedBox(height: h8,),
-                  Container(
-                    height: h75,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.search_sharp, size: 30,),
-                        SizedBox(width: w8,),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Legal Advice',
-                              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Get professional legal\nadvice for your case.',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
+                  ListTile(
+                    title: constText15SemiBold(text: "Services Offered"),
+                    trailing: IconButton(onPressed: (){
+                      showDialog(context: context,
+                          builder: (BuildContext context){
+                        return AlertDialog(
+                          contentPadding: EdgeInsets.zero,
+                          title: Center(child: Text('Add Services',style: AppTextStyles.kBody15SemiBoldTextStyle,),),
+                          actions: [
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Divider(),
+                                  constText12SemiBold(text: "Name"),
+                                  ConstTextField(
+                                    controller: controller.titleController.value,
+                                    hintText: "Enter Title",
+                                  ),
+                                  constText12SemiBold(text: "Sub Title"),
+                                  ConstTextField(
+                                    controller: controller.subtitleController.value,
+                                    hintText: "Enter Sub Title",
+                                  ),
+                                  constText12SemiBold(text: "Fees"),
+                                  ConstTextField(
+                                    controller: controller.feesController.value,
+                                    hintText: "Enter Fees",
+                                  ),
+                                  Divider(),
+
+                                  SizedBox(
+                                    width: double.maxFinite,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        MyCustomButton(onTap: (){
+                                          Get.back();
+                                        },color: Colors.grey,text: "Cancel",),
+                                        const Text("  "),
+                                        MyCustomButton(onTap: (){},color: AppColors.info80,text: "Save",)
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            )
                           ],
-                        ),
-                        SizedBox(width: w30,),
-                        // Text(
-                        //   'Starting at ${widget.adviceprice}',
-                        //   style: const TextStyle(fontSize: 20.0),
-                        // ),
-                      ],
-                    ),
+
+                        );
+                          });
+                    }, icon: Icon(Icons.edit,)),
                   ),
-                  SizedBox(height: h8,),
-                  Container(
-                    height: h75,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.file_copy_sharp, size: 30,),
-                        SizedBox(width: w8,),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Document Review',
-                              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Have your legal\ndocumnet reviewed by',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: w30,),
-                        // Text(
-                        //   'Starting at ${widget.documentprice}',
-                        //   style: const TextStyle(fontSize: 20.0),
-                        // ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: h8,),
-                  Container(
-                    height: h75,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.cases_outlined, size: 30,),
-                        SizedBox(width: w8,),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Case Review',
-                              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Get your legel case\nthroughly reviewed.',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: w50,),
-                        // Text(
-                        //   'Starting at ${widget.caseprice}',
-                        //   style: const TextStyle(fontSize: 20.0),
-                        // ),
-                      ],
-                    ),
-                  ),
+                  
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 6,
+                      itemBuilder: (context, index){
+                        // return servicesOffer();
+                        return servicesOffer();
+                      }),
+                  // SizedBox(height: h8,),
+                  // Container(
+                  //   height: h75,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.grey.shade50,
+                  //     borderRadius: BorderRadius.circular(10),
+                  //   ),
+                  //   child: Row(
+                  //     children: [
+                  //       const Icon(Icons.search_sharp, size: 30,),
+                  //       SizedBox(width: w8,),
+                  //       const Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             'Legal Advice',
+                  //             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  //           ),
+                  //           Text(
+                  //             'Get professional legal\nadvice for your case.',
+                  //             style: TextStyle(fontSize: 16.0),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       SizedBox(width: w30,),
+                  //       // Text(
+                  //       //   'Starting at ${widget.adviceprice}',
+                  //       //   style: const TextStyle(fontSize: 20.0),
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(height: h8,),
+                  // Container(
+                  //   height: h75,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.grey.shade50,
+                  //     borderRadius: BorderRadius.circular(10),
+                  //   ),
+                  //   child: Row(
+                  //     children: [
+                  //       const Icon(Icons.file_copy_sharp, size: 30,),
+                  //       SizedBox(width: w8,),
+                  //       const Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             'Document Review',
+                  //             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  //           ),
+                  //           Text(
+                  //             'Have your legal\ndocumnet reviewed by',
+                  //             style: TextStyle(fontSize: 16.0),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       SizedBox(width: w30,),
+                  //       // Text(
+                  //       //   'Starting at ${widget.documentprice}',
+                  //       //   style: const TextStyle(fontSize: 20.0),
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(height: h8,),
+                  // Container(
+                  //   height: h75,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.grey.shade50,
+                  //     borderRadius: BorderRadius.circular(10),
+                  //   ),
+                  //   child: Row(
+                  //     children: [
+                  //       const Icon(Icons.cases_outlined, size: 30,),
+                  //       SizedBox(width: w8,),
+                  //       const Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             'Case Review',
+                  //             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  //           ),
+                  //           Text(
+                  //             'Get your legel case\nthroughly reviewed.',
+                  //             style: TextStyle(fontSize: 16.0),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       SizedBox(width: w50,),
+                  //       // Text(
+                  //       //   'Starting at ${widget.caseprice}',
+                  //       //   style: const TextStyle(fontSize: 20.0),
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
                   // todo inzamam specialities date 5 july
                   constText15SemiBold(text: "Specialities"),
                   Container(
@@ -321,7 +388,57 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                   ),
                   
                   // todo education 5 july
-                  constText15SemiBold(text: "Education & Credentials"),
+                  ListTile(
+                    title: constText15SemiBold(text: "Education & Credentials"),
+                    trailing: IconButton(onPressed: (){
+                      showDialog(context: context,
+                          builder: (BuildContext context){
+                            return AlertDialog(
+                              contentPadding: EdgeInsets.zero,
+                              title: Center(child: Text('Add Education',style: AppTextStyles.kBody15SemiBoldTextStyle,),),
+                              actions: [
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Divider(),
+                                      constText12SemiBold(text: "University/Collage"),
+                                      ConstTextField(
+                                        hintText: "Enter Your University",
+                                      ),
+                                      constText12SemiBold(text: " Course"),
+                                      ConstTextField(
+                                        hintText: "Enter Course",
+                                      ),
+                                      constText12SemiBold(text: "Years"),
+                                      ConstTextField(
+
+                                      ),
+                                      Divider(),
+
+                                      SizedBox(
+                                        width: double.maxFinite,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            MyCustomButton(onTap: (){
+                                              Get.back();
+                                            },color: Colors.grey,text: "Cancel",),
+                                            const Text("  "),
+                                            MyCustomButton(onTap: (){},color: AppColors.info80,text: "Save",)
+                                          ],
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                )
+                              ],
+
+                            );
+                          });
+                    }, icon: Icon(Icons.edit,)),
+                  ),
                   SizedBox(
                     child: ListView.builder(
                       itemCount: 2,
@@ -390,6 +507,13 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage> with SingleTick
                   ),
 
                   constText15SemiBold(text: "Client Review"),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 3,
+                      itemBuilder: (context, index){
+                      return clientReview();
+                      }),
 
                   // Text(
                   //   'Education: $education',

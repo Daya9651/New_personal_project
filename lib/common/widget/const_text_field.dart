@@ -106,7 +106,7 @@ class ConstTextField extends StatelessWidget {
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         keyboardType: inputType,
         obscureText: obscure ?? false,
-        cursorColor: AppColors.primary,
+        cursorColor: AppColors.info80,
         maxLength: maxLength,
         maxLines: maxLine ?? 1,
         // cursorHeight: cursorHeight??3.5.w,
@@ -138,7 +138,7 @@ class ConstTextField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.w)),
                   borderSide:
-                      const BorderSide(color: AppColors.primary, width: 1),
+                      const BorderSide(color: AppColors.info80, width: 1),
                 )
               : InputBorder.none,
           border: borderNone == true

@@ -1,14 +1,14 @@
+import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/style/color.dart';
-
 import '../../../style/text_style.dart';
 
 Widget specialitiesCard(){
   return Card(
-    color: Colors.grey.shade300,
+    color: AppColors.white101,
     child: Center(child: Text('English')),
   );
 }
@@ -18,17 +18,21 @@ Widget customListTile({
   String? subtitle,
   String? date,
   IconData? icon,
-  Function()? onTap
+  Function()? onTap,
+  bool? visibility ,
 
 }){
   return ListTile(
     contentPadding: EdgeInsets.only(left: h5),
-    leading: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(h5),
-        color: Colors.grey.shade300,
-      ),
-      child: IconButton(onPressed: onTap, icon: Icon(icon, color: AppColors.white100,)).marginAll(h2),),
+    leading: Visibility(
+      visible: visibility ?? true,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(h5),
+          color: AppColors.white101
+        ),
+        child: IconButton(onPressed: onTap, icon: Icon(icon, color: AppColors.white100,)).marginAll(h2),),
+    ),
     title: Container(child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,10 +87,71 @@ Widget constText15SemiBold({String? text}){
   );
 }
 
-Widget constText12SemiBold({String? text}){
+Widget constText12SemiBold({String? text, bool? imp}){
   return Container(
     margin: EdgeInsets.only(top: h8, left: h5 ),
-    child: Text(text??'', style: AppTextStyles.kCaption12SemiBoldTextStyle,),
+    child: Row(
+      children: [
+        Text(text??'', style: AppTextStyles.kCaption12SemiBoldTextStyle,),
+        Visibility(
+          visible: imp??false,
+            child: Text('*', style: AppTextStyles.kCaption12SemiBoldTextStyle.copyWith(color: AppColors.error40),))
+      ],
+    ),
+  );
+}
+
+Widget servicesOffer(){
+  return Container(
+    child: ListTile(
+      title: SizedBox(
+        width: h50,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Legal Documentation',style: AppTextStyles.kCaption12RegularTextStyle,),
+            Text('best lawyer in the word',style: AppTextStyles.kSmall8RegularTextStyle,)
+          ],
+        ),
+      ),
+      trailing: Column(
+        children: [
+          Text('Starting at '),
+          Text('Rs. 500'),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget clientReview(){
+  return Container(
+    // width: Get.width * 0.05,
+    // width: 200,
+    margin: EdgeInsets.only(bottom: h20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Client@gmail.com'),
+        Text('Jun 4, 2024'),
+        Row(
+          children: [
+            Icon(Icons.star),
+            Icon(Icons.star),
+            Icon(Icons.star),
+            Icon(Icons.star),
+            Icon(Icons.star_border),
+          ],
+        ),
+        Text('Deffersx'),
+        Row(
+          children: [
+          Icon(Icons.thumb_up_alt_outlined),
+          SizedBox(width: h30,),
+          Icon(Icons.thumb_down_alt_outlined),
+        ],)
+      ],
+    ),
   );
 }
 

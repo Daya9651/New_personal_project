@@ -182,4 +182,9 @@ try{
 
 
 
+  //todo for Services offered Controller
+  var titleController = TextEditingController().obs;
+  var subtitleController = TextEditingController().obs;
+  var feesController = TextEditingController().obs;
+
 }

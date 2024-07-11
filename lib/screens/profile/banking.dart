@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:likhit/service/api_url.dart';
+import 'package:likhit/service/loginApi.dart';
 import 'package:likhit/style/text_style.dart';
 
 class Banking extends StatefulWidget {
@@ -12,7 +12,7 @@ class Banking extends StatefulWidget {
 class _BankingState extends State<Banking> {
   @override
   void initState() {
-    EmailService().bankDetails();
+    // EmailService().bankDetails();
     super.initState();
   }
 

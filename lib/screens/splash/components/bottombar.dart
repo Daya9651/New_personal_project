@@ -1,57 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:likhit/screens/bottombar/contracts.dart';
-import 'package:likhit/screens/bottombar/homepage.dart';
-import 'package:likhit/screens/bottombar/inbox.dart';
-import 'package:likhit/screens/bottombar/profile.dart';
+import 'package:get/get.dart';
+import 'package:likhit/screens/bottombar/controllers/bottom_nav_controller.dart';
 
-class MyBottomBar extends StatefulWidget {
-  final String userName;
+import '../../drawer/likhit_drawer.dart';
+
+class MyBottomBar extends GetView<BottomNavController> {
+  final String ?userName;
 
   const MyBottomBar({super.key,
-    required this.userName});
-  @override
-  State<MyBottomBar> createState() => _MyBottomBarState();
-}
+     this.userName});
 
-class _MyBottomBarState extends State<MyBottomBar> {
-  int index = 0;
-  final screen = [
-    const HomePage(),
-    const Contracts(),
-    const Inbox(),
-    ProfileInputPage(),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(onPressed: (){},
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(80),
-          ),
-            child: Text("+", style: TextStyle(fontSize: 40,),)),),
+      backgroundColor: Colors.white,
+      // floatingActionButton: FloatingActionButton(onPressed: (){},
+      //   child: Icon(Icons.add)),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Text("Hey, Sachin"),
-            SizedBox(width: 110,),
-            InkWell(onTap: (){
-              // Navigator.push(context, MaterialPageRoute(builder: (context)=> MyTabBar()));
-            },
-              child: Container(
-                  height: 40,
-                  width: 135,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(child: Text("Lawyer", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),))),
-            ),
-          ],
-        ),
+
       ),
+      drawer: LikhitDrawer(),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
             labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
@@ -65,12 +33,15 @@ class _MyBottomBarState extends State<MyBottomBar> {
             ),
             indicatorColor: Colors.transparent),
         child: NavigationBar(
+
           backgroundColor: Colors.white,
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           animationDuration: const Duration(seconds: 1),
-          selectedIndex: index,
-          onDestinationSelected: (index) => setState(() => this.index = index),
-          destinations: const [
+          selectedIndex: controller.selectedIndex.value,
+          onDestinationSelected: (index) {
+            controller.selectedIndex.value = index;
+            controller.onItemTapped;
+          },          destinations: const [
             NavigationDestination(
               icon: Icon(Icons.home_filled),
               label: "Home",
@@ -97,7 +68,7 @@ class _MyBottomBarState extends State<MyBottomBar> {
           ],
         ),
       ),
-      body: screen[index],
+      body:controller.screen.elementAt(controller.selectedIndex.value),
     );
   }
 }

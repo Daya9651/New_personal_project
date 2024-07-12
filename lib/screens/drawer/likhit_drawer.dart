@@ -1,0 +1,190 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:likhit/common/widget/const_text_with_styles.dart';
+import 'package:likhit/const/image_strings.dart';
+import 'package:likhit/screens/auth/save_auth_data.dart';
+import 'package:likhit/screens/profile/widget/profile_card.dart';
+
+import '../../../const/const_width.dart';
+import '../../const/const_height.dart';
+import '../../routes/routes.dart';
+import '../../style/color.dart';
+import '../../style/gradients.dart';
+import '../../utils/utils.dart';
+import 'controller/likhit_drawer_controller.dart';
+
+class LikhitDrawer extends StatelessWidget {
+   LikhitDrawer({super.key});
+final LikhitDrawerController controller = Get.put(LikhitDrawerController());
+  @override
+  Widget build(BuildContext context) {
+    return  controller.bottomNavController.userType.value =="Lawyer"? Drawer(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        color: AppColors.white,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            _buildDrawerHeader(),
+            _buildDrawerItem(
+              icon: Icons.home,
+              text: 'Profile',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Appointment List',
+              onTap: () {
+              },
+            ),
+            _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Client Transaction',
+              onTap: () {
+
+              },
+            ), _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'My Transaction',
+              onTap: () {
+                // Get.toNamed(ApplicationPages.clientLawyerList);
+              },
+            ),
+            _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Plans',
+              onTap: () {
+                // Get.toNamed(ApplicationPages.clientLawyerList);
+              },
+            ),
+
+            _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Payment Request',
+              onTap: () {
+                // Get.toNamed(ApplicationPages.clientLawyerList);
+              },
+            ),
+
+
+            constDivider(),
+            _buildDrawerItem(
+              icon: Icons.logout,
+              text: 'Logout',
+              onTap: () {
+                UserDataService.removeUser().then((_){
+                  Get.offAllNamed(ApplicationPages.signUpPage);
+                });
+                // Get.toNamed(ApplicationPages.settingPage);
+                // Handle settings navigation
+              },
+            ),
+          ],
+        ),
+      ),
+    ):Drawer(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        color: AppColors.white,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            _buildDrawerHeader(),
+            _buildDrawerItem(
+              icon: Icons.home,
+              text: 'Profile',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Lawyer List ',
+              onTap: () {
+                Get.toNamed(ApplicationPages.clientLawyerList);
+              },
+            ),
+            _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Appointment List',
+              onTap: () {
+                Get.toNamed(ApplicationPages.clientLawyerList);
+              },
+            ),    _buildDrawerItem(
+              icon: Icons.account_circle,
+              text: 'Transaction List',
+              onTap: () {
+                // Get.toNamed(ApplicationPages.clientLawyerList);
+              },
+            ),
+
+
+
+
+
+            constDivider(),
+            _buildDrawerItem(
+              icon: Icons.logout,
+              text: 'Logout',
+              onTap: () {
+                UserDataService.removeUser().then((_){
+                  Get.offAllNamed(ApplicationPages.signUpPage);
+                });
+                // Get.toNamed(ApplicationPages.settingPage);
+                debugPrint("setting is pressing");
+                // Handle settings navigation
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerHeader() {
+    return SizedBox(
+      height: 0.35.sh,
+      child: DrawerHeader(
+        // decoration: const BoxDecoration(gradient: primaryGradientColor),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: w52,
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: w50,
+                  backgroundImage: AssetImage(
+                    clientLogo,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.w),
+              const12TextBold("type :${controller.bottomNavController.userType.value}"),
+              const12TextBold("satyam@gmail.com"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem({
+    required IconData icon,
+    required String text,
+    VoidCallback? onTap,
+
+  }) {
+
+      return ListTile(leading: Container(
+          padding: EdgeInsets.all(w8),
+          decoration: const BoxDecoration(
+              shape: BoxShape.circle, gradient: primaryGradientColor),child: Icon(icon,color: AppColors.white,)), title: Text(text), onTap: onTap);
+
+  }
+
+}

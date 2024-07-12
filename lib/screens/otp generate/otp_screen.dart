@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:likhit/common/widget/const_text_with_styles.dart';
+import 'package:likhit/screens/profile/widget/profile_card.dart';
+import 'package:likhit/style/color.dart';
 import 'package:likhit/utils/const_toast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../common/widget/custom_app_bar.dart';
 import '../../const/const_height.dart';
+import '../../const/image_strings.dart';
 import '../../custom/botton.dart';
 import '../../service/loginApi.dart';
 import '../../style/text_style.dart';
@@ -24,10 +29,10 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('OTP Verification'),
-        backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
+      appBar:
+      const CustomAppBar(
+ title:  'OTP Verification'
       ),
       body: Center(
         child: Padding(
@@ -36,13 +41,12 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo/likhitlogo.png', height: 160, width: 160,),
-                const SizedBox(height: 80),
-                 Text(
+                Image.asset(logo, height: 160, width: 160,),
+                 SizedBox(height: h30),
+                 const12Text(
                    'Enter OTP sent to ${widget.email}',
-                   style: TextStyle(fontSize: 18),
                  ),
-                const SizedBox(height: 3,),
+                SizedBox(height: h3,),
                 PinCodeTextField(
                   controller:otpController ,
                   appContext: context,
@@ -98,10 +102,13 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Didn't Receive code?", style: AppTextStyles.kBody15SemiBoldTextStyle,),
+                    const12Text("Didn't Receive code?",),
                     const SizedBox(width: 2,),
-                    TextButton(onPressed: () {  },
-                    child: Text("Resend", style: AppTextStyles.kBody15SemiBoldTextStyle.copyWith(color: Colors.orange.shade400),)),
+                    TextButton(onPressed: () {
+
+                      emailService.sendOtp(widget.email, context);
+                    },
+                    child: const12TextBold("Resend", textColor: AppColors.warning40)),
                   ],
                 ),
                 const SizedBox(height: 20),

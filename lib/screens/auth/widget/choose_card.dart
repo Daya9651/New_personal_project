@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
+
+import '../../../const/const_height.dart';
 
 class ChooseCard extends StatelessWidget {
   void Function()? onTap;
@@ -18,8 +21,8 @@ class ChooseCard extends StatelessWidget {
         elevation: 4,
         color: Colors.white,
         child: Container(
-          height: 150,
-          width: 150,
+          height: 0.2.sh,
+          width:  0.18.sh,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.info80),
             borderRadius: BorderRadius.circular(10),

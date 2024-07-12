@@ -3,14 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
 
-import '../../../const/const_height.dart';
-
 class ChooseCard extends StatelessWidget {
   void Function()? onTap;
   final String image;
   final String language;
   final Color color;
-  ChooseCard({super.key, required this.image, required this.language, required this.color, required this.onTap});
+
+  ChooseCard(
+      {super.key,
+      required this.image,
+      required this.language,
+      required this.color,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +25,8 @@ class ChooseCard extends StatelessWidget {
         elevation: 4,
         color: Colors.white,
         child: Container(
-          height: 0.2.sh,
-          width:  0.18.sh,
+          height: 0.22.sh,
+          width: 0.18.sh,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.info80),
             borderRadius: BorderRadius.circular(10),
@@ -38,13 +42,12 @@ class ChooseCard extends StatelessWidget {
                       width: 80,
                       decoration: BoxDecoration(
                           // border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10)
-                      ),
+                          borderRadius: BorderRadius.circular(10)),
                       child: Image.asset(image),
                     ),
                   ),
                   Text(language,
-                    style: AppTextStyles.kCaption12SemiBoldTextStyle)
+                      style: AppTextStyles.kCaption12SemiBoldTextStyle)
                 ],
               ),
               Padding(
@@ -52,7 +55,11 @@ class ChooseCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(Icons.check_circle, color: color,size: 30,),
+                    Icon(
+                      Icons.check_circle,
+                      color: color,
+                      size: 30,
+                    ),
                   ],
                 ),
               ),

@@ -20,11 +20,21 @@ class UserDataService {
     return prefs.getString(userType);
   }
 
+
+
   static Future<void> removeUser() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(
       token,
     );
+    await prefs.remove(
+      userType,
+    );
+  }
+
+  static Future<void> saveUserType(userTypes) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(userType, userTypes);
     await prefs.remove(
       userType,
     );

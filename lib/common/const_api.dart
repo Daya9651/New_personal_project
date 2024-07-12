@@ -141,6 +141,7 @@ import 'package:flutter/foundation.dart';
 // import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../const/api_urls.dart';
+import '../const/image_strings.dart';
 import '../screens/auth/save_auth_data.dart';
 import '../utils/const_toast.dart';
 
@@ -148,48 +149,36 @@ class ApiService {
   static final Dio _dio = Dio();
 
   static void init() {
-    // Initialize common configurations such as base URL, headers, etc.
     _dio.options.baseUrl = baseUrl;
-    // _dio.options.connectTimeout = const Duration(seconds: 15);
-    // _dio.options.receiveTimeout = const Duration(seconds: 15);
 
-    // Add interceptors
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          // Do something before request is sent
-          // For example, add headers
-          options.headers.addAll({'Authorization': 'Token ${await UserDataService.getAuthToken()}'});
-          return handler.next(options); // continue
+          bool isPublicToken = options.extra['publicToken'] ?? false;
+          if (isPublicToken) {
+            options.headers['Authorization'] = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
+          } else {
+            options.headers['Authorization'] = 'Token ${await UserDataService.getAuthToken()}';
+          }
+          return handler.next(options);
         },
         onResponse: (response, handler) {
-          // Do something with the response data
-          return handler.next(response); // continue
+          return handler.next(response);
         },
         onError: (e, handler) {
-          // Do something with the error
           if (e.response != null) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx.
-
             if (e.response?.data["message"] is List) {
-              ConstToast.to.showSuccess( "${e.response?.data["message"][0]}");
+              ConstToast.to.showSuccess("${e.response?.data["message"][0]}");
             } else {
-              ConstToast.to.showError( "${e.response?.data["message"]}");
+              ConstToast.to.showError("${e.response?.data["message"]}");
             }
             debugPrint('Error status: ${e.response!.statusCode}');
             debugPrint('Error message: ${e.response!.statusMessage}');
             debugPrint('Error data: ${e.response!.data}');
           } else {
-            // Something happened in setting up or sending the request that triggered an Error
             debugPrint('Dio Error: $e');
-            // if(InternetStatus.connected==true) {
-            //   ConstToast.to.showError( " connection time out");
-            // }else{
-            //   ConstToast.to.showError( "check your internet connection");
-            // }
           }
-          return handler.next(e); // continue
+          return handler.next(e);
         },
       ),
     );
@@ -211,14 +200,17 @@ class ApiService {
       );
       return response;
     } catch (e) {
-      // Handle error gracefully
       throw 'Failed to fetch data: $e';
     }
   }
 
   static Future<Response> postData(
-      {required url, dynamic data, options}) async {
+      {required String url, dynamic data, Options? options, bool publicToken = false}) async {
     try {
+      options ??= Options();
+      options.extra ??= {};
+      options.extra?['publicToken'] = publicToken;
+
       final response = await _dio.post(
         url,
         data: data,
@@ -230,6 +222,7 @@ class ApiService {
       throw 'Failed to post data: $e';
     }
   }
+
   static Future<Response> uploadImage({
     required String url,
     required File imageFile,
@@ -267,5 +260,5 @@ class ApiService {
       throw 'Failed to upload image: $e';
     }
   }
-// Add other methods for different HTTP methods as needed
 }
+

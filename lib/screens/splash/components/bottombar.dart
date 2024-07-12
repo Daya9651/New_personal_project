@@ -20,7 +20,7 @@ class MyBottomBar extends GetView<BottomNavController> {
 
       ),
       drawer: LikhitDrawer(),
-      bottomNavigationBar: NavigationBarTheme(
+      bottomNavigationBar:Obx(()=> NavigationBarTheme(
         data: NavigationBarThemeData(
             labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
                   (Set<WidgetState> states) {
@@ -67,8 +67,8 @@ class MyBottomBar extends GetView<BottomNavController> {
             ),
           ],
         ),
-      ),
-      body:controller.screen.elementAt(controller.selectedIndex.value),
+      )),
+      body:Obx(()=> controller.screen.elementAt(controller.selectedIndex.value)),
     );
   }
 }

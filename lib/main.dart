@@ -6,9 +6,11 @@ import 'package:likhit/screens/auth/save_auth_data.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/utils/const_toast.dart';
 
-void main() {
+void main() async{
+  // checkUserType();
   Get.put(ConstToast(), permanent: true);
-  checkUserType();
+  debugPrint("type :${await UserDataService.getUserType()}");
+  debugPrint("token :${await UserDataService.getAuthToken()}");
   runApp(const MyApp());
 }
 
@@ -51,7 +53,8 @@ Future<String> checkUserType() async {
 
   String type ="";
   type = await UserDataService.getUserType()??"";
-  debugPrint("during main type: $type");
+  var token = await UserDataService.getAuthToken()??"";
+  debugPrint("during main type: $type token $token");
   return type;
 
 }

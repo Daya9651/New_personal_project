@@ -11,10 +11,7 @@ import '../screens/signup/signUp.dart';
 import '../screens/splash/components/bottombar.dart';
 import '../screens/splash_screen_likhit.dart';
 
-class ApplicationPages{
-
-
-
+class ApplicationPages {
   static const splashScreen = '/';
   static const signUpPage = '/signUpPage';
   static const choosePage = '/choosePage';
@@ -25,58 +22,37 @@ class ApplicationPages{
   static const myBottomBar = '/myBottomBar';
 
   static List<GetPage>? getApplicationPages() => [
-
-
-
-    GetPage(
-  name: splashScreen,
-  page: () => const SplashScreenLikhit(),
-  ),
-
-    GetPage(
-  name: signUpPage,
-  page: () =>  SignInPage(),
-  ),
-
-
-    GetPage(
-      name: choosePage,
-      page: () =>  const ChoosePage(),
-    ),
-
-
-    GetPage(
-      name: addLawyerProfile,
-      page: () =>  LawyerAddProfile(),
-    ) ,
-    GetPage(
-      name: myBottomBar,
-      page: () =>  MyBottomBar(),
-      binding: BottomNavBinding()
-    ) ,
-
-    GetPage(
-      name: addUserProfile,
-      page: () =>  UserAddProfile(),
-    ),
-     GetPage(
-      name: clientLawyerList,
-      page: () =>  const ClientLawyerList(),
-    ),
-
-
-    GetPage(
-      name: bookAppointmentsPage,
-      page: () =>  const BookAppointmentsPage(),
-      binding:BookAppointmentBindings()
-    ),
-
-
-
-
-
-
-  ];
-
-
+        GetPage(
+          name: splashScreen,
+          page: () => const SplashScreenLikhit(),
+        ),
+        GetPage(
+          name: signUpPage,
+          page: () => SignInPage(),
+        ),
+        GetPage(
+          name: choosePage,
+          page: () => const ChoosePage(),
+        ),
+        GetPage(
+          name: addLawyerProfile,
+          page: () => LawyerAddProfile(),
+        ),
+        GetPage(
+            name: myBottomBar,
+            page: () => MyBottomBar(),
+            binding: BottomNavBinding()),
+        GetPage(
+          name: addUserProfile,
+          page: () => UserAddProfile(),
+        ),
+        GetPage(
+          name: clientLawyerList,
+          page: () => ClientLawyerList(),
+        ),
+        GetPage(
+            name: bookAppointmentsPage,
+            page: () => const BookAppointmentsPage(),
+            binding: BookAppointmentBindings()),
+      ];
 }

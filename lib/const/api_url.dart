@@ -16,8 +16,9 @@ const String confirmationLawyerAndClientUrl = "$baseUrl/confirm-user-api/";
 const String stateUrl = "$baseUrl/state-list-api/";
 //todo city api
 const String cityUrl = "$baseUrl/city-list-api/";
-
-
+//todo lawyer list api
+const String lawyerListUrl = "$baseUrl/list-lawyer-api/";
+//todo book appointment detail api
+const String lawyerBookAppointmentDetailsUrl = "$baseUrl/lawyer-details-api/";
 
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
-

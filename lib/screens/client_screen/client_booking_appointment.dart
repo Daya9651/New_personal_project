@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/custom/botton.dart';
 import 'package:likhit/routes/routes.dart';
+import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
 import 'package:likhit/style/color.dart';
 
 import '../../common/widget/const_container.dart';
 import '../../const/const_height.dart';
 import '../../const/const_width.dart';
-import '../../const/image_strings.dart';
 import '../profile/widget/profile_card.dart';
 
 class ClientBookingAppointment extends StatefulWidget {
@@ -20,6 +20,7 @@ class ClientBookingAppointment extends StatefulWidget {
 
 class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
     with SingleTickerProviderStateMixin {
+  ClientApiController controller = Get.put(ClientApiController());
   late TabController tabController;
 
   @override
@@ -46,18 +47,28 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                   Hero(
                     tag: 'clientLogo',
                     child: CircleAvatar(
-                      radius: w70
-                      ,
-                      child: Image.asset(clientLogo),
+                      radius: w70,
+                      child: Image.network(
+                        controller.lawyerBookDetailListData.value.data!.image
+                            .toString(),
+                      ),
                     ),
                   ),
-                  constText12SemiBold(text: "05/08/2024"),
-                  constText12SemiBold(text: "NFC id 56789120"),
+                  constText12SemiBold(
+                    text: controller.lawyerBookDetailListData.value.data?.dob
+                        .toString(),
+                  ),
+                  constText12SemiBold(
+                      text:
+                          "NFC id ${controller.lawyerBookDetailListData.value.data?.nfcid.toString()}"),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      constText12SemiBold(text: 'Shreyansh Tripathi'),
+                      constText12SemiBold(
+                          text: controller
+                              .lawyerBookDetailListData.value.data?.name
+                              ?.toString()),
                       SizedBox(
                         height: h15,
                       ),
@@ -72,15 +83,16 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                             color: Colors.white,
                             onPressed: () {
                               //todo
-                              Get.toNamed(ApplicationPages.bookAppointmentsPage);
+                              Get.toNamed(
+                                  ApplicationPages.bookAppointmentsPage);
                             },
                           )),
                     ],
                   ),
                   const SizedBox(height: 10.0),
                   constText15SemiBold(text: "About Advocate"),
-                  Text(
-                      'These steps should help you resolve the issue. If the problem persists, providing more context or code snippets around the Calendar component and its usage might help in giving a more precise solution.'),
+                  Text(controller.lawyerBookDetailListData.value.data!.about
+                      .toString()),
                   ListTile(
                     title: constText15SemiBold(text: "Services Offered"),
                   ),
@@ -88,10 +100,15 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                   ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 6,
+                      itemCount: controller
+                          .lawyerBookDetailListData.value.data?.fees?.length,
                       itemBuilder: (context, index) {
-                        // return servicesOffer();
-                        return servicesOffer();
+                        var servicesOfferData = controller
+                            .lawyerBookDetailListData.value.data?.fees?[index];
+                        return servicesOffer(
+                            title: servicesOfferData?.title.toString(),
+                            subtitle: servicesOfferData?.subtitle.toString(),
+                            fees: servicesOfferData?.fee.toString());
                       }),
                   constText15SemiBold(text: "Specialities"),
                   Container(
@@ -103,16 +120,24 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                             mainAxisExtent: h40,
                             crossAxisSpacing: w8,
                             mainAxisSpacing: w5),
-                        itemCount: 5,
+                        itemCount: controller.lawyerBookDetailListData.value
+                            .data?.specialties?.length,
                         itemBuilder: (context, index) {
-                          return specialitiesCard(text: 'Domestic Violence');
+                          var specialitiesData = controller
+                              .lawyerBookDetailListData
+                              .value
+                              .data
+                              ?.specialties?[index];
+                          return specialitiesCard(
+                              text: specialitiesData.toString());
                         }),
                   ),
 
                   //todo experience
                   constText15SemiBold(text: "Experience"),
-                  Text(
-                      'These steps should help you resolve the issue. If the problem persists, providing more context or code snippets around the Calendar component and its usage might help in giving a more precise solution.'),
+                  Text(controller
+                      .lawyerBookDetailListData.value.data!.experience
+                      .toString()),
 
                   // todo education 5 july
                   ListTile(
@@ -120,30 +145,43 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                   ),
                   SizedBox(
                       child: ListView.builder(
-                          itemCount: 2,
+                          itemCount: controller.lawyerBookDetailListData.value
+                              .data!.educationCredentials!.length,
+                          // itemCount: 2,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
+                            var educationData = controller
+                                .lawyerBookDetailListData
+                                .value
+                                .data
+                                ?.educationCredentials![index];
                             return customListTile(
-                                title: 'Lucknow University',
-                                subtitle: "B.Tech",
-                                date: "2024",
+                                title: educationData?.name.toString(),
+                                subtitle: educationData?.title.toString(),
+                                date: educationData?.year.toString(),
                                 icon: Icons.school,
                                 onTap: () {});
                           })),
 
-                  //todo experience 5 july
+                  // todo experience 5 july
                   constText15SemiBold(text: "Experience"),
                   SizedBox(
                       child: ListView.builder(
-                          itemCount: 2,
+                          itemCount: controller.lawyerBookDetailListData.value
+                              .data?.experiences?.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
+                            var experienceData = controller
+                                .lawyerBookDetailListData
+                                .value
+                                .data
+                                ?.experiences?[index];
                             return customListTile(
-                                title: 'Criminal Experience',
-                                subtitle: "Best Criminal lawyer Experience",
-                                date: "2022 - Present",
+                                title: experienceData?.title.toString(),
+                                subtitle: experienceData?.subtitle.toString(),
+                                date: experienceData?.fromDate.toString(),
                                 icon: Icons.star_border,
                                 onTap: () {});
                           })),
@@ -202,6 +240,8 @@ class ClientBookingBarAssociation extends StatefulWidget {
 
 class _ClientBookingBarAssociationState
     extends State<ClientBookingBarAssociation> {
+  ClientApiController controller = Get.put(ClientApiController());
+
   @override
   void initState() {
     // EmailService().barAssociation();
@@ -218,13 +258,16 @@ class _ClientBookingBarAssociationState
       // ),
       body: SizedBox(
           child: ListView.builder(
-              itemCount: 5,
+              itemCount:
+                  controller.lawyerBookDetailListData.value.data?.barId?.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
+                var barIdData = controller
+                    .lawyerBookDetailListData.value.data?.barId?[index];
                 return customListTile(
-                    title: 'Bar Id',
-                    subtitle: "123456",
+                    title: barIdData?.state.toString(),
+                    subtitle: barIdData?.barId.toString(),
                     icon: Icons.shopping_bag,
                     onTap: () {});
               })),

@@ -40,7 +40,7 @@ Widget customListTile({
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title ?? '',
+            "Bar ID ${title ?? ''}",
             style: AppTextStyles.kCaption12RegularTextStyle,
           ),
           Text(
@@ -128,7 +128,11 @@ Widget constText12SemiBold({String? text, bool? imp}) {
   );
 }
 
-Widget servicesOffer() {
+Widget servicesOffer({
+  String? title,
+  String? subtitle,
+  String? fees,
+}) {
   return Container(
     child: ListTile(
       title: SizedBox(
@@ -137,11 +141,11 @@ Widget servicesOffer() {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Legal Documentation',
+              title ?? '',
               style: AppTextStyles.kCaption12RegularTextStyle,
             ),
             Text(
-              'best lawyer in the word',
+              subtitle ?? '',
               style: AppTextStyles.kSmall8RegularTextStyle,
             )
           ],
@@ -150,7 +154,7 @@ Widget servicesOffer() {
       trailing: Column(
         children: [
           Text('Starting at '),
-          Text('Rs. 500'),
+          Text('Rs. ${fees ?? ''}'),
         ],
       ),
     ),

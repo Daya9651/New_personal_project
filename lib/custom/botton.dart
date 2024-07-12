@@ -38,7 +38,6 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-
 class CustomButton2 extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;

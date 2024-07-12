@@ -47,7 +47,7 @@ class AccountManageController extends GetxController{
           data: {
             "name": "",
             "mobile": "",
-            "dob": "",
+            "dob": "25",
             "address": "",
             "image": "",
             "gender": "",

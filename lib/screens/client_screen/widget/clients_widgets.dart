@@ -4,6 +4,8 @@ import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
 
 import '../../../const/const_height.dart';
+import '../../../const/const_width.dart';
+import '../../../const/image_strings.dart';
 
 Widget lawyerProfileDetailCard(
     {String? title,
@@ -20,14 +22,13 @@ Widget lawyerProfileDetailCard(
       onTap: onTap,
       child: Row(
         children: [
-          Container(
-            margin: EdgeInsets.all(h10),
-            height: h80,
-            width: h80,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(h50),
-                //todo selected image
-                color: AppColors.info80),
+          Hero(
+            tag: 'clientLogo',
+            child: CircleAvatar(
+              radius: w50
+              ,
+              child: Image.asset(clientLogo),
+            ),
           ),
           Expanded(
             child: Column(

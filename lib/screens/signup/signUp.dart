@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/custom/botton.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
+import '../../const/const_width.dart';
+import '../../const/image_strings.dart';
 import '../../service/loginApi.dart';
 
 class SignInPage extends StatelessWidget {
@@ -12,7 +15,7 @@ class SignInPage extends StatelessWidget {
   SignInPage({super.key});
 
   final TextEditingController emailController = TextEditingController();
-  final EmailService emailService = EmailService();
+  final EmailService emailService = Get.put(EmailService());
 
   final _formKey = GlobalKey<FormState>();
   late String email;
@@ -36,12 +39,12 @@ class SignInPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 35,),
-                Image.asset('assets/logo/likhitlogo.png', height: 160, width: 160,),
+                Image.asset(logo, height: 160, width: 160,),
                 const SizedBox(height: 70,),
                  Text(
                   'Log in or sign up to Likhit De',
 
-                  style: AppTextStyles.kBody17SemiBoldTextStyle,
+                  style: AppTextStyles.kBody15SemiBoldTextStyle,
                 ),
                 const SizedBox(height: 10.0),
                // TextField(
@@ -64,6 +67,7 @@ class SignInPage extends StatelessWidget {
                //  ),
 
                 ConstTextField(
+                  inputType: TextInputType.emailAddress,
                   controller: emailController,
                   labelText: "Enter your mail",
                   height: 50,
@@ -78,17 +82,24 @@ class SignInPage extends StatelessWidget {
                     return null;
                   },
                   onSubmitted: (value) {
-                    email = value !;
+                    if (email.isNotEmpty) {
+                      emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
+                      // Clear the email field
+                      // Navigate to the VerifyOtpPage after OTP is sent
+
+
+                    }
                   },
                 ),
                 SizedBox(height:h5),
-                  Container(
+                     Container(
                     height: h40,
+                      margin: EdgeInsets.all(w2),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.indigo
                       ),
-                      child:emailService.isLoading? CircularProgressIndicator():CustomButton(
+                      child: Obx(()=> emailService. isLoading.value? Center(child: const CircularProgressIndicator(color: AppColors.white,).paddingAll(w3)):CustomButton(
                           text: 'Continue',
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
@@ -96,21 +107,12 @@ class SignInPage extends StatelessWidget {
                               if (email.isNotEmpty) {
                                 emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
                                 // Clear the email field
-                                // emailController.clear();
                                 // Navigate to the VerifyOtpPage after OTP is sent
 
 
-                          } else {
-                            // Handle empty email case
                           }
-
-                          // _formKey.currentState!.save();
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) =>  OTPVerificationPage()),
-                          // );
                          }
-                        }, color: AppColors.white),),
+                        }, color: AppColors.white)),),
                 SizedBox(height: h20),
                  //todo changes
                 Row(

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/screens/auth/controller/account_manage_controller.dart';
 import 'package:likhit/screens/auth/user_add_profile.dart';
 import 'package:likhit/screens/auth/widget/choose_card.dart';
 import 'package:likhit/style/color.dart';
 
+import '../../const/const_height.dart';
+import '../../const/const_width.dart';
+import '../../const/image_strings.dart';
 import '../../custom/botton.dart';
 import 'lawyer_add_profile.dart';
 
@@ -25,82 +30,60 @@ class _ChoosePageState extends State<ChoosePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Container(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 40, right: 40, top: 40),
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  width: MediaQuery.of(context).size.height * 0.5,
-                  child: Image.asset('assets/logo/likhitlogo.png'),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Center(
+              child: Image.asset(logo,height: 0.3.sh,),
+            ).paddingSymmetric(vertical: w80,),
+            Column(
+              children: [
+                const12TextBold(
+                  "Choose Account Type",
+
                 ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Choose Account Type",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ChooseCard(
-                          image: 'assets/logo/lawyer.png',
-                          language: "Lawyer",
-                          color: choose == 0 ? AppColors.info80 : Colors.white,
-                          onTap: () {
-                            setState(() {
-                              choose = 0;
-                            });
-                          },
-                        ),
-                        ChooseCard(
-                          image: 'assets/logo/client.webp',
-                          language: "Client",
-                          color: choose == 1 ? AppColors.info80 : Colors.white,
-                          onTap: () {
-                            setState(() {
-                              choose = 1;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
-                child: SizedBox(
-                    width: double.maxFinite,
-                    child: CustomButton(
-                      color: AppColors.white,
-                      text: "Continue",
-                      onPressed: () async {
-                        // await UserDataService.removeUser();
-                        choose == 0
-                            ? Get.to(LawyerAddProfile())
-                            : Get.to(UserAddProfile());
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ChooseCard(
+                      image: lawyerLogo,
+                      language: "Lawyer",
+                      color: choose == 0 ? AppColors.info80 : Colors.white,
+                      onTap: () {
+                        setState(() {
+                          choose = 0;
+                        });
                       },
-                    )),
-              )
-            ],
-          ),
-        ),
+                    ),
+                    ChooseCard(
+                      image: clientLogo,
+                      language: "Client",
+                      color: choose == 1 ? AppColors.info80 : Colors.white,
+                      onTap: () {
+                        setState(() {
+                          choose = 1;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            CustomButton(
+              width: double.maxFinite,
+              color: AppColors.white,
+              text: "Continue",
+              onPressed: () async {
+                // await UserDataService.removeUser();
+                choose == 0
+                    ? Get.to(LawyerAddProfile())
+                    : Get.to(UserAddProfile());
+              },
+            )
+          ],
+        ).paddingSymmetric(horizontal: w5),
       ),
     );
   }

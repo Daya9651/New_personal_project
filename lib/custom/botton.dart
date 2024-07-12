@@ -3,6 +3,7 @@ import 'package:likhit/style/color.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
+  final double? width;
   final VoidCallback onPressed;
   final Color? color;
   final Color? backgroundColor;
@@ -14,13 +15,13 @@ class CustomButton extends StatelessWidget {
       required this.onPressed,
       this.color,
       this.backgroundColor,
-      this.backgroundFalse})
+      this.backgroundFalse, this.width})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // width: double.infinity,
+      width: width,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(

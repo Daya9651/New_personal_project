@@ -7,6 +7,8 @@ import 'package:likhit/screens/auth/services/model/city_model.dart';
 import 'package:likhit/screens/auth/services/model/state_model.dart';
 import 'package:likhit/utils/const_toast.dart';
 
+import '../../../routes/routes.dart';
+
 class AccountManageController extends GetxController{
 
   ApiService apiService = ApiService();
@@ -39,26 +41,54 @@ class AccountManageController extends GetxController{
 
 
   // todo lawyer and user profile
-  Future confirmUserApi({String? confirm}) async{
+  Future confirmUserApi({String confirm="no"}) async{
     debugPrint("confirmUserApi hitting");
     try {
+
+      Map<String, dynamic> data;
+      if (confirm == "no") {
+        data = {
+          "name": nameController.value.text,
+          "mobile": phoneController.value.text,
+          "dob": dateAndTimeController.value.text,
+          "address": addressController.value.text,
+          // "image": "",
+          "gender": gender.value,
+          "confirm":  "no",
+        };
+      }else{
+        data = {
+        "lawyerid":lawyerController.value.text,
+        "name":nameController.value.text,
+        "mobile":phoneController.value.text,
+        "dob": dateAndTimeController.value.text,
+        "address":addressController.value.text,
+        "about":aboutController.value.text,
+        "office_address":addressController.value.text,
+        // "image":
+        "gender":gender.value,
+        "url":"",
+        "country":"India",
+        "city":city.value,
+        "state":state.value,
+        "experience":"",
+        "specialties": [],
+        "language_spoken": [],
+        "language_written": [],
+        "confirm": confirm
+      };
+      }
+
+
+
       dio.Response response = await ApiService.postData(
           url: confirmationLawyerAndClientUrl,
-          data: {
-            "name": "",
-            "mobile": "",
-            "dob": "",
-            "address": "",
-            "image": "",
-            "gender": "",
-            "confirm": confirm ?? "no",
-
-          }
+          data: data
       );
-      debugPrint("confirmUserApi ${response}");
+      debugPrint("confirmUserApi $response");
       if(response.data['response_code']==200){
         ConstToast.to.showSuccess("${response.data['message']}");
-
+        Get.offAllNamed(ApplicationPages.myBottomBar);
       }else{
         debugPrint("else confirmUserApi ${response.data}");
         ConstToast.to.showError("${response.data['message']}");

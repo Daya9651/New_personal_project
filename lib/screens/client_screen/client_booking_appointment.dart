@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:likhit/custom/botton.dart';
+import 'package:likhit/routes/routes.dart';
 import 'package:likhit/style/color.dart';
 
 import '../../common/widget/const_container.dart';
 import '../../const/const_height.dart';
 import '../../const/const_width.dart';
+import '../../const/image_strings.dart';
 import '../profile/widget/profile_card.dart';
 
 class ClientBookingAppointment extends StatefulWidget {
@@ -40,22 +43,13 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      //todo for image show
-                      CircleAvatar(
-                        radius: 60,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(h100),
-                            color: AppColors.info80,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 182,
-                      ),
-                    ],
+                  Hero(
+                    tag: 'clientLogo',
+                    child: CircleAvatar(
+                      radius: w70
+                      ,
+                      child: Image.asset(clientLogo),
+                    ),
                   ),
                   constText12SemiBold(text: "05/08/2024"),
                   constText12SemiBold(text: "NFC id 56789120"),
@@ -78,6 +72,7 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                             color: Colors.white,
                             onPressed: () {
                               //todo
+                              Get.toNamed(ApplicationPages.bookAppointmentsPage);
                             },
                           )),
                     ],

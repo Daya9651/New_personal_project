@@ -71,6 +71,7 @@ Future<DateTime?> selectDate(BuildContext context) async {
 
 String formattedDate(DateTime? selectedDate) {
   return selectedDate != null
-      ? "${selectedDate.day.toString().padLeft(2, '0')}/${selectedDate.month.toString().padLeft(2, '0')}/${selectedDate.year}"
+      // ? "${selectedDate.day.toString().padLeft(2, '0')}/${selectedDate.month.toString().padLeft(2, '0')}/${selectedDate.year}"
+      ? "${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}"
       : "";
 }

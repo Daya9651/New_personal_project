@@ -19,10 +19,13 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
       appBar: AppBar(),
       body: ListView(
         children: [
-          CircleAvatar(
-            radius: w70
-            ,
-            child: Image.asset(clientLogo),
+          Hero(
+            tag: 'clientLogo',
+            child: CircleAvatar(
+              radius: w70
+              ,
+              child: Image.asset(clientLogo),
+            ),
           ),
     const15BoldText("Adv Satya-m"),
           const8Text("With highest number of LinkedIn recommendations for Legal Consultations done in India & Asia-Pacific region.",textColor: AppColors.white60),
@@ -39,7 +42,7 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
             children: [
               Expanded(
                 child: ListView.builder(
-                  // shrinkWrap: true,
+                  shrinkWrap: true,
                     itemCount: 5,
                     itemBuilder: (context,index){return
                 ListTile(

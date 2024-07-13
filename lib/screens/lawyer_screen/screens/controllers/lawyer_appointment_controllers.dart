@@ -2,10 +2,12 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/const_api.dart';
+import 'package:likhit/screens/lawyer_screen/screens/models/invoice_model.dart';
 import 'package:likhit/screens/lawyer_screen/screens/models/lawyer_appointment_model.dart';
 import 'package:likhit/utils/const_toast.dart';
 
 import '../../../../const/api_url.dart';
+import '../models/invoice_model.dart';
 
 class LawyerAppointmentControllers extends GetxController{
 
@@ -19,6 +21,7 @@ class LawyerAppointmentControllers extends GetxController{
     super.onInit();
     ApiService.init();
     getLawyerAppointment();
+
   }
 
 
@@ -70,7 +73,28 @@ class LawyerAppointmentControllers extends GetxController{
     }
   }
 
+// daya
 
+  var invoice = InvoiceModel().obs;
+  Future getInvoiceById({int? id})async {
+
+    try {
+      dio.Response response = await ApiService.getData(
+          invoiceUrl,
+          queryParameters: {
+            'payment_id': 4,
+          }
+      );
+      if(response.data['respnse_code']==200){
+
+        invoice.value = InvoiceModel.fromJson(
+            response.data);
+      }
+
+    } catch (e) {
+      debugPrint("invoiceData error : $e");
+    }
+  }
 
 
 }

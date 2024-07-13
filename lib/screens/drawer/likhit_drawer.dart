@@ -114,7 +114,7 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
               icon: Icons.account_circle,
               text: 'Transaction List',
               onTap: () {
-                // Get.toNamed(ApplicationPages.clientLawyerList);
+                Get.toNamed(ApplicationPages.invoice);
               },
             ),
 

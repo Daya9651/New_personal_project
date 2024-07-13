@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_appointment_list.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_my_transaction.dart';
+import 'package:likhit/screens/payment/invoicing.dart';
 
 import '../screens/auth/choose_account_type.dart';
 import '../screens/auth/lawyer_add_profile.dart';
@@ -19,8 +20,6 @@ import '../screens/splash_screen_likhit.dart';
 
 class ApplicationPages{
 
-
-
   static const splashScreen = '/';
   static const signUpPage = '/signUpPage';
   static const choosePage = '/choosePage';
@@ -29,6 +28,7 @@ class ApplicationPages{
   static const bookAppointmentsPage = '/bookAppointmentsPage';
   static const clientLawyerList = '/clientLawyerList';
   static const myBottomBar = '/myBottomBar';
+  static const invoice = '/invoice';
 
 
   //lawyer
@@ -102,9 +102,11 @@ class ApplicationPages{
       name: lawyerMyTransaction,
       page: () =>  const LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
-    ),  GetPage(
+    ),
+
+    GetPage(
       name: lawyerAppointmentList,
-      page: () =>  const LawyerAppointmentList(),
+      page: () =>  const Invoicing(),
       binding: LawyerAppointmentBindings()
     ),
 

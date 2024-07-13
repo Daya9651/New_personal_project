@@ -1,9 +1,8 @@
 
-import 'package:dio/dio.dart%20%20';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_rx/get_rx.dart';
 import 'package:likhit/const/api_url.dart';
 import 'package:likhit/pending_review_page.dart';
 import 'package:likhit/routes/routes.dart';

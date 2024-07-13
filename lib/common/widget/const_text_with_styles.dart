@@ -77,6 +77,12 @@ Text const6TextBold(String text, {Color textColor = AppColors.white100}) {
     style: AppTextStyles.kSmall6SemiBoldTextStyle.copyWith(color: textColor),
   );
 }
+Text const6TextBoldUnderLine(String text, {Color textColor = AppColors.white100}) {
+  return Text(
+    text,
+    style: AppTextStyles.kSmall6SemiBoldTextStyle.copyWith(color: textColor,decoration: TextDecoration.lineThrough),
+  );
+}
 
 textWithoutStyle(text, style) {
   return Text(

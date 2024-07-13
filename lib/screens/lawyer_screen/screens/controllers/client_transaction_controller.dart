@@ -16,11 +16,11 @@ class ClientTransactionController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     ApiService.init();
-    getClientTransactions();
+    getClientDirectTransactions();
   }
 
 
-  Future getClientTransactions({String ?search})async {
+  Future getClientDirectTransactions({String ?search})async {
     try {
       dio.Response clientTransactionResponse = await ApiService.getData(
           lawyerPaymentUrl,
@@ -40,4 +40,11 @@ class ClientTransactionController extends GetxController{
 debugPrint("clientTransactionResponse error : $e");
     }
   }
+
+
+
+
+
+
+
 }

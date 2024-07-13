@@ -4,10 +4,7 @@ import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/auth/save_auth_data.dart';
-import 'package:likhit/screens/profile/widget/profile_card.dart';
-
 import '../../../const/const_width.dart';
-import '../../const/const_height.dart';
 import '../../routes/routes.dart';
 import '../../style/color.dart';
 import '../../style/gradients.dart';
@@ -62,7 +59,6 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
                 // Get.toNamed(ApplicationPages.lawyerAppointmentList);
               },
             ),
-
             _buildDrawerItem(
               icon: Icons.account_circle,
               text: 'Payment Request',
@@ -70,7 +66,6 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
                 // Get.toNamed(ApplicationPages.clientLawyerList);
               },
             ),
-
 
             constDivider(),
             _buildDrawerItem(
@@ -122,10 +117,6 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
                 // Get.toNamed(ApplicationPages.clientLawyerList);
               },
             ),
-
-
-
-
 
             constDivider(),
             _buildDrawerItem(

@@ -441,7 +441,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage>
                             return customListTile(
                                 title: 'Lucknow University',
                                 subtitle: "B.Tech",
-                                date: "2024",
+                                startDate: "2022 - Present",
+                                endDate: "2022 - Present",
                                 icon: Icons.school,
                                 onTap: () {});
                           })),
@@ -449,7 +450,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage>
                     child: customListTile(
                         title: 'IIT Kanpur',
                         subtitle: "M.Tech",
-                        date: "2024",
+                        startDate: "2022 - Present",
+                        endDate: "2022 - Present",
                         icon: Icons.school,
                         onTap: () {}),
                   ),
@@ -497,7 +499,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage>
                             return customListTile(
                                 title: 'Criminal Experience',
                                 subtitle: "Best Criminal lawyer Experience",
-                                date: "2022 - Present",
+                                startDate: "2022 - Present",
+                                endDate: "2022 - Present",
                                 icon: Icons.star_border,
                                 onTap: () {});
                           })),
@@ -505,7 +508,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage>
                     child: customListTile(
                         title: 'Criminal Experience',
                         subtitle: "Best Criminal lawyer Experience",
-                        date: "2022 - Present",
+                        startDate: "2022 - Present",
+                        endDate: "2022 - Present",
                         icon: Icons.star_border,
                         onTap: () {}),
                   ),
@@ -513,7 +517,8 @@ class _ProfileDisplayPageState extends State<ProfileDisplayPage>
                     child: customListTile(
                         title: 'XYX',
                         subtitle: "Handle Company Cases ",
-                        date: "2024 - Present",
+                        startDate: "2022 - Present",
+                        endDate: "2022 - Present",
                         icon: Icons.star_border,
                         onTap: () {}),
                   ),

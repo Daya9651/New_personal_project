@@ -1,6 +1,5 @@
-
-import 'package:dio/dio.dart%20%20';
-import 'package:flutter/cupertino.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:get/get_rx/get_rx.dart';
@@ -9,17 +8,16 @@ import 'package:likhit/pending_review_page.dart';
 import 'package:likhit/routes/routes.dart';
 import 'package:likhit/screens/auth/save_auth_data.dart';
 import 'package:likhit/utils/const_toast.dart';
+
 import '../common/const_api.dart';
 import '../screens/auth/choose_account_type.dart';
 import '../screens/otp generate/otp_screen.dart';
-import 'package:dio/dio.dart' as dio;
 
-
-  class EmailService  extends GetxController{
+class EmailService extends GetxController {
   RxBool isLoading = false.obs;
   final Dio _dio = Dio();
-  // String authToken = '';
 
+  // String authToken = '';
 
   @override
   void onInit() {
@@ -28,26 +26,30 @@ import 'package:dio/dio.dart' as dio;
     ApiService.init();
   }
 
-
-  Future<void> sendOtp(String email,BuildContext context) async {
+  Future<void> sendOtp(String email, BuildContext context) async {
     _dio.options.headers['Authorization'] = publicToken;
     isLoading.value = true;
     try {
       // Response response = await _dio.post( 'http://192.168.1.71:6768/get-otp-api/',
-     var response = await _dio.post( loginEmailUrl,
+      var response = await _dio.post(
+        loginEmailUrl,
         data: {'email': email},
       );
       debugPrint("loginEmailUrl: ${loginEmailUrl}");
       if (response.data['response_code'] == 200) {
-        isLoading.value= false;
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyOtpPage(email: email,)));
+        isLoading.value = false;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => VerifyOtpPage(
+                      email: email,
+                    )));
 
-
-        ConstToast.to.showSuccess(response.data['message'] +email);
+        ConstToast.to.showSuccess(response.data['message'] + email);
         debugPrint('OTP sent successfully');
       } else {
         isLoading.value = false;
-        ConstToast.to.showError(response.data['message'] );
+        ConstToast.to.showError(response.data['message']);
         debugPrint('Failed to send OTP');
       }
     } catch (e) {
@@ -57,8 +59,8 @@ import 'package:dio/dio.dart' as dio;
     }
   }
 
-
-  Future<void> verifyByOtp(String email, String otp, BuildContext context) async {
+  Future<void> verifyByOtp(
+      String email, String otp, BuildContext context) async {
     debugPrint("sending otp: $email, $otp");
 
     try {
@@ -67,7 +69,6 @@ import 'package:dio/dio.dart' as dio;
         data: {
           'email': email,
           'otp': otp,
-
         },
         publicToken: true,
       );
@@ -79,7 +80,9 @@ import 'package:dio/dio.dart' as dio;
         debugPrint("type by login: $type");
 
         if (type == "Not Define") {
-          Get.off(const ChoosePage(),);
+          Get.off(
+            const ChoosePage(),
+          );
         } else if (type == "Approval Pending") {
           Get.to(() => const PendingReviewPage());
         } else {
@@ -87,7 +90,8 @@ import 'package:dio/dio.dart' as dio;
         }
 
         UserDataService.saveUserData(token, type);
-        debugPrint("saveUserData tokenType ${await UserDataService.getAuthToken()}");
+        debugPrint(
+            "saveUserData tokenType ${await UserDataService.getAuthToken()}");
 
         ConstToast.to.showSuccess(response.data['message']);
       } else {
@@ -99,10 +103,4 @@ import 'package:dio/dio.dart' as dio;
       debugPrint('Error verification: $e');
     }
   }
-
-
-
-
 }
-
-

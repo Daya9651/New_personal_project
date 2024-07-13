@@ -4,7 +4,7 @@ class LawyerListModel {
   int? count;
   int? currentPage;
   int? totalPages;
-  List<LawyerListData>? data;
+  List<Data>? data;
 
   LawyerListModel(
       {this.message,
@@ -21,20 +21,20 @@ class LawyerListModel {
     currentPage = json['current_page'];
     totalPages = json['total_pages'];
     if (json['data'] != null) {
-      data = <LawyerListData>[];
+      data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new LawyerListData.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['response_code'] = this.responseCode;
-    data['count'] = this.count;
-    data['current_page'] = this.currentPage;
-    data['total_pages'] = this.totalPages;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['response_code'] = responseCode;
+    data['count'] = count;
+    data['current_page'] = currentPage;
+    data['total_pages'] = totalPages;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -42,7 +42,7 @@ class LawyerListModel {
   }
 }
 
-class LawyerListData {
+class Data {
   int? id;
   String? name;
   String? address;
@@ -50,19 +50,21 @@ class LawyerListData {
   List<String>? languageSpoken;
   String? experience;
   String? image;
-  double? avgRating;
 
-  LawyerListData(
-      {this.id,
-      this.name,
-      this.address,
-      this.specialties,
-      this.languageSpoken,
-      this.experience,
-      this.image,
-      this.avgRating});
+  // double? avgRating;
 
-  LawyerListData.fromJson(Map<String, dynamic> json) {
+  Data({
+    this.id,
+    this.name,
+    this.address,
+    this.specialties,
+    this.languageSpoken,
+    this.experience,
+    this.image,
+    // this.avgRating
+  });
+
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     address = json['address'];
@@ -70,19 +72,19 @@ class LawyerListData {
     languageSpoken = json['language_spoken'].cast<String>();
     experience = json['experience'];
     image = json['image'];
-    avgRating = json['avg_rating'];
+    // avgRating = json['avg_rating'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['address'] = this.address;
-    data['specialties'] = this.specialties;
-    data['language_spoken'] = this.languageSpoken;
-    data['experience'] = this.experience;
-    data['image'] = this.image;
-    data['avg_rating'] = this.avgRating;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['address'] = address;
+    data['specialties'] = specialties;
+    data['language_spoken'] = languageSpoken;
+    data['experience'] = experience;
+    data['image'] = image;
+    // data['avg_rating'] = avgRating;
     return data;
   }
 }

@@ -10,6 +10,7 @@ import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_appointm
 
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
+import '../../../../const/image_strings.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
 import '../../../../utils/utils.dart';
@@ -57,7 +58,7 @@ class LawyerAppointmentList extends GetView<LawyerAppointmentControllers> {
               radiusBorder: w5,
               borderColor: AppColors.white50,
               padding: w3,
-              color:transaction.status=="Pending  " ?AppColors.white:AppColors.success10,
+              color:transaction.paymentStatus!="Paid" ?AppColors.white:AppColors.success10,
               child: ListTile(
                 title: const8TextBold("${transaction.name}"),
                 subtitle: Column(
@@ -66,10 +67,11 @@ class LawyerAppointmentList extends GetView<LawyerAppointmentControllers> {
                     const6Text(" ${transaction.email} Mob: ${transaction.phoneNo}"),
                     const6Text("Content: ${transaction.content}"),
                     const8TextBold("Time: ${formatDateTime(DateTime.parse(transaction.createdDate??""))}"),
+                    const8TextBold("$rS ${transaction.paymentAmount}",textColor: AppColors.success40),
 
                   ],
                 ),
-                trailing:ElevatedButton(
+                trailing:transaction.paymentStatus=="Paid"?ElevatedButton(
 
 
                   onPressed: transaction.status=="Approved" ? null:(){
@@ -89,7 +91,7 @@ class LawyerAppointmentList extends GetView<LawyerAppointmentControllers> {
                    );
 
 
-                  },child: const6Text(transaction.status.toString()),)
+                  },child: const6Text(transaction.status.toString()),):const6TextBold('${transaction.paymentStatus}',textColor: AppColors.error40)
               ),
             );
           },

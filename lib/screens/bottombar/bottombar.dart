@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/common/widget/const_text_with_styles.dart';
+import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:likhit/screens/bottombar/controllers/bottom_nav_controller.dart';
 
-import '../../drawer/likhit_drawer.dart';
+import '../drawer/likhit_drawer.dart';
 
 class MyBottomBar extends GetView<BottomNavController> {
   final String ?userName;
@@ -16,8 +18,8 @@ class MyBottomBar extends GetView<BottomNavController> {
       backgroundColor: Colors.white,
       // floatingActionButton: FloatingActionButton(onPressed: (){},
       //   child: Icon(Icons.add)),
-      appBar: AppBar(
-
+      appBar:CustomAppBar(
+        title: controller.titleNames[controller.selectedIndex.value],
       ),
       drawer: LikhitDrawer(),
       bottomNavigationBar:Obx(()=> NavigationBarTheme(
@@ -56,9 +58,9 @@ class MyBottomBar extends GetView<BottomNavController> {
               selectedIcon: Icon(Icons.chat, color: Colors.indigo),
             ),
             NavigationDestination(
-              icon: Icon(Icons.inbox),
-              label: "Inbox",
-              selectedIcon: Icon(Icons.inbox, color: Colors.indigo),
+              icon: Icon(Icons.receipt_long_outlined,),
+              label: "Transactions",
+              selectedIcon: Icon(Icons.receipt_long, color: Colors.indigo),
             ),
             NavigationDestination(
               icon: Icon(Icons.person),

@@ -30,10 +30,6 @@ class BottomNavController extends GetxController{
   void onItemTapped(int index) {
     selectedIndex.value = index;
     debugPrint('selectedIndex.value ${selectedIndex.value}');
-    // if (index == 0 && AppManager().getrole.toString() == "Sales Manager" ||
-    //     AppManager().getrole.toString() == StoreAdmin) {
-    //   leadDashboardController.update();
-    // }
   }
   Future getUserType()async{
 

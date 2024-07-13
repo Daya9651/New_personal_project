@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:likhit/common/const_api.dart';
 import 'package:likhit/const/api_url.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:likhit/screens/auth/save_auth_data.dart';
 import 'package:likhit/screens/auth/services/model/city_model.dart';
 import 'package:likhit/screens/auth/services/model/state_model.dart';
 import 'package:likhit/utils/const_toast.dart';
@@ -87,6 +88,8 @@ class AccountManageController extends GetxController{
       );
       debugPrint("confirmUserApi $response");
       if(response.data['response_code']==200){
+        var type = response.data['user_type'];
+        UserDataService.saveUserType(type);
         ConstToast.to.showSuccess("${response.data['message']}");
         Get.offAllNamed(ApplicationPages.myBottomBar);
       }else{

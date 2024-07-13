@@ -16,6 +16,11 @@ const String confirmationLawyerAndClientUrl = "$baseUrl/confirm-user-api/";
 const String stateUrl = "$baseUrl/state-list-api/";
 //todo city api
 const String cityUrl = "$baseUrl/city-list-api/";
+const String lawyerPaymentUrl = "$baseUrl/lawyer-payment-recieve-api/";
+const String lawyerMyTransactionUrl = "$baseUrl/buy-plan-transaction-history-api/";
+const String viewLawyerAppointment = "$baseUrl/lawyer-view-appointment-api/";
+const String lawyerConfirmRejectAppointmentUrl = "$baseUrl/lawyer-confirm-reject-appointment-api/";
+const String profileUrl = "$baseUrl/view-profile-api/";
 
 
 

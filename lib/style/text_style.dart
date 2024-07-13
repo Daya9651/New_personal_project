@@ -85,4 +85,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 10.sp, // Larger font size for desktop/laptop
   );
+  static TextStyle kSmall6SemiBoldTextStyle = GoogleFonts.poppins(
+    fontWeight: FontWeight.w600,
+    fontSize: 8.sp, // Larger font size for desktop/laptop
+  );  static TextStyle kSmall6RegularTextStyle = GoogleFonts.poppins(
+    // fontWeight: FontWeight.w600,
+    fontSize: 8.sp, // Larger font size for desktop/laptop
+  );
 }

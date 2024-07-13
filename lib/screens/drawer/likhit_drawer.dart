@@ -14,7 +14,7 @@ import '../../style/gradients.dart';
 import '../../utils/utils.dart';
 import 'controller/likhit_drawer_controller.dart';
 
-class LikhitDrawer extends StatelessWidget {
+class LikhitDrawer extends GetView<LikhitDrawerController> {
    LikhitDrawer({super.key});
 final LikhitDrawerController controller = Get.put(LikhitDrawerController());
   @override
@@ -38,26 +38,28 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
               icon: Icons.account_circle,
               text: 'Appointment List',
               onTap: () {
+                Get.toNamed(ApplicationPages.lawyerAppointmentList);
+
               },
             ),
             _buildDrawerItem(
               icon: Icons.account_circle,
               text: 'Client Transaction',
               onTap: () {
-
+                Get.toNamed(ApplicationPages.clientTransaction);
               },
             ), _buildDrawerItem(
               icon: Icons.account_circle,
               text: 'My Transaction',
               onTap: () {
-                // Get.toNamed(ApplicationPages.clientLawyerList);
+                Get.toNamed(ApplicationPages.lawyerMyTransaction);
               },
             ),
             _buildDrawerItem(
               icon: Icons.account_circle,
               text: 'Plans',
               onTap: () {
-                // Get.toNamed(ApplicationPages.clientLawyerList);
+                // Get.toNamed(ApplicationPages.lawyerAppointmentList);
               },
             ),
 
@@ -158,14 +160,15 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   radius: w50,
-                  backgroundImage: AssetImage(
-                    clientLogo,
+                  backgroundImage: NetworkImage(
+                      controller.profileData.value.data?.image??""
                   ),
                 ),
               ),
               SizedBox(height: 10.w),
-              const12TextBold("type :${controller.bottomNavController.userType.value}"),
-              const12TextBold("satyam@gmail.com"),
+              const10TextBold("${controller.profileData.value.data?.name.toString().toUpperCase()}"),
+              const10TextBold("${controller.profileData.value.data?.email}"),
+              // const12TextBold("satyam@gmail.com"),
             ],
           ),
         ),
@@ -183,7 +186,10 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
       return ListTile(leading: Container(
           padding: EdgeInsets.all(w8),
           decoration: const BoxDecoration(
-              shape: BoxShape.circle, gradient: primaryGradientColor),child: Icon(icon,color: AppColors.white,)), title: Text(text), onTap: onTap);
+            color: AppColors.info80,
+              shape: BoxShape.circle,
+              // gradient: primaryGradientColor
+          ),child: Icon(icon,color: AppColors.white,)), title: Text(text), onTap: onTap);
 
   }
 

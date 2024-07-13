@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likhit/style/color.dart';
 
 const orangeGradient =  LinearGradient(
   colors: [
@@ -23,8 +24,8 @@ const primaryGradientColor =  LinearGradient(
 
 const greyGradientColor =  LinearGradient(
   colors: [
-    Colors.grey,
-    Colors.grey
+ AppColors.info80,
+    AppColors.white,
     // Color(0xFFe1654d),
 
 

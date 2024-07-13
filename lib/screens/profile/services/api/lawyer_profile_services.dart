@@ -26,10 +26,6 @@ class LawyerProfileServices {
     }catch(e){
       ConstToast.to.showError('$e');
     }
-
-
-
-
     //
   }
 }

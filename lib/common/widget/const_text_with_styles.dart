@@ -58,13 +58,25 @@ Text const8Text(String text, {Color textColor = AppColors.white100}) {
     text,
     style: AppTextStyles.kSmall8RegularTextStyle.copyWith(color: textColor),
   );
-}Text const8TextBold(String text, {Color textColor = AppColors.white100}) {
+}
+Text const8TextBold(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall8SemiBoldTextStyle.copyWith(color: textColor),
   );
 }
-
+Text const6Text(String text, {Color textColor = AppColors.white100}) {
+  return Text(
+    text,
+    style: AppTextStyles.kSmall6RegularTextStyle.copyWith(color: textColor),
+  );
+}
+Text const6TextBold(String text, {Color textColor = AppColors.white100}) {
+  return Text(
+    text,
+    style: AppTextStyles.kSmall6SemiBoldTextStyle.copyWith(color: textColor),
+  );
+}
 
 textWithoutStyle(text, style) {
   return Text(

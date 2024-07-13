@@ -4,34 +4,37 @@ import '../../style/color.dart';
 import '../../style/text_style.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String ?title;
+  final String? title;
   final List<Widget>? actions;
   final Widget? leading;
+  final PreferredSizeWidget? bottom; // Add this property
 
-  const CustomAppBar(
-      {super.key,  this.title, this.actions, this.leading});
+  const CustomAppBar({
+    super.key,
+    this.title,
+    this.actions,
+    this.leading,
+    this.bottom, // Initialize it in the constructor
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: const IconThemeData(
-    color:
-        AppColors.white
-       // Change this color to whatever you want
-    ),
-      // forceMaterialTransparency: true,
+        color: AppColors.white, // Change this color to whatever you want
+      ),
       titleTextStyle: AppTextStyles.kCaption12SemiBoldTextStyle
           .copyWith(color: AppColors.white),
-      title: Text(title??""),
+      title: Text(title ?? ""),
       leading: leading,
-      // centerTitle: true,
-
       actions: actions,
       backgroundColor: AppColors.info80,
-
+      bottom: bottom, // Add the bottom property to the AppBar
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(
+    kToolbarHeight + (bottom?.preferredSize.height ?? 0.0), // Adjust height based on bottom's preferred size
+  );
 }

@@ -111,8 +111,8 @@ class ConstTextField extends StatelessWidget {
         maxLines: maxLine ?? 1,
         // cursorHeight: cursorHeight??3.5.w,
         style: style ??
-            AppTextStyles.kBody15RegularTextStyle
-                .copyWith(color: AppColors.white100),
+            AppTextStyles.kCaption12RegularTextStyle
+                .copyWith(color:enableBorderColor?? AppColors.white100),
         decoration: InputDecoration(
           filled: filled,
           fillColor: fillColor,
@@ -138,14 +138,14 @@ class ConstTextField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.w)),
                   borderSide:
-                      const BorderSide(color: AppColors.info80, width: 1),
+                       BorderSide(color:enableBorderColor ?? AppColors.info80, width: 1),
                 )
               : InputBorder.none,
           border: borderNone == true
-              ? const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.white80),
+              ?  OutlineInputBorder(
+                  borderSide: BorderSide(color:enableBorderColor ?? AppColors.white80),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(5.0),
+                    Radius.circular(w5),
                   ),
                 )
               : InputBorder.none,

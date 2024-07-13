@@ -44,8 +44,6 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
         }else if(type =="Not Define"){
           Get.offAllNamed(ApplicationPages.choosePage);
         }
-
-
         else{
           Get.offAllNamed(ApplicationPages.myBottomBar);
 

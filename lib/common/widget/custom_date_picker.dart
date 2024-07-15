@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:likhit/style/color.dart';
+import 'package:intl/intl.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final DateTime initialDate;
   final Function(DateTime) onDateSelected;
 
-  CustomDatePicker({required this.initialDate, required this.onDateSelected}) : super();
+  CustomDatePicker({required this.initialDate, required this.onDateSelected})
+      : super();
 
   @override
   _CustomDatePickerState createState() => _CustomDatePickerState();
 }
+
 class _CustomDatePickerState extends State<CustomDatePicker> {
   late DateTime _selectedDate;
 
@@ -31,7 +33,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       setState(() {
         _selectedDate = picked;
       });
-      if(widget.onDateSelected != null) {
+      if (widget.onDateSelected != null) {
         widget.onDateSelected(picked);
       }
     }
@@ -62,10 +64,24 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
 Future<DateTime?> selectDate(BuildContext context) async {
   final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(3900));
+  return picked;
+}
+
+Future<TimeOfDay?> selectTime(BuildContext context) async {
+  final TimeOfDay? picked = await showTimePicker(
     context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(1900),
-    lastDate: DateTime(3900));
+    initialTime: TimeOfDay.now(),
+    builder: (BuildContext context, Widget? child) {
+      return MediaQuery(
+        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+        child: child!,
+      );
+    },
+  );
   return picked;
 }
 
@@ -74,4 +90,12 @@ String formattedDate(DateTime? selectedDate) {
       // ? "${selectedDate.day.toString().padLeft(2, '0')}/${selectedDate.month.toString().padLeft(2, '0')}/${selectedDate.year}"
       ? "${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}"
       : "";
+}
+
+String formatTime(TimeOfDay timeOfDay) {
+  final now = DateTime.now();
+  final dateTime =
+      DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+  final formattedTime = DateFormat.jm().format(dateTime);
+  return formattedTime;
 }

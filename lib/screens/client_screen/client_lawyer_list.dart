@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
 import 'package:likhit/screens/client_screen/widget/clients_widgets.dart';
 import 'package:likhit/style/color.dart';
@@ -24,16 +25,15 @@ class ClientLawyerList extends StatelessWidget {
           bottom: PreferredSize(
               preferredSize: Size.fromHeight(h50),
               child: ConstTextField(
-                // controller: controller.searchTransactionController.value,
-                // onChanged: (value) {
-                //   controller.clientAppointmentDetailFetch(search: value);
-                // },
+                controller: controller.searchLawyerListController.value,
+                onChanged: (value) {
+                  controller.getLawyerListFetch(search: value);
+                },
                 hintText: "search for legal expert",
                 enableBorderColor: AppColors.white,
                 suffixIcon: IconButton(
                     onPressed: () {
-                      // controller.searchTransactionController.value.clear();
-                      // controller.getLawyerAppointment();
+                      controller.searchLawyerListController.value.clear();
                     },
                     icon: const Icon(
                       CupertinoIcons.multiply_circle,
@@ -55,12 +55,6 @@ class ClientLawyerList extends StatelessWidget {
               // itemCount: 5,
               itemBuilder: (context, index) {
                 var listData = controller.lawyerListData.value.data?[index];
-                // var specialtiesList = [];
-                // for(var i =0;i<listData.specialties!.length;i++){
-                //
-                //   specialtiesList.addAll(listData.specialties);
-                // }
-                //
                 if (controller.lawyerListData.value.data!.isEmpty) {
                   return Center(
                     child: CircularProgressIndicator(
@@ -73,10 +67,12 @@ class ClientLawyerList extends StatelessWidget {
                         controller.lawyerBookDetailFetch(id: listData?.id);
                         Get.to(ClientBookingAppointment());
                       },
-                      image: listData?.image.toString() ?? '',
+                      image: listData?.image == null
+                          ? errorHandleImage
+                          : listData?.image.toString() ?? '',
                       title: listData?.name.toString() ?? '',
-                      workspaceText: listData?.specialties.toString() ?? '',
-                      languageText: listData?.languageSpoken.toString() ?? '',
+                      workspaceText: listData?.specialties?.join(', ') ?? '',
+                      languageText: listData?.languageSpoken?.join(', ') ?? '',
                       expText: listData?.experience.toString() ?? '',
                       locationText: listData?.address.toString() ?? '');
                 }

@@ -12,6 +12,9 @@ import '../model/client_profile_model.dart';
 class ClientApiController extends GetxController {
   var searchTransactionController = TextEditingController().obs;
 
+  var searchLawyerListController = TextEditingController().obs;
+  var reviewController = TextEditingController().obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -19,6 +22,7 @@ class ClientApiController extends GetxController {
     ApiService.init();
     getClientProfile();
     getLawyerListFetch();
+    clientAppointmentDetailFetch();
   }
 
   //todo lawyer list get api
@@ -44,9 +48,14 @@ class ClientApiController extends GetxController {
 
   Future getLawyerListFetch({String? search}) async {
     try {
-      dio.Response clientTransactionResponse = await ApiService.getData(
-        lawyerListUrl,
-      );
+      dio.Response clientTransactionResponse =
+          await ApiService.getData(lawyerListUrl, queryParameters: {
+        'sort': '',
+        'speciality': '',
+        'language_spoken': '',
+        'location': '',
+        'search': search,
+      });
       if (clientTransactionResponse.data['response_code'] == 200) {
         lawyerListData.value =
             LawyerListModel.fromJson(clientTransactionResponse.data);

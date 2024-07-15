@@ -17,12 +17,28 @@ const String stateUrl = "$baseUrl/state-list-api/";
 //todo city api
 const String cityUrl = "$baseUrl/city-list-api/";
 const String lawyerPaymentUrl = "$baseUrl/lawyer-payment-recieve-api/";
-const String lawyerMyTransactionUrl = "$baseUrl/buy-plan-transaction-history-api/";
+const String lawyerMyTransactionUrl =
+    "$baseUrl/buy-plan-transaction-history-api/";
 const String viewLawyerAppointment = "$baseUrl/lawyer-view-appointment-api/";
-const String lawyerConfirmRejectAppointmentUrl = "$baseUrl/lawyer-confirm-reject-appointment-api/";
+const String lawyerConfirmRejectAppointmentUrl =
+    "$baseUrl/lawyer-confirm-reject-appointment-api/";
 const String profileUrl = "$baseUrl/view-profile-api/";
 
+//todo lawyer satyam
+const String paymentLawyerRequestTransactionUrl =
+    "$baseUrl/lawyer-request-payment-history-api/";
+const String getNfcUrl = "$baseUrl/get-nfc-card-plans-view/";
+const String getSubPlanUrl = "$baseUrl/get-subscription-plans-view/";
+const String clientListUrl = "$baseUrl/list-of-client-api/";
+const String lawyerRequestPaymentUrl =
+    "$baseUrl/lawyer-request-for-payment-api/";
 
+//todo client urls
+const String lawyerListUrl = "$baseUrl/list-lawyer-api/";
+const String lawyerBookAppointmentDetailsUrl = "$baseUrl/lawyer-details-api/";
+const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
+
+//todo clientBookAppointment
+const String clientBookAppointmentUrl = "$baseUrl/user-book-appointment-api/";
 
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
-

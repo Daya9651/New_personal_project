@@ -12,7 +12,6 @@ import '../../const/const_height.dart';
 import '../../const/const_width.dart';
 import '../../helpers/string_to_date_function.dart';
 import '../../style/color.dart';
-import '../../utils/utils.dart';
 
 class ClientAppointmentList extends GetView<ClientApiController> {
   const ClientAppointmentList({super.key});
@@ -35,7 +34,7 @@ class ClientAppointmentList extends GetView<ClientApiController> {
               enableBorderColor: AppColors.white,
               suffixIcon: IconButton(
                   onPressed: () {
-                    // controller.searchTransactionController.value.clear();
+                    controller.searchTransactionController.value.clear();
                     // controller.getLawyerAppointment();
                   },
                   icon: const Icon(
@@ -82,16 +81,16 @@ class ClientAppointmentList extends GetView<ClientApiController> {
                     onPressed: transaction.status == "Approved"
                         ? null
                         : () {
-                            askDialog(
-                              title: "Appointment Status",
-                              context: context,
-                              doneText: "Accept",
-                              cancelText: "Reschedule",
-                              onPressedCancel: () {},
-                              onPressedDone: () {
-                                // controller.bookAppointment(transaction.id, "Approved");
-                              },
-                            );
+                            // askDialog(
+                            //   title: "Appointment Status",
+                            //   context: context,
+                            //   doneText: "Accept",
+                            //   cancelText: "Reschedule",
+                            //   onPressedCancel: () {},
+                            //   onPressedDone: () {
+                            //     // controller.bookAppointment(transaction.id, "Approved");
+                            //   },
+                            // );
                           },
                     child: const6Text(transaction.status.toString()),
                   )),

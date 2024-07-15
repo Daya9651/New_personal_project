@@ -13,6 +13,7 @@ import '../screens/bottombar/bindings/bottom_nav_binding.dart';
 import '../screens/bottombar/bindings/lawyer_transaction_binding.dart';
 import '../screens/bottombar/bottombar.dart';
 import '../screens/client_screen/client_appointment_list.dart';
+import '../screens/client_screen/client_book_appointment_time.dart';
 import '../screens/client_screen/client_lawyer_list.dart';
 import '../screens/lawyer_screen/screens/bindings/client_transaction_binding.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_appointment_bindings.dart';
@@ -44,6 +45,7 @@ class ApplicationPages {
   //todo client
   static const clientAppointmentList = '/clientAppointmentList';
   static const clientProfile = '/clientProfile';
+  static const clientBookAppointment = '/clientBookAppointment';
 
   static List<GetPage>? getApplicationPages() => [
         GetPage(
@@ -81,7 +83,7 @@ class ApplicationPages {
 
         GetPage(
             name: bookAppointmentsPage,
-            page: () => const BookAppointmentsPage(),
+            page: () => BookAppointmentsPage(),
             binding: BookAppointmentBindings()),
 
         // lawyer
@@ -117,5 +119,10 @@ class ApplicationPages {
             name: clientProfile,
             page: () => const ClientProfile(),
             binding: ClientAppointmentBinding()),
+
+        GetPage(
+            name: clientBookAppointment,
+            page: () => const ClientBookAppointmentTime(),
+            binding: ClientBookAppointmentBinding()),
       ];
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:likhit/screens/auth/save_auth_data.dart';
+import 'package:likhit/screens/lawyer_screen/screens/views/client_transaction.dart';
 
 import '../contracts.dart';
 import '../homepage.dart';
 import '../inbox.dart';
+import '../lawyer_transactions.dart';
 import '../profile.dart';
 
 class BottomNavController extends GetxController{
@@ -15,10 +17,17 @@ class BottomNavController extends GetxController{
   final screen = [
     const HomePage(),
     const Contracts(),
-    const Inbox(),
+    const LawyerTransactionPage(),
     ProfileInputPage(),
   ];
 
+  List<String> titleNames = [
+    "Home",
+    "Appointments",
+    "Transactions",
+    "Profile",
+
+  ];
 
   @override
   void onInit() {

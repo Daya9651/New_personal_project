@@ -10,14 +10,17 @@ import '../screens/auth/user_add_profile.dart';
 import '../screens/book_appointment_client/bindings/book_appointment_bindings.dart';
 import '../screens/book_appointment_client/views/book_appointments_page.dart';
 import '../screens/bottombar/bindings/bottom_nav_binding.dart';
+import '../screens/bottombar/bindings/lawyer_transaction_binding.dart';
+import '../screens/bottombar/bottombar.dart';
 import '../screens/client_screen/client_appointment_list.dart';
 import '../screens/client_screen/client_lawyer_list.dart';
 import '../screens/lawyer_screen/screens/bindings/client_transaction_binding.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_appointment_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_my_transaction_bindings.dart';
+import '../screens/lawyer_screen/screens/bindings/lawyer_payment_request_binding.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
+import '../screens/lawyer_screen/screens/views/lawyer_payment_request_page.dart';
 import '../screens/signup/signUp.dart';
-import '../screens/splash/components/bottombar.dart';
 import '../screens/splash_screen_likhit.dart';
 
 class ApplicationPages {
@@ -96,6 +99,15 @@ class ApplicationPages {
             name: lawyerAppointmentList,
             page: () => const LawyerAppointmentList(),
             binding: LawyerAppointmentBindings()),
+
+        GetPage(
+            name: lawyerMyTransaction,
+            page: () => const LawyerMyTransaction(),
+            binding: LawyerTransactionBinding()),
+        GetPage(
+            name: lawyerPaymentRequest,
+            page: () => const LawyerPaymentRequestPage(),
+            binding: LawyerPaymentRequestBinding()),
 
         GetPage(
             name: clientAppointmentList,

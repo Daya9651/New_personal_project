@@ -27,13 +27,13 @@ class ClientTransaction extends GetView<ClientTransactionController> {
           child: ConstTextField(
             controller: controller.searchTransactionController.value,
             onChanged: (value) {
-              controller.getClientTransactions(search: value);
+              controller.getClientDirectTransactions(search: value);
             },
             hintText: "Search Transactions",
             enableBorderColor: AppColors.white,
             suffixIcon: IconButton(onPressed: (){
               controller.searchTransactionController.value.clear();
-              controller.getClientTransactions();
+              controller.getClientDirectTransactions();
 
             }, icon: const Icon(CupertinoIcons.multiply_circle,color: AppColors.white,)),
           )

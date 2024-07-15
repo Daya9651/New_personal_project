@@ -5,7 +5,6 @@ import 'package:likhit/style/text_style.dart';
 
 import '../../../const/const_height.dart';
 import '../../../const/const_width.dart';
-import '../../../const/image_strings.dart';
 
 Widget lawyerProfileDetailCard(
     {String? title,
@@ -13,21 +12,28 @@ Widget lawyerProfileDetailCard(
     String? languageText,
     String? expText,
     String? locationText,
+    String? image,
     Function()? onTap}) {
   return Card(
-    color: AppColors.white,
+    color: AppColors.info10,
     elevation: 3,
     shadowColor: AppColors.info80,
     child: InkWell(
       onTap: onTap,
       child: Row(
         children: [
-          Hero(
-            tag: 'clientLogo',
-            child: CircleAvatar(
-              radius: w50
-              ,
-              child: Image.asset(clientLogo),
+          CircleAvatar(
+            radius: w35,
+            backgroundColor: Colors.transparent,
+            // Ensure CircleAvatar is transparent
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: ClipOval(
+                child: Image.network(
+                  image ?? '',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           Expanded(
@@ -35,38 +41,59 @@ Widget lawyerProfileDetailCard(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Sheryansh Tripathi',
-                  style: AppTextStyles.kCaption12SemiBoldTextStyle,
+                  title ?? '',
+                  style: AppTextStyles.kCaption12SemiBoldTextStyle
+                      .copyWith(fontSize: h18),
                 ),
                 Row(
                   children: [
-                    Icon(Icons.workspace_premium),
+                    Icon(
+                      Icons.workspace_premium,
+                      size: h20,
+                    ),
                     Expanded(
-                      child: Text(' Domestic violence, DUI/DWI +3 More',
-                          style: AppTextStyles.kSmall10RegularTextStyle),
+                      child: Text(' ${workspaceText ?? ''}',
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
                     ),
                   ],
                 ).marginAll(h5),
                 Row(
                   children: [
-                    Icon(Icons.g_translate),
-                    Text(' Marathi',
-                        style: AppTextStyles.kSmall10RegularTextStyle),
-                  ],
-                ).marginAll(h5),
-                Row(
-                  children: [
-                    Icon(Icons.school_outlined),
-                    Text(' 10 Yrs Exp',
-                        style: AppTextStyles.kSmall10RegularTextStyle),
-                  ],
-                ).marginAll(h5),
-                Row(
-                  children: [
-                    Icon(Icons.location_on_outlined),
+                    Icon(
+                      Icons.g_translate,
+                      size: h20,
+                    ),
                     Expanded(
-                      child: Text(' Bashkari Ambedker Nager',
-                          style: AppTextStyles.kSmall10RegularTextStyle),
+                      child: Text(' ${languageText ?? ''}',
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
+                    ),
+                  ],
+                ).marginAll(h5),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.school_outlined,
+                      size: h20,
+                    ),
+                    Expanded(
+                      child: Text(' ${expText ?? ''} Yrs Exp',
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
+                    ),
+                  ],
+                ).marginAll(h5),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: h20,
+                    ),
+                    Expanded(
+                      child: Text(' ${locationText ?? ''}',
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
                     ),
                   ],
                 ).marginAll(h5),

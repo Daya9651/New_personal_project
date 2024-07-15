@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/style/color.dart';
 
+import '../../../const/const_width.dart';
 import '../../../style/text_style.dart';
 
 Widget specialitiesCard({String? text}) {
@@ -15,7 +16,8 @@ Widget specialitiesCard({String? text}) {
 Widget customListTile({
   String? title,
   String? subtitle,
-  String? date,
+  String? startDate,
+  String? endDate,
   IconData? icon,
   Function()? onTap,
   bool? visibility,
@@ -40,8 +42,9 @@ Widget customListTile({
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title ?? '',
-            style: AppTextStyles.kCaption12RegularTextStyle,
+            "${title ?? ''}",
+            style: AppTextStyles.kCaption12SemiBoldTextStyle
+                .copyWith(fontSize: h15),
           ),
           Text(
             subtitle ?? '',
@@ -52,9 +55,12 @@ Widget customListTile({
       ),
     ),
     trailing: Container(
+      height: h50,
+      width: w80,
       child: Text(
-        date ?? '',
-        style: AppTextStyles.kSmall10RegularTextStyle,
+        "start ${startDate ?? ''} / end ${endDate ?? ''}",
+        style: AppTextStyles.kSmall10RegularTextStyle.copyWith(fontSize: h10),
+        textAlign: TextAlign.justify,
       ),
     ),
   );
@@ -102,7 +108,7 @@ Widget constText15SemiBold({String? text}) {
     ),
     child: Text(
       text ?? '',
-      style: AppTextStyles.kBody15SemiBoldTextStyle,
+      style: AppTextStyles.kBody15SemiBoldTextStyle.copyWith(fontSize: h20),
     ),
   );
 }
@@ -114,7 +120,8 @@ Widget constText12SemiBold({String? text, bool? imp}) {
       children: [
         Text(
           text ?? '',
-          style: AppTextStyles.kCaption12SemiBoldTextStyle,
+          style:
+              AppTextStyles.kCaption12SemiBoldTextStyle.copyWith(fontSize: h15),
         ),
         Visibility(
             visible: imp ?? false,
@@ -128,21 +135,30 @@ Widget constText12SemiBold({String? text, bool? imp}) {
   );
 }
 
-Widget servicesOffer() {
+Widget servicesOffer({
+  String? title,
+  String? subtitle,
+  String? fees,
+}) {
   return Container(
     child: ListTile(
+      dense: true,
+      visualDensity: VisualDensity(horizontal: 4, vertical: -4),
       title: SizedBox(
         width: h50,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Legal Documentation',
-              style: AppTextStyles.kCaption12RegularTextStyle,
+              title ?? '',
+              style: AppTextStyles.kCaption12SemiBoldTextStyle
+                  .copyWith(fontSize: h15),
             ),
             Text(
-              'best lawyer in the word',
-              style: AppTextStyles.kSmall8RegularTextStyle,
+              subtitle ?? '',
+              style:
+                  AppTextStyles.kSmall8RegularTextStyle.copyWith(fontSize: h10),
             )
           ],
         ),
@@ -150,7 +166,7 @@ Widget servicesOffer() {
       trailing: Column(
         children: [
           Text('Starting at '),
-          Text('Rs. 500'),
+          Text('Rs. ${fees ?? ''}'),
         ],
       ),
     ),

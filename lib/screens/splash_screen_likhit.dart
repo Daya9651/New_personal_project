@@ -6,7 +6,7 @@ import 'package:likhit/routes/routes.dart';
 import 'package:likhit/screens/auth/choose_account_type.dart';
 import 'package:likhit/screens/sign_in_page.dart';
 import 'package:likhit/screens/signup/signUp.dart';
-import 'package:likhit/screens/splash/components/bottombar.dart';
+import 'package:likhit/screens/bottombar/bottombar.dart';
 import 'package:likhit/screens/splash/splash_screen.dart';
 
 import '../const/const_height.dart';

@@ -5,10 +5,11 @@ import 'package:dio/dio.dart' as dio;
 import '../../../../const/api_url.dart';
 import '../models/client_transaction_model.dart';
 import '../models/lawyer_my_transaction_model.dart';
+import '../models/lawyer_payment_request_model.dart';
 
-class LawyerMyTransactionController extends GetxController{
+class LawyerPaymentRequestController extends GetxController{
 
-  var myTransactionList = LawyerMyTransactionModel().obs;
+  var myTransactionList = PaymentRequestTransactionModel().obs;
   var searchTransactionController = TextEditingController().obs;
 
 
@@ -17,30 +18,28 @@ class LawyerMyTransactionController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     ApiService.init();
-    getMyTransactions();
+    getPaymentRequestTransactions();
   }
 
 
-  Future getMyTransactions({String ?search})async {
+  Future getPaymentRequestTransactions({String ?search})async {
     try {
       dio.Response myTransactionResponse = await ApiService.getData(
-          lawyerMyTransactionUrl,
+          paymentLawyerRequestTransactionUrl,
           queryParameters: {
             'search': search,
             'page': "1",
           }
       );
-      if(myTransactionResponse.data['response_code']==200){
+      if(myTransactionResponse.data['respnse_code']==200){
 
-        myTransactionList.value = LawyerMyTransactionModel.fromJson(
+        myTransactionList.value = PaymentRequestTransactionModel.fromJson(
             myTransactionResponse.data);
-      }else{
-        debugPrint("${myTransactionResponse.data['message']}");
       }
 
 
     } catch (e) {
-      debugPrint("getMyTransactions error : $e");
+      debugPrint("getPaymentRequestTransactions error : $e");
     }
   }
 }

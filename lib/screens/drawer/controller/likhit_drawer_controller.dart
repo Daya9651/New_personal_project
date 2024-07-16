@@ -23,7 +23,7 @@ class LikhitDrawerController extends GetxController {
   }
 
 
-  Future getProfileData({String ?search})async {
+  Future getProfileData()async {
     try {
       dio.Response myTransactionResponse = await ApiService.getData(
           profileUrl,
@@ -37,7 +37,7 @@ class LikhitDrawerController extends GetxController {
 
 
     } catch (e) {
-      debugPrint("clientTransactionResponse error : $e");
+      debugPrint("getProfileData error : $e");
     }
   }
 }

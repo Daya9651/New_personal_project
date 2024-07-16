@@ -6,7 +6,9 @@ import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../const/image_strings.dart';
@@ -27,13 +29,13 @@ class ClientTransaction extends GetView<ClientTransactionController> {
           child: ConstTextField(
             controller: controller.searchTransactionController.value,
             onChanged: (value) {
-              controller.getClientTransactions(search: value);
+              controller.getClientDirectTransactions(search: value);
             },
             hintText: "Search Transactions",
             enableBorderColor: AppColors.white,
             suffixIcon: IconButton(onPressed: (){
               controller.searchTransactionController.value.clear();
-              controller.getClientTransactions();
+              controller.getClientDirectTransactions();
 
             }, icon: const Icon(CupertinoIcons.multiply_circle,color: AppColors.white,)),
           )
@@ -41,7 +43,13 @@ class ClientTransaction extends GetView<ClientTransactionController> {
       ),
       body:Obx(() {
         if (controller.clientTransactionList.value.data == null) {
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: Shimmer.fromColors(
+              baseColor: baseColor,
+              highlightColor: highLightColor,
+              child: loadSke(),
+            ),
+          );
         }
 
         if (controller.clientTransactionList.value.data!.isEmpty) {

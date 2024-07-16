@@ -24,7 +24,7 @@ const primaryGradientColor =  LinearGradient(
 
 const greyGradientColor =  LinearGradient(
   colors: [
- AppColors.info80,
+ Colors.grey,
     AppColors.white,
     // Color(0xFFe1654d),
 

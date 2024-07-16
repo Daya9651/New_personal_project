@@ -1,4 +1,4 @@
-class LawyerMyTransactionModel {
+class PaymentRequestTransactionModel {
   String? message;
   int? respnseCode;
   int? count;
@@ -6,7 +6,7 @@ class LawyerMyTransactionModel {
   int? totalPages;
   List<Data>? data;
 
-  LawyerMyTransactionModel(
+  PaymentRequestTransactionModel(
       {this.message,
         this.respnseCode,
         this.count,
@@ -14,16 +14,16 @@ class LawyerMyTransactionModel {
         this.totalPages,
         this.data});
 
-  LawyerMyTransactionModel.fromJson(Map<String, dynamic> json) {
+  PaymentRequestTransactionModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    respnseCode = json['response_code'];
+    respnseCode = json['respnse_code'];
     count = json['count'];
     currentPage = json['current_page'];
     totalPages = json['total_pages'];
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(new Data.fromJson(v));
       });
     }
   }
@@ -31,7 +31,7 @@ class LawyerMyTransactionModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
-    data['response_code'] = respnseCode;
+    data['respnse_code'] = respnseCode;
     data['count'] = count;
     data['current_page'] = currentPage;
     data['total_pages'] = totalPages;
@@ -44,70 +44,63 @@ class LawyerMyTransactionModel {
 
 class Data {
   int? id;
-  String? paymentNo;
+  String? paymentId;
+  double? paymentAmount;
+  String? paymentFor;
+  String? expiryTime;
+  String? paymentLink;
   String? createdDate;
+  String? updatedDate;
   String? status;
-  String? paymentMethod;
-  String? totalPayableAmount;
-  bool? isActivate;
-  dynamic? activationDate;
-  dynamic? deactivateAt;
-  bool? free;
   Lawyer? lawyer;
-  Plan? plan;
-  String? delhiveryAddress;
+  Client? client;
 
   Data(
       {this.id,
-        this.paymentNo,
+        this.paymentId,
+        this.paymentAmount,
+        this.paymentFor,
+        this.expiryTime,
+        this.paymentLink,
         this.createdDate,
+        this.updatedDate,
         this.status,
-        this.paymentMethod,
-        this.totalPayableAmount,
-        this.isActivate,
-        this.activationDate,
-        this.deactivateAt,
-        this.free,
         this.lawyer,
-        this.plan,
-        this.delhiveryAddress});
+        this.client});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    paymentNo = json['payment_no'];
+    paymentId = json['payment_id'];
+    paymentAmount = json['payment_amount'];
+    paymentFor = json['payment_for'];
+    expiryTime = json['expiry_time'];
+    paymentLink = json['payment_link'];
     createdDate = json['created_date'];
+    updatedDate = json['updated_date'];
     status = json['status'];
-    paymentMethod = json['payment_method'];
-    totalPayableAmount = json['total_payable_amount'];
-    isActivate = json['is_activate'];
-    activationDate = json['activation_date'];
-    deactivateAt = json['deactivate_at'];
-    free = json['free'];
     lawyer =
-    json['lawyer'] != null ? Lawyer.fromJson(json['lawyer']) : null;
-    plan = json['plan'] != null ? Plan.fromJson(json['plan']) : null;
-    delhiveryAddress = json['delhivery_address'];
+    json['lawyer'] != null ? new Lawyer.fromJson(json['lawyer']) : null;
+    client =
+    json['client'] != null ? new Client.fromJson(json['client']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['payment_no'] = paymentNo;
+    data['payment_id'] = paymentId;
+    data['payment_amount'] = paymentAmount;
+    data['payment_for'] = paymentFor;
+    data['expiry_time'] = expiryTime;
+    data['payment_link'] = paymentLink;
     data['created_date'] = createdDate;
+    data['updated_date'] = updatedDate;
     data['status'] = status;
-    data['payment_method'] = paymentMethod;
-    data['total_payable_amount'] = totalPayableAmount;
-    data['is_activate'] = isActivate;
-    data['activation_date'] = activationDate;
-    data['deactivate_at'] = deactivateAt;
-    data['free'] = free;
     if (lawyer != null) {
       data['lawyer'] = lawyer!.toJson();
     }
-    if (plan != null) {
-      data['plan'] = plan!.toJson();
+    if (client != null) {
+      data['client'] = client!.toJson();
     }
-    data['delhivery_address'] = delhiveryAddress;
     return data;
   }
 }
@@ -233,59 +226,75 @@ class Lawyer {
   }
 }
 
-class Plan {
+class Client {
   int? id;
-  String? type;
-  String? price;
-  int? discount;
-  int? gst;
-  int? gatewayFee;
-  double? delhiveryCharge;
-  String? typeImage;
-  bool? isActivate;
-  String? isCreated;
-  int? plan;
+  String? createdDate;
+  String? updatedDate;
+  String? name;
+  String? address;
+  String? mobile;
+  String? email;
+  String? dob;
+  String? gender;
+  String? image;
+  String? country;
+  String? state;
+  String? city;
+  int? store;
+  int? user;
 
-  Plan(
+  Client(
       {this.id,
-        this.type,
-        this.price,
-        this.discount,
-        this.gst,
-        this.gatewayFee,
-        this.delhiveryCharge,
-        this.typeImage,
-        this.isActivate,
-        this.isCreated,
-        this.plan});
+        this.createdDate,
+        this.updatedDate,
+        this.name,
+        this.address,
+        this.mobile,
+        this.email,
+        this.dob,
+        this.gender,
+        this.image,
+        this.country,
+        this.state,
+        this.city,
+        this.store,
+        this.user});
 
-  Plan.fromJson(Map<String, dynamic> json) {
+  Client.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    type = json['type'];
-    price = json['price'];
-    discount = json['discount'];
-    gst = json['gst'];
-    gatewayFee = json['gateway_fee'];
-    delhiveryCharge = json['delhivery_charge'];
-    typeImage = json['type_image'];
-    isActivate = json['is_activate'];
-    isCreated = json['is_created'];
-    plan = json['plan'];
+    createdDate = json['created_date'];
+    updatedDate = json['updated_date'];
+    name = json['name'];
+    address = json['address'];
+    mobile = json['mobile'];
+    email = json['email'];
+    dob = json['dob'];
+    gender = json['gender'];
+    image = json['image'];
+    country = json['country'];
+    state = json['state'];
+    city = json['city'];
+    store = json['store'];
+    user = json['user'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['type'] = type;
-    data['price'] = price;
-    data['discount'] = discount;
-    data['gst'] = gst;
-    data['gateway_fee'] = gatewayFee;
-    data['delhivery_charge'] = delhiveryCharge;
-    data['type_image'] = typeImage;
-    data['is_activate'] = isActivate;
-    data['is_created'] = isCreated;
-    data['plan'] = plan;
+    data['created_date'] = createdDate;
+    data['updated_date'] = updatedDate;
+    data['name'] = name;
+    data['address'] = address;
+    data['mobile'] = mobile;
+    data['email'] = email;
+    data['dob'] = dob;
+    data['gender'] = gender;
+    data['image'] = image;
+    data['country'] = country;
+    data['state'] = state;
+    data['city'] = city;
+    data['store'] = store;
+    data['user'] = user;
     return data;
   }
 }

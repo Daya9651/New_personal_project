@@ -5,7 +5,6 @@ import 'package:likhit/style/text_style.dart';
 
 import '../../../const/const_height.dart';
 import '../../../const/const_width.dart';
-import '../../../const/image_strings.dart';
 
 Widget lawyerProfileDetailCard(
     {String? title,
@@ -13,6 +12,7 @@ Widget lawyerProfileDetailCard(
     String? languageText,
     String? expText,
     String? locationText,
+    String? image,
     Function()? onTap}) {
   return Card(
     color: AppColors.white,
@@ -23,11 +23,13 @@ Widget lawyerProfileDetailCard(
       child: Row(
         children: [
           Hero(
-            tag: 'clientLogo',
+            tag: image ?? '',
             child: CircleAvatar(
-              radius: w50
-              ,
-              child: Image.asset(clientLogo),
+              radius: w50,
+              child: Image.network(
+                image ?? '',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Expanded(
@@ -35,14 +37,14 @@ Widget lawyerProfileDetailCard(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Sheryansh Tripathi',
+                  title ?? '',
                   style: AppTextStyles.kCaption12SemiBoldTextStyle,
                 ),
                 Row(
                   children: [
                     Icon(Icons.workspace_premium),
                     Expanded(
-                      child: Text(' Domestic violence, DUI/DWI +3 More',
+                      child: Text(' ${workspaceText ?? ''}',
                           style: AppTextStyles.kSmall10RegularTextStyle),
                     ),
                   ],
@@ -50,22 +52,26 @@ Widget lawyerProfileDetailCard(
                 Row(
                   children: [
                     Icon(Icons.g_translate),
-                    Text(' Marathi',
-                        style: AppTextStyles.kSmall10RegularTextStyle),
+                    Expanded(
+                      child: Text(' ${languageText ?? ''}',
+                          style: AppTextStyles.kSmall10RegularTextStyle),
+                    ),
                   ],
                 ).marginAll(h5),
                 Row(
                   children: [
                     Icon(Icons.school_outlined),
-                    Text(' 10 Yrs Exp',
-                        style: AppTextStyles.kSmall10RegularTextStyle),
+                    Expanded(
+                      child: Text(' ${expText ?? ''} Yrs Exp',
+                          style: AppTextStyles.kSmall10RegularTextStyle),
+                    ),
                   ],
                 ).marginAll(h5),
                 Row(
                   children: [
                     Icon(Icons.location_on_outlined),
                     Expanded(
-                      child: Text(' Bashkari Ambedker Nager',
+                      child: Text(' ${locationText ?? ''}',
                           style: AppTextStyles.kSmall10RegularTextStyle),
                     ),
                   ],

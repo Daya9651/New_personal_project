@@ -12,7 +12,10 @@ class LawyerAppointmentControllers extends GetxController{
   var lawyerAppointmentList = LawyerAppointmentModel().obs;
   var searchTransactionController = TextEditingController().obs;
 
-
+  var dateController = TextEditingController().obs;
+  var timeController = TextEditingController().obs;
+  var reasonController = TextEditingController().obs;
+RxBool isLoading = false.obs;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -23,6 +26,7 @@ class LawyerAppointmentControllers extends GetxController{
 
 
   Future getLawyerAppointment({String ?search})async {
+    isLoading(true);
     try {
       dio.Response clientTransactionResponse = await ApiService.getData(
           viewLawyerAppointment,
@@ -32,13 +36,16 @@ class LawyerAppointmentControllers extends GetxController{
           }
       );
       if(clientTransactionResponse.data['response_code']==200){
-
+        isLoading(false);
         lawyerAppointmentList.value = LawyerAppointmentModel.fromJson(
             clientTransactionResponse.data);
+      }else{
+        isLoading(false);
       }
 
 
     } catch (e) {
+      isLoading(false);
       debugPrint("LawyerAppointmentModel error : $e");
     }
   }
@@ -46,6 +53,7 @@ class LawyerAppointmentControllers extends GetxController{
 
 
   Future bookAppointment(id,status)async {
+    isLoading(true);
     try {
       dio.Response clientTransactionResponse = await ApiService.postData(
        url:    lawyerConfirmRejectAppointmentUrl,
@@ -55,10 +63,11 @@ class LawyerAppointmentControllers extends GetxController{
         }
       );
       if(clientTransactionResponse.data['response_code']==200) {
-
+        isLoading(false);
         Get.back();
         ConstToast.to.showSuccess("${clientTransactionResponse.data['message']}");
       }else{
+        isLoading(false);
         ConstToast.to.showError("${clientTransactionResponse.data['message']}");
 
 
@@ -66,11 +75,50 @@ class LawyerAppointmentControllers extends GetxController{
 
       getLawyerAppointment();
     } catch (e) {
-      debugPrint("clientTransactionResponse error : $e");
+      isLoading(false);
+      debugPrint("bookAppointment error : $e");
     }
   }
 
 
+  Future rescheduleAppointment(id)async {
+    isLoading(true);
+    try {
+      dio.Response clientTransactionResponse = await ApiService.postData(
+       url:    lawyerConfirmRejectAppointmentUrl,
+        data: {
+          "appointment_id":id,
+          "date":dateController.value.text,
+          "time":timeController.value.text,
+          // "time":"7.15",
+          "reason":reasonController.value.text,
+          "status":"Reschedule",
 
+        }
+      );
+      if(clientTransactionResponse.data['response_code']==200) {
+        isLoading(false);
+        Get.back();
+        clrControllers();
+        ConstToast.to.showSuccess("${clientTransactionResponse.data['message']}");
+      }else{
+        ConstToast.to.showError("${clientTransactionResponse.data['message']}");
+
+        isLoading(false);
+      }
+
+      getLawyerAppointment();
+    } catch (e) {
+      isLoading(false);
+      debugPrint("rescheduleAppointment : $e");
+    }
+  }
+
+
+clrControllers(){
+    dateController.value.clear();
+    timeController.value.clear();
+    reasonController.value.clear();
+}
 
 }

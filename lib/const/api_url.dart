@@ -22,6 +22,10 @@ const String viewLawyerAppointment = "$baseUrl/lawyer-view-appointment-api/";
 const String lawyerConfirmRejectAppointmentUrl = "$baseUrl/lawyer-confirm-reject-appointment-api/";
 const String profileUrl = "$baseUrl/view-profile-api/";
 
+// daya
+const String invoiceUrl = "$baseUrl/payment-detail-api/";
+const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
+
 
 
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";

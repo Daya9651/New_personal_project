@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 giveDateOnly(String date) {
   DateFormat formatter = DateFormat('dd/MM/yyyy');
   var formattedDate =

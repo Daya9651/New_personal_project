@@ -1,5 +1,6 @@
 
-import 'package:dio/dio.dart%20%20';
+// import 'package:dio/dio.dart%20%20';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ import 'package:dio/dio.dart' as dio;
      var response = await _dio.post( loginEmailUrl,
         data: {'email': email},
       );
-      debugPrint("loginEmailUrl: ${loginEmailUrl}");
+      debugPrint("loginEmailUrl: $loginEmailUrl");
       if (response.data['response_code'] == 200) {
         isLoading.value= false;
         Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyOtpPage(email: email,)));

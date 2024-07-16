@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_appointment_list.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_my_transaction.dart';
 
 import '../screens/auth/choose_account_type.dart';
@@ -10,17 +9,14 @@ import '../screens/book_appointment_client/views/book_appointments_page.dart';
 import '../screens/bottombar/bindings/bottom_nav_binding.dart';
 import '../screens/client_screen/client_lawyer_list.dart';
 import '../screens/lawyer_screen/screens/bindings/client_transaction_binding.dart';
-import '../screens/lawyer_screen/screens/bindings/lawyer_appointment_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_my_transaction_bindings.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
+import '../screens/payment/laywer Invoice/my_transactions_invoice.dart';
 import '../screens/signup/signUp.dart';
 import '../screens/splash/components/bottombar.dart';
 import '../screens/splash_screen_likhit.dart';
 
 class ApplicationPages{
-
-
-
   static const splashScreen = '/';
   static const signUpPage = '/signUpPage';
   static const choosePage = '/choosePage';
@@ -29,20 +25,14 @@ class ApplicationPages{
   static const bookAppointmentsPage = '/bookAppointmentsPage';
   static const clientLawyerList = '/clientLawyerList';
   static const myBottomBar = '/myBottomBar';
-
-
   //lawyer
-
   static const clientTransaction = '/clientTransaction';
   static const lawyerAppointmentList = '/lawyerAppointmentList';
   static const lawyerPaymentRequest = '/lawyerPaymentRequest';
   static const lawyerMyTransaction = '/lawyerMyTransaction';
   static const plans = '/plans';
 
-
   static List<GetPage>? getApplicationPages() => [
-
-
 
     GetPage(
   name: splashScreen,
@@ -67,7 +57,7 @@ class ApplicationPages{
     ) ,
     GetPage(
       name: myBottomBar,
-      page: () =>  MyBottomBar(),
+      page: () => const MyBottomBar(),
       binding: BottomNavBinding()
     ) ,
 
@@ -88,8 +78,6 @@ class ApplicationPages{
     ),
 
 
-
-
     // lawyer
 
     GetPage(
@@ -102,17 +90,12 @@ class ApplicationPages{
       name: lawyerMyTransaction,
       page: () =>  const LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
-    ),  GetPage(
-      name: lawyerAppointmentList,
-      page: () =>  const LawyerAppointmentList(),
-      binding: LawyerAppointmentBindings()
     ),
-
-
-
-
-
-
+    GetPage(
+      name: lawyerAppointmentList,
+      page: () => const MyTransactionsInvoice(),
+      // binding: LawyerAppointmentBindings()
+    ),
   ];
 
 

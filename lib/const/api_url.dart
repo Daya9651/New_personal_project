@@ -38,6 +38,11 @@ const String lawyerListUrl = "$baseUrl/list-lawyer-api/";
 const String lawyerBookAppointmentDetailsUrl = "$baseUrl/lawyer-details-api/";
 const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
 
+//todo review apis
+const String clientReviewUrl = "$baseUrl/reviews-api/";
+const String likeUrl = "$baseUrl/review-like-api/";
+const String dislikeUrl = "$baseUrl/review-dislike-api/";
+
 //todo clientBookAppointment
 const String clientBookAppointmentUrl = "$baseUrl/user-book-appointment-api/";
 

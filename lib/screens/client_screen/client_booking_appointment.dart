@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart' as FlutterRatingBar;
 import 'package:get/get.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/custom/botton.dart';
@@ -36,12 +37,12 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: "Book Appointment",
       ),
       body: Obx(() {
         if (controller.lawyerBookDetailListData.value.data == null) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         return Padding(
           padding: const EdgeInsets.all(11.0),
@@ -131,28 +132,25 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                               fees: servicesOfferData?.fee.toString());
                         }),
                     constText15SemiBold(text: "Specialities"),
-                    Container(
-                      child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisExtent: h40,
-                                  crossAxisSpacing: w8,
-                                  mainAxisSpacing: w5),
-                          itemCount: controller.lawyerBookDetailListData.value
-                              .data?.specialties?.length,
-                          itemBuilder: (context, index) {
-                            var specialitiesData = controller
-                                .lawyerBookDetailListData
-                                .value
-                                .data
-                                ?.specialties?[index];
-                            return specialitiesCard(
-                                text: specialitiesData.toString());
-                          }),
-                    ),
+                    GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisExtent: h40,
+                            crossAxisSpacing: w8,
+                            mainAxisSpacing: w5),
+                        itemCount: controller.lawyerBookDetailListData.value
+                            .data?.specialties?.length,
+                        itemBuilder: (context, index) {
+                          var specialitiesData = controller
+                              .lawyerBookDetailListData
+                              .value
+                              .data
+                              ?.specialties?[index];
+                          return specialitiesCard(
+                              text: specialitiesData.toString());
+                        }),
 
                     //todo experience
                     constText15SemiBold(text: "Experience"),
@@ -170,7 +168,7 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                             itemCount: controller.lawyerBookDetailListData.value
                                 .data!.educationCredentials!.length,
                             // itemCount: 2,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               var educationData = controller
@@ -192,7 +190,7 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                         child: ListView.builder(
                             itemCount: controller.lawyerBookDetailListData.value
                                 .data?.experiences?.length,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               var experienceData = controller
@@ -227,78 +225,122 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                                       ),
                                     ),
                                     actions: [
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Divider(),
-                                            constText12SemiBold(text: "Rating"),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Divider(),
+                                          constText12SemiBold(text: "Rating"),
 
-                                            //todo rating bar
-                                            // RatingBar.builder(
-                                            //   initialRating: 3,
-                                            //   minRating: 1,
-                                            //   direction: Axis.horizontal,
-                                            //   allowHalfRating: true,
-                                            //   itemCount: 5,
-                                            //   itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                                            //   itemBuilder: (context, _) => Icon(
-                                            //     Icons.star,
-                                            //     color: Colors.amber,
-                                            //   ),
-                                            //   onRatingUpdate: (rating) {
-                                            //     print(rating);
-                                            //   },
-                                            // );
+                                          //todo rating bar
+                                          FlutterRatingBar.RatingBar.builder(
+                                            // ignoreGestures: true,
+                                            itemSize: h25,
+                                            initialRating: 0,
+                                            minRating: 1,
+                                            // direction: Axis.horizontal,
+                                            // allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: h3),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {
+                                              controller.ratingController
+                                                  .value = rating;
+                                            },
+                                          ),
 
-                                            constText12SemiBold(text: "Review"),
-                                            ConstTextField(
-                                              maxLine: 2,
-                                              controller: controller
-                                                  .reviewController.value,
-                                              hintText: "Write Review",
+                                          constText12SemiBold(text: "Review"),
+                                          ConstTextField(
+                                            maxLine: 2,
+                                            controller: controller
+                                                .commentController.value,
+                                            hintText: "Write Review",
+                                          ),
+                                          const Divider(),
+                                          SizedBox(
+                                            width: double.maxFinite,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                MyCustomButton(
+                                                  onTap: () {
+                                                    Get.back();
+                                                  },
+                                                  color: Colors.grey,
+                                                  text: "Cancel",
+                                                ),
+                                                const Text("  "),
+                                                MyCustomButton(
+                                                  onTap: () {
+                                                    controller.postReview(controller
+                                                        .lawyerBookDetailListData
+                                                        .value
+                                                        .data
+                                                        ?.id);
+                                                    controller
+                                                        .lawyerBookDetailFetch();
+                                                    Get.back();
+                                                  },
+                                                  color: AppColors.info80,
+                                                  text: "Save",
+                                                )
+                                              ],
                                             ),
-                                            Divider(),
-                                            SizedBox(
-                                              width: double.maxFinite,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  MyCustomButton(
-                                                    onTap: () {
-                                                      Get.back();
-                                                    },
-                                                    color: Colors.grey,
-                                                    text: "Cancel",
-                                                  ),
-                                                  const Text("  "),
-                                                  MyCustomButton(
-                                                    onTap: () {},
-                                                    color: AppColors.info80,
-                                                    text: "Save",
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       )
                                     ],
                                   );
                                 });
                           },
-                          icon: Icon(
-                            Icons.edit,
+                          icon: const Icon(
+                            Icons.reviews_outlined,
                           )),
                     ),
+
                     ListView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 3,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.lawyerBookDetailListData.value
+                            .data?.reviews?.length,
                         itemBuilder: (context, index) {
-                          return clientReview();
+                          var review = controller
+                              .lawyerBookDetailListData.value.data?.reviews;
+                          return Column(
+                            children: [
+                              clientReview(
+                                  userName: review?[index].userName,
+                                  date: review?[index].isCreated,
+                                  comment: review?[index].comment,
+                                  star: review![index].rating,
+                                  like: review[index].likeCount,
+                                  likeTap: () {
+                                    controller.postLike(
+                                        reviewID: review[index].id,
+                                        lawyerID: controller
+                                            .lawyerBookDetailListData
+                                            .value
+                                            .data
+                                            ?.id);
+                                  },
+                                  dislike: review[index].dislikeCount,
+                                  dislikeTap: () {
+                                    controller.postDislike(
+                                        reviewID: review[index].id,
+                                        lawyerID: controller
+                                            .lawyerBookDetailListData
+                                            .value
+                                            .data
+                                            ?.id);
+                                  }),
+                            ],
+                          );
                         }),
 
                     const SizedBox(height: 10.0),
@@ -367,7 +409,7 @@ class _ClientBookingBarAssociationState
           child: ListView.builder(
               itemCount:
                   controller.lawyerBookDetailListData.value.data?.barId?.length,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 var barIdData = controller

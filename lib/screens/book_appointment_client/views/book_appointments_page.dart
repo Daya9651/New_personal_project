@@ -74,10 +74,6 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
                           .lawyerBookDetailListData.value.data?.fees?[index];
                       return InkWell(
                         onTap: () {
-                          clientBookAppointmentTimeController
-                              .clientBookAppointmentPost(
-                                  serviceID: servicesOfferData.id,
-                                  lawyerID: servicesOfferData.lawyerId);
                           Get.toNamed(ApplicationPages.clientBookAppointment);
                         },
                         child: ListTile(

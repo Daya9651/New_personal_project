@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_book_appointment_time_controller.dart';
 
 import '../../common/widget/const_dropdown.dart';
@@ -12,10 +13,14 @@ import '../profile/widget/profile_card.dart';
 
 class ClientBookAppointmentTime
     extends GetView<ClientBookAppointmentTimeController> {
-  const ClientBookAppointmentTime({super.key});
+  ClientBookAppointmentTime({super.key});
+
+  ClientApiController clientApiController = Get.put(ClientApiController());
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+        "inzamam ${controller.clientBookAppointmentPost(serviceID: 36, lawyerID: 16)}");
     return Scaffold(
       appBar: CustomAppBar(
         title: "Book Appointment",
@@ -104,7 +109,18 @@ class ClientBookAppointmentTime
                     ),
                     const Text("  "),
                     MyCustomButton(
-                      onTap: () {},
+                      onTap: () {
+                        controller.clientBookAppointmentPost(
+                            lawyerID: clientApiController
+                                .lawyerBookDetailListData.value.data?.id,
+                            serviceID: clientApiController
+                                .lawyerBookDetailListData
+                                .value
+                                .data
+                                ?.fees?[0]
+                                .id);
+                        // controller.bookAppointRazorPay();
+                      },
                       color: AppColors.info80,
                       text: "Confirm & Pay",
                     )

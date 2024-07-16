@@ -122,7 +122,7 @@ class ApplicationPages {
 
         GetPage(
             name: clientBookAppointment,
-            page: () => const ClientBookAppointmentTime(),
+            page: () => ClientBookAppointmentTime(),
             binding: ClientBookAppointmentBinding()),
       ];
 }

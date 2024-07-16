@@ -13,7 +13,6 @@ class ClientApiController extends GetxController {
   var searchTransactionController = TextEditingController().obs;
 
   var searchLawyerListController = TextEditingController().obs;
-  var reviewController = TextEditingController().obs;
 
   @override
   void onInit() {
@@ -158,6 +157,57 @@ class ClientApiController extends GetxController {
       }
     } catch (e) {
       debugPrint("getClientProfile exception : $e");
+    }
+  }
+
+  var commentController = TextEditingController().obs;
+
+  // var ratingController = TextEditingController().obs;
+  RxDouble ratingController = 0.0.obs;
+
+  Future postReview(int? id) async {
+    try {
+      dio.Response response =
+          await ApiService.postData(url: clientReviewUrl, data: {
+        'comment': commentController.value.text,
+        'lawyer_id': id,
+        'rating': ratingController.value
+        // 'rating': ratingController.value.text.toInt(),
+      });
+      lawyerBookDetailFetch(id: id);
+      update();
+    } catch (e) {
+      debugPrint("postReview exception : $e");
+    }
+  }
+
+  RxDouble like = 0.0.obs;
+
+  Future postLike({int? reviewID, lawyerID}) async {
+    try {
+      dio.Response response = await ApiService.postData(url: likeUrl, data: {
+        'review_id': reviewID,
+        // 'rating': ratingController.value.text.toInt(),
+      });
+      lawyerBookDetailFetch(id: lawyerID);
+      update();
+    } catch (e) {
+      debugPrint("postLike exception : $e");
+    }
+  }
+
+  RxDouble dislike = 0.0.obs;
+
+  Future postDislike({int? reviewID, lawyerID}) async {
+    try {
+      dio.Response response = await ApiService.postData(url: dislikeUrl, data: {
+        'review_id': reviewID,
+        // 'rating': ratingController.value.text.toInt(),
+      });
+      lawyerBookDetailFetch(id: lawyerID);
+      update();
+    } catch (e) {
+      debugPrint("postDislike exception : $e");
     }
   }
 }

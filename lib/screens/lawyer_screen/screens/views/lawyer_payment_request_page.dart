@@ -7,7 +7,9 @@ import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_payment_request_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../common/widget/custom_date_picker.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
@@ -45,7 +47,13 @@ class LawyerPaymentRequestPage extends GetView<LawyerPaymentRequestController> {
       ),
       body:Obx(() {
         if (controller.myTransactionList.value.data == null) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Shimmer.fromColors(
+              baseColor: baseColor,
+              highlightColor: highLightColor,
+              child: loadSke(),
+            ),
+          );
         }
 
         if (controller.myTransactionList.value.data!.isEmpty) {

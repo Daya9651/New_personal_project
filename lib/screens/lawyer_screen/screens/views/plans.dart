@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/routes/routes.dart';
 import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_plans_controller.dart';
 import 'package:likhit/screens/lawyer_screen/screens/models/lawyer_plan_model.dart';
+import 'package:shimmer/shimmer.dart';
+import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../common/widget/const_text_with_styles.dart';
+import '../../../../common/widget/primary_button.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../style/color.dart';
@@ -30,11 +34,32 @@ class LawyerPlans extends GetView<LawyerPlansController> {
           ),
         ),
       ),
+      floatingActionButton: Obx(() {
+        return controller.currentIndex.value == 0? constTextContainer(
+
+          onTap:controller.selectedPlanId.value != 0?(){
+            // Get.toNamed(ApplicationPages.lawyerAllAddress, arguments: {'showSelectionButton': true,'planId': controller.selectedPlanId.value,});
+          }:null,
+        "Buy Plan"
+      ):constTextContainer(
+            "Buy Plan", onTap: (){
+          Get.toNamed(ApplicationPages.lawyerAllAddress, arguments: {'showSelectionButton': true,'planId': controller.selectedPlanId.value,});
+        }
+        );
+      }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Obx(() {
         if (controller.currentIndex.value == 0 &&
             (controller.lawyerSubscriptionPlanList.value.plan == null ||
-                controller.lawyerSubscriptionPlanList.value.planPrices!.isEmpty)) {
-          return const Center(child: CircularProgressIndicator());
+                controller.lawyerSubscriptionPlanList.value.planPrices!.isEmpty ||
+                controller.isLoading.value)) {
+          return Center(
+            child: Shimmer.fromColors(
+              baseColor: baseColor,
+              highlightColor: highLightColor,
+              child: loadSke(),
+            ),
+          );
         } else if (controller.currentIndex.value == 1 &&
             (controller.lawyerPlanList.value.plan == null ||
                 controller.lawyerPlanList.value.planPrices!.isEmpty)) {
@@ -51,49 +76,73 @@ class LawyerPlans extends GetView<LawyerPlansController> {
 
         return RefreshIndicator(
           onRefresh: controller.refreshData,
-          child: ListView.builder(
-            itemCount: selectedList.length,
-            itemBuilder: (context, index) {
-              var transaction = selectedList[index];
-              bool isSelected = controller.currentIndex.value == 0
-                  ? controller.isSelectedSubs(index)
-                  : controller.isSelectedNFc(index);
-
-              return ConstantContainer(
-                radiusBorder: w5,
-                borderColor: isSelected ? Colors.blue : AppColors.white50,
-                padding: w3,
-                child: ListTile(
-                  leading: CircleAvatar(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                      NetworkImage(transaction.typeImage ?? ""),
+          child: Expanded(
+            child: ListView.builder(
+              itemCount: selectedList.length,
+              itemBuilder: (context, index) {
+                var transaction = selectedList[index];
+                bool isSelected = controller.currentIndex.value == 0
+                    ? controller.isSelectedSubs(index)
+                    : controller.isSelectedNFc(index);
+            
+                return ConstantContainer(
+                  radiusBorder: w5,
+                  borderColor: isSelected ? Colors.blue : AppColors.white50,
+                  padding: w3,
+                  child: ListTile(
+                    onTap: () {
+                      if (controller.currentIndex.value == 0) {
+                        controller.selectedPlanId.value= transaction.id??0;
+                        controller.selectSubscription(index);
+                      } else {
+                        controller.selectedPlanId.value= transaction.id??0;
+                        controller.selectNFC(index);
+                      }
+                    },
+                    leading: CircleAvatar(
+                      child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(transaction.typeImage ?? ""),
+                      ),
                     ),
+                    title: const8TextBold("${transaction.type}"),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const6TextBoldUnderLine(
+                            "Price: ${transaction.price}",
+                            textColor: AppColors.white50),
+                        const8TextBold(
+                            "Payable Amount: ${transaction.discountPrice}",
+                            textColor: AppColors.success40),
+                      ],
+                    ),
+                    trailing:Obx(() {
+                      debugPrint("${controller.currentIndex.value}");
+                      bool isSelected = controller.currentIndex.value == 0
+                          ? controller.isSelectedSubs(index)
+                          : controller.isSelectedNFc(index);
+
+                      return IconButton(
+                        onPressed: () {
+                          if (controller.currentIndex.value == 0) {
+                            // controller.selectedPlanId.value= transaction.id??0;
+                            controller.selectSubscription(index);
+                          } else {
+                            controller.selectedPlanId.value= transaction.id??0;
+                            controller.selectNFC(index);
+                          }
+                        },
+                        icon: isSelected
+                            ? const Icon(Icons.check_circle_outline, color: Colors.blue)
+                            : const Icon(Icons.circle_outlined, color: Colors.redAccent),
+                      );
+                    }),
+
                   ),
-                  title: const8TextBold("${transaction.type}"),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const6TextBoldUnderLine(
-                          "Price: ${transaction.price}",
-                          textColor: AppColors.white50),
-                      const8TextBold(
-                          "Payable Amount: ${transaction.discountPrice}",
-                          textColor: AppColors.success40),
-                    ],
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: isSelected
-                        ? const Icon(Icons.check_circle_outline,
-                        color: Colors.blue)
-                        : const Icon(Icons.circle_outlined,
-                        color: Colors.redAccent),
-                  ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         );
       }),

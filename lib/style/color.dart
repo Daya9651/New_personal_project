@@ -94,3 +94,6 @@ class AppColors {
   static const Color background = Color(0xff657593);
   static const Color hoverColor1 = Colors.red;
 }
+
+ Color baseColor = Colors.grey[300]!;
+ Color highLightColor = Colors.grey[100]!;

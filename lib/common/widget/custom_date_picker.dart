@@ -60,15 +60,22 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   }
 }
 
-Future<DateTime?> selectDate(BuildContext context) async {
-  final DateTime? picked = await showDatePicker(
+  Future<DateTime?> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(3900));
+    return picked;
+  }
+
+Future<TimeOfDay?> selectTime(BuildContext context) async {
+  final TimeOfDay? picked = await showTimePicker(
     context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(1900),
-    lastDate: DateTime(3900));
+    initialTime: TimeOfDay.now(),
+  );
   return picked;
 }
-
 String formattedDate(DateTime? selectedDate) {
   return selectedDate != null
       // ? "${selectedDate.day.toString().padLeft(2, '0')}/${selectedDate.month.toString().padLeft(2, '0')}/${selectedDate.year}"

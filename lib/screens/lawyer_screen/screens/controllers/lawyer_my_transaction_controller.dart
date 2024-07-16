@@ -34,11 +34,13 @@ class LawyerMyTransactionController extends GetxController{
 
         myTransactionList.value = LawyerMyTransactionModel.fromJson(
             myTransactionResponse.data);
+      }else{
+        debugPrint("${myTransactionResponse.data['message']}");
       }
 
 
     } catch (e) {
-      debugPrint("clientTransactionResponse error : $e");
+      debugPrint("getMyTransactions error : $e");
     }
   }
 }

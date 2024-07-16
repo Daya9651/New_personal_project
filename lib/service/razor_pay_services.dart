@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:likhit/utils/const_toast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -5,7 +7,7 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 class RazorpayService {
   static final RazorpayService _instance = RazorpayService._internal();
   late Razorpay _razorpay;
-
+  String? orderID;
   factory RazorpayService() {
     return _instance;
   }
@@ -19,8 +21,8 @@ class RazorpayService {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
-    ConstToast.to.showSuccess('${response.signature}');
-    debugPrint('Payment Success: ${response.signature}');
+    ConstToast.to.showSuccess('${response.orderId}');
+    debugPrint('Payment Success: ${response.orderId} ${response.data}');
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -34,7 +36,17 @@ class RazorpayService {
     ConstToast.to.showInfo('${response.walletName}');
     debugPrint('External Wallet: ${response.walletName}');
   }
-
+  Future<String?> waitForOrderID() async {
+    Completer<String?> completer = Completer();
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, (PaymentFailureResponse response) {
+      completer.complete(null);
+    });
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, (PaymentSuccessResponse response) {
+      orderID = response.paymentId;
+      completer.complete(response.paymentId);
+    });
+    return completer.future;
+  }
   void openCheckout({ String? key, required int amount,  String ?name,  String ?description,  String? contact,  String ?email}) {
     var options = {
       'key': 'rzp_test_sww6eyRpjsDmO2', //testing

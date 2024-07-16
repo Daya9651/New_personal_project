@@ -86,13 +86,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/common/widget/primary_button.dart';
 import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_appointment_controllers.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../../common/widget/const_shimmer_effects.dart';
+import '../../../../common/widget/custom_date_picker.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../const/image_strings.dart';
@@ -127,7 +132,13 @@ class LawyerAppointmentList extends GetView<LawyerAppointmentControllers> {
       ),
       body:Obx(() {
         if (controller.lawyerAppointmentList.value.data == null) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Shimmer.fromColors(
+              baseColor: baseColor,
+              highlightColor: highLightColor,
+              child: loadSke(),
+            ),
+          );
         }
 
         if (controller.lawyerAppointmentList.value.data!.isEmpty) {
@@ -167,7 +178,7 @@ class LawyerAppointmentList extends GetView<LawyerAppointmentControllers> {
                      doneText:"Accept",
                      cancelText: "Reschedule",
                        onPressedCancel: (){
-
+                         _showReschedule(context,transaction.id);
                        },
                        onPressedDone: (){
                        controller.bookAppointment(transaction.id, "Approved");
@@ -185,5 +196,81 @@ class LawyerAppointmentList extends GetView<LawyerAppointmentControllers> {
     );
   }
 
+  _showReschedule(BuildContext context,id){
+    return showDialog(context: context, builder: (context){
+
+      return SizedBox(
+        height: 0.3.sh,
+        child: AlertDialog(
+          backgroundColor: AppColors.white,
+          title: const12TextBold("Appointment Status"),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                ConstTextField(
+                  hintText: "Select Date",
+                  controller: controller.dateController.value,
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        selectDate(context).then((DateTime? selectedDate) {
+                          if (selectedDate != null) {
+                            String formatted = formattedDate(selectedDate);
+                            controller.dateController.value.text =
+                                formatted;
+                          }
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.calendar_month,
+                        color: AppColors.info80,
+                      )),
+                ),
+                ConstTextField(
+                  hintText: "Select Time",
+                  controller: controller.timeController.value,
+                  suffixIcon: IconButton(
+                      onPressed: () async {
+                        TimeOfDay? selectedTime = await selectTime(context);
+            
+                          if (selectedTime != null) {
+                            String formattedTime = selectedTime.format(context);
+                            controller.timeController.value.text =
+                                formattedTime;
+            
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.timer,
+                        color: AppColors.info80,
+                      )),
+                ),
+                ConstTextField(
+                  hintText: "Reason",
+                  maxLine: 5,
+                  controller: controller.reasonController.value,
+            
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            constTextContainer("Cancel",color: baseColor,
+            width: 0.3.sw,
+              onTap: () {
+                Get.back();
+             controller.   clrControllers();
+              }
+            ),
+        Obx(()=>controller.isLoading.value? const Center(child: CircularProgressIndicator(),)  : constTextContainer("Save",
+                width: 0.3.sw,
+              onTap: (){
+              controller.rescheduleAppointment(id);
+              }
+            )),
+          ],
+        ),
+      );
+    });
+  }
 
 }

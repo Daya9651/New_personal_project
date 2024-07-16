@@ -685,7 +685,7 @@ class BarAssociation {
 class Reviews {
   int? id;
   String? userName;
-  int? rating;
+  double? rating;
   String? comment;
   String? isCreated;
   int? likeCount;

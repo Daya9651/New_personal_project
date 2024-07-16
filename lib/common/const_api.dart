@@ -260,5 +260,67 @@ class ApiService {
       throw 'Failed to upload image: $e';
     }
   }
+
+
+  // New PUT method
+  static Future<Response> putData(
+      {required String url, dynamic data, Options? options, bool publicToken = false}) async {
+    try {
+      options ??= Options();
+      options.extra ??= {};
+      options.extra?['publicToken'] = publicToken;
+
+      final response = await _dio.put(
+        url,
+        data: data,
+        options: options,
+      );
+
+      return response;
+    } catch (e) {
+      throw 'Failed to update data: $e';
+    }
+  }
+
+  // New PATCH method
+  static Future<Response> patchData(
+      {required String url, dynamic data, Options? options, bool publicToken = false}) async {
+    try {
+      options ??= Options();
+      options.extra ??= {};
+      options.extra?['publicToken'] = publicToken;
+
+      final response = await _dio.patch(
+        url,
+        data: data,
+        options: options,
+      );
+
+      return response;
+    } catch (e) {
+      throw 'Failed to patch data: $e';
+    }
+  }
+
+  // New DELETE method
+  static Future<Response> deleteData(
+      {required String url, dynamic data, Options? options, bool publicToken = false}) async {
+    try {
+      options ??= Options();
+      options.extra ??= {};
+      options.extra?['publicToken'] = publicToken;
+
+      final response = await _dio.delete(
+        url,
+        data: data,
+        options: options,
+      );
+
+      return response;
+    } catch (e) {
+      throw 'Failed to delete data: $e';
+    }
+  }
+
 }
 

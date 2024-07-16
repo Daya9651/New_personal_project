@@ -17,6 +17,9 @@ const String confirmationLawyerAndClientUrl = "$baseUrl/confirm-user-api/";
 const String stateUrl = "$baseUrl/state-list-api/";
 //todo city api
 const String cityUrl = "$baseUrl/city-list-api/";
+const String lawyerListUrl = "$baseUrl/list-lawyer-api/";
+//todo book appointment detail api
+const String lawyerBookAppointmentDetailsUrl = "$baseUrl/lawyer-details-api/";
 
 
 //lawyer
@@ -30,6 +33,11 @@ const String getNfcUrl = "$baseUrl/get-nfc-card-plans-view/";
 const String getSubPlanUrl = "$baseUrl/get-subscription-plans-view/";
 const String clientListUrl = "$baseUrl/list-of-client-api/";
 const String lawyerRequestPaymentUrl = "$baseUrl/lawyer-request-for-payment-api/";
+const String lawyerBuyPlantUrl = "$baseUrl/lawyer-buy-plan-api/";
+const String addressUrl = "$baseUrl/crud-delhivery-address-api/";
+//payments
+const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
+
 
 
 

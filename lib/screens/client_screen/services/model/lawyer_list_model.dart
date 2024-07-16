@@ -50,7 +50,7 @@ class LawyerListData {
   List<String>? languageSpoken;
   String? experience;
   String? image;
-  double? avgRating;
+  int? avgRating;
 
   LawyerListData(
       {this.id,

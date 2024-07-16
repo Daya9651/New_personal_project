@@ -15,7 +15,7 @@ class ClientApiController extends GetxController {
     super.onInit();
     ApiService.init();
     lawyerListFetch();
-    lawyerBookDetailFetch(id: 16);
+    // lawyerBookDetailFetch(id: 16);
   }
 
   //todo lawyer list get api
@@ -29,7 +29,7 @@ class ClientApiController extends GetxController {
       var data = response.data['data'] as List;
       lawyerListData.value =
           data.map((item) => LawyerListData.fromJson(item)).toList();
-      debugPrint("lawyerListFetch : ${lawyerListData[0].name}");
+      // debugPrint("lawyerListFetch : ${lawyerListData[0].name}");
       update();
     } catch (e) {
       debugPrint("lawyerListFetch exception : $e");
@@ -52,7 +52,7 @@ class ClientApiController extends GetxController {
             LawyerBookAppointmentDetailModel.fromJson(responseData);
         lawyerBookDetailListData.value = lawyerBookAppointmentDetailModel;
 
-        debugPrint("lawyerBookDetailFetch : $responseData");
+        // debugPrint("lawyerBookDetailFetch : $responseData");
         update();
       } else {
         debugPrint("lawyerBookDetailFetch : Empty data or invalid structure");

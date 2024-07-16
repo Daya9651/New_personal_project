@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_address_bindings.dart';
 import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_payment_request_controller.dart';
+import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_add_address.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_appointment_list.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_my_transaction.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_payment_request_page.dart';
@@ -21,6 +23,7 @@ import '../screens/lawyer_screen/screens/bindings/lawyer_payment_request_binding
 import '../screens/lawyer_screen/screens/bindings/payment_request_only_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/plans_bindings.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
+import '../screens/lawyer_screen/screens/views/lawyer_all_address.dart';
 import '../screens/signup/signUp.dart';
 import '../screens/bottombar/bottombar.dart';
 import '../screens/splash_screen_likhit.dart';
@@ -50,6 +53,8 @@ class ApplicationPages{
   static const lawyerMyTransaction = '/lawyerMyTransaction';
   static const plans = '/plans';
   static const paymentRequestPageOnly = '/paymentRequestPageOnly';
+  static const lawyerAllAddress = '/lawyerAllAddress';
+  static const addressLawyerAddress = '/addressLawyerAddress';
 
 
   static List<GetPage>? getApplicationPages() => [
@@ -89,7 +94,7 @@ class ApplicationPages{
     ),
      GetPage(
       name: clientLawyerList,
-      page: () =>  const ClientLawyerList(),
+      page: () =>   ClientLawyerList(),
     ),
 
 
@@ -141,6 +146,15 @@ class ApplicationPages{
       name: paymentRequestPageOnly,
       page: () =>  const PaymentRequestOnlyPage(),
       binding: PaymentRequestOnlyBindings()
+    ),
+    GetPage(
+      name: lawyerAllAddress,
+      page: () =>  const LawyerAllAddress(),
+      binding: LawyerAddressBindings()
+    ),  GetPage(
+      name: addressLawyerAddress,
+      page: () =>  const LawyerAddAddress(),
+      binding: LawyerAddressBindings()
     ),
 
 

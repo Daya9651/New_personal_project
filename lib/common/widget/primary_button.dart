@@ -11,6 +11,7 @@ constTextContainer(
     text, {
       VoidCallback? onTap,
       double? width,
+      Color?color
     }) {
   return InkWell(
     onTap: onTap,
@@ -21,7 +22,7 @@ constTextContainer(
       width: width,
       // ?? (isDesktop() ? 200.w : 0.4.sw),
       // gradient: primaryGradientColor,
-      color: AppColors.info80,
+      color:color?? AppColors.info80,
       child: Center(child: const10TextBold("  $text  ",textColor: AppColors.white)),
     ),
   );

@@ -50,12 +50,12 @@ class Data {
   String? paymentMethod;
   String? totalPayableAmount;
   bool? isActivate;
-  Null? activationDate;
-  Null? deactivateAt;
+  dynamic? activationDate;
+  dynamic? deactivateAt;
   bool? free;
   Lawyer? lawyer;
   Plan? plan;
-  Null? delhiveryAddress;
+  String? delhiveryAddress;
 
   Data(
       {this.id,

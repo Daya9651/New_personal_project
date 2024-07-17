@@ -119,7 +119,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
               onTap: () {
                 Get.toNamed(ApplicationPages.clientLawyerList);
               },
-            ),    _buildDrawerItem(
+            ),
+            _buildDrawerItem(
               icon: Icons.account_circle,
               text: 'Transaction',
               onTap: () {

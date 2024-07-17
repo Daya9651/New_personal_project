@@ -23,18 +23,18 @@ class LawyerListModel {
     if (json['data'] != null) {
       data = <LawyerListData>[];
       json['data'].forEach((v) {
-        data!.add(new LawyerListData.fromJson(v));
+        data!.add(LawyerListData.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['response_code'] = this.responseCode;
-    data['count'] = this.count;
-    data['current_page'] = this.currentPage;
-    data['total_pages'] = this.totalPages;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['response_code'] = responseCode;
+    data['count'] = count;
+    data['current_page'] = currentPage;
+    data['total_pages'] = totalPages;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -74,15 +74,15 @@ class LawyerListData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['address'] = this.address;
-    data['specialties'] = this.specialties;
-    data['language_spoken'] = this.languageSpoken;
-    data['experience'] = this.experience;
-    data['image'] = this.image;
-    data['avg_rating'] = this.avgRating;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['address'] = address;
+    data['specialties'] = specialties;
+    data['language_spoken'] = languageSpoken;
+    data['experience'] = experience;
+    data['image'] = image;
+    data['avg_rating'] = avgRating;
     return data;
   }
 }

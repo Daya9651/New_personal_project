@@ -9,13 +9,11 @@ import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../common/widget/const_shimmer_effects.dart';
-import '../../../../common/widget/custom_date_picker.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
-import '../../../../const/image_strings.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
-import '../controllers/client_transaction_controller.dart';
+import '../../../payment/laywer Invoice/my_transactions_invoice.dart';
 import '../controllers/lawyer_my_transaction_controller.dart';
 
 class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
@@ -83,7 +81,10 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
                   ],
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const MyTransactionsInvoice());
+
+                  },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),
               ),

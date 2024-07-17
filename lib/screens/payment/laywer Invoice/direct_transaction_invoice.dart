@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/common/widget/custom_date_picker.dart';
 import 'package:likhit/const/image_strings.dart';
+import 'package:likhit/helpers/string_to_date_function.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
 
 class DirectTransactionInvoice extends StatefulWidget {
-  const DirectTransactionInvoice({super.key});
+  final int paymentId;
+  const DirectTransactionInvoice({super.key, required this.paymentId});
 
   @override
   State<DirectTransactionInvoice> createState() => _InvoicingState();
@@ -16,15 +19,23 @@ class _InvoicingState extends State<DirectTransactionInvoice> {
   PaymentController controller = Get.put(PaymentController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.getInvoiceData(widget.paymentId);
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     debugPrint('Daya : ${controller.invoiceDirectList.value.data?[0].status}');
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAppBar(
-          title: 'Invoices',
-        ),
+        // appBar: const CustomAppBar(
+        //   title: 'Invoices',
+        // ),
         body:Obx(()=> Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(left: 16.0, right: 16, top: 50, bottom: 16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +74,17 @@ class _InvoicingState extends State<DirectTransactionInvoice> {
                       ],
                     ),
 
+                    TextButton(onPressed: (){
+                      // generatePdf(
+                      //     state: controller.invoiceList.value.data?.lawyer?.state ?? "",
+                      //     city: controller.invoiceList.value.data?.lawyer?.city ?? "",
+                      //     country: controller.invoiceList.value.data?.lawyer?.country ?? "",
+                      //     phone: controller.invoiceList.value.data?.lawyer?.mobile ?? "",
+                      //     area: controller.invoiceList.value.data?.lawyer?.address ?? "", ,
+                      //     // items: widget.items
+                      // );
+                    }, child: Text('Download'))
+
                   ],
                 ),
                 const Divider(),
@@ -85,7 +107,7 @@ class _InvoicingState extends State<DirectTransactionInvoice> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text('Invoice Date :',),
-                        Text('${controller.invoiceList.value.data?.client?.createdDate.toString()}'),
+                        Text('${formatDateTime(DateTime.parse(controller.invoiceList.value.data?.client!.createdDate.toString()??""))}'),
                         const Text('Reference# :'),
                         Text('${controller.invoiceList.value.data?.paymentNo.toString()}')
                       ],
@@ -115,7 +137,7 @@ class _InvoicingState extends State<DirectTransactionInvoice> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('${controller.invoiceList.value.data?.lawyer?.servicesOffered.toString()}'),
+                    Text('${controller.invoiceList.value.data?.service?.title??""}'),
                     SizedBox(
                       width: 70,
                       child: Column(

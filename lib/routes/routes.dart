@@ -24,13 +24,12 @@ import '../screens/lawyer_screen/screens/bindings/payment_request_only_bindings.
 import '../screens/lawyer_screen/screens/bindings/plans_bindings.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
 import '../screens/lawyer_screen/screens/views/lawyer_all_address.dart';
+import '../screens/payment/laywer Invoice/request_transaction_invoice.dart';
 import '../screens/signup/signUp.dart';
 import '../screens/bottombar/bottombar.dart';
 import '../screens/splash_screen_likhit.dart';
 
 class ApplicationPages{
-
-
 
   static const splashScreen = '/';
   static const signUpPage = '/signUpPage';
@@ -43,7 +42,6 @@ class ApplicationPages{
   //bottom bar
   static const myBottomBar = '/myBottomBar';
   static const lawyerTransaction = '/lawyerTransaction';
-
 
   //lawyer
 
@@ -106,7 +104,6 @@ class ApplicationPages{
 
 
 
-
     // lawyer
 
     GetPage(
@@ -120,11 +117,11 @@ class ApplicationPages{
       page: () =>  const LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
     ),
-    GetPage(
-      name: lawyerAppointmentList,
-      page: () =>  const LawyerAppointmentList(),
-      binding: LawyerAppointmentBindings()
-    ),
+    // GetPage(
+    //   name: lawyerAppointmentList,
+    //   page: () =>  const RequestTransactionInvoice(),
+    //   binding: LawyerAppointmentBindings()
+    // ),
 
     GetPage(
       name: lawyerTransaction,
@@ -151,15 +148,13 @@ class ApplicationPages{
       name: lawyerAllAddress,
       page: () =>  const LawyerAllAddress(),
       binding: LawyerAddressBindings()
-    ),  GetPage(
+    ),
+
+    GetPage(
       name: addressLawyerAddress,
       page: () =>  const LawyerAddAddress(),
       binding: LawyerAddressBindings()
     ),
-
-
-
-
 
 
   ];

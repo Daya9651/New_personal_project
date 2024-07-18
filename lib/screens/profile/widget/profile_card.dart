@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart' as FlutterRatingBar;
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:likhit/const/const_height.dart';
 import 'package:likhit/style/color.dart';
 
+import '../../../const/const_width.dart';
 import '../../../style/text_style.dart';
 
 Widget specialitiesCard({String? text}) {
@@ -15,7 +18,8 @@ Widget specialitiesCard({String? text}) {
 Widget customListTile({
   String? title,
   String? subtitle,
-  String? date,
+  String? startDate,
+  String? endDate,
   IconData? icon,
   Function()? onTap,
   bool? visibility,
@@ -40,8 +44,9 @@ Widget customListTile({
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Bar ID ${title ?? ''}",
-            style: AppTextStyles.kCaption12RegularTextStyle,
+            "${title ?? ''}",
+            style: AppTextStyles.kCaption12SemiBoldTextStyle
+                .copyWith(fontSize: h15),
           ),
           Text(
             subtitle ?? '',
@@ -52,9 +57,12 @@ Widget customListTile({
       ),
     ),
     trailing: Container(
+      height: h50,
+      width: w80,
       child: Text(
-        date ?? '',
-        style: AppTextStyles.kSmall10RegularTextStyle,
+        "start ${startDate ?? ''} / end ${endDate ?? ''}",
+        style: AppTextStyles.kSmall10RegularTextStyle.copyWith(fontSize: h10),
+        textAlign: TextAlign.justify,
       ),
     ),
   );
@@ -102,7 +110,7 @@ Widget constText15SemiBold({String? text}) {
     ),
     child: Text(
       text ?? '',
-      style: AppTextStyles.kBody15SemiBoldTextStyle,
+      style: AppTextStyles.kBody15SemiBoldTextStyle.copyWith(fontSize: h20),
     ),
   );
 }
@@ -114,7 +122,8 @@ Widget constText12SemiBold({String? text, bool? imp}) {
       children: [
         Text(
           text ?? '',
-          style: AppTextStyles.kCaption12SemiBoldTextStyle,
+          style:
+              AppTextStyles.kCaption12SemiBoldTextStyle.copyWith(fontSize: h15),
         ),
         Visibility(
             visible: imp ?? false,
@@ -135,18 +144,23 @@ Widget servicesOffer({
 }) {
   return Container(
     child: ListTile(
+      dense: true,
+      visualDensity: VisualDensity(horizontal: 4, vertical: -4),
       title: SizedBox(
         width: h50,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title ?? '',
-              style: AppTextStyles.kCaption12RegularTextStyle,
+              style: AppTextStyles.kCaption12SemiBoldTextStyle
+                  .copyWith(fontSize: h15),
             ),
             Text(
               subtitle ?? '',
-              style: AppTextStyles.kSmall8RegularTextStyle,
+              style:
+                  AppTextStyles.kSmall8RegularTextStyle.copyWith(fontSize: h10),
             )
           ],
         ),
@@ -161,7 +175,24 @@ Widget servicesOffer({
   );
 }
 
-Widget clientReview() {
+Widget clientReview({
+  String? userName,
+  String? date,
+  String? comment,
+  int? star,
+  like,
+  dislike,
+  Function()? likeTap,
+  Function()? dislikeTap,
+}) {
+  String formatDate(String? dateString) {
+    if (dateString == null || dateString.isEmpty) {
+      return '';
+    }
+    DateTime dateTime = DateTime.parse(dateString);
+    return DateFormat.yMMMd().format(dateTime);
+  }
+
   return Container(
     // width: Get.width * 0.05,
     // width: 200,
@@ -169,25 +200,49 @@ Widget clientReview() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Client@gmail.com'),
-        Text('Jun 4, 2024'),
-        Row(
-          children: [
-            Icon(Icons.star),
-            Icon(Icons.star),
-            Icon(Icons.star),
-            Icon(Icons.star),
-            Icon(Icons.star_border),
-          ],
+        Text(
+          userName ?? '',
+          style: AppTextStyles.kSmall10RegularTextStyle,
         ),
-        Text('Deffersx'),
+        Text(
+          // date ?? '',
+          formatDate(date),
+          style: AppTextStyles.kSmall10RegularTextStyle,
+        ),
+        FlutterRatingBar.RatingBar.builder(
+          ignoreGestures: true,
+          itemSize: h25,
+          initialRating: double.tryParse(star.toString()) ?? 0.0,
+          itemCount: 5,
+          itemPadding: EdgeInsets.symmetric(horizontal: h1),
+          itemBuilder: (context, _) => const Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+          onRatingUpdate: (rating) {
+            print(rating);
+          },
+        ),
+        Text(comment ?? ''),
         Row(
           children: [
-            Icon(Icons.thumb_up_alt_outlined),
+            InkWell(
+                onTap: likeTap,
+                child: Icon(
+                  Icons.thumb_up,
+                  color: AppColors.info40,
+                ).marginOnly(right: h5)),
+            Text("$like" ?? "0"),
             SizedBox(
               width: h30,
             ),
-            Icon(Icons.thumb_down_alt_outlined),
+            InkWell(
+                onTap: dislikeTap,
+                child: Icon(
+                  Icons.thumb_down,
+                  color: AppColors.error40,
+                ).marginOnly(right: h5)),
+            Text("$dislike" ?? "0")
           ],
         )
       ],

@@ -49,6 +49,12 @@ const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
 
 
 
+//todo review apis
+const String clientReviewUrl = "$baseUrl/reviews-api/";
+const String likeUrl = "$baseUrl/review-like-api/";
+const String dislikeUrl = "$baseUrl/review-dislike-api/";
+
+//todo clientBookAppointment
+const String clientBookAppointmentUrl = "$baseUrl/user-book-appointment-api/";
 
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
-

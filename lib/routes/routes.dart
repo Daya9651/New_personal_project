@@ -15,6 +15,8 @@ import '../screens/book_appointment_client/bindings/book_appointment_bindings.da
 import '../screens/book_appointment_client/views/book_appointments_page.dart';
 import '../screens/bottombar/bindings/bottom_nav_binding.dart';
 import '../screens/bottombar/bindings/lawyer_transaction_binding.dart';
+import '../screens/client transactions/view/Client_appointment_transactions.dart';
+import '../screens/client transactions/view/client_view_history_screen.dart';
 import '../screens/client_screen/client_lawyer_list.dart';
 import '../screens/lawyer_screen/screens/bindings/client_transaction_binding.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_appointment_bindings.dart';
@@ -53,6 +55,10 @@ class ApplicationPages{
   static const paymentRequestPageOnly = '/paymentRequestPageOnly';
   static const lawyerAllAddress = '/lawyerAllAddress';
   static const addressLawyerAddress = '/addressLawyerAddress';
+
+  // Client
+  static const userPaymentHistory = '/userPaymentHistory';
+  static const clientAppointmentTransaction = '/clientAppointmentTransaction';
 
 
   static List<GetPage>? getApplicationPages() => [
@@ -154,6 +160,19 @@ class ApplicationPages{
       name: addressLawyerAddress,
       page: () =>  const LawyerAddAddress(),
       binding: LawyerAddressBindings()
+    ),
+
+    // Client
+    GetPage(
+        name: userPaymentHistory,
+        page: () =>  const ClientViewHistoryScreen(),
+        // binding: LawyerAddressBindings()
+    ),
+
+    GetPage(
+        name: clientAppointmentTransaction,
+        page: () =>  const ClientAppointmentTransactions(),
+        binding: LawyerPaymentRequestBinding()
     ),
 
 

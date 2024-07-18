@@ -92,12 +92,12 @@ class Data {
     about = json['about'];
     gender = json['gender'];
     servicesOffered = json['services_offered'];
-    specialties = json['specialties'].cast<String>();
+    specialties = json['specialties'];
     experience = json['experience'];
     image = json['image'];
     websiteUrl = json['website_url'];
-    languageSpoken = json['language_spoken'].cast<String>();
-    languageWritten = json['language_written'].cast<String>();
+    languageSpoken = json['language_spoken'];
+    languageWritten = json['language_written'];
     country = json['country'];
     state = json['state'];
     city = json['city'];

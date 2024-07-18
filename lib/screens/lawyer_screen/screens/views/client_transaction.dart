@@ -7,7 +7,6 @@ import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
@@ -51,11 +50,9 @@ class ClientTransaction extends GetView<ClientTransactionController> {
             ),
           );
         }
-
         if (controller.clientTransactionList.value.data!.isEmpty) {
           return const Center(child: Text("No transactions found."));
         }
-
         return ListView.builder(
           itemCount: controller.clientTransactionList.value.data!.length,
           itemBuilder: (context, index) {

@@ -13,7 +13,7 @@ class PaymentController extends GetxController{
     // TODO: implement onInit
 
     // getDirectInvoiceData();
-    // getDirectInvoiceData();
+    getDirectInvoiceData();
     super.onInit();
   }
   var invoiceList = InvoiceModel().obs;

@@ -50,7 +50,7 @@ class LawyerListData {
   List<String>? languageSpoken;
   String? experience;
   String? image;
-  int? avgRating;
+  double? avgRating;
 
   LawyerListData(
       {this.id,
@@ -70,7 +70,7 @@ class LawyerListData {
     languageSpoken = json['language_spoken'].cast<String>();
     experience = json['experience'];
     image = json['image'];
-    avgRating = json['avg_rating'];
+    // avgRating = json['avg_rating'];
   }
 
   Map<String, dynamic> toJson() {

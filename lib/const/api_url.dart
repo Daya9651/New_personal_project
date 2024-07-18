@@ -46,5 +46,9 @@ const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
 
 
 
+// Client Transaction History
+const String  invoiceClientDirectUrl = "$baseUrl/user-payment-history-api/";
+const String  clientAppointmentHistoryUrl = "$baseUrl/user-appointment-payment-history-api/";
+
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
 

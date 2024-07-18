@@ -41,6 +41,7 @@ class ConstTextField extends StatelessWidget {
   final TextAlign? textAlign;
   final String? initialValue;
   final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
 
   const ConstTextField({
     super.key,
@@ -76,13 +77,13 @@ class ConstTextField extends StatelessWidget {
     this.initialValue,
     this.onSubmitted,
     this.height,
-    this.borderRadius, this.width,
+    this.borderRadius, this.width, this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: w3, horizontal: w10),
+      padding: padding??EdgeInsets.symmetric(vertical: w3, horizontal: w10),
 
       // constraints: BoxConstraints(
       //   maxHeight: 50,

@@ -15,20 +15,24 @@ Widget lawyerProfileDetailCard(
     String? image,
     Function()? onTap}) {
   return Card(
-    color: AppColors.white,
+    color: AppColors.info10,
     elevation: 3,
     shadowColor: AppColors.info80,
     child: InkWell(
       onTap: onTap,
       child: Row(
         children: [
-          Hero(
-            tag: image ?? '',
-            child: CircleAvatar(
-              radius: w50,
-              child: Image.network(
-                image ?? '',
-                fit: BoxFit.fill,
+          CircleAvatar(
+            radius: w35,
+            backgroundColor: Colors.transparent,
+            // Ensure CircleAvatar is transparent
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: ClipOval(
+                child: Image.network(
+                  image ?? '',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -38,41 +42,58 @@ Widget lawyerProfileDetailCard(
               children: [
                 Text(
                   title ?? '',
-                  style: AppTextStyles.kCaption12SemiBoldTextStyle,
+                  style: AppTextStyles.kCaption12SemiBoldTextStyle
+                      .copyWith(fontSize: h18),
                 ),
                 Row(
                   children: [
-                    Icon(Icons.workspace_premium),
+                    Icon(
+                      Icons.workspace_premium,
+                      size: h20,
+                    ),
                     Expanded(
                       child: Text(' ${workspaceText ?? ''}',
-                          style: AppTextStyles.kSmall10RegularTextStyle),
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
                     ),
                   ],
                 ).marginAll(h5),
                 Row(
                   children: [
-                    Icon(Icons.g_translate),
+                    Icon(
+                      Icons.g_translate,
+                      size: h20,
+                    ),
                     Expanded(
                       child: Text(' ${languageText ?? ''}',
-                          style: AppTextStyles.kSmall10RegularTextStyle),
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
                     ),
                   ],
                 ).marginAll(h5),
                 Row(
                   children: [
-                    Icon(Icons.school_outlined),
+                    Icon(
+                      Icons.school_outlined,
+                      size: h20,
+                    ),
                     Expanded(
                       child: Text(' ${expText ?? ''} Yrs Exp',
-                          style: AppTextStyles.kSmall10RegularTextStyle),
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
                     ),
                   ],
                 ).marginAll(h5),
                 Row(
                   children: [
-                    Icon(Icons.location_on_outlined),
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: h20,
+                    ),
                     Expanded(
                       child: Text(' ${locationText ?? ''}',
-                          style: AppTextStyles.kSmall10RegularTextStyle),
+                          style: AppTextStyles.kSmall10RegularTextStyle
+                              .copyWith(fontSize: h12)),
                     ),
                   ],
                 ).marginAll(h5),

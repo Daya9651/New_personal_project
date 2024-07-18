@@ -259,34 +259,14 @@ class _ProfileInputPageState extends State<ProfileInputPage> {
                 const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfileDisplayPage(
-                          image: _image,
-                          userId: _userIdController.text,
-                          userName: _userNameController.text,
-                          userAdd: _userAddController.text,
-                          userAbout: _userAboutController.text,
-                          university: _universityController.text,
-                          qualification: _qualifiactionController.text,
-                          passingyear: _passingyearController.text,
-                          academic: _academicController.text,
-                          acadqualification: _acdQalifiactionController.text,
-                          acadpasssing: _acdpassingController.text,
-                          adviceprice: _acdpassingController.text,
-                          documentprice: _acdpassingController.text,
-                          caseprice: _acdpassingController.text,
-                          officeName: _officeNameController.text,
-                          position: _positionController.text,
-                          barstate: _barstateController.text,
-                          barid: _baridController.text,
-                          baradmission: _baradmissionController.text,
-                          servicesOffered: _servicesController.text,
-                          experience: _experienceController.text,
-                        ),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => ProfileDisplayPage(
+                    //
+                    //     ),
+                    //   ),
+                    // );
                   },
                   child: const Text('Submit'),
                 ),

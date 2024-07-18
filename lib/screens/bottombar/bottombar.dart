@@ -14,12 +14,16 @@ class MyBottomBar extends GetView<BottomNavController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // final initialIndex = Get.arguments['initialIndex'] ?? 0;
+
+    // Set the initial selected index
+    // controller.selectedIndex.value = initialIndex;
+    return  Scaffold(
       backgroundColor: Colors.white,
       // floatingActionButton: FloatingActionButton(onPressed: (){},
       //   child: Icon(Icons.add)),
       appBar:CustomAppBar(
-        title: controller.titleNames[controller.selectedIndex.value],
+        textWidget:Obx(()=> Text(controller.titleNames[controller.selectedIndex.value])),
       ),
       drawer: LikhitDrawer(),
       bottomNavigationBar:Obx(()=> NavigationBarTheme(

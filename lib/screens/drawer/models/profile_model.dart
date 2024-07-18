@@ -1,13 +1,17 @@
+import 'package:get/get.dart';
+
 class ProfileModel {
   String? message;
   int? responseCode;
+  bool? kyc;
   Data? data;
 
-  ProfileModel({this.message, this.responseCode, this.data});
+  ProfileModel({this.message, this.responseCode, this.data, this.kyc});
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     responseCode = json['response_code'];
+    kyc = json['kyc'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
@@ -15,6 +19,7 @@ class ProfileModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['response_code'] = responseCode;
+    data['kyc'] = kyc;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -33,6 +38,7 @@ class Data {
   String? dob;
   String? about;
   String? gender;
+
   Null? servicesOffered;
   List<String>? specialties;
   String? experience;
@@ -50,6 +56,7 @@ class Data {
   String? approvalStatus;
   int? store;
   int? user;
+  double? rating;
 
   Data(
       {this.id,
@@ -62,6 +69,7 @@ class Data {
         this.dob,
         this.about,
         this.gender,
+        this.rating,
         this.servicesOffered,
         this.specialties,
         this.experience,
@@ -74,6 +82,7 @@ class Data {
         this.city,
         this.isActivate,
         this.nfcActivate,
+
         this.isCreated,
         this.lastLogin,
         this.approvalStatus,
@@ -89,6 +98,7 @@ class Data {
     address = json['address'];
     mobile = json['mobile'];
     dob = json['dob'];
+    rating = json['avg_rating'];
     about = json['about'];
     gender = json['gender'];
     servicesOffered = json['services_offered'];

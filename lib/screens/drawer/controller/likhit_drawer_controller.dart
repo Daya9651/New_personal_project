@@ -20,6 +20,7 @@ class LikhitDrawerController extends GetxController {
     super.onInit();
     ApiService.init();
     getProfileData();
+    bottomNavController.getUserType();
   }
 
 

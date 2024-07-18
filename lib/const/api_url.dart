@@ -35,6 +35,15 @@ const String clientListUrl = "$baseUrl/list-of-client-api/";
 const String lawyerRequestPaymentUrl = "$baseUrl/lawyer-request-for-payment-api/";
 const String lawyerBuyPlantUrl = "$baseUrl/lawyer-buy-plan-api/";
 const String addressUrl = "$baseUrl/crud-delhivery-address-api/";
+const String reviewsUrl = "$baseUrl/reviews-list-for-lawyer-api/";
+const String reviewsLikeUrl = "$baseUrl/review-like-api/";
+const String reviewsDisLikeUrl = "$baseUrl/review-dislike-api/";
+const String lawyerServiceUrl = "$baseUrl/crud-lawyer-fee-api/";
+const String lawyerEducationUrl = "$baseUrl/crud-lawyer-education-api/";
+const String lawyerExperienceUrl = "$baseUrl/crud-lawyer-experience-api/";
+const String lawyerBankUrl = "$baseUrl/crud-lawyer-bank/";
+const String lawyerPhoneUrl = "$baseUrl/crud-lawyer-phone-number-api/";
+const String lawyerUpdateProfileUrl = "$baseUrl/update-profile-lawyer-api/";
 //payments
 const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
 
@@ -45,7 +54,14 @@ const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history
 const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
 
 
+//todo review apis
+const String clientReviewUrl = "$baseUrl/reviews-api/";
+const String likeUrl = "$baseUrl/review-like-api/";
+const String dislikeUrl = "$baseUrl/review-dislike-api/";
 
+//todo clientBookAppointment
+const String clientBookAppointmentUrl = "$baseUrl/user-book-appointment-api/";
+const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
 // Client Transaction History
 const String  invoiceClientDirectUrl = "$baseUrl/user-payment-history-api/";
 const String  clientAppointmentHistoryUrl = "$baseUrl/user-appointment-payment-history-api/";

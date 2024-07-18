@@ -41,7 +41,7 @@ class ClientTransaction extends GetView<ClientTransactionController> {
         ),
       ),
       body:Obx(() {
-        if (controller.clientTransactionList.value.data == null) {
+        if (controller.clientTransactionList.value.data == null ) {
           return Center(
             child: Shimmer.fromColors(
               baseColor: baseColor,

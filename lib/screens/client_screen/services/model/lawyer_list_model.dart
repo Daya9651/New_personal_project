@@ -4,7 +4,7 @@ class LawyerListModel {
   int? count;
   int? currentPage;
   int? totalPages;
-  List<LawyerListData>? data;
+  List<Data>? data;
 
   LawyerListModel(
       {this.message,
@@ -21,9 +21,9 @@ class LawyerListModel {
     currentPage = json['current_page'];
     totalPages = json['total_pages'];
     if (json['data'] != null) {
-      data = <LawyerListData>[];
+      data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(LawyerListData.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
@@ -42,7 +42,7 @@ class LawyerListModel {
   }
 }
 
-class LawyerListData {
+class Data {
   int? id;
   String? name;
   String? address;
@@ -52,17 +52,20 @@ class LawyerListData {
   String? image;
   double? avgRating;
 
-  LawyerListData(
-      {this.id,
-      this.name,
-      this.address,
-      this.specialties,
-      this.languageSpoken,
-      this.experience,
-      this.image,
-      this.avgRating});
+  // double? avgRating;
 
-  LawyerListData.fromJson(Map<String, dynamic> json) {
+  Data({
+    this.id,
+    this.name,
+    this.address,
+    this.specialties,
+    this.languageSpoken,
+    this.experience,
+    this.image,
+    // this.avgRating
+  });
+
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     address = json['address'];
@@ -82,7 +85,7 @@ class LawyerListData {
     data['language_spoken'] = languageSpoken;
     data['experience'] = experience;
     data['image'] = image;
-    data['avg_rating'] = avgRating;
+    // data['avg_rating'] = avgRating;
     return data;
   }
 }

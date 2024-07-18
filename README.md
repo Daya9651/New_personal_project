@@ -48,3 +48,6 @@ Client Side:
 1.Direct Payment Transaction ui And Api with Search
 2.Appointment Payment Transaction ui And Api with Search
 3.PaymentRequest Payment Transaction ui And Api with Search
+4.Book Appointment api
+5.Razor Pay On book appointment
+6.Payment success Api

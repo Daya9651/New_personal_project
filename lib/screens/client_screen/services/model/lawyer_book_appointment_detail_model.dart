@@ -6,17 +6,17 @@ class LawyerBookAppointmentDetailModel {
 
   LawyerBookAppointmentDetailModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null
-        ? new BookAppointmentLawyerData.fromJson(json['data'])
+        ? BookAppointmentLawyerData.fromJson(json['data'])
         : null;
     responseCode = json['response_code'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['response_code'] = this.responseCode;
+    data['response_code'] = responseCode;
     return data;
   }
 }
@@ -45,7 +45,7 @@ class BookAppointmentLawyerData {
   String? dob;
   String? about;
   String? gender;
-  Null? servicesOffered;
+  String? servicesOffered;
   List<String>? specialties;
   String? experience;
   String? image;
@@ -110,13 +110,13 @@ class BookAppointmentLawyerData {
     if (json['experiences'] != null) {
       experiences = <Experiences>[];
       json['experiences'].forEach((v) {
-        experiences!.add(new Experiences.fromJson(v));
+        experiences!.add(Experiences.fromJson(v));
       });
     }
     if (json['education_credentials'] != null) {
       educationCredentials = <EducationCredentials>[];
       json['education_credentials'].forEach((v) {
-        educationCredentials!.add(new EducationCredentials.fromJson(v));
+        educationCredentials!.add(EducationCredentials.fromJson(v));
       });
     }
     // if (json['images'] != null) {
@@ -128,67 +128,67 @@ class BookAppointmentLawyerData {
     if (json['operating_hours'] != null) {
       operatingHours = <OperatingHours>[];
       json['operating_hours'].forEach((v) {
-        operatingHours!.add(new OperatingHours.fromJson(v));
+        operatingHours!.add(OperatingHours.fromJson(v));
       });
     }
     if (json['phone'] != null) {
       phone = <Phone>[];
       json['phone'].forEach((v) {
-        phone!.add(new Phone.fromJson(v));
+        phone!.add(Phone.fromJson(v));
       });
     }
     if (json['email'] != null) {
       email = <Email>[];
       json['email'].forEach((v) {
-        email!.add(new Email.fromJson(v));
+        email!.add(Email.fromJson(v));
       });
     }
     if (json['office_location'] != null) {
       officeLocation = <OfficeLocation>[];
       json['office_location'].forEach((v) {
-        officeLocation!.add(new OfficeLocation.fromJson(v));
+        officeLocation!.add(OfficeLocation.fromJson(v));
       });
     }
     if (json['social_media'] != null) {
       socialMedia = <SocialMedia>[];
       json['social_media'].forEach((v) {
-        socialMedia!.add(new SocialMedia.fromJson(v));
+        socialMedia!.add(SocialMedia.fromJson(v));
       });
     }
     if (json['fees'] != null) {
       fees = <Fees>[];
       json['fees'].forEach((v) {
-        fees!.add(new Fees.fromJson(v));
+        fees!.add(Fees.fromJson(v));
       });
     }
     if (json['bank'] != null) {
       bank = <Bank>[];
       json['bank'].forEach((v) {
-        bank!.add(new Bank.fromJson(v));
+        bank!.add(Bank.fromJson(v));
       });
     }
     if (json['bar_id'] != null) {
       barId = <BarId>[];
       json['bar_id'].forEach((v) {
-        barId!.add(new BarId.fromJson(v));
+        barId!.add(BarId.fromJson(v));
       });
     }
     if (json['preferredcourt'] != null) {
       preferredcourt = <Preferredcourt>[];
       json['preferredcourt'].forEach((v) {
-        preferredcourt!.add(new Preferredcourt.fromJson(v));
+        preferredcourt!.add(Preferredcourt.fromJson(v));
       });
     }
     if (json['bar_association'] != null) {
       barAssociation = <BarAssociation>[];
       json['bar_association'].forEach((v) {
-        barAssociation!.add(new BarAssociation.fromJson(v));
+        barAssociation!.add(BarAssociation.fromJson(v));
       });
     }
     if (json['reviews'] != null) {
       reviews = <Reviews>[];
       json['reviews'].forEach((v) {
-        reviews!.add(new Reviews.fromJson(v));
+        reviews!.add(Reviews.fromJson(v));
       });
     }
     lawyerid = json['lawyerid'];
@@ -219,80 +219,80 @@ class BookAppointmentLawyerData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.experiences != null) {
-      data['experiences'] = this.experiences!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (experiences != null) {
+      data['experiences'] = experiences!.map((v) => v.toJson()).toList();
     }
-    if (this.educationCredentials != null) {
+    if (educationCredentials != null) {
       data['education_credentials'] =
-          this.educationCredentials!.map((v) => v.toJson()).toList();
+          educationCredentials!.map((v) => v.toJson()).toList();
     }
     // if (this.images != null) {
     //   data['images'] = this.images!.map((v) => v.toJson()).toList();
     // }
-    if (this.operatingHours != null) {
+    if (operatingHours != null) {
       data['operating_hours'] =
-          this.operatingHours!.map((v) => v.toJson()).toList();
+          operatingHours!.map((v) => v.toJson()).toList();
     }
-    if (this.phone != null) {
-      data['phone'] = this.phone!.map((v) => v.toJson()).toList();
+    if (phone != null) {
+      data['phone'] = phone!.map((v) => v.toJson()).toList();
     }
-    if (this.email != null) {
-      data['email'] = this.email!.map((v) => v.toJson()).toList();
+    if (email != null) {
+      data['email'] = email!.map((v) => v.toJson()).toList();
     }
-    if (this.officeLocation != null) {
+    if (officeLocation != null) {
       data['office_location'] =
-          this.officeLocation!.map((v) => v.toJson()).toList();
+          officeLocation!.map((v) => v.toJson()).toList();
     }
-    if (this.socialMedia != null) {
-      data['social_media'] = this.socialMedia!.map((v) => v.toJson()).toList();
+    if (socialMedia != null) {
+      data['social_media'] = socialMedia!.map((v) => v.toJson()).toList();
     }
-    if (this.fees != null) {
-      data['fees'] = this.fees!.map((v) => v.toJson()).toList();
+    if (fees != null) {
+      data['fees'] = fees!.map((v) => v.toJson()).toList();
     }
-    if (this.bank != null) {
-      data['bank'] = this.bank!.map((v) => v.toJson()).toList();
+    if (bank != null) {
+      data['bank'] = bank!.map((v) => v.toJson()).toList();
     }
-    if (this.barId != null) {
-      data['bar_id'] = this.barId!.map((v) => v.toJson()).toList();
+    if (barId != null) {
+      data['bar_id'] = barId!.map((v) => v.toJson()).toList();
     }
-    if (this.preferredcourt != null) {
+    if (preferredcourt != null) {
       data['preferredcourt'] =
-          this.preferredcourt!.map((v) => v.toJson()).toList();
+          preferredcourt!.map((v) => v.toJson()).toList();
     }
-    if (this.barAssociation != null) {
+    if (barAssociation != null) {
       data['bar_association'] =
-          this.barAssociation!.map((v) => v.toJson()).toList();
+          barAssociation!.map((v) => v.toJson()).toList();
     }
-    if (this.reviews != null) {
-      data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
+    if (reviews != null) {
+      data['reviews'] = reviews!.map((v) => v.toJson()).toList();
     }
-    data['lawyerid'] = this.lawyerid;
-    data['nfcid'] = this.nfcid;
-    data['name'] = this.name;
-    data['address'] = this.address;
-    data['mobile'] = this.mobile;
-    data['dob'] = this.dob;
-    data['about'] = this.about;
-    data['gender'] = this.gender;
-    data['services_offered'] = this.servicesOffered;
-    data['specialties'] = this.specialties;
-    data['experience'] = this.experience;
-    data['image'] = this.image;
-    data['website_url'] = this.websiteUrl;
-    data['language_spoken'] = this.languageSpoken;
-    data['language_written'] = this.languageWritten;
-    data['country'] = this.country;
-    data['state'] = this.state;
-    data['city'] = this.city;
-    data['is_activate'] = this.isActivate;
-    data['nfc_activate'] = this.nfcActivate;
-    data['is_created'] = this.isCreated;
-    data['last_login'] = this.lastLogin;
-    data['approval_status'] = this.approvalStatus;
-    data['store'] = this.store;
-    data['user'] = this.user;
+    data['lawyerid'] = lawyerid;
+    data['nfcid'] = nfcid;
+    data['name'] = name;
+    data['address'] = address;
+    data['mobile'] = mobile;
+    data['dob'] = dob;
+    data['about'] = about;
+    data['gender'] = gender;
+    data['services_offered'] = servicesOffered;
+    data['specialties'] = specialties;
+    data['experience'] = experience;
+    data['image'] = image;
+    data['website_url'] = websiteUrl;
+    data['language_spoken'] = languageSpoken;
+    data['language_written'] = languageWritten;
+    data['country'] = country;
+    data['state'] = state;
+    data['city'] = city;
+    data['is_activate'] = isActivate;
+    data['nfc_activate'] = nfcActivate;
+    data['is_created'] = isCreated;
+    data['last_login'] = lastLogin;
+    data['approval_status'] = approvalStatus;
+    data['store'] = store;
+    data['user'] = user;
     return data;
   }
 }
@@ -315,12 +315,12 @@ class Experiences {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['subtitle'] = this.subtitle;
-    data['from_date'] = this.fromDate;
-    data['to_date'] = this.toDate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['subtitle'] = subtitle;
+    data['from_date'] = fromDate;
+    data['to_date'] = toDate;
     return data;
   }
 }
@@ -341,11 +341,11 @@ class EducationCredentials {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['title'] = this.title;
-    data['year'] = this.year;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['title'] = title;
+    data['year'] = year;
     return data;
   }
 }
@@ -382,15 +382,15 @@ class OperatingHours {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['weekday'] = this.weekday;
-    data['open24'] = this.open24;
-    data['close'] = this.close;
-    data['morning_open'] = this.morningOpen;
-    data['morning_close'] = this.morningClose;
-    data['evening_open'] = this.eveningOpen;
-    data['evening_close'] = this.eveningClose;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['weekday'] = weekday;
+    data['open24'] = open24;
+    data['close'] = close;
+    data['morning_open'] = morningOpen;
+    data['morning_close'] = morningClose;
+    data['evening_open'] = eveningOpen;
+    data['evening_close'] = eveningClose;
     return data;
   }
 }
@@ -409,10 +409,10 @@ class Phone {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['number'] = this.number;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['number'] = number;
     return data;
   }
 }
@@ -429,9 +429,9 @@ class Email {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['email'] = email;
     return data;
   }
 }
@@ -471,16 +471,16 @@ class OfficeLocation {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['street'] = this.street;
-    data['apartment'] = this.apartment;
-    data['country'] = this.country;
-    data['state'] = this.state;
-    data['city'] = this.city;
-    data['pincode'] = this.pincode;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['street'] = street;
+    data['apartment'] = apartment;
+    data['country'] = country;
+    data['state'] = state;
+    data['city'] = city;
+    data['pincode'] = pincode;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
     return data;
   }
 }
@@ -501,11 +501,11 @@ class SocialMedia {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['platform'] = this.platform;
-    data['url'] = this.url;
-    data['whatsapp_number'] = this.whatsappNumber;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['platform'] = platform;
+    data['url'] = url;
+    data['whatsapp_number'] = whatsappNumber;
     return data;
   }
 }
@@ -528,12 +528,12 @@ class Fees {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['subtitle'] = this.subtitle;
-    data['fee'] = this.fee;
-    data['lawyer_id'] = this.lawyerId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['subtitle'] = subtitle;
+    data['fee'] = fee;
+    data['lawyer_id'] = lawyerId;
     return data;
   }
 }
@@ -547,7 +547,7 @@ class Bank {
   String? accountType;
   int? micrCode;
   String? upiId;
-  Null? qrCode;
+  String? qrCode;
 
   Bank(
       {this.id,
@@ -573,16 +573,16 @@ class Bank {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['account_holder_name'] = this.accountHolderName;
-    data['bank_name'] = this.bankName;
-    data['account_number'] = this.accountNumber;
-    data['ifsc_code'] = this.ifscCode;
-    data['account_type'] = this.accountType;
-    data['micr_code'] = this.micrCode;
-    data['upi_id'] = this.upiId;
-    data['qr_code'] = this.qrCode;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['account_holder_name'] = accountHolderName;
+    data['bank_name'] = bankName;
+    data['account_number'] = accountNumber;
+    data['ifsc_code'] = ifscCode;
+    data['account_type'] = accountType;
+    data['micr_code'] = micrCode;
+    data['upi_id'] = upiId;
+    data['qr_code'] = qrCode;
     return data;
   }
 }
@@ -613,13 +613,13 @@ class BarId {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['state'] = this.state;
-    data['bar_id'] = this.barId;
-    data['admission_date'] = this.admissionDate;
-    data['is_created'] = this.isCreated;
-    data['is_updated'] = this.isUpdated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['state'] = state;
+    data['bar_id'] = barId;
+    data['admission_date'] = admissionDate;
+    data['is_created'] = isCreated;
+    data['is_updated'] = isUpdated;
     return data;
   }
 }
@@ -643,12 +643,12 @@ class Preferredcourt {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['court'] = this.court;
-    data['location'] = this.location;
-    data['is_created'] = this.isCreated;
-    data['is_updated'] = this.isUpdated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['court'] = court;
+    data['location'] = location;
+    data['is_created'] = isCreated;
+    data['is_updated'] = isUpdated;
     return data;
   }
 }
@@ -672,12 +672,12 @@ class BarAssociation {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['bar_name'] = this.barName;
-    data['member_at'] = this.memberAt;
-    data['is_created'] = this.isCreated;
-    data['is_updated'] = this.isUpdated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['bar_name'] = barName;
+    data['member_at'] = memberAt;
+    data['is_created'] = isCreated;
+    data['is_updated'] = isUpdated;
     return data;
   }
 }
@@ -711,14 +711,14 @@ class Reviews {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_name'] = this.userName;
-    data['rating'] = this.rating;
-    data['comment'] = this.comment;
-    data['is_created'] = this.isCreated;
-    data['like_count'] = this.likeCount;
-    data['dislike_count'] = this.dislikeCount;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_name'] = userName;
+    data['rating'] = rating;
+    data['comment'] = comment;
+    data['is_created'] = isCreated;
+    data['like_count'] = likeCount;
+    data['dislike_count'] = dislikeCount;
     return data;
   }
 }

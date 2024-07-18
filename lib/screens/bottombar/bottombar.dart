@@ -23,7 +23,7 @@ class MyBottomBar extends GetView<BottomNavController> {
       // floatingActionButton: FloatingActionButton(onPressed: (){},
       //   child: Icon(Icons.add)),
       appBar:CustomAppBar(
-        textWidget:Obx(()=> Text("${controller.titleNames[controller.selectedIndex.value]}")),
+        textWidget:Obx(()=> Text(controller.titleNames[controller.selectedIndex.value])),
       ),
       drawer: LikhitDrawer(),
       bottomNavigationBar:Obx(()=> NavigationBarTheme(

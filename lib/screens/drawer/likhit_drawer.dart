@@ -117,7 +117,7 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
               icon: Icons.home,
               text: 'Profile',
               onTap: () {
-                Navigator.pop(context);
+                Get.toNamed(ApplicationPages.clientProfile);
               },
             ),
             _buildDrawerItem(
@@ -131,23 +131,22 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
               icon: Icons.account_circle,
               text: 'Appointment List',
               onTap: () {
-                Get.toNamed(ApplicationPages.clientLawyerList);
+                Get.toNamed(ApplicationPages.clientAppointmentList);
               },
-            ),    _buildDrawerItem(
+            ),
+            _buildDrawerItem(
               icon: Icons.account_circle,
               text: 'Transaction List',
               onTap: () {
                 // Get.toNamed(ApplicationPages.clientLawyerList);
               },
             ),
-
             constDivider(),
-
             _buildDrawerItem(
               icon: Icons.logout,
               text: 'Logout',
               onTap: () {
-                UserDataService.removeUser().then((_){
+                UserDataService.removeUser().then((_) {
                   Get.offAllNamed(ApplicationPages.signUpPage);
                 });
                 // Get.toNamed(ApplicationPages.settingPage);
@@ -158,7 +157,10 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
           ],
         ),
       ),
-    ));
+    )
+
+
+    );
     return controller.bottomNavController.userType.value == "Lawyer"
         ? Drawer(
             backgroundColor: Colors.transparent,
@@ -290,7 +292,7 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Stack(
+         Obx(()=>     controller.bottomNavController.userType.value == "Lawyer"?        Column(
                 children: [
                   CircleAvatar(
                     radius: w52,
@@ -302,32 +304,43 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
                       ),
                     ),
                   ),
-                  Positioned(
-                      bottom: h10,
-                      right: -w1,
-
-                      child: IconButton.filledTonal(
-
-
-
-                          onPressed: (){
-                            Get.toNamed(ApplicationPages.myBottomBar,  arguments: {'initialIndex': 3}, );
-                          }, icon: const Icon(Icons.edit_outlined,color: AppColors.info80,)))
+                  SizedBox(height: 10.w),
+                  const10TextBold("${   controller.profileData.value.data?.name.toString().toUpperCase()}"),
+                  const10TextBold("${   controller.profileData.value.data?.email}"),
+                  // Positioned(
+                  //     bottom: h10,
+                  //     right: -w1,
+                  //
+                  //     child: IconButton.filledTonal(
+                  //
+                  //
+                  //
+                  //         onPressed: (){
+                  //           Get.toNamed(ApplicationPages.myBottomBar,  arguments: {'initialIndex': 3}, );
+                  //         }, icon: const Icon(Icons.edit_outlined,color: AppColors.info80,))),
                 ],
-              CircleAvatar(
-                radius: w52,
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: w50,
-                  backgroundImage: NetworkImage(
-                      clientController.clientProfile.value.data?.image ?? ""),
-                ),
-              ),
-              SizedBox(height: 10.w),
-              const10TextBold("${controller.profileData.value.data?.name.toString().toUpperCase()}"),
-              const10TextBold("${controller.profileData.value.data?.email}"),
-              // const12TextBold("satyam@gmail.com"),
+
+              ):Column(
+                 children: [
+                   CircleAvatar(
+                     radius: w52,
+                     child: CircleAvatar(
+                       backgroundColor: Colors.transparent,
+                       radius: w50,
+                       backgroundImage: NetworkImage(
+                           clientController.clientProfile.value.data?.image ?? ""),
+                     ),
+                   ),
+                   SizedBox(height: 10.w),
+                   const10TextBold("${  clientController.clientProfile.value.data?.name.toString().toUpperCase()}"),
+                   const10TextBold("${  clientController.clientProfile.value.data?.email}"),
+
+                 ],
+               )),
+
+
             ],
+
           ),
         ),
       ),

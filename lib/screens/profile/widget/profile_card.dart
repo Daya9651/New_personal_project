@@ -179,7 +179,7 @@ Widget clientReview({
   String? userName,
   String? date,
   String? comment,
-  int? star,
+  double? star,
   like,
   dislike,
   Function()? likeTap,

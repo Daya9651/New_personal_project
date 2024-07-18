@@ -11,9 +11,9 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
-import '../../../../const/image_strings.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
+import '../../../payment/laywer Invoice/direct_transaction_invoice.dart';
 import '../controllers/client_transaction_controller.dart';
 
 class ClientTransaction extends GetView<ClientTransactionController> {
@@ -53,7 +53,7 @@ class ClientTransaction extends GetView<ClientTransactionController> {
         }
 
         if (controller.clientTransactionList.value.data!.isEmpty) {
-          return Center(child: Text("No transactions found."));
+          return const Center(child: Text("No transactions found."));
         }
 
         return ListView.builder(
@@ -78,8 +78,11 @@ class ClientTransaction extends GetView<ClientTransactionController> {
                   ],
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.picture_as_pdf, color: Colors.redAccent),
+                  onPressed: () async {
+
+                   await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
+                  },
+                  icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),
               ),
             );

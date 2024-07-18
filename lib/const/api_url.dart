@@ -48,6 +48,11 @@ const String lawyerUpdateProfileUrl = "$baseUrl/update-profile-lawyer-api/";
 const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
 
 
+// daya
+const String invoiceUrl = "$baseUrl/payment-detail-api/";
+const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history-api/";
+const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
+
 
 //todo review apis
 const String clientReviewUrl = "$baseUrl/reviews-api/";

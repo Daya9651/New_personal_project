@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_for_text_fields.dart';
-import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:likhit/screens/lawyer_screen/screens/controllers/payment_request_only_controller.dart';
 import 'package:likhit/screens/lawyer_screen/screens/models/client_list_model.dart';
 
-import '../../../../common/widget/const_auto_complete.dart';
 import '../../../../common/widget/primary_button.dart';
 import '../../../../const/const_height.dart';
 

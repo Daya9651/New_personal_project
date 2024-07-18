@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,16 +7,12 @@ import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_payment_request_controller.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../common/widget/const_shimmer_effects.dart';
-import '../../../../common/widget/custom_date_picker.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
-import '../../../../const/image_strings.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
-import '../controllers/client_transaction_controller.dart';
-import '../controllers/lawyer_my_transaction_controller.dart';
+import '../../../payment/laywer Invoice/request_transaction_invoice.dart';
 
 class LawyerPaymentRequestPage extends GetView<LawyerPaymentRequestController> {
   const LawyerPaymentRequestPage({super.key});
@@ -85,7 +80,10 @@ class LawyerPaymentRequestPage extends GetView<LawyerPaymentRequestController> {
                   ],
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+
+                    await Get.to(() => RequestTransactionInvoice(paymentId: transaction.id??0,));
+                  },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),
               ),

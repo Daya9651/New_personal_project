@@ -50,6 +50,7 @@ class Data {
   List<String>? languageSpoken;
   String? experience;
   String? image;
+  int? avgRating;
 
   // double? avgRating;
 

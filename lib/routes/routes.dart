@@ -37,6 +37,7 @@ import '../screens/lawyer_screen/screens/bindings/plans_bindings.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
 import '../screens/lawyer_screen/screens/views/lawyer_all_address.dart';
 import '../screens/lawyer_screen/screens/views/lawyer_payment_request_page.dart';
+import '../screens/payment/laywer Invoice/request_transaction_invoice.dart';
 import '../screens/signup/signUp.dart';
 import '../screens/splash_screen_likhit.dart';
 
@@ -115,6 +116,7 @@ class ApplicationPages {
           page: () => ClientLawyerList(),
         ),
 
+
     GetPage(
       name: bookAppointmentsPage,
       page: () =>   BookAppointmentsPage(),
@@ -139,7 +141,7 @@ class ApplicationPages {
     ),
     GetPage(
       name: lawyerAppointmentList,
-      page: () =>  const LawyerAppointmentList(),
+      page: () =>   LawyerAppointmentList(),
       binding: LawyerAppointmentBindings()
     ),
 

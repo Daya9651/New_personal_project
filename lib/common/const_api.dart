@@ -144,13 +144,10 @@ import '../const/api_urls.dart';
 import '../const/image_strings.dart';
 import '../screens/auth/save_auth_data.dart';
 import '../utils/const_toast.dart';
-
 class ApiService {
   static final Dio _dio = Dio();
-
   static void init() {
     _dio.options.baseUrl = baseUrl;
-
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {

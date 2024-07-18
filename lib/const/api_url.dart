@@ -62,4 +62,7 @@ const String dislikeUrl = "$baseUrl/review-dislike-api/";
 //todo clientBookAppointment
 const String clientBookAppointmentUrl = "$baseUrl/user-book-appointment-api/";
 const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
+const String clientDirectTransUrl = "$baseUrl/user-payment-history-api/";
+const String clientAppointTransUrl = "$baseUrl/user-appointment-payment-history-api/";
+const String clientRequestPayTransUrl = "$baseUrl/user-request-payment-history-api/";
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";

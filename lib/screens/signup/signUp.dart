@@ -115,49 +115,49 @@ class SignInPage extends StatelessWidget {
                         }, color: AppColors.white)),),
                 SizedBox(height: h20),
                  //todo changes
-                Row(
-                  children: [
-                    Divider(),
-                    // Text(
-                    //     'Or',
-                    //     style: AppTextStyles.kBody15SemiBoldTextStyle
-                    // ),
-                    Divider(),
-
-                  ],
-                ),
-
-                Text(
-                    'Or',
-                    style: AppTextStyles.kBody15SemiBoldTextStyle,
-                  textAlign: TextAlign.center,
-                ),
-
-                SizedBox(height: h15),
-                  // icon: Icon(Icons.g_translate),
-                   Container(
-                     padding: EdgeInsets.all(h10),
-                     decoration: BoxDecoration(
-                       color: AppColors.white101,
-                       borderRadius: BorderRadius.circular(15),
-                     ),
-                       child: CustomButton2(
-                         imageHeight: 25,
-                         imageWidth: 25,
-                         image: "assets/logo/google.png",
-                         text: 'Continue with Google', onPressed: () {}, color: Colors.black,)),
-                const SizedBox(height: 16.0),
-                  // icon: Icon(Icons.apple),
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: CustomButton2(
-                        imageHeight: 50,
-                        imageWidth: 50,
-                        image: "assets/logo/apple.png",
-                        text: 'Continue with Apple', onPressed: (){}, color: Colors.white,)),
+                // Row(
+                //   children: [
+                //     Divider(),
+                //     // Text(
+                //     //     'Or',
+                //     //     style: AppTextStyles.kBody15SemiBoldTextStyle
+                //     // ),
+                //     Divider(),
+                //
+                //   ],
+                // ),
+                //
+                // Text(
+                //     'Or',
+                //     style: AppTextStyles.kBody15SemiBoldTextStyle,
+                //   textAlign: TextAlign.center,
+                // ),
+                //
+                // SizedBox(height: h15),
+                //   // icon: Icon(Icons.g_translate),
+                //    Container(
+                //      padding: EdgeInsets.all(h10),
+                //      decoration: BoxDecoration(
+                //        color: AppColors.white101,
+                //        borderRadius: BorderRadius.circular(15),
+                //      ),
+                //        child: CustomButton2(
+                //          imageHeight: 25,
+                //          imageWidth: 25,
+                //          image: "assets/logo/google.png",
+                //          text: 'Continue with Google', onPressed: () {}, color: Colors.black,)),
+                // const SizedBox(height: 16.0),
+                //   // icon: Icon(Icons.apple),
+                //   Container(
+                //       decoration: BoxDecoration(
+                //         color: Colors.blue,
+                //         borderRadius: BorderRadius.circular(15),
+                //       ),
+                //       child: CustomButton2(
+                //         imageHeight: 50,
+                //         imageWidth: 50,
+                //         image: "assets/logo/apple.png",
+                //         text: 'Continue with Apple', onPressed: (){}, color: Colors.white,)),
               ],
             ),
           ),

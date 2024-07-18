@@ -30,7 +30,7 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 1, vsync: this);
     super.initState();
   }
 
@@ -308,31 +308,31 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.lawyerBookDetailListData.value
-                            .data?.reviews?.length,
+                            .reviews?.length,
                         itemBuilder: (context, index) {
                           var review = controller
-                              .lawyerBookDetailListData.value.data?.reviews;
+                              .lawyerBookDetailListData.value.reviews?[index];
                           return Column(
                             children: [
                               clientReview(
-                                  userName: review?[index].userName,
-                                  date: review?[index].isCreated,
-                                  comment: review?[index].comment,
-                                  star: review![index].rating,
-                                  like: review[index].likeCount,
+                                  userName: review?.userName,
+                                  date: review?.isCreated,
+                                  comment: review?.comment,
+                                  star: double.tryParse(review?.rating.toString()??""),
+                                  like: review?.likeCount,
                                   likeTap: () {
                                     controller.postLike(
-                                        reviewID: review[index].id,
+                                        reviewID: review?.id,
                                         lawyerID: controller
                                             .lawyerBookDetailListData
                                             .value
                                             .data
                                             ?.id);
                                   },
-                                  dislike: review[index].dislikeCount,
+                                  dislike: review?.dislikeCount,
                                   dislikeTap: () {
                                     controller.postDislike(
-                                        reviewID: review[index].id,
+                                        reviewID: review?.id,
                                         lawyerID: controller
                                             .lawyerBookDetailListData
                                             .value

@@ -137,6 +137,30 @@ Widget constText12SemiBold({String? text, bool? imp}) {
   );
 }
 
+Widget constText20SemiBold({String? text, bool? imp}) {
+  return Container(
+    margin: EdgeInsets.only(top: h8, left: h5),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(
+            text ?? '',
+            style: AppTextStyles.kCaption12SemiBoldTextStyle
+                .copyWith(fontSize: h25),
+          ),
+        ),
+        Visibility(
+            visible: imp ?? false,
+            child: Text(
+              '*',
+              style: AppTextStyles.kCaption12SemiBoldTextStyle
+                  .copyWith(color: AppColors.error40),
+            ))
+      ],
+    ),
+  );
+}
+
 Widget servicesOffer({
   String? title,
   String? subtitle,

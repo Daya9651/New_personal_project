@@ -14,6 +14,8 @@ class ClientApiController extends GetxController {
 
   var searchLawyerListController = TextEditingController().obs;
 
+  // final ClientEditController clientEditController = Get.put(ClientEditController());
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -125,12 +127,11 @@ class ClientApiController extends GetxController {
   Future getClientProfile() async {
     try {
       dio.Response response = await ApiService.getData(profileUrl);
-
       var responseData = response.data;
       if (responseData != null && responseData['data'] != null) {
         var ClientProfile = ClientProfileModel.fromJson(responseData);
         clientProfile.value = ClientProfile;
-
+        // clientEditController.patchClientEditProfile();
         debugPrint("getClientProfile : $responseData");
         update();
       } else {

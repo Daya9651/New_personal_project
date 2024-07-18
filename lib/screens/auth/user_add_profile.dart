@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../common/widget/const_dropdown.dart';
 import '../../common/widget/const_text_field.dart';
+import '../../common/widget/custom_app_bar.dart';
 import '../../common/widget/custom_date_picker.dart';
 import '../../const/const_height.dart';
 import '../../style/color.dart';
@@ -18,9 +19,8 @@ class UserAddProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: constText15SemiBold(text: "Client Add Profile"),
+      appBar: CustomAppBar(
+        title: "Client Add Profile",
       ),
       body: SingleChildScrollView(
         child: Container(

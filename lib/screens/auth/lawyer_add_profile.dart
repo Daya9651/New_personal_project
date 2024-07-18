@@ -5,6 +5,7 @@ import 'package:likhit/screens/auth/controller/account_manage_controller.dart';
 
 import '../../common/widget/const_dropdown.dart';
 import '../../common/widget/const_text_field.dart';
+import '../../common/widget/custom_app_bar.dart';
 import '../../const/const_height.dart';
 import '../../helpers/literals.dart';
 import '../../style/color.dart';
@@ -19,10 +20,7 @@ class LawyerAddProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: constText15SemiBold(text: "Lawyer Add Profile"),
-      ),
+      appBar: CustomAppBar(title: "Lawyer Add Profile"),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: h25, right: h25),

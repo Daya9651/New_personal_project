@@ -87,7 +87,7 @@ String formattedDate(DateTime? selectedDate) {
 String formatTime(TimeOfDay timeOfDay) {
   final now = DateTime.now();
   final dateTime =
-      DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-  final formattedTime = DateFormat.jm().format(dateTime);
+  DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+  final formattedTime = DateFormat.Hm().format(dateTime); // 24-hour format
   return formattedTime;
 }

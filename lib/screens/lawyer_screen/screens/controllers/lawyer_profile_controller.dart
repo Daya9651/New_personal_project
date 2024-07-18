@@ -337,7 +337,7 @@ data: {
       dio.Response myTransactionResponse = await ApiService.deleteData(
           url:   lawyerServiceUrl,
           data: {
-            "fee_id":id,
+            "education_id":id,
 
 
 
@@ -449,7 +449,7 @@ data: {
       dio.Response myTransactionResponse = await ApiService.deleteData(
           url:   lawyerExperienceUrl,
           data: {
-            "fee_id":id,
+            "experience_id":id,
 
 
 

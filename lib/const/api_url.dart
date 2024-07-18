@@ -46,6 +46,7 @@ const String lawyerPhoneUrl = "$baseUrl/crud-lawyer-phone-number-api/";
 const String lawyerUpdateProfileUrl = "$baseUrl/update-profile-lawyer-api/";
 //payments
 const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
+const String razorAppointUrl = "$baseUrl/handle-appointment-payment-success-api/";
 
 
 // daya

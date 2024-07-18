@@ -4,12 +4,11 @@ import 'package:likhit/common/const_api.dart';
 import 'package:dio/dio.dart' as dio;
 import '../../../../const/api_url.dart';
 import '../../../auth/controller/account_manage_controller.dart';
-import '../../../client transactions/model/client_view_appointment.dart';
 import '../models/client_transaction_model.dart';
 
 class ClientTransactionController extends GetxController{
   var clientTransactionList = LawyerClientTransactionsModel().obs;
-  var clientViewHistory = UserPaymentHistory().obs;
+  // var clientViewHistory = UserPaymentHistory().obs;
   var searchTransactionController = TextEditingController().obs;
   final AccountManageController controller = Get.put(AccountManageController());
 
@@ -19,7 +18,7 @@ class ClientTransactionController extends GetxController{
     super.onInit();
     ApiService.init();
     getClientDirectTransactions();
-    getClientViewHistory();
+    // getClientViewHistory();
 
   }
   Future getClientDirectTransactions({String ?search})async {
@@ -41,24 +40,24 @@ class ClientTransactionController extends GetxController{
     }
   }
 
-  Future getClientViewHistory({String ?search})async {
-    try {
-      dio.Response clientTransactionResponse = await ApiService.getData(
-          invoiceClientDirectUrl,
-          queryParameters: {
-            'search': search,
-            'page': "1",
-          }
-      );
-      if(clientTransactionResponse.data['respnse_code']==200){
-
-        clientViewHistory.value = UserPaymentHistory.fromJson(
-            clientTransactionResponse.data);
-      }
-
-
-    } catch (e) {
-      debugPrint("getClientDirectHistory error : $e");
-    }
-  }
+  // Future getClientViewHistory({String ?search})async {
+  //   try {
+  //     dio.Response clientTransactionResponse = await ApiService.getData(
+  //         invoiceClientDirectUrl,
+  //         queryParameters: {
+  //           'search': search,
+  //           'page': "1",
+  //         }
+  //     );
+  //     if(clientTransactionResponse.data['respnse_code']==200){
+  //
+  //       clientViewHistory.value = UserPaymentHistory.fromJson(
+  //           clientTransactionResponse.data);
+  //     }
+  //
+  //
+  //   } catch (e) {
+  //     debugPrint("getClientDirectHistory error : $e");
+  //   }
+  // }
 }

@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_address_bindings.dart';
-import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_payment_request_controller.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_add_address.dart';
-import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_appointment_list.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_my_transaction.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_payment_request_page.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/payment_request_only_page.dart';
@@ -21,12 +19,19 @@ import '../screens/client_screen/client_book_appointment_time.dart';
 import '../screens/client_screen/client_lawyer_list.dart';
 import '../screens/lawyer_screen/screens/bindings/client_transaction_binding.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_appointment_bindings.dart';
+import '../screens/lawyer_screen/screens/bindings/lawyer_banks_bindings.dart';
+import '../screens/lawyer_screen/screens/bindings/lawyer_contact_info_binding.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_my_transaction_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_payment_request_binding.dart';
+import '../screens/lawyer_screen/screens/bindings/lawyer_profile_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/payment_request_only_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/plans_bindings.dart';
+import '../screens/lawyer_screen/screens/views/bank_details_page.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
 import '../screens/lawyer_screen/screens/views/lawyer_all_address.dart';
+import '../screens/lawyer_screen/screens/views/lawyer_profile.dart';
+import '../screens/lawyer_screen/screens/views/profile/views/contact_information_page.dart';
+import '../screens/lawyer_screen/screens/views/profile/views/lawyer_reviews_by_client_page.dart';
 import '../screens/payment/laywer Invoice/request_transaction_invoice.dart';
 import '../screens/signup/signUp.dart';
 import '../screens/bottombar/bottombar.dart';
@@ -105,7 +110,7 @@ class ApplicationPages{
 
     GetPage(
       name: bookAppointmentsPage,
-      page: () =>  const BookAppointmentsPage(),
+      page: () =>   BookAppointmentsPage(),
       binding:BookAppointmentBindings()
     ),
 
@@ -167,7 +172,8 @@ class ApplicationPages{
       name: lawyerProfilePage,
       page: () =>  const LawyerProfile(),
       binding: LawyerProfileBindings()
-    ), GetPage(
+    ),
+    GetPage(
       name: reviewPage,
       page: () =>  const LawyerReviewsByClientPage(),
       binding: LawyerProfileBindings()

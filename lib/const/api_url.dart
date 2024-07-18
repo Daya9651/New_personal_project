@@ -1,5 +1,5 @@
-// const String baseUrl = "http://192.168.1.71:6768"; //local
-const String baseUrl = "https://admin1.likhitde.com";
+const String baseUrl = "http://192.168.1.71:6768"; //local
+// const String baseUrl = "https://admin1.likhitde.com";
 //live
 
 const String loginEmailUrl = "$baseUrl/get-otp-api/";
@@ -62,9 +62,7 @@ const String dislikeUrl = "$baseUrl/review-dislike-api/";
 //todo clientBookAppointment
 const String clientBookAppointmentUrl = "$baseUrl/user-book-appointment-api/";
 const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
-// Client Transaction History
-const String  invoiceClientDirectUrl = "$baseUrl/user-payment-history-api/";
-const String  clientAppointmentHistoryUrl = "$baseUrl/user-appointment-payment-history-api/";
-
+const String clientDirectTransUrl = "$baseUrl/user-payment-history-api/";
+const String clientAppointTransUrl = "$baseUrl/user-appointment-payment-history-api/";
+const String clientRequestPayTransUrl = "$baseUrl/user-request-payment-history-api/";
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";
-

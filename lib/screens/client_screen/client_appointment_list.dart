@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:likhit/common/widget/const_shimmer_effects.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../common/widget/const_container.dart';
 import '../../common/widget/const_text_field.dart';
@@ -45,7 +47,7 @@ class ClientAppointmentList extends GetView<ClientApiController> {
       ),
       body: Obx(() {
         if (controller.clientAppointmentListData.value.data == null) {
-          return const Center(child: CircularProgressIndicator());
+          return Shimmer.fromColors(baseColor: baseColor, highlightColor: highLightColor, child: loadSke());
         }
 
         if (controller.clientAppointmentListData.value.data!.isEmpty) {

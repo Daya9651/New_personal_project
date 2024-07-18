@@ -56,7 +56,7 @@ class LawyerEducationPage extends GetView<LawyerProfileController> {
                         ],
                       ),
                       trailing: SizedBox(
-                        width: w70,
+                        width: w80,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

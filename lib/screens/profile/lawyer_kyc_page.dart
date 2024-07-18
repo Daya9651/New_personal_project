@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
-import 'package:likhit/screens/profile/controller/lawyer_profile_controller.dart';
+import 'package:likhit/common/widget/const_text_with_styles.dart';
+import 'package:likhit/screens/profile/controller/lawyer_profile_controller_inside.dart';
 import 'package:likhit/screens/profile/widget/profile_card.dart';
 
 import '../../const/const_height.dart';
@@ -67,7 +68,7 @@ class Identification extends StatelessWidget {
 class Verification extends StatelessWidget {
    Verification({super.key});
 
-  LawyerProfileController controller = Get.put(LawyerProfileController());
+   LawyerProfileControllerInside controller = Get.put(LawyerProfileControllerInside());
 
   @override
   Widget build(BuildContext context) {
@@ -78,14 +79,16 @@ class Verification extends StatelessWidget {
           child: Obx(() => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              constText15SemiBold(text: "Documentation Upload"),
+              // const10TextBold( "Documentation Upload"),
         
-              constText12SemiBold(text: "Adhar Card Number"),
+              const10TextBold( "Aadhaar Card Number"),
               ConstTextField(
+                maxLength: 10,
+                inputType: TextInputType.number,
                 controller: controller.aadharController.value,
-                hintText: "Adhar Card Number",
+                hintText: "Aadhaar Card Number",
               ),
-              constText12SemiBold(text: "Adhar Card Image"),
+              const10TextBold( "Aadhaar Card Image"),
               chooseFileContainer(onTap: ()async{
                 await controller.getAdharCardImage();
                 debugPrint(' imageFile1 ${controller.adharCardImage.toString()}');
@@ -93,12 +96,12 @@ class Verification extends StatelessWidget {
                 imageText: controller.adharCardImage.toString()
               ),
         
-              constText12SemiBold(text: "PAN Card"),
+              const10TextBold( "PAN Card"),
               ConstTextField(
                 controller: controller.panCardController.value,
                 hintText: "PAN Card Number",
               ),
-              constText12SemiBold(text: "PAN Image"),
+              const10TextBold( "PAN Image"),
               chooseFileContainer(onTap: ()async{
                 await controller.getPanCardImage();
                 debugPrint(' imageFile2 ${controller.image.toString()}');
@@ -106,12 +109,12 @@ class Verification extends StatelessWidget {
                   imageText: controller.panCardImage.toString()
               ),
         
-              constText12SemiBold(text: "Lawyer License"),
+              const10TextBold( "Lawyer License"),
               ConstTextField(
                 controller: controller.lawyerLicenseController.value,
                 hintText: "License Number",
               ),
-              constText12SemiBold(text: "License Image"),
+              const10TextBold( "License Image"),
               chooseFileContainer(onTap: ()async{
                 await controller.getLicenseImage();
                 debugPrint(' imageFile3 ${controller.image.toString()}');
@@ -125,7 +128,7 @@ class Verification extends StatelessWidget {
                 width: double.maxFinite,
                   child: MyCustomButton(onTap: (){
                     // controller.uploadLawyerDoc();
-                    controller.updateLawyerProfile();
+                    controller.uploadLawyerDoc();
                   },color: AppColors.info80,text: "Save",))),
               SizedBox(height: h25,),
             ],

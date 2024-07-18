@@ -1,5 +1,5 @@
-// const String baseUrl = "http://192.168.1.71:6768"; //local
-const String baseUrl = "https://admin1.likhitde.com";
+const String baseUrl = "http://192.168.1.71:6768"; //local
+// const String baseUrl = "https://admin1.likhitde.com";
 //live
 
 const String loginEmailUrl = "$baseUrl/get-otp-api/";
@@ -35,6 +35,15 @@ const String clientListUrl = "$baseUrl/list-of-client-api/";
 const String lawyerRequestPaymentUrl = "$baseUrl/lawyer-request-for-payment-api/";
 const String lawyerBuyPlantUrl = "$baseUrl/lawyer-buy-plan-api/";
 const String addressUrl = "$baseUrl/crud-delhivery-address-api/";
+const String reviewsUrl = "$baseUrl/reviews-list-for-lawyer-api/";
+const String reviewsLikeUrl = "$baseUrl/review-like-api/";
+const String reviewsDisLikeUrl = "$baseUrl/review-dislike-api/";
+const String lawyerServiceUrl = "$baseUrl/crud-lawyer-fee-api/";
+const String lawyerEducationUrl = "$baseUrl/crud-lawyer-education-api/";
+const String lawyerExperienceUrl = "$baseUrl/crud-lawyer-experience-api/";
+const String lawyerBankUrl = "$baseUrl/crud-lawyer-bank/";
+const String lawyerPhoneUrl = "$baseUrl/crud-lawyer-phone-number-api/";
+const String lawyerUpdateProfileUrl = "$baseUrl/update-profile-lawyer-api/";
 //payments
 const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
 

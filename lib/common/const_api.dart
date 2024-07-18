@@ -261,7 +261,20 @@ class ApiService {
     }
   }
 
-
+  static Future<Response> uploadPatchImages({
+    required String url,
+    required FormData formData,
+  }) async {
+    try {
+      final response = await _dio.patch(
+        url,
+        data: formData,
+      );
+      return response;
+    } catch (e) {
+      throw 'Failed to upload image: $e';
+    }
+  }
   // New PUT method
   static Future<Response> putData(
       {required String url, dynamic data, Options? options, bool publicToken = false}) async {

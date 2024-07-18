@@ -5,20 +5,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:likhit/const/api_urls.dart';
+import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_profile_controller.dart';
 import 'package:likhit/utils/const_toast.dart';
 
 import '../../../common/const_api.dart';
+import '../../drawer/models/profile_model.dart';
 import '../model/lawyer_profile_model.dart';
 
-class LawyerProfileController extends GetxController{
+class LawyerProfileControllerInside extends GetxController{
+  var updatedProfileData = ProfileModel().obs;
+  final LawyerProfileController profileController = Get.find();
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     ApiService.init();
-
+    getUpdatedProfile();
+    preFillData();
   }
+
+
+
+
 
   RxBool isLoading = false.obs;
 
@@ -34,6 +43,8 @@ class LawyerProfileController extends GetxController{
   var websiteURLController = TextEditingController().obs;
   var aboutController = TextEditingController().obs;
   var experienceController = TextEditingController().obs;
+  var dobController = TextEditingController().obs;
+  RxString gender = ''.obs;
 
   final Rx<File?> _image = Rx<File?>(null);
 
@@ -54,6 +65,11 @@ class LawyerProfileController extends GetxController{
   File? get adharCardImage => _adharCardImage.value;
   File? get panCardImage => _panCardImage.value;
   File? get licenseImage => _licenseImage.value;
+
+
+  var writtenLanguages = <String>[].obs;
+  var spokenLanguages = <String>[].obs;
+  var specialities = <String>[].obs;
 
   Future<void> getAdharCardImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -152,20 +168,36 @@ class LawyerProfileController extends GetxController{
   RxList<LawyerProfileModelData> lawyerProfileList = <LawyerProfileModelData>[].obs;
 
   Future <void> updateLawyerProfile() async{
-
+    isLoading(true);
 try{
-    dio.Response response = await ApiService.getData(
-       '$baseUrl$updateLawyerProfileUrl',
+    dio.Response response = await ApiService.patchData(
+     url:   '$baseUrl$updateLawyerProfileUrl',
+      data: {
+        "name": nameController.value.text,
+        "mobile": phoneController.value.text,
+        "dob": dobController.value.text,
+        "address": addressController.value.text,
+        "about": aboutController.value.text,
+        "office_address": "", // Assuming this is not used in your form
+        // "gender": gender.value,
+        "website_url": websiteURLController.value.text,
+        "experience": experienceController.value.text,
+        "specialties": specialities, // Assuming multiple specialties can be selected
+        "language_spoken": spokenLanguages,
+        "language_written": writtenLanguages,
+      }
     );
 
     debugPrint('uploadLawyerDocUrl ${response.statusCode}');
 
     if (response.data['response_code'] == 200) {
-      LawyerProfileModel lawyerProfile = LawyerProfileModel.fromJson(response.data['data']);
+      LawyerProfileModel lawyerProfile = LawyerProfileModel.fromJson(response.data);
       // Clear the existing list and add new data
-    
+      Get.back();
+      getUpdatedProfile();
+      profileController.getProfileData();
 
-      // ConstToast.to.showSuccess('Lawyer documents uploaded successfully');
+      ConstToast.to.showSuccess('Lawyer profile updated successfully');
       isLoading(false);
       toClr();
     } else {
@@ -179,8 +211,67 @@ try{
   }
 
   }
+  void preFillData() {
+    if (updatedProfileData.value != null) {
+      var profile = updatedProfileData.value!;
+      nameController.value.text = profile.data?.name ?? "";
+      phoneController.value.text = profile.data?.mobile ?? "";
+      dobController.value.text = profile.data?.dob ?? "";
+      addressController.value.text = profile.data?.address ?? "";
+      aboutController.value.text = profile.data?.about ?? "";
+      websiteURLController.value.text = profile.data?.websiteUrl ?? "";
+      experienceController.value.text = profile.data?.experience ?? "";
+      gender.value = profile.data?.gender ?? "";
+      specialities.assignAll(profile.data?.specialties ?? []);
+      writtenLanguages.assignAll(profile.data?.languageWritten ?? []);
+      spokenLanguages.assignAll(profile.data?.languageSpoken ?? []);
+    }
+  }
+  Future getUpdatedProfile()async {
+    isLoading(true);
+    try {
+      dio.Response myTransactionResponse = await ApiService.getData(
+        '$baseUrl$updateLawyerProfileUrl',
+
+      );
+      if(myTransactionResponse.data['response_code']==200){
+
+        updatedProfileData.value = ProfileModel.fromJson(
+            myTransactionResponse.data);
+        preFillData();
+        isLoading(false);
+      }else{
+        isLoading(false);
+      }
 
 
+    } catch (e) {
+      isLoading(false);
+      debugPrint("getProfileData error : $e");
+    }
+  }
+
+
+  void toggleWrittenLanguage(String language) {
+    if (writtenLanguages.contains(language)) {
+      writtenLanguages.remove(language);
+    } else {
+      writtenLanguages.add(language);
+    }
+  }
+  void toggleSpokenLanguage(String language) {
+    if (spokenLanguages.contains(language)) {
+      spokenLanguages.remove(language);
+    } else {
+      spokenLanguages.add(language);
+    }
+  } void toggleSpecialities(String speciality) {
+    if (specialities.contains(speciality)) {
+      specialities.remove(speciality);
+    } else {
+      specialities.add(speciality);
+    }
+  }
 
   //todo for Services offered Controller
   var titleController = TextEditingController().obs;

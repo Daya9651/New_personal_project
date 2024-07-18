@@ -45,7 +45,7 @@ class _SplashScreenLikhitState extends State<SplashScreenLikhit> {
           Get.offAllNamed(ApplicationPages.choosePage);
         }
         else{
-          Get.offAllNamed(ApplicationPages.myBottomBar);
+          Get.offAllNamed(ApplicationPages.myBottomBar, arguments: {'initialIndex': 0}, );
 
         }
 

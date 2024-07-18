@@ -76,73 +76,71 @@ class LawyerPlans extends GetView<LawyerPlansController> {
 
         return RefreshIndicator(
           onRefresh: controller.refreshData,
-          child: Expanded(
-            child: ListView.builder(
-              itemCount: selectedList.length,
-              itemBuilder: (context, index) {
-                var transaction = selectedList[index];
-                bool isSelected = controller.currentIndex.value == 0
-                    ? controller.isSelectedSubs(index)
-                    : controller.isSelectedNFc(index);
-            
-                return ConstantContainer(
-                  radiusBorder: w5,
-                  borderColor: isSelected ? Colors.blue : AppColors.white50,
-                  padding: w3,
-                  child: ListTile(
-                    onTap: () {
-                      if (controller.currentIndex.value == 0) {
-                        controller.selectedPlanId.value= transaction.id??0;
-                        controller.selectSubscription(index);
-                      } else {
-                        controller.selectedPlanId.value= transaction.id??0;
-                        controller.selectNFC(index);
-                      }
-                    },
-                    leading: CircleAvatar(
-                      child: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(transaction.typeImage ?? ""),
-                      ),
-                    ),
-                    title: const8TextBold("${transaction.type}"),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const6TextBoldUnderLine(
-                            "Price: ${transaction.price}",
-                            textColor: AppColors.white50),
-                        const8TextBold(
-                            "Payable Amount: ${transaction.discountPrice}",
-                            textColor: AppColors.success40),
-                      ],
-                    ),
-                    trailing:Obx(() {
-                      debugPrint("${controller.currentIndex.value}");
-                      bool isSelected = controller.currentIndex.value == 0
-                          ? controller.isSelectedSubs(index)
-                          : controller.isSelectedNFc(index);
+          child: ListView.builder(
+            itemCount: selectedList.length,
+            itemBuilder: (context, index) {
+              var transaction = selectedList[index];
+              bool isSelected = controller.currentIndex.value == 0
+                  ? controller.isSelectedSubs(index)
+                  : controller.isSelectedNFc(index);
 
-                      return IconButton(
-                        onPressed: () {
-                          if (controller.currentIndex.value == 0) {
-                            // controller.selectedPlanId.value= transaction.id??0;
-                            controller.selectSubscription(index);
-                          } else {
-                            controller.selectedPlanId.value= transaction.id??0;
-                            controller.selectNFC(index);
-                          }
-                        },
-                        icon: isSelected
-                            ? const Icon(Icons.check_circle_outline, color: Colors.blue)
-                            : const Icon(Icons.circle_outlined, color: Colors.redAccent),
-                      );
-                    }),
-
+              return ConstantContainer(
+                radiusBorder: w5,
+                borderColor: isSelected ? Colors.blue : AppColors.white50,
+                padding: w3,
+                child: ListTile(
+                  onTap: () {
+                    if (controller.currentIndex.value == 0) {
+                      controller.selectedPlanId.value= transaction.id??0;
+                      controller.selectSubscription(index);
+                    } else {
+                      controller.selectedPlanId.value= transaction.id??0;
+                      controller.selectNFC(index);
+                    }
+                  },
+                  leading: CircleAvatar(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: NetworkImage(transaction.typeImage ?? ""),
+                    ),
                   ),
-                );
-              },
-            ),
+                  title: const8TextBold("${transaction.type}"),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const6TextBoldUnderLine(
+                          "Price: ${transaction.price}",
+                          textColor: AppColors.white50),
+                      const8TextBold(
+                          "Payable Amount: ${transaction.discountPrice}",
+                          textColor: AppColors.success40),
+                    ],
+                  ),
+                  trailing:Obx(() {
+                    debugPrint("${controller.currentIndex.value}");
+                    bool isSelected = controller.currentIndex.value == 0
+                        ? controller.isSelectedSubs(index)
+                        : controller.isSelectedNFc(index);
+
+                    return IconButton(
+                      onPressed: () {
+                        if (controller.currentIndex.value == 0) {
+                          // controller.selectedPlanId.value= transaction.id??0;
+                          controller.selectSubscription(index);
+                        } else {
+                          controller.selectedPlanId.value= transaction.id??0;
+                          controller.selectNFC(index);
+                        }
+                      },
+                      icon: isSelected
+                          ? const Icon(Icons.check_circle_outline, color: Colors.blue)
+                          : const Icon(Icons.circle_outlined, color: Colors.redAccent),
+                    );
+                  }),
+
+                ),
+              );
+            },
           ),
         );
       }),

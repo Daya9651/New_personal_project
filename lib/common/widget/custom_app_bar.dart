@@ -7,12 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
   final Widget? leading;
+  final Widget? textWidget;
   final PreferredSizeWidget? bottom; // Add this property
 
   const CustomAppBar({
     super.key,
     this.title,
     this.actions,
+    this.textWidget,
     this.leading,
     this.bottom, // Initialize it in the constructor
   });
@@ -25,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       titleTextStyle: AppTextStyles.kCaption12SemiBoldTextStyle
           .copyWith(color: AppColors.white),
-      title: Text(title ?? ""),
+      title: textWidget??Text(title ?? ""),
       leading: leading,
       actions: actions,
       backgroundColor: AppColors.info80,

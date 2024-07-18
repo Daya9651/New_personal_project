@@ -26,15 +26,15 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
           padding: EdgeInsets.zero,
           children: <Widget>[
             _buildDrawerHeader(),
+            // _buildDrawerItem(
+            //   icon: Icons.home,
+            //   text: 'Profile',
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
             _buildDrawerItem(
-              icon: Icons.home,
-              text: 'Profile',
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            _buildDrawerItem(
-              icon: Icons.account_circle,
+              icon: Icons.meeting_room_sharp,
               text: 'Appointment List',
               onTap: () {
                 Get.toNamed(ApplicationPages.lawyerAppointmentList);
@@ -42,7 +42,7 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
               },
             ),
             _buildDrawerItem(
-              icon: Icons.account_circle,
+              icon: Icons.receipt_long,
               text: 'Client Transactions',
               onTap: () {
 
@@ -57,21 +57,21 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
 
                 ]),
              _buildDrawerItem(
-              icon: Icons.account_circle,
+              icon: Icons.paid,
               text: 'My Transaction',
               onTap: () {
                 Get.toNamed(ApplicationPages.lawyerMyTransaction);
               },
             ),
             _buildDrawerItem(
-              icon: Icons.account_circle,
+              icon: Icons.subscriptions_rounded,
               text: 'Plans',
               onTap: () {
                 Get.toNamed(ApplicationPages.plans);
               },
             ),
             _buildDrawerItem(
-              icon: Icons.account_circle,
+              icon: Icons.request_page,
               text: 'Payment Request',
               onTap: () {
                 Get.toNamed(ApplicationPages.paymentRequestPageOnly);
@@ -80,7 +80,7 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
 
             constDivider(),
             _buildDrawerItem(
-              icon: Icons.account_circle,
+              icon: Icons.contacts_outlined,
               text: 'Address',
               onTap: () {
                 // Get.to(LawyerAddAddress());
@@ -166,15 +166,30 @@ final LikhitDrawerController controller = Get.put(LikhitDrawerController());
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: w52,
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: w50,
-                  backgroundImage: NetworkImage(
-                      controller.profileData.value.data?.image??""
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: w52,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: w50,
+                      backgroundImage: NetworkImage(
+                          controller.profileData.value.data?.image??""
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                      bottom: h10,
+                      right: -w1,
+
+                      child: IconButton.filledTonal(
+
+
+
+                          onPressed: (){
+                            Get.toNamed(ApplicationPages.myBottomBar,  arguments: {'initialIndex': 3}, );
+                          }, icon: const Icon(Icons.edit_outlined,color: AppColors.info80,)))
+                ],
               ),
               SizedBox(height: 10.w),
               const10TextBold("${controller.profileData.value.data?.name.toString().toUpperCase()}"),

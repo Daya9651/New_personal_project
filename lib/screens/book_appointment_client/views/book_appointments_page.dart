@@ -23,6 +23,9 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> args = Get.arguments ?? {};
+    final int lawyerId = args['lawyerId'] ?? 0;
+    final int serviceId = args['serviceId'] ?? 0;
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
@@ -74,7 +77,16 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
                           .lawyerBookDetailListData.value.data?.fees?[index];
                       return InkWell(
                         onTap: () {
-                          Get.toNamed(ApplicationPages.clientBookAppointment);
+                          Get.toNamed(ApplicationPages.clientBookAppointment
+                              ,arguments: {
+                              "lawyerId":clientApiController.lawyerBookDetailListData.value.data?.id,
+                              "serviceId":servicesOfferData.id,
+                                "amount": (servicesOfferData.fee != null && servicesOfferData.fee!.isNotEmpty)
+                                    ? double.parse(servicesOfferData.fee!).toInt()
+                                    : 0,
+
+                              }
+                          );
                         },
                         child: ListTile(
                           title: const12TextBold(

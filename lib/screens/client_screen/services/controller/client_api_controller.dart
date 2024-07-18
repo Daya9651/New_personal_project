@@ -51,10 +51,10 @@ class ClientApiController extends GetxController {
     try {
       dio.Response clientTransactionResponse =
           await ApiService.getData(lawyerListUrl, queryParameters: {
-        'sort': '',
-        'speciality': '',
-        'language_spoken': '',
-        'location': '',
+        'sort': "",
+        'speciality': "",
+        'language_spoken': "",
+        'location': "",
         'search': search,
       });
       if (clientTransactionResponse.data['response_code'] == 200) {
@@ -82,7 +82,7 @@ class ClientApiController extends GetxController {
             LawyerBookAppointmentDetailModel.fromJson(responseData);
         lawyerBookDetailListData.value = lawyerBookAppointmentDetailModel;
 
-        debugPrint("lawyerBookDetailFetch : $responseData");
+        // debugPrint("lawyerBookDetailFetch : $responseData");
         update();
       } else {
         debugPrint("lawyerBookDetailFetch : Empty data or invalid structure");
@@ -110,7 +110,7 @@ class ClientApiController extends GetxController {
             ClientAppointmentModel.fromJson(responseData);
         clientAppointmentListData.value = ClientAppointmnetListData;
 
-        debugPrint("clientAppointmentDetailFetch : $responseData");
+        // debugPrint("clientAppointmentDetailFetch : $responseData");
         update();
       } else {
         debugPrint(

@@ -54,20 +54,20 @@ class ServiceOfferedPage extends GetView<LawyerProfileController> {
                     ],
                   ),
                   trailing: SizedBox(
-                    width: w70,
+                    width: w80,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton.filledTonal(onPressed: (){
 _addService(context,service: serviceList);
                         },
-                          icon: Icon(Icons.edit,color: AppColors.primary,),
+                          icon: const Icon(Icons.edit,color: AppColors.primary,),
                         ),
                         IconButton.filledTonal(onPressed: (){
                           controller.deleteServiceData(serviceList?.id??0);
 
                         },
-                          icon: Icon(Icons.delete,color: Colors.redAccent,),
+                          icon: const Icon(Icons.delete,color: Colors.redAccent,),
                         ),
                       ],
                     ),

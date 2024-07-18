@@ -42,3 +42,12 @@ Task on 17/07/2024
 14.Experience Delete Api  
 15.Experience Delete Api  
 16.Update Pic 
+
+Task on 18/07/2024 
+Client Side:
+1.Direct Payment Transaction ui And Api with Search
+2.Appointment Payment Transaction ui And Api with Search
+3.PaymentRequest Payment Transaction ui And Api with Search
+4.Book Appointment api
+5.Razor Pay On book appointment
+6.Payment success Api

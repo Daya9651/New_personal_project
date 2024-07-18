@@ -21,21 +21,18 @@ const String lawyerListUrl = "$baseUrl/list-lawyer-api/";
 //todo book appointment detail api
 const String lawyerBookAppointmentDetailsUrl = "$baseUrl/lawyer-details-api/";
 
+
 //lawyer
 const String lawyerPaymentUrl = "$baseUrl/lawyer-payment-recieve-api/";
-const String lawyerMyTransactionUrl =
-    "$baseUrl/buy-plan-transaction-history-api/";
+const String lawyerMyTransactionUrl = "$baseUrl/buy-plan-transaction-history-api/";
 const String viewLawyerAppointment = "$baseUrl/lawyer-view-appointment-api/";
-const String lawyerConfirmRejectAppointmentUrl =
-    "$baseUrl/lawyer-confirm-reject-appointment-api/";
-const String paymentLawyerRequestTransactionUrl =
-    "$baseUrl/lawyer-request-payment-history-api/";
+const String lawyerConfirmRejectAppointmentUrl = "$baseUrl/lawyer-confirm-reject-appointment-api/";
+const String paymentLawyerRequestTransactionUrl = "$baseUrl/lawyer-request-payment-history-api/";
 const String profileUrl = "$baseUrl/view-profile-api/";
 const String getNfcUrl = "$baseUrl/get-nfc-card-plans-view/";
 const String getSubPlanUrl = "$baseUrl/get-subscription-plans-view/";
 const String clientListUrl = "$baseUrl/list-of-client-api/";
-const String lawyerRequestPaymentUrl =
-    "$baseUrl/lawyer-request-for-payment-api/";
+const String lawyerRequestPaymentUrl = "$baseUrl/lawyer-request-for-payment-api/";
 const String lawyerBuyPlantUrl = "$baseUrl/lawyer-buy-plan-api/";
 const String addressUrl = "$baseUrl/crud-delhivery-address-api/";
 const String reviewsUrl = "$baseUrl/reviews-list-for-lawyer-api/";
@@ -49,12 +46,14 @@ const String lawyerPhoneUrl = "$baseUrl/crud-lawyer-phone-number-api/";
 const String lawyerUpdateProfileUrl = "$baseUrl/update-profile-lawyer-api/";
 //payments
 const String responseRazorUrl = "$baseUrl/handle-buy-plan-payment-success-api/";
+const String razorAppointUrl = "$baseUrl/handle-appointment-payment-success-api/";
+
 
 // daya
 const String invoiceUrl = "$baseUrl/payment-detail-api/";
-const String invoicePaymentRequestUrl =
-    "$baseUrl/lawyer-request-payment-history-api/";
-const String invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
+const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history-api/";
+const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
+
 
 //todo review apis
 const String clientReviewUrl = "$baseUrl/reviews-api/";
@@ -68,4 +67,7 @@ const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
 //todo clientProfileEdit
 const String clientEditProfileUrl = "$baseUrl/get-update-profile-client-api/";
 
+const String clientDirectTransUrl = "$baseUrl/user-payment-history-api/";
+const String clientAppointTransUrl = "$baseUrl/user-appointment-payment-history-api/";
+const String clientRequestPayTransUrl = "$baseUrl/user-request-payment-history-api/";
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";

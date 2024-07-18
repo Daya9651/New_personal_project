@@ -1,13 +1,19 @@
 class LawyerBookAppointmentDetailModel {
-  BookAppointmentLawyerData? data;
+  Data? data;
+  List<Reviews>? reviews;
   int? responseCode;
 
-  LawyerBookAppointmentDetailModel({this.data, this.responseCode});
+  LawyerBookAppointmentDetailModel(
+      {this.data, this.reviews, this.responseCode});
 
   LawyerBookAppointmentDetailModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null
-        ? BookAppointmentLawyerData.fromJson(json['data'])
-        : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    if (json['reviews'] != null) {
+      reviews = <Reviews>[];
+      json['reviews'].forEach((v) {
+        reviews!.add(Reviews.fromJson(v));
+      });
+    }
     responseCode = json['response_code'];
   }
 
@@ -16,16 +22,19 @@ class LawyerBookAppointmentDetailModel {
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
+    if (reviews != null) {
+      data['reviews'] = reviews!.map((v) => v.toJson()).toList();
+    }
     data['response_code'] = responseCode;
     return data;
   }
 }
 
-class BookAppointmentLawyerData {
+class Data {
   int? id;
   List<Experiences>? experiences;
   List<EducationCredentials>? educationCredentials;
-  List<String>? images;
+  // List<String>? images;
   List<OperatingHours>? operatingHours;
   List<Phone>? phone;
   List<Email>? email;
@@ -36,7 +45,6 @@ class BookAppointmentLawyerData {
   List<BarId>? barId;
   List<Preferredcourt>? preferredcourt;
   List<BarAssociation>? barAssociation;
-  List<Reviews>? reviews;
   String? lawyerid;
   String? nfcid;
   String? name;
@@ -63,49 +71,48 @@ class BookAppointmentLawyerData {
   int? store;
   int? user;
 
-  BookAppointmentLawyerData(
+  Data(
       {this.id,
-      this.experiences,
-      this.educationCredentials,
-      this.images,
-      this.operatingHours,
-      this.phone,
-      this.email,
-      this.officeLocation,
-      this.socialMedia,
-      this.fees,
-      this.bank,
-      this.barId,
-      this.preferredcourt,
-      this.barAssociation,
-      this.reviews,
-      this.lawyerid,
-      this.nfcid,
-      this.name,
-      this.address,
-      this.mobile,
-      this.dob,
-      this.about,
-      this.gender,
-      this.servicesOffered,
-      this.specialties,
-      this.experience,
-      this.image,
-      this.websiteUrl,
-      this.languageSpoken,
-      this.languageWritten,
-      this.country,
-      this.state,
-      this.city,
-      this.isActivate,
-      this.nfcActivate,
-      this.isCreated,
-      this.lastLogin,
-      this.approvalStatus,
-      this.store,
-      this.user});
+        this.experiences,
+        this.educationCredentials,
+        // this.images,
+        this.operatingHours,
+        this.phone,
+        this.email,
+        this.officeLocation,
+        this.socialMedia,
+        this.fees,
+        this.bank,
+        this.barId,
+        this.preferredcourt,
+        this.barAssociation,
+        this.lawyerid,
+        this.nfcid,
+        this.name,
+        this.address,
+        this.mobile,
+        this.dob,
+        this.about,
+        this.gender,
+        this.servicesOffered,
+        this.specialties,
+        this.experience,
+        this.image,
+        this.websiteUrl,
+        this.languageSpoken,
+        this.languageWritten,
+        this.country,
+        this.state,
+        this.city,
+        this.isActivate,
+        this.nfcActivate,
+        this.isCreated,
+        this.lastLogin,
+        this.approvalStatus,
+        this.store,
+        this.user});
 
-  BookAppointmentLawyerData.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['experiences'] != null) {
       experiences = <Experiences>[];
@@ -120,9 +127,9 @@ class BookAppointmentLawyerData {
       });
     }
     // if (json['images'] != null) {
-    //   images = [];
+    //   images = <String>[];
     //   json['images'].forEach((v) {
-    //     images!.add(new images.fromJson(v));
+    //     images!.add(String.fromJson(v));
     //   });
     // }
     if (json['operating_hours'] != null) {
@@ -185,12 +192,6 @@ class BookAppointmentLawyerData {
         barAssociation!.add(BarAssociation.fromJson(v));
       });
     }
-    if (json['reviews'] != null) {
-      reviews = <Reviews>[];
-      json['reviews'].forEach((v) {
-        reviews!.add(Reviews.fromJson(v));
-      });
-    }
     lawyerid = json['lawyerid'];
     nfcid = json['nfcid'];
     name = json['name'];
@@ -228,8 +229,8 @@ class BookAppointmentLawyerData {
       data['education_credentials'] =
           educationCredentials!.map((v) => v.toJson()).toList();
     }
-    // if (this.images != null) {
-    //   data['images'] = this.images!.map((v) => v.toJson()).toList();
+    // if (images != null) {
+    //   data['images'] = images!.map((v) => v.toJson()).toList();
     // }
     if (operatingHours != null) {
       data['operating_hours'] =
@@ -264,9 +265,6 @@ class BookAppointmentLawyerData {
     if (barAssociation != null) {
       data['bar_association'] =
           barAssociation!.map((v) => v.toJson()).toList();
-    }
-    if (reviews != null) {
-      data['reviews'] = reviews!.map((v) => v.toJson()).toList();
     }
     data['lawyerid'] = lawyerid;
     data['nfcid'] = nfcid;
@@ -362,13 +360,13 @@ class OperatingHours {
 
   OperatingHours(
       {this.id,
-      this.weekday,
-      this.open24,
-      this.close,
-      this.morningOpen,
-      this.morningClose,
-      this.eveningOpen,
-      this.eveningClose});
+        this.weekday,
+        this.open24,
+        this.close,
+        this.morningOpen,
+        this.morningClose,
+        this.eveningOpen,
+        this.eveningClose});
 
   OperatingHours.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -449,14 +447,14 @@ class OfficeLocation {
 
   OfficeLocation(
       {this.id,
-      this.street,
-      this.apartment,
-      this.country,
-      this.state,
-      this.city,
-      this.pincode,
-      this.latitude,
-      this.longitude});
+        this.street,
+        this.apartment,
+        this.country,
+        this.state,
+        this.city,
+        this.pincode,
+        this.latitude,
+        this.longitude});
 
   OfficeLocation.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -551,14 +549,14 @@ class Bank {
 
   Bank(
       {this.id,
-      this.accountHolderName,
-      this.bankName,
-      this.accountNumber,
-      this.ifscCode,
-      this.accountType,
-      this.micrCode,
-      this.upiId,
-      this.qrCode});
+        this.accountHolderName,
+        this.bankName,
+        this.accountNumber,
+        this.ifscCode,
+        this.accountType,
+        this.micrCode,
+        this.upiId,
+        this.qrCode});
 
   Bank.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -597,11 +595,11 @@ class BarId {
 
   BarId(
       {this.id,
-      this.state,
-      this.barId,
-      this.admissionDate,
-      this.isCreated,
-      this.isUpdated});
+        this.state,
+        this.barId,
+        this.admissionDate,
+        this.isCreated,
+        this.isUpdated});
 
   BarId.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -685,40 +683,52 @@ class BarAssociation {
 class Reviews {
   int? id;
   String? userName;
-  double? rating;
-  String? comment;
+  int? lawyer;
   String? isCreated;
+  int? rating;
+  String? comment;
   int? likeCount;
   int? dislikeCount;
+  String? image;
+  String? likeDislikeStatus;
 
   Reviews(
       {this.id,
-      this.userName,
-      this.rating,
-      this.comment,
-      this.isCreated,
-      this.likeCount,
-      this.dislikeCount});
+        this.userName,
+        this.lawyer,
+        this.isCreated,
+        this.rating,
+        this.comment,
+        this.likeCount,
+        this.dislikeCount,
+        this.image,
+        this.likeDislikeStatus});
 
   Reviews.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userName = json['user_name'];
+    lawyer = json['lawyer'];
+    isCreated = json['is_created'];
     rating = json['rating'];
     comment = json['comment'];
-    isCreated = json['is_created'];
     likeCount = json['like_count'];
     dislikeCount = json['dislike_count'];
+    image = json['image'];
+    likeDislikeStatus = json['like_dislike_status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['user_name'] = userName;
+    data['lawyer'] = lawyer;
+    data['is_created'] = isCreated;
     data['rating'] = rating;
     data['comment'] = comment;
-    data['is_created'] = isCreated;
     data['like_count'] = likeCount;
     data['dislike_count'] = dislikeCount;
+    data['image'] = image;
+    data['like_dislike_status'] = likeDislikeStatus;
     return data;
   }
 }

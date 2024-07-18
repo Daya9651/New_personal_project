@@ -74,7 +74,7 @@ class MyBottomBar extends GetView<BottomNavController> {
           ],
         ),
       )),
-      body:Obx(()=> controller.screen.elementAt(controller.selectedIndex.value)),
+      body:Obx(()=>controller.userType.value =="Lawyer"? controller.lawyerScreen.elementAt(controller.selectedIndex.value):controller.clientScreen.elementAt(controller.selectedIndex.value)),
     );
   }
 }

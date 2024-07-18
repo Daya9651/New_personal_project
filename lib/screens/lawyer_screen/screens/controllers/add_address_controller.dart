@@ -265,14 +265,14 @@ clrControllers(){
       // amount: int.parse(amountController.value.text),
         amount: amount
     );
-    String? orderID = await _razorpayService.waitForOrderID();
+    // String? orderID = await _razorpayService.waitForOrderID();
 
     // Now call razorPayResponse with the obtained order ID
-    await razorPayResponse(orderID);
+    // await razorPayResponse(orderID);
   }
   //razor pay success response
 
-  Future<void> razorPayResponse(String? orderId) async {
+  Future<void> razorPayResponse( orderId) async {
     if (orderId != null) {
       isLoading(true);
       try {

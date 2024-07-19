@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
-import 'package:likhit/screens/profile/widget/profile_card.dart';
 import 'package:likhit/style/color.dart';
-import 'package:likhit/utils/const_toast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../common/widget/custom_app_bar.dart';
@@ -10,14 +9,15 @@ import '../../const/const_height.dart';
 import '../../const/image_strings.dart';
 import '../../custom/botton.dart';
 import '../../service/loginApi.dart';
-import '../../style/text_style.dart';
-import '../splash/splash_screen.dart';
 
 class VerifyOtpPage extends StatefulWidget {
   final String email;
+
   // final String ?verifyByOtp;
 
-  const VerifyOtpPage({ required this.email, });
+  const VerifyOtpPage({
+    required this.email,
+  });
 
   @override
   _VerifyOtpPageState createState() => _VerifyOtpPageState();
@@ -26,14 +26,12 @@ class VerifyOtpPage extends StatefulWidget {
 class _VerifyOtpPageState extends State<VerifyOtpPage> {
   TextEditingController otpController = TextEditingController();
   final EmailService emailService = EmailService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar:
-      const CustomAppBar(
- title:  'OTP Verification'
-      ),
+      appBar: const CustomAppBar(title: 'OTP Verification'),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
@@ -41,16 +39,30 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(logo, height: 160, width: 160,),
-                 SizedBox(height: h30),
-                 const12Text(
-                   'Enter OTP sent to ${widget.email}',
-                 ),
-                SizedBox(height: h3,),
+                Image.asset(
+                  logo,
+                  height: 160,
+                  width: 160,
+                ),
+                SizedBox(height: h30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const12Text(
+                      'Enter OTP sent to ${widget.email}',
+                    ).marginOnly(
+                      bottom: h20,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: h3,
+                ),
                 PinCodeTextField(
-                  controller:otpController ,
+                  controller: otpController,
                   appContext: context,
-                  length: 6, // Length of the OTP. Change according to your requirement.
+                  length: 6,
+                  // Length of the OTP. Change according to your requirement.
                   onChanged: (value) {
                     // Handle OTP change if needed
                   },
@@ -64,9 +76,9 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                   ),
                   // controller: otpController,
                   keyboardType: TextInputType.number,
-                  onCompleted: (value){
-                    emailService.verifyByOtp(widget.email??"", otpController.text,context);
-
+                  onCompleted: (value) {
+                    emailService.verifyByOtp(
+                        widget.email ?? "", otpController.text, context);
                   },
                   // onCompleted: (value) {
                   //   // When user completes entering OTP
@@ -102,48 +114,57 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const12Text("Didn't Receive code?",),
-                    const SizedBox(width: 2,),
-                    TextButton(onPressed: () {
-
-                      emailService.sendOtp(widget.email, context);
-                    },
-                    child: const12TextBold("Resend", textColor: AppColors.warning40)),
+                    const12Text(
+                      "Didn't Receive code?",
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          emailService.sendOtp(widget.email, context);
+                        },
+                        child: const12TextBold("Resend",
+                            textColor: AppColors.warning40)),
                   ],
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  height: h40,
+                  height: h50,
+                  width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.indigo
-                  ),
+                      borderRadius: BorderRadius.circular(h10),
+                      color: Colors.indigo),
                   child: CustomButton(
                     color: Colors.white,
                     text: 'Continue',
                     onPressed: () {
-                      debugPrint("sending otp : ${widget.email} ,${otpController.text}");
-                      emailService.verifyByOtp(widget.email??"", otpController.text,context);
+                      debugPrint(
+                          "sending otp : ${widget.email} ,${otpController.text}");
+                      emailService.verifyByOtp(
+                          widget.email ?? "", otpController.text, context);
                       // Manual verification button if needed
-                    //   String enteredOTP = otpController.text.trim();
-                    //   // Perform OTP verification (replace with your actual logic)
-                    //   if (enteredOTP == otpController.text.length) {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const SplashScreen(), // Replace with your next page widget
-                    //       ),
-                    //     );
-                    //   } else if(enteredOTP == otpController.text.isEmpty) {
-                    // ConstToast.to.showError("Please enter the correct OTP.");
-                    //   } else {
-                    //     // Handle incorrect OTP scenario
-                    //     ConstToast.to.showError("Please enter the correct OTP.");
-                    //   }
+                      //   String enteredOTP = otpController.text.trim();
+                      //   // Perform OTP verification (replace with your actual logic)
+                      //   if (enteredOTP == otpController.text.length) {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => const SplashScreen(), // Replace with your next page widget
+                      //       ),
+                      //     );
+                      //   } else if(enteredOTP == otpController.text.isEmpty) {
+                      // ConstToast.to.showError("Please enter the correct OTP.");
+                      //   } else {
+                      //     // Handle incorrect OTP scenario
+                      //     ConstToast.to.showError("Please enter the correct OTP.");
+                      //   }
                     },
                   ),
                 ),
-                const SizedBox(height: 150,)
+                const SizedBox(
+                  height: 150,
+                )
               ],
             ),
           ),
@@ -152,7 +173,6 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
     );
   }
 }
-
 
 //
 // import 'package:flutter/material.dart';

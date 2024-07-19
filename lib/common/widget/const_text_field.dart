@@ -77,13 +77,15 @@ class ConstTextField extends StatelessWidget {
     this.initialValue,
     this.onSubmitted,
     this.height,
-    this.borderRadius, this.width, this.padding,
+    this.borderRadius,
+    this.width,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding??EdgeInsets.symmetric(vertical: w3, horizontal: w10),
+      padding: padding ?? EdgeInsets.symmetric(vertical: w3, horizontal: w10),
 
       // constraints: BoxConstraints(
       //   maxHeight: 50,
@@ -113,7 +115,7 @@ class ConstTextField extends StatelessWidget {
         // cursorHeight: cursorHeight??3.5.w,
         style: style ??
             AppTextStyles.kCaption12RegularTextStyle
-                .copyWith(color:enableBorderColor?? AppColors.white100),
+                .copyWith(color: enableBorderColor ?? AppColors.white100),
         decoration: InputDecoration(
           filled: filled,
           fillColor: fillColor,
@@ -123,6 +125,7 @@ class ConstTextField extends StatelessWidget {
           prefixIcon: prefixIcon,
           hintText: hintText,
           labelText: labelText,
+          labelStyle: TextStyle(color: AppColors.info80),
           hintStyle: hintStyle ??
               AppTextStyles.kSmall10RegularTextStyle
                   .copyWith(color: AppColors.white50),
@@ -131,20 +134,20 @@ class ConstTextField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.w)),
                   borderSide: BorderSide(
-                      color: enableBorderColor ?? AppColors.white80,
-                      width: 1),
+                      color: enableBorderColor ?? AppColors.white80, width: 1),
                 )
               : InputBorder.none,
           focusedBorder: borderNone == true
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.w)),
-                  borderSide:
-                       BorderSide(color:enableBorderColor ?? AppColors.info80, width: 1),
+                  borderSide: BorderSide(
+                      color: enableBorderColor ?? AppColors.info80, width: 1),
                 )
               : InputBorder.none,
           border: borderNone == true
-              ?  OutlineInputBorder(
-                  borderSide: BorderSide(color:enableBorderColor ?? AppColors.white80),
+              ? OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: enableBorderColor ?? AppColors.white80),
                   borderRadius: BorderRadius.all(
                     Radius.circular(w5),
                   ),

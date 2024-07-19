@@ -8,11 +8,11 @@ class ClientAppointmentTransModel {
 
   ClientAppointmentTransModel(
       {this.message,
-        this.respnseCode,
-        this.count,
-        this.currentPage,
-        this.totalPages,
-        this.data});
+      this.respnseCode,
+      this.count,
+      this.currentPage,
+      this.totalPages,
+      this.data});
 
   ClientAppointmentTransModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
@@ -56,15 +56,15 @@ class Data {
   String? status;
   String? paymentNo;
   String? paymentMethod;
-  int? paymentAmount;
+  double? paymentAmount;
   String? paymentStatus;
-  int? likhitDeCommission;
+  double? likhitDeCommission;
   double? gatewayCommission;
   double? splitCharge;
-  int? likhitDeNetAmt;
+  double? likhitDeNetAmt;
   double? likhitGstAmt;
   double? likhitTotalAmtGst;
-  int? getwayAmt;
+  double? getwayAmt;
   double? getwayGstAmt;
   double? getwayTotalAmtGst;
   double? splitAmt;
@@ -83,42 +83,42 @@ class Data {
 
   Data(
       {this.id,
-        this.lawyerName,
-        this.serviceFee,
-        this.serviceName,
-        this.date,
-        this.time,
-        this.name,
-        this.email,
-        this.content,
-        this.phoneNo,
-        this.status,
-        this.paymentNo,
-        this.paymentMethod,
-        this.paymentAmount,
-        this.paymentStatus,
-        this.likhitDeCommission,
-        this.gatewayCommission,
-        this.splitCharge,
-        this.likhitDeNetAmt,
-        this.likhitGstAmt,
-        this.likhitTotalAmtGst,
-        this.getwayAmt,
-        this.getwayGstAmt,
-        this.getwayTotalAmtGst,
-        this.splitAmt,
-        this.splitGstAmt,
-        this.splitTotalAmtGst,
-        this.totalDeductionFromLikhitDe,
-        this.likhitDeNetProfitAmt,
-        this.likhitDeNetProfitGstAmt,
-        this.likhitDeTotalNetProfitAmtGst,
-        this.payableAmountToLawyerAfterCharge,
-        this.createdDate,
-        this.updatedDate,
-        this.lawyer,
-        this.client,
-        this.service});
+      this.lawyerName,
+      this.serviceFee,
+      this.serviceName,
+      this.date,
+      this.time,
+      this.name,
+      this.email,
+      this.content,
+      this.phoneNo,
+      this.status,
+      this.paymentNo,
+      this.paymentMethod,
+      this.paymentAmount,
+      this.paymentStatus,
+      this.likhitDeCommission,
+      this.gatewayCommission,
+      this.splitCharge,
+      this.likhitDeNetAmt,
+      this.likhitGstAmt,
+      this.likhitTotalAmtGst,
+      this.getwayAmt,
+      this.getwayGstAmt,
+      this.getwayTotalAmtGst,
+      this.splitAmt,
+      this.splitGstAmt,
+      this.splitTotalAmtGst,
+      this.totalDeductionFromLikhitDe,
+      this.likhitDeNetProfitAmt,
+      this.likhitDeNetProfitGstAmt,
+      this.likhitDeTotalNetProfitAmtGst,
+      this.payableAmountToLawyerAfterCharge,
+      this.createdDate,
+      this.updatedDate,
+      this.lawyer,
+      this.client,
+      this.service});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -153,15 +153,13 @@ class Data {
     likhitDeNetProfitGstAmt = json['likhit_de_net_profit_gst_amt'];
     likhitDeTotalNetProfitAmtGst = json['likhit_de_total_net_profit_amt_gst'];
     payableAmountToLawyerAfterCharge =
-    json['payable_amount_to_lawyer_after_charge'];
+        json['payable_amount_to_lawyer_after_charge'];
     createdDate = json['created_date'];
     updatedDate = json['updated_date'];
-    lawyer =
-    json['lawyer'] != null ? Lawyer.fromJson(json['lawyer']) : null;
-    client =
-    json['client'] != null ? Client.fromJson(json['client']) : null;
+    lawyer = json['lawyer'] != null ? Lawyer.fromJson(json['lawyer']) : null;
+    client = json['client'] != null ? Client.fromJson(json['client']) : null;
     service =
-    json['service'] != null ? Service.fromJson(json['service']) : null;
+        json['service'] != null ? Service.fromJson(json['service']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -196,8 +194,7 @@ class Data {
     data['total_deduction_from_likhit_de'] = totalDeductionFromLikhitDe;
     data['likhit_de_net_profit_amt'] = likhitDeNetProfitAmt;
     data['likhit_de_net_profit_gst_amt'] = likhitDeNetProfitGstAmt;
-    data['likhit_de_total_net_profit_amt_gst'] =
-        likhitDeTotalNetProfitAmtGst;
+    data['likhit_de_total_net_profit_amt_gst'] = likhitDeTotalNetProfitAmtGst;
     data['payable_amount_to_lawyer_after_charge'] =
         payableAmountToLawyerAfterCharge;
     data['created_date'] = createdDate;
@@ -246,32 +243,32 @@ class Lawyer {
 
   Lawyer(
       {this.id,
-        this.lawyerid,
-        this.nfcid,
-        this.name,
-        this.address,
-        this.mobile,
-        this.email,
-        this.dob,
-        this.about,
-        this.gender,
-        this.servicesOffered,
-        this.specialties,
-        this.experience,
-        this.image,
-        this.websiteUrl,
-        this.languageSpoken,
-        this.languageWritten,
-        this.country,
-        this.state,
-        this.city,
-        this.isActivate,
-        this.nfcActivate,
-        this.isCreated,
-        this.lastLogin,
-        this.approvalStatus,
-        this.store,
-        this.user});
+      this.lawyerid,
+      this.nfcid,
+      this.name,
+      this.address,
+      this.mobile,
+      this.email,
+      this.dob,
+      this.about,
+      this.gender,
+      this.servicesOffered,
+      this.specialties,
+      this.experience,
+      this.image,
+      this.websiteUrl,
+      this.languageSpoken,
+      this.languageWritten,
+      this.country,
+      this.state,
+      this.city,
+      this.isActivate,
+      this.nfcActivate,
+      this.isCreated,
+      this.lastLogin,
+      this.approvalStatus,
+      this.store,
+      this.user});
 
   Lawyer.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -356,21 +353,21 @@ class Client {
 
   Client(
       {this.id,
-        this.createdDate,
-        this.updatedDate,
-        this.name,
-        this.address,
-        this.mobile,
-        this.email,
-        this.dob,
-        this.gender,
-        this.image,
-        this.country,
-        this.state,
-        this.city,
-        this.isActivate,
-        this.store,
-        this.user});
+      this.createdDate,
+      this.updatedDate,
+      this.name,
+      this.address,
+      this.mobile,
+      this.email,
+      this.dob,
+      this.gender,
+      this.image,
+      this.country,
+      this.state,
+      this.city,
+      this.isActivate,
+      this.store,
+      this.user});
 
   Client.fromJson(Map<String, dynamic> json) {
     id = json['id'];

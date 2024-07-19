@@ -132,7 +132,6 @@ class ClientApiController extends GetxController {
         var ClientProfile = ClientProfileModel.fromJson(responseData);
         clientProfile.value = ClientProfile;
         // clientEditController.patchClientEditProfile();
-        debugPrint("getClientProfile : $responseData");
         update();
       } else {
         debugPrint("getClientProfile : Empty data or invalid structure");

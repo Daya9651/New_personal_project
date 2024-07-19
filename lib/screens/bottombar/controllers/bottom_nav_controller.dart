@@ -39,9 +39,18 @@ class BottomNavController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    lawyerProfileController.getProfileData().then((_){
+
     getUserType();
-    lawyerProfileController.getProfileData();
+    });
   }
+    refreshData(){
+      lawyerProfileController.   getProfileData();
+
+        getUserType();
+
+    }
+
 
   void onItemTapped(int index) {
     selectedIndex.value = index;

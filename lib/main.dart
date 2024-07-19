@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       defaultGlobalState: Get.isLogEnable,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+
         // brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,

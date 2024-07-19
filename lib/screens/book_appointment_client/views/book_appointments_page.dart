@@ -66,42 +66,40 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
           IndexedStack(
             index: controller.currentIndex.value,
             children: [
-              Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: clientApiController
-                        .lawyerBookDetailListData.value.data?.fees?.length,
-                    itemBuilder: (context, index) {
-                      var servicesOfferData = clientApiController
-                          .lawyerBookDetailListData.value.data?.fees?[index];
-                      return InkWell(
-                        onTap: () {
-                          Get.toNamed(ApplicationPages.clientBookAppointment
-                              ,arguments: {
-                              "lawyerId":clientApiController.lawyerBookDetailListData.value.data?.id,
-                              "serviceId":servicesOfferData.id,
-                                "amount": (servicesOfferData.fee != null && servicesOfferData.fee!.isNotEmpty)
-                                    ? double.parse(servicesOfferData.fee!).toInt()
-                                    : 0,
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: clientApiController
+                      .lawyerBookDetailListData.value.data?.fees?.length,
+                  itemBuilder: (context, index) {
+                    var servicesOfferData = clientApiController
+                        .lawyerBookDetailListData.value.data?.fees?[index];
+                    return InkWell(
+                      onTap: () {
+                        Get.toNamed(ApplicationPages.clientBookAppointment
+                            ,arguments: {
+                            "lawyerId":clientApiController.lawyerBookDetailListData.value.data?.id,
+                            "serviceId":servicesOfferData.id,
+                              "amount": (servicesOfferData.fee != null && servicesOfferData.fee!.isNotEmpty)
+                                  ? double.parse(servicesOfferData.fee!).toInt()
+                                  : 0,
 
-                              }
-                          );
-                        },
-                        child: ListTile(
-                          title: const12TextBold(
-                              servicesOfferData!.title.toString(),
-                              textColor: AppColors.primary),
-                          subtitle: const8Text(
-                              servicesOfferData.subtitle.toString(),
-                              textColor: AppColors.white70),
-                          trailing: const10TextBold(
-                              servicesOfferData.fee.toString(),
-                              textColor: AppColors.success40),
-                        ),
-                      );
-                    }),
-              )
+                            }
+                        );
+                      },
+                      child: ListTile(
+                        title: const12TextBold(
+                            servicesOfferData!.title.toString(),
+                            textColor: AppColors.primary),
+                        subtitle: const8Text(
+                            servicesOfferData.subtitle.toString(),
+                            textColor: AppColors.white70),
+                        trailing: const10TextBold(
+                            servicesOfferData.fee.toString(),
+                            textColor: AppColors.success40),
+                      ),
+                    );
+                  })
             ],
           )
         ],

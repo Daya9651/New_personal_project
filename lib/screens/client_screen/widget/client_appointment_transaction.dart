@@ -13,6 +13,7 @@ import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
+import '../../payment/client invoice/client_appointment_invoice.dart';
 import '../services/controller/client_appointment_trans_controller.dart';
 import '../services/controller/client_side_client_transaction_controller.dart';
 
@@ -23,7 +24,7 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Client Transactions",
+        title: "Appointment Transactions",
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(h50),
             child: ConstTextField(
@@ -42,7 +43,8 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
         ),
       ),
       body:Obx(() {
-        if (controller.clientTransactionList.value.data == null ) {
+        if ( controller.isLoading.value) {
+        // if (controller.isLoading.value ) {
           return Center(
             child: Shimmer.fromColors(
               baseColor: baseColor,
@@ -52,35 +54,35 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
           );
         }
 
-        if (controller.clientTransactionList.value.data!.isEmpty) {
+        if (controller.clientTransactionList.value.data == null) {
           return const Center(child: Text("No transactions found."));
         }
 
         return ListView.builder(
-          itemCount: controller.clientTransactionList.value.data!.length,
+          itemCount: controller.clientTransactionList.value.data?.length,
           itemBuilder: (context, index) {
-            var transaction = controller.clientTransactionList.value.data![index];
+            var transaction = controller.clientTransactionList.value.data?[index];
 
             return ConstantContainer(
               radiusBorder: w5,
               borderColor: AppColors.white50,
               padding: w3,
-              color:transaction.status=="Unpaid" ?AppColors.white:AppColors.success10,
+              color:transaction?.status=="Unpaid" ?AppColors.white:AppColors.success10,
               child: ListTile(
-                title: const8TextBold(transaction.lawyerName.toString().toUpperCase()),
+                title: const8TextBold(transaction?.lawyerName.toString().toUpperCase()??""),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const6Text("${transaction.paymentMethod}\nId:${transaction.paymentNo}"),
-                    const6Text("Date & Time: ${formatDateTime(DateTime.parse(transaction.createdDate??""))}"),
-                    const6Text("Service Name: ${transaction.serviceName}"),
-                    const8TextBold("Amount: ₹${transaction.payableAmountToLawyerAfterCharge?.toStringAsFixed(2)}", textColor: AppColors.success40),
+                    const6Text("${transaction?.paymentMethod}\nId:${transaction?.paymentNo}"),
+                    const6Text("Date & Time: ${formatDateTime(DateTime.parse(transaction?.createdDate??""))}"),
+                    const6Text("Service Name: ${transaction?.serviceName}"),
+                    const8TextBold("Amount: ₹${transaction?.payableAmountToLawyerAfterCharge?.toStringAsFixed(2)}", textColor: AppColors.success40),
                   ],
                 ),
                 trailing: IconButton(
                   onPressed: () async {
 
-                    // await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    await Get.to(() =>  ClientAppointmentInvoice(paymentId: int.parse(transaction?.id.toString()??""),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),

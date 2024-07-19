@@ -11,6 +11,8 @@ import '../../const/image_strings.dart';
 import '../../service/loginApi.dart';
 
 class SignInPage extends StatelessWidget {
+
+
   SignInPage({super.key});
 
   final TextEditingController emailController = TextEditingController();
@@ -37,40 +39,32 @@ class SignInPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(
-                  height: 35,
-                ),
-                Image.asset(
-                  logo,
-                  height: 160,
-                  width: 160,
-                ),
-                const SizedBox(
-                  height: 70,
-                ),
-                Text(
+                const SizedBox(height: 35,),
+                Image.asset(logo, height: 160, width: 160,),
+                const SizedBox(height: 70,),
+                 Text(
                   'Log in or sign up to Likhit De',
                   style: AppTextStyles.kSmall10SemiBoldTextStyle,
                 ).marginOnly(bottom: h10, left: h15),
                 const SizedBox(height: 10.0),
-                // TextField(
-                //    decoration: InputDecoration(
-                //      labelText: 'Enter your mail',
-                //      border: OutlineInputBorder(
-                //        borderSide: BorderSide(color: Colors.grey),
-                //        borderRadius: BorderRadius.circular(20),
-                //      ),
-                //      focusedBorder: OutlineInputBorder(
-                //        borderSiget: ^4.6.6de: BorderSide(color: Colors.blue),
-                //        borderRadius: BorderRadius.circular(20),// Change focused border color here
-                //      ),
-                //    ),
-                //    keyboardType: TextInputType.emailAddress,
-                //  ),
-                //  ConstTextField(
-                //   hintText: 'Hello',
-                //
-                //  ),
+               // TextField(
+               //    decoration: InputDecoration(
+               //      labelText: 'Enter your mail',
+               //      border: OutlineInputBorder(
+               //        borderSide: BorderSide(color: Colors.grey),
+               //        borderRadius: BorderRadius.circular(20),
+               //      ),
+               //      focusedBorder: OutlineInputBorder(
+               //        borderSiget: ^4.6.6de: BorderSide(color: Colors.blue),
+               //        borderRadius: BorderRadius.circular(20),// Change focused border color here
+               //      ),
+               //    ),
+               //    keyboardType: TextInputType.emailAddress,
+               //  ),
+               //  ConstTextField(
+               //   hintText: 'Hello',
+               //
+               //  ),
 
                 ConstTextField(
                   inputType: TextInputType.emailAddress,
@@ -88,11 +82,15 @@ class SignInPage extends StatelessWidget {
                     return null;
                   },
                   onSubmitted: (value) {
-                    if (email.isNotEmpty) {
-                      emailService.sendOtp(email,
-                          context); // Assuming emailService is correctly implemented
-                      // Clear the email field
-                      // Navigate to the VerifyOtpPage after OTP is sent
+                    if (_formKey.currentState!.validate()) {
+                      String email = emailController.text.trim();
+                      if (email.isNotEmpty) {
+                        emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
+                        // Clear the email field
+                        // Navigate to the VerifyOtpPage after OTP is sent
+
+
+                      }
                     }
                   },
                 ),
@@ -114,17 +112,16 @@ class SignInPage extends StatelessWidget {
                             if (_formKey.currentState!.validate()) {
                               String email = emailController.text.trim();
                               if (email.isNotEmpty) {
-                                emailService.sendOtp(email,
-                                    context); // Assuming emailService is correctly implemented
+                                emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
                                 // Clear the email field
                                 // Navigate to the VerifyOtpPage after OTP is sent
-                              }
-                            }
-                          },
-                          color: AppColors.white)),
-                ),
+
+
+                          }
+                         }
+                        }, color: AppColors.white)),),
                 SizedBox(height: h20),
-                //todo changes
+                 //todo changes
                 // Row(
                 //   children: [
                 //     Divider(),

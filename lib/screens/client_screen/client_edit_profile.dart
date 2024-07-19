@@ -22,148 +22,149 @@ class ClientEditProfile extends GetView<ClientEditController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: "Edit Profile",
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.only(left: h25, right: h25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 0.3.sw,
-                child: Stack(
-                  children: [
-                    Obx(() => CircleAvatar(
-                          backgroundColor: AppColors.white60,
-                          radius: w55,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: w50,
-                            backgroundImage: controller.profilePic != null
-                                ? FileImage(controller.profilePic!)
-                                : NetworkImage(clientController
-                                        .clientProfile.value.data?.image ??
-                                    ""),
-                          ),
-                        )),
-                    Positioned(
-                      bottom: h10,
-                      right: -w1,
-                      child: IconButton.outlined(
-                        onPressed: () {
-                          // Show options to select image from gallery or camera
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return SafeArea(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    ListTile(
-                                      leading: const Icon(Icons.photo_library),
-                                      title: const Text('Choose from gallery'),
-                                      onTap: () async {
-                                        Navigator.pop(context);
-                                        controller.getPic(ImageSource.gallery);
-                                        await controller.postProfilePic();
-                                      },
+      body: Obx(() {
+        if (clientController.clientProfile.value.data == null) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(left: h25, right: h25),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 0.3.sw,
+                    child: Stack(
+                      children: [
+                        Obx(() {
+                          return CircleAvatar(
+                            backgroundColor: AppColors.white60,
+                            radius: w55,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: w50,
+                              backgroundImage: controller.profilePic != null
+                                  ? FileImage(controller.profilePic!)
+                                  : NetworkImage(clientController.clientProfile.value.data?.image ?? ""),
+                            ),
+                          );
+                        }),
+                        Positioned(
+                          bottom: h10,
+                          right: -w1,
+                          child: IconButton.outlined(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SafeArea(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        ListTile(
+                                          leading: const Icon(Icons.photo_library),
+                                          title: const Text('Choose from gallery'),
+                                          onTap: () async {
+                                            Navigator.pop(context);
+                                            controller.getPic(ImageSource.gallery);
+                                            await controller.postProfilePic();
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: const Icon(Icons.camera_alt),
+                                          title: const Text('Take a photo'),
+                                          onTap: () async {
+                                            Navigator.pop(context);
+                                            controller.getPic(ImageSource.camera);
+                                            await controller.postProfilePic();
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    ListTile(
-                                      leading: const Icon(Icons.camera_alt),
-                                      title: const Text('Take a photo'),
-                                      onTap: () async {
-                                        Navigator.pop(context);
-                                        controller.getPic(ImageSource.camera);
-                                        await controller.postProfilePic();
-                                      },
-                                    ),
-                                  ],
-                                ),
+                                  );
+                                },
                               );
                             },
-                          );
+                            icon: const Icon(Icons.edit_outlined, color: AppColors.info80),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  constText12SemiBold(text: "Name"),
+                  ConstTextField(
+                    controller: controller.nameController.value,
+                    hintText: "Enter Name",
+                  ),
+                  constText12SemiBold(text: "Phone"),
+                  ConstTextField(
+                    inputType: TextInputType.number,
+                    maxLength: 10,
+                    controller: controller.mobileController.value,
+                    hintText: "Enter Phone",
+                  ),
+                  constText12SemiBold(text: "dob"),
+                  ConstTextField(
+                    readyOnly: true,
+                    controller: controller.dobController.value,
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          selectDate(context).then((DateTime? selectedDate) {
+                            if (selectedDate != null) {
+                              String formatted = formattedDate(selectedDate);
+                              controller.dobController.value.text = formatted;
+                            }
+                          });
                         },
-                        icon: const Icon(Icons.edit_outlined,
-                            color: AppColors.info80),
-                      ),
+                        icon: const Icon(
+                          Icons.calendar_month,
+                          color: AppColors.info80,
+                        )),
+                  ),
+                  constText12SemiBold(text: "Address"),
+                  ConstTextField(
+                    inputType: TextInputType.streetAddress,
+                    controller: controller.addressController.value,
+                    maxLine: 2,
+                    hintText: "Enter Address",
+                  ),
+                  SizedBox(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        MyCustomButton(
+                          onTap: () {
+                            Get.back();
+                          },
+                          color: Colors.grey,
+                          text: "Cancel",
+                        ),
+                        const Text("  "),
+                        MyCustomButton(
+                          onTap: () {
+                            controller.patchClientEditProfile();
+                            clientController.getClientProfile();
+                            Get.back();
+                          },
+                          color: AppColors.info80,
+                          text: "Submit",
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: h25,
+                  ),
+                ],
               ),
-              constText12SemiBold(text: "Name"),
-              ConstTextField(
-                controller: controller.nameController.value,
-                hintText: "Enter Name",
-              ),
-              constText12SemiBold(text: "Phone"),
-              ConstTextField(
-                controller: controller.mobileController.value,
-                hintText: "Enter Phone",
-              ),
-              constText12SemiBold(text: "dob"),
-              ConstTextField(
-                controller: controller.dobController.value,
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      selectDate(context).then((DateTime? selectedDate) {
-                        if (selectedDate != null) {
-                          String formatted = formattedDate(selectedDate);
-                          controller.dobController.value.text = formatted;
-                        }
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.calendar_month,
-                      color: AppColors.info80,
-                    )),
-              ),
-              constText12SemiBold(text: "Gender"),
-              ConstantDropdown(
-                options: const ["Male", 'Female', 'Other'],
-                onChanged: (value) {
-                  controller.gender.value = value;
-                },
-              ),
-              constText12SemiBold(text: "Address"),
-              ConstTextField(
-                controller: controller.addressController.value,
-                maxLine: 2,
-                hintText: "Enter Address",
-              ),
-              SizedBox(
-                width: double.maxFinite,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    MyCustomButton(
-                      onTap: () {
-                        Get.back();
-                      },
-                      color: Colors.grey,
-                      text: "Cancel",
-                    ),
-                    const Text("  "),
-                    MyCustomButton(
-                      onTap: () {
-                        controller.patchClientEditProfile();
-                        clientController.getClientProfile();
-                        Get.back();
-                      },
-                      color: AppColors.info80,
-                      text: "Submit",
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: h25,
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        }
+      }),
     );
   }
 }

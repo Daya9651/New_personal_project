@@ -68,7 +68,7 @@ void setMobileType(int value, String title){
       );
       if(myTransactionResponse.data['response_code']==200){
         ConstToast.to.showSuccess("Contact Added");
-        // getAllContacts();
+        getAllContacts();
         Get.back();
         isLoading(false);
 

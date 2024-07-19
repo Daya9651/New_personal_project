@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/common/widget/const_shimmer_effects.dart';
+import 'package:likhit/const/const_width.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../common/widget/custom_app_bar.dart';
 import '../../../helpers/string_to_date_function.dart';
+import '../../../style/color.dart';
 
 class RequestTransactionInvoice extends StatefulWidget {
   final int paymentId;
@@ -24,15 +29,15 @@ class _InvoicingState extends State<RequestTransactionInvoice> {
   }
   @override
   Widget build(BuildContext context) {
-    debugPrint('Daya : ${controller.invoiceDirectList.value.data?[0].status}');
     return Scaffold(
         backgroundColor: Colors.white,
-        // appBar: const CustomAppBar(
-        //   title: 'Invoices',
-        // ),
-        body:Obx(()=> Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 70),
-          child: SingleChildScrollView(
+        appBar: const CustomAppBar(
+          title: 'Invoices',
+        ),
+        body:Obx(()=>controller.isLoading.value?Shimmer.fromColors(
+            baseColor: baseColor, highlightColor: highLightColor,
+            child: loadSke()):
+          SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -79,7 +84,7 @@ class _InvoicingState extends State<RequestTransactionInvoice> {
                       //     area: controller.invoicePaymentRequestList.value.data?.lawyer?.address ?? "", ,
                       //     // items: widget.items
                       // );
-                    }, child: Text('Download'))
+                    }, child: const Text('Download'))
 
                   ],
                 ),
@@ -91,18 +96,19 @@ class _InvoicingState extends State<RequestTransactionInvoice> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Bill To', style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                        Text('Customer : ${controller.invoicePaymentRequestList.value.data?.client?.name.toString()}'),
-                        Text('Area :${controller.invoicePaymentRequestList.value.data?.client?.address.toString()}'),
-                        Text('City :${controller.invoicePaymentRequestList.value.data?.client?.city.toString()}'),
-                        Text('State :${controller.invoicePaymentRequestList.value.data?.client?.state.toString()}'),
-                        Text('Country :${controller.invoicePaymentRequestList.value.data?.client?.country.toString()}'),
+                        Text('Customer : ${controller.invoicePaymentRequestList.value.data?.client?.name.toString()}',
+                           style: AppTextStyles.kSmall10RegularTextStyle,),
+                        Text('Area :${controller.invoicePaymentRequestList.value.data?.client?.address.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                        Text('City :${controller.invoicePaymentRequestList.value.data?.client?.city.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                        Text('State :${controller.invoicePaymentRequestList.value.data?.client?.state.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                        Text('Country :${controller.invoicePaymentRequestList.value.data?.client?.country.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Invoice Date :',style: AppTextStyles.kSmall10SemiBoldTextStyle,),
-                        Text('${formatDateTime(DateTime.parse(controller.invoicePaymentRequestList.value.data?.createdDate.toString()??""))}'),
+                        Text(formatDateTime(DateTime.parse(controller.invoicePaymentRequestList.value.data?.createdDate.toString()??""))),
                         Text('Reference# :', style: AppTextStyles.kSmall10SemiBoldTextStyle,),
                         Text('${controller.invoicePaymentRequestList.value.data?.paymentId.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,)
                       ],
@@ -151,9 +157,9 @@ class _InvoicingState extends State<RequestTransactionInvoice> {
                   ],
                 ),
               ],
-            ),
-          ),
-        ))
+            ).paddingAll(w7)
+          )
+        ),
     );
   }
 }

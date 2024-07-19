@@ -9,11 +9,25 @@ import 'package:likhit/screens/client_screen/services/controller/client_api_cont
 
 import '../../../../common/const_api.dart';
 import '../../../../utils/const_toast.dart';
+import '../model/client_profile_model.dart';
 
 class ClientEditController extends GetxController {
   // var profileData = ProfileModel().obs;
   final ClientApiController clientApiController =
       Get.put(ClientApiController());
+
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    clientApiController.getClientProfile().then((_) {
+      preFillData();
+    });
+  }
+
+
+
   final Rx<File?> _profilePic = Rx<File?>(null);
 
   File? get profilePic => _profilePic.value;
@@ -96,12 +110,13 @@ class ClientEditController extends GetxController {
         "address": addressController.value.text,
         // 'image': "",
       });
-      ClientApiController().getClientProfile();
       update();
       if (editProfile.data['response_code'] == 200) {
         ConstToast.to.showSuccess("${editProfile.data['message']}");
+        clientApiController.getClientProfile();
         isLoading(false);
       } else {
+        clientApiController.getClientProfile();
         isLoading(false);
         // ConstToast.to.showError("${editProfile.data['response_code']}");
       }
@@ -110,4 +125,19 @@ class ClientEditController extends GetxController {
       debugPrint("patchClientEditProfile error : $e");
     }
   }
+
+  var updatedProfileData = ClientProfileModel().obs;
+
+
+  void preFillData() {
+    var profile = clientApiController.clientProfile.value;
+    nameController.value.text = profile.data?.name ?? "";
+    mobileController.value.text = profile.data?.mobile ?? "";
+    dobController.value.text = profile.data?.dob ?? "";
+    emailController.value.text = profile.data?.email ?? "";
+    addressController.value.text = profile.data?.address ?? "";
+  }
+
+
+
 }

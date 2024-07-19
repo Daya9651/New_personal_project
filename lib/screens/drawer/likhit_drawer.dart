@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
-import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/auth/save_auth_data.dart';
-import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_add_address.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
-
 import '../../../const/const_width.dart';
 import '../../const/const_height.dart';
 import '../../routes/routes.dart';
 import '../../style/color.dart';
-import '../../style/gradients.dart';
 import '../../utils/utils.dart';
 import 'controller/likhit_drawer_controller.dart';
 class LikhitDrawer extends GetView<LikhitDrawerController> {
@@ -22,7 +18,10 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>  controller.bottomNavController.userType.value =="Lawyer"? Drawer(
+    return Obx(() {
+
+      controller.bottomNavController.getUserType();
+      return controller.bottomNavController.userType.value =="Lawyer"? Drawer(
       backgroundColor: Colors.transparent,
       child: Container(
         color: AppColors.white,
@@ -54,6 +53,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
                 subItems: [
                   _buildDrawerSubItem('Direct Transactions', onTap: () {
                     Get.toNamed(ApplicationPages.clientTransaction);
+                  }, icons: Icons.category),_buildDrawerSubItem('Appointment Transactions', onTap: () {
+                    Get.toNamed(ApplicationPages.lawyerAppointmentTransPage);
                   }, icons: Icons.category),
                   _buildDrawerSubItem('Payment Request', onTap: () {
                     Get.toNamed(ApplicationPages.lawyerPaymentRequest);
@@ -168,7 +169,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
           ],
         ),
       ),
-    )
+    );
+    }
 
 
     );

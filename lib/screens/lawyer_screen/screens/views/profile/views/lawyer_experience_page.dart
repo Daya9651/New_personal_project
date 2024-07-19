@@ -66,7 +66,7 @@ class LawyerExperiencePage extends GetView<LawyerProfileController> {
                               icon: const Icon(Icons.edit,color: AppColors.primary,),
                             ),
                             IconButton.filledTonal(onPressed: (){
-                              controller.deleteServiceData(serviceList?.id??0);
+                              controller.deleteLawyerExperience(serviceList?.id??0);
 
                             },
                               icon: const Icon(Icons.delete,color: Colors.redAccent,),

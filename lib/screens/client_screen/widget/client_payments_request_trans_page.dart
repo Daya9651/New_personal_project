@@ -22,7 +22,7 @@ class ClientPaymentsRequestTransPage extends GetView<ClientPaymentsTransControll
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Client Transactions",
+        title: "Payment Request",
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(h50),
             child: ConstTextField(
@@ -79,7 +79,7 @@ class ClientPaymentsRequestTransPage extends GetView<ClientPaymentsTransControll
                 trailing: IconButton(
                   onPressed: () async {
 
-                    // await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    // await Get.to(() =>  ClientPaymentInvoice(paymentId: int.parse(transaction.id.toString()),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),

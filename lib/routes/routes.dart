@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_address_bindings.dart';
+import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_app_trans_binding.dart';
 import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_banks_bindings.dart';
-import 'package:likhit/screens/lawyer_screen/screens/controllers/lawyer_payment_request_controller.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/bank_details_page.dart';
+import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_appoint_trans_page.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/profile/views/contact_information_page.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_add_address.dart';
 import 'package:likhit/screens/client_screen/client_profile.dart';
@@ -41,8 +42,6 @@ import '../screens/lawyer_screen/screens/bindings/payment_request_only_bindings.
 import '../screens/lawyer_screen/screens/bindings/plans_bindings.dart';
 import '../screens/lawyer_screen/screens/views/client_transaction.dart';
 import '../screens/lawyer_screen/screens/views/lawyer_all_address.dart';
-import '../screens/lawyer_screen/screens/views/lawyer_payment_request_page.dart';
-import '../screens/payment/laywer Invoice/request_transaction_invoice.dart';
 import '../screens/signup/signUp.dart';
 import '../screens/splash_screen_likhit.dart';
 
@@ -74,6 +73,7 @@ class ApplicationPages {
   static const reviewPage = '/reviewPage';
   static const lawyerBankPage = '/lawyerBankPage';
   static const lawyerContactInfoPage = '/lawyerContactInfoPage';
+  static const lawyerAppointmentTransPage = '/lawyerAppointmentTransPage';
 
   //todo client
   static const clientAppointmentList = '/clientAppointmentList';
@@ -112,7 +112,7 @@ class ApplicationPages {
     ) ,
     GetPage(
       name: myBottomBar,
-      page: () =>  MyBottomBar(),
+      page: () =>  const MyBottomBar(),
 
       bindings: [BottomNavBinding(),LawyerTransactionBinding(),LawyerProfileBindings()]
     ) ,
@@ -148,10 +148,14 @@ class ApplicationPages {
       name: lawyerMyTransaction,
       page: () =>  const LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
+    ),  GetPage(
+      name: lawyerAppointmentTransPage,
+      page: () =>  const LawyerAppointTransPage(),
+      binding: LawyerAppTransBinding()
     ),
     GetPage(
       name: lawyerAppointmentList,
-      page: () =>   LawyerAppointmentList(),
+      page: () =>   const LawyerAppointmentList(),
       binding: LawyerAppointmentBindings()
     ),
 
@@ -225,15 +229,15 @@ class ApplicationPages {
             binding: ClientBookAppointmentBinding()),
     GetPage(
             name: clientSideTransaction,
-            page: () => ClientSideClientTransaction(),
+            page: () => const ClientSideClientTransaction(),
             binding: ClientSideClientTransBindings()),
 
     GetPage(
             name: clientAppointTransaction,
-            page: () => ClientAppointmentTransaction(),
+            page: () => const ClientAppointmentTransaction(),
             binding: ClientAppointmentTransBinding()),   GetPage(
             name: clientPaymentRequestTransaction,
-            page: () => ClientPaymentsRequestTransPage(),
+            page: () => const ClientPaymentsRequestTransPage(),
             binding: ClientPaymentsTransBinding()),
 
         GetPage(

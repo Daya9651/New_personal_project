@@ -3,21 +3,23 @@ import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/style/color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../common/widget/const_shimmer_effects.dart';
 import '../../common/widget/custom_app_bar.dart';
 import '../../const/const_height.dart';
 import '../../const/image_strings.dart';
 import '../../custom/botton.dart';
 import '../../service/loginApi.dart';
+import '../../style/text_style.dart';
+import '../splash/splash_screen.dart';
 
 class VerifyOtpPage extends StatefulWidget {
   final String email;
 
   // final String ?verifyByOtp;
 
-  const VerifyOtpPage({
-    required this.email,
-  });
+  const VerifyOtpPage({ required this.email, });
 
   @override
   _VerifyOtpPageState createState() => _VerifyOtpPageState();
@@ -26,43 +28,40 @@ class VerifyOtpPage extends StatefulWidget {
 class _VerifyOtpPageState extends State<VerifyOtpPage> {
   TextEditingController otpController = TextEditingController();
   final EmailService emailService = EmailService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const CustomAppBar(title: 'OTP Verification'),
-      body: Center(
+      appBar:
+      const CustomAppBar(
+ title:  'OTP Verification'
+      ),
+      body:Obx(()=>emailService.isLoading.value?Shimmer.fromColors(
+        baseColor: baseColor,
+        highlightColor: highLightColor,
+        child: loadSke(),
+      ) :Center(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  logo,
-                  height: 160,
-                  width: 160,
-                ),
-                SizedBox(height: h30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const12Text(
-                      'Enter OTP sent to ${widget.email}',
-                    ).marginOnly(
-                      bottom: h20,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: h3,
-                ),
+                Image.asset(logo, height: 160, width: 160,),
+                 SizedBox(height: h30),
+                 Wrap(
+                   // crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     const12Text(
+                       'Enter OTP sent to ${widget.email}',
+                     ).marginOnly(bottom: h10),
+                   ],
+                 ),
+                SizedBox(height: h3,),
                 PinCodeTextField(
-                  controller: otpController,
+                  controller:otpController ,
                   appContext: context,
-                  length: 6,
-                  // Length of the OTP. Change according to your requirement.
+                  length: 6, // Length of the OTP. Change according to your requirement.
                   onChanged: (value) {
                     // Handle OTP change if needed
                   },
@@ -76,9 +75,9 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                   ),
                   // controller: otpController,
                   keyboardType: TextInputType.number,
-                  onCompleted: (value) {
-                    emailService.verifyByOtp(
-                        widget.email ?? "", otpController.text, context);
+                  onCompleted: (value){
+                    emailService.verifyByOtp(widget.email??"", otpController.text,context);
+
                   },
                   // onCompleted: (value) {
                   //   // When user completes entering OTP
@@ -114,18 +113,13 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const12Text(
-                      "Didn't Receive code?",
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          emailService.sendOtp(widget.email, context);
-                        },
-                        child: const12TextBold("Resend",
-                            textColor: AppColors.warning40)),
+                    const12Text("Didn't Receive code?",),
+                    const SizedBox(width: 2,),
+                    TextButton(onPressed: () {
+
+                      emailService.sendOtp(widget.email, context);
+                    },
+                    child: const12TextBold("Resend", textColor: AppColors.warning40)),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -162,17 +156,16 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 150,
-                )
+                const SizedBox(height: 150,)
               ],
             ),
           ),
         ),
-      ),
+      )),
     );
   }
 }
+
 
 //
 // import 'package:flutter/material.dart';

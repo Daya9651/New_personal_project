@@ -128,7 +128,12 @@ class LawyerAddAddress extends GetView<AddAddressController> {
                   const Text("  "),
                   MyCustomButton(
                     onTap: () {
-                      controller.addAddress();
+                      controller.addAddress().then((_){
+                        Future.delayed(const Duration(milliseconds: 2), () {
+                          Get.back();
+                        });
+                        controller.getAddressList();
+                      });
                     },
                     color: AppColors.info80,
                     text: "Save",

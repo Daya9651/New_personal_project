@@ -39,6 +39,7 @@ class ClientAppointmentTransController extends GetxController{
         clientTransactionList.value = ClientAppointmentTransModel.fromJson(
             clientTransactionResponse.data);
       }else{
+        debugPrint("client appoint trans list : ${clientTransactionResponse.data['message']}");
         isLoading(false);
       }
 

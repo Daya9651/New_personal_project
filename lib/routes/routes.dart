@@ -75,7 +75,7 @@ class ApplicationPages {
   static const lawyerContactInfoPage = '/lawyerContactInfoPage';
   static const lawyerAppointmentTransPage = '/lawyerAppointmentTransPage';
 
-  //todo client
+  //todo ient
   static const clientAppointmentList = '/clientAppointmentList';
   static const clientProfile = '/clientProfile';
   static const clientBookAppointment = '/clientBookAppointment';
@@ -148,7 +148,8 @@ class ApplicationPages {
       name: lawyerMyTransaction,
       page: () =>  const LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
-    ),  GetPage(
+    ),
+    GetPage(
       name: lawyerAppointmentTransPage,
       page: () =>  const LawyerAppointTransPage(),
       binding: LawyerAppTransBinding()

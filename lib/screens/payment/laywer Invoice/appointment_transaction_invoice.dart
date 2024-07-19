@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/const/const_width.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../common/widget/const_shimmer_effects.dart';
+import '../../../helpers/string_to_date_function.dart';
+import '../../../style/color.dart';
+import '../controller/lawyer_appointmnet_trs_controller.dart';
 
 class AppointmentTransactionInvoice extends StatefulWidget {
-  const AppointmentTransactionInvoice({super.key});
+  final int? paymentId;
+  const AppointmentTransactionInvoice({super.key, this.paymentId, });
+
+
 
   @override
   State<AppointmentTransactionInvoice> createState() => _InvoicingState();
 }
 
 class _InvoicingState extends State<AppointmentTransactionInvoice> {
-  PaymentController controller = Get.put(PaymentController());
+  LawyerAppointmentTrsController controller = Get.put(LawyerAppointmentTrsController());
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getAppointmentTransaction(widget.paymentId??0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +39,9 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
         appBar: const CustomAppBar(
           title: 'Invoices',
         ),
-        body:Obx(()=> Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
+        body:Obx(()=>controller.isLoading.value?Shimmer.fromColors(
+            baseColor: baseColor, highlightColor: highLightColor,
+            child: loadSke()): SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,7 +58,7 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text('Payment Invoice', style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                        Text('${controller.invoiceList.value.data?.paymentNo}')
+                        Text('${controller.appointmentTransactionInvoiceList.value.data?.paymentNo}')
                       ],
                     ).marginOnly(top: 60),
                   ],
@@ -52,13 +69,13 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Lawyer Name : ${controller.invoiceList.value.data?.lawyer?.name.toString()}'),
-                        Text('City : ${controller.invoiceList.value.data?.lawyer?.city.toString()}'),
-                        Text('State : ${controller.invoiceList.value.data?.lawyer?.state.toString()}'),
-                        Text('Country : ${controller.invoiceList.value.data?.lawyer?.country.toString()}'),
+                        Text('Lawyer Name : ${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.name.toString()}'),
+                        Text('City : ${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.city.toString()}'),
+                        Text('State : ${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.state.toString()}'),
+                        Text('Country : ${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.country.toString()}'),
                         const Text('Currency : INR'),
-                        Text('Mob No : ${controller.invoiceList.value.data?.lawyer?.mobile.toString()}'),
-                        Text('Area : ${controller.invoiceList.value.data?.lawyer?.address.toString()}'),
+                        Text('Mob No : ${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.mobile.toString()}'),
+                        Text('Area : ${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.address.toString()}'),
                       ],
                     ),
 
@@ -72,21 +89,26 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Bill To', style: AppTextStyles.kBody15SemiBoldTextStyle,),
-                        Text('Customer : ${controller.invoiceList.value.data?.client?.name.toString()}'),
-                        // Text('Mobile :${controller.invoiceList.value.data?.client?.mobile.toString()}'),
-                        Text('Area :${controller.invoiceList.value.data?.client?.address.toString()}'),
-                        Text('City :${controller.invoiceList.value.data?.client?.city.toString()}'),
-                        Text('State :${controller.invoiceList.value.data?.client?.state.toString()}'),
-                        Text('Country :${controller.invoiceList.value.data?.client?.country.toString()}'),
+                        Text('Customer : ${controller.appointmentTransactionInvoiceList.value.data?.client?.name.toString()}'),
+                        // Text('Mobile :${controller.appointmentTransactionInvoiceList.value.data?.client?.mobile.toString()}'),
+                        Text('Area :${controller.appointmentTransactionInvoiceList.value.data?.client?.address.toString()}'),
+                        Text('City :${controller.appointmentTransactionInvoiceList.value.data?.client?.city.toString()}'),
+                        Text('State :${controller.appointmentTransactionInvoiceList.value.data?.client?.state.toString()}'),
+                        Text('Country :${controller.appointmentTransactionInvoiceList.value.data?.client?.country.toString()}'),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                          Text('Invoice Date :',style: AppTextStyles.kSmall10SemiBoldTextStyle,),
-                         Text('${controller.invoiceList.value.data?.client?.createdDate.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                        Text(formatDateTime(DateTime.parse(
+                            controller.appointmentTransactionInvoiceList.value.data?.client!.createdDate
+                                .toString() ??
+                                ""))),
+
+                        // Text(DateFormat.yMMMMd().format(controller.appointmentTransactionInvoiceList.value.data?.client?.createdDate as DateTime ), style: AppTextStyles.kSmall10RegularTextStyle,),
                          Text('Reference# :', style: AppTextStyles.kSmall10SemiBoldTextStyle,),
-                         Text('${controller.invoiceList.value.data?.paymentNo.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,)
+                         Text('${controller.appointmentTransactionInvoiceList.value.data?.paymentNo.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,)
                       ],
                     )
                   ],
@@ -105,10 +127,10 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('${controller.invoiceList.value.data?.lawyer?.servicesOffered.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
-                    Text('${controller.invoiceList.value.data?.paymentMethod.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
-                    Text('${controller.invoiceList.value.data?.status.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
-                    Text('${controller.invoiceList.value.data?.paymentAmount.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                    Text('${controller.appointmentTransactionInvoiceList.value.data?.lawyer?.servicesOffered.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                    Text('${controller.appointmentTransactionInvoiceList.value.data?.paymentMethod.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                    Text('${controller.appointmentTransactionInvoiceList.value.data?.status.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
+                    Text('${controller.appointmentTransactionInvoiceList.value.data?.paymentAmount.toString()}', style: AppTextStyles.kSmall10RegularTextStyle,),
                   ],
                 ),
                 const Divider(),
@@ -119,12 +141,12 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Total Amount', style: AppTextStyles.kSmall10SemiBoldTextStyle,),
-                        Text('${controller.invoiceList.value.data?.paymentAmount.toString()}', style: AppTextStyles.kSmall8SemiBoldTextStyle,),
+                        Text('${controller.appointmentTransactionInvoiceList.value.data?.paymentAmount.toString()}', style: AppTextStyles.kSmall8SemiBoldTextStyle,),
                       ],
                     ),
                     const Divider(color: Colors.black,),
                   ],
-                ).marginOnly(left: 150),
+                ).paddingAll(w8),
                 const SizedBox(height: 25,),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -137,7 +159,7 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
               ],
             ),
           ),
-        ))
+        )
     );
   }
 }

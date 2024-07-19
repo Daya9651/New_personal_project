@@ -56,10 +56,11 @@ const String razorAppointUrl =
 
 // daya
 const String invoiceUrl = "$baseUrl/payment-detail-api/";
-const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history-api/";
-const String invoicePaymentRequestUrl10 = "$baseUrl/buy-plan-transaction-history-api/";
 const String invoicePaymentRequestUrl =
     "$baseUrl/lawyer-request-payment-history-api/";
+const String invoicePaymentRequestUrl10 =
+    "$baseUrl/buy-plan-transaction-history-api/";
+// const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history-api/";
 // const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
 const String invoiceDirectUrl = "$baseUrl/payment-detail-api/";
 const String invoiceAppointmentTransUrl =

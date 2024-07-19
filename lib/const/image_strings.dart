@@ -6,6 +6,7 @@ const String errorHandleImage =
     'https://img.freepik.com/premium-photo/graphic-designer-digital-avatar-generative-ai_934475-9292.jpg';
 
 const String logo = '$logoString/likhitlogo.png';
+const String underReview = '$logoString/MtWt96stVs.json';
 
 const String rS = '₹';
 

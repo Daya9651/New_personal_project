@@ -85,8 +85,8 @@ class PayLawyer extends StatelessWidget {
                         onChanged: (value) {  },)),
                   const SizedBox(height: 50,),
                   InkWell(onTap: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const MyTransactionsInvoice()),);
+                    // Navigator.push(context,
+                    //   MaterialPageRoute(builder: (context) => const MyTransactionsInvoice()),);
                   },
                     child: Container(height: 45, width: 370,
                         decoration: BoxDecoration(

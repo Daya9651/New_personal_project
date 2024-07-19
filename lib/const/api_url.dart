@@ -56,11 +56,12 @@ const String razorAppointUrl =
 
 // daya
 const String invoiceUrl = "$baseUrl/payment-detail-api/";
-const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history-api/";
+const String invoicePaymentRequestUrl =
+    "$baseUrl/lawyer-request-payment-history-api/";
 // const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
-const String  invoiceDirectUrl = "$baseUrl/payment-detail-api/";
-const String  invoiceAppointmentTransUrl = "$baseUrl/user-appointment-payment-history-api/";
-
+const String invoiceDirectUrl = "$baseUrl/payment-detail-api/";
+const String invoiceAppointmentTransUrl =
+    "$baseUrl/user-appointment-payment-history-api/";
 
 //todo review apis
 const String clientReviewUrl = "$baseUrl/reviews-api/";
@@ -75,7 +76,9 @@ const String clientAppointmentUrl = "$baseUrl/client-view-appointment-api/";
 const String clientEditProfileUrl = "$baseUrl/get-update-profile-client-api/";
 
 const String clientDirectTransUrl = "$baseUrl/user-payment-history-api/";
-const String clientAppointTransUrl = "$baseUrl/user-appointment-payment-history-api/";
-const String clientRequestPayTransUrl = "$baseUrl/user-request-payment-history-api/";
+const String clientAppointTransUrl =
+    "$baseUrl/user-appointment-payment-history-api/";
+const String clientRequestPayTransUrl =
+    "$baseUrl/user-request-payment-history-api/";
 // const String clientPaymentRequestPayTransUrl = "$baseUrl/user-request-payment-history-api/";
 const String publicToken = "Token 52fca82c967fc97df119f49faab7b9179e73f229";

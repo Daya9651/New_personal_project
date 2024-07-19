@@ -40,6 +40,7 @@ class LawyerAddProfile extends StatelessWidget {
               constText12SemiBold(text: "Phone", imp: true),
               ConstTextField(
                 controller: controller.phoneController.value,
+                maxLength: 10,
                 hintText: "Enter Your Phone",
                 inputType: TextInputType.number,
               ),

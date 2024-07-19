@@ -25,15 +25,22 @@ class PendingReviewPage extends StatelessWidget {
               "Your lawyer profile is under review and will be evaluated as promptly as possible",
               style: AppTextStyles.kCaption12SemiBoldTextStyle,
             ),
-            CustomButton2(
-                imageHeight: h20,
-                imageWidth: h20,
-                image: logo,
-                text: "Login",
+            Container(
+              margin: EdgeInsets.all(h20),
+              height: h50,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(h10),
+                  color: Colors.indigo),
+              child: CustomButton(
+                color: Colors.white,
+                text: 'Login',
                 onPressed: () async {
                   await UserDataService.removeUser();
                   Get.offAllNamed(ApplicationPages.signUpPage);
-                })
+                },
+              ),
+            ),
           ],
         ),
       ),

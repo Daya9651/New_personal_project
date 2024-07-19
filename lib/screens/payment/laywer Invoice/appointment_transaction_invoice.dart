@@ -17,7 +17,6 @@ class _InvoicingState extends State<AppointmentTransactionInvoice> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('Daya : ${controller.invoiceDirectList.value.data?[0].status}');
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: const CustomAppBar(

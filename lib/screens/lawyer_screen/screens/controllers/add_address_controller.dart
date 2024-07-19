@@ -182,7 +182,7 @@ RxInt selectedAddressId = 0.obs;
 
 
 
-  Future addAddress({String ?search})async {
+  Future addAddress()async {
     isLoading(true);
     try {
       dio.Response addressResponse = await ApiService.postData(
@@ -202,11 +202,12 @@ RxInt selectedAddressId = 0.obs;
       if(addressResponse.data['response_code']==200){
         isLoading(false);
       ConstToast.to.showSuccess("${addressResponse.data['message']}");
+        getAddressList();
       clrControllers();
       }else{
         isLoading(false);
       ConstToast.to.showError("${addressResponse.data['message']}");
-
+        getAddressList();
       }
 
 

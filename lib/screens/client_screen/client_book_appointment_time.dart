@@ -92,11 +92,13 @@ class ClientBookAppointmentTime
               ),
               constText12SemiBold(text: "Email"),
               ConstTextField(
+                inputType: TextInputType.emailAddress,
                 controller: controller.emailController.value,
                 hintText: "Enter Your Email",
               ),
               constText12SemiBold(text: "Phone Number"),
               ConstTextField(
+                maxLength: 10,
                 controller: controller.phoneController.value,
                 hintText: "Enter Your Phone",
                 inputType: TextInputType.number,

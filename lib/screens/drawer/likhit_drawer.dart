@@ -22,7 +22,10 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>  controller.bottomNavController.userType.value =="Lawyer"? Drawer(
+    return Obx(() {
+
+      controller.bottomNavController.getUserType();
+      return controller.bottomNavController.userType.value =="Lawyer"? Drawer(
       backgroundColor: Colors.transparent,
       child: Container(
         color: AppColors.white,
@@ -168,7 +171,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
           ],
         ),
       ),
-    )
+    );
+    }
 
 
     );

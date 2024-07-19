@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -57,7 +59,7 @@ class BankDetailsPage extends GetView<LawyerBankController> {
 
 
                 trailing:    SizedBox(
-                  width: w70,
+                  width: w80,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -74,9 +76,10 @@ class BankDetailsPage extends GetView<LawyerBankController> {
                           upiId: bankList?.upiId.toString(),
 
 
+
                         ));
                       },
-                        icon: Icon(Icons.edit,color: AppColors.primary,),
+                        icon: Icon(Icons.edit,color: AppColors.info80,),
                       ),
                       IconButton.filledTonal(onPressed: (){
                         controller.deleteBank(bankList?.id??0);
@@ -125,7 +128,7 @@ class AddBankPage extends GetView<LawyerBankController> {
       controller.isSelectAccType.value = accountType ?? "";
       controller.micrController.value.text = micrCode ?? "";
       controller.upiController.value.text = upiId ?? "";
-      // controller.qrImageFile = qrImage ?? "";
+      controller.qrImageFile.value = qrImage != null ? File(qrImage!) : null;
     }
 
     return Scaffold(
@@ -190,8 +193,9 @@ class AddBankPage extends GetView<LawyerBankController> {
             onTap: (){
               controller.getQrImage();
             },
+                hintText: controller.qrImage==null?"Select Qr Image":controller.qrImage.toString(),
             readyOnly: true,
-            controller: TextEditingController(text: controller.qrImage.toString()),
+            controller: TextEditingController(text: '${controller.qrImage??""}'),
 
           )),
           constTextContainer(

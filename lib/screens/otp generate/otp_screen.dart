@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:likhit/common/widget/const_shimmer_effects.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/screens/profile/widget/profile_card.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/utils/const_toast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../common/widget/custom_app_bar.dart';
 import '../../const/const_height.dart';
@@ -34,7 +37,11 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
       const CustomAppBar(
  title:  'OTP Verification'
       ),
-      body: Center(
+      body:Obx(()=>emailService.isLoading.value?Shimmer.fromColors(
+        baseColor: baseColor,
+        highlightColor: highLightColor,
+        child: loadSke(),
+      ) :Center(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
           child: SingleChildScrollView(
@@ -148,7 +155,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
             ),
           ),
         ),
-      ),
+      )),
     );
   }
 }

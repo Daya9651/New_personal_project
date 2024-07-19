@@ -14,6 +14,7 @@ class ClientProfile extends GetView<ClientApiController> {
 
   @override
   Widget build(BuildContext context) {
+
     // var controller.clientProfile.value.data = controller.clientProfile.value.data;
     return Scaffold(
         appBar: CustomAppBar(

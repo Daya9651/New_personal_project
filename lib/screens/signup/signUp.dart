@@ -82,12 +82,15 @@ class SignInPage extends StatelessWidget {
                     return null;
                   },
                   onSubmitted: (value) {
-                    if (email.isNotEmpty) {
-                      emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
-                      // Clear the email field
-                      // Navigate to the VerifyOtpPage after OTP is sent
+                    if (_formKey.currentState!.validate()) {
+                      String email = emailController.text.trim();
+                      if (email.isNotEmpty) {
+                        emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
+                        // Clear the email field
+                        // Navigate to the VerifyOtpPage after OTP is sent
 
 
+                      }
                     }
                   },
                 ),

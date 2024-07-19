@@ -91,14 +91,14 @@ class PaymentRequestOnlyController extends GetxController{
       if(clientTransactionResponse.data['response_code']==200){
         isLoading(false);
       ConstToast.to.showSuccess('${clientTransactionResponse.data['message']}');
-      clr();
+
       // Get.back();
       }else{
         isLoading(false);
       ConstToast.to.showError('${clientTransactionResponse.data['message']}');
 
       }
-
+      clr();
 
     } catch (e) {
       debugPrint("getClientList error : $e");

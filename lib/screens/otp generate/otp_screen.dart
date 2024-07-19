@@ -49,8 +49,8 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
               children: [
                 Image.asset(logo, height: 160, width: 160,),
                  SizedBox(height: h30),
-                 Row(
-                   crossAxisAlignment: CrossAxisAlignment.start,
+                 Wrap(
+                   // crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
                      const12Text(
                        'Enter OTP sent to ${widget.email}',

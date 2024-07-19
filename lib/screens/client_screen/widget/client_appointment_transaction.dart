@@ -74,7 +74,7 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const6Text("${transaction?.paymentMethod}\nId:${transaction?.paymentNo}"),
-                    // const6Text("Date & Time: ${formatDateTime(DateTime.parse(transaction?.createdDate??""))}"),
+                    const6Text("Date & Time: ${formatDateTime(DateTime.parse(transaction?.createdDate??""))}"),
                     const6Text("Service Name: ${transaction?.serviceName}"),
                     const8TextBold("Amount: ₹${transaction?.payableAmountToLawyerAfterCharge?.toStringAsFixed(2)}", textColor: AppColors.success40),
                   ],
@@ -82,7 +82,7 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
                 trailing: IconButton(
                   onPressed: () async {
 
-                    await Get.to(() =>  ClientAppointmentInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    await Get.to(() =>  ClientAppointmentInvoice(paymentId: int.parse(transaction?.id.toString()??""),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),

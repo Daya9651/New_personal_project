@@ -102,7 +102,7 @@ class AddContactInfo extends GetView<LawyerContactInfoController> {
 
                 width: double.maxFinite,
                 ConstTextField(
-maxLength: 10,
+// maxLength: 10,
                   inputType: TextInputType.number,
                   controller: controller.mobileController.value,
 

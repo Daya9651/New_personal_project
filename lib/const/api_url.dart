@@ -25,6 +25,8 @@ const String lawyerBookAppointmentDetailsUrl = "$baseUrl/lawyer-details-api/";
 const String lawyerPaymentUrl = "$baseUrl/lawyer-payment-recieve-api/";
 const String lawyerMyTransactionUrl =
     "$baseUrl/buy-plan-transaction-history-api/";
+const String lawyerAppointmentTransactionUrl =
+    "$baseUrl/lawyer-appointment-payment-recieve-api/";
 const String viewLawyerAppointment = "$baseUrl/lawyer-view-appointment-api/";
 const String lawyerConfirmRejectAppointmentUrl =
     "$baseUrl/lawyer-confirm-reject-appointment-api/";

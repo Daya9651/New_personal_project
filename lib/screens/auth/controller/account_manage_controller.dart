@@ -8,7 +8,9 @@ import 'package:likhit/screens/auth/services/model/city_model.dart';
 import 'package:likhit/screens/auth/services/model/state_model.dart';
 import 'package:likhit/utils/const_toast.dart';
 
+import '../../../pending_review_page.dart';
 import '../../../routes/routes.dart';
+import '../choose_account_type.dart';
 
 class AccountManageController extends GetxController{
 
@@ -90,8 +92,20 @@ class AccountManageController extends GetxController{
       if(response.data['response_code']==200){
         var type = response.data['user_type'];
         UserDataService.saveUserType(type);
+
+        debugPrint("choosing after : ${type}");
+
+        if (type == "Not Define") {
+          Get.off(const ChoosePage(),);
+        } else if (type == "Approval Pending") {
+          Get.to(() => const PendingReviewPage());
+        } else {
+          Get.offAllNamed(ApplicationPages.myBottomBar);
+        }
+
+
         ConstToast.to.showSuccess("${response.data['message']}");
-        Get.offAllNamed(ApplicationPages.myBottomBar);
+
       }else{
         debugPrint("else confirmUserApi ${response.data}");
         ConstToast.to.showError("${response.data['message']}");

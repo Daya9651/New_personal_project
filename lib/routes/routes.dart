@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_address_bindings.dart';
+import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_app_trans_binding.dart';
 import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_banks_bindings.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/bank_details_page.dart';
+import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_appoint_trans_page.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/profile/views/contact_information_page.dart';
 import 'package:likhit/screens/lawyer_screen/screens/views/lawyer_add_address.dart';
 import 'package:likhit/screens/client_screen/client_profile.dart';
@@ -71,6 +73,7 @@ class ApplicationPages {
   static const reviewPage = '/reviewPage';
   static const lawyerBankPage = '/lawyerBankPage';
   static const lawyerContactInfoPage = '/lawyerContactInfoPage';
+  static const lawyerAppointmentTransPage = '/lawyerAppointmentTransPage';
 
   //todo client
   static const clientAppointmentList = '/clientAppointmentList';
@@ -145,6 +148,10 @@ class ApplicationPages {
       name: lawyerMyTransaction,
       page: () =>  const LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
+    ),  GetPage(
+      name: lawyerAppointmentTransPage,
+      page: () =>  const LawyerAppointTransPage(),
+      binding: LawyerAppTransBinding()
     ),
     GetPage(
       name: lawyerAppointmentList,

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../controllers/lawyer_appoint_trans_controller.dart';
 
-class ClientTransactionBinding extends Bindings{
+class LawyerAppTransBinding extends Bindings{
 
 
   @override

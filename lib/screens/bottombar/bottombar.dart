@@ -15,7 +15,7 @@ class MyBottomBar extends GetView<BottomNavController> {
   @override
   Widget build(BuildContext context) {
     // final initialIndex = Get.arguments['initialIndex'] ?? 0;
-
+    controller.getUserType();
     // Set the initial selected index
     // controller.selectedIndex.value = initialIndex;
     return  Scaffold(
@@ -74,7 +74,18 @@ class MyBottomBar extends GetView<BottomNavController> {
           ],
         ),
       )),
-      body:Obx(()=>controller.userType.value =="Lawyer"? controller.lawyerScreen.elementAt(controller.selectedIndex.value):controller.clientScreen.elementAt(controller.selectedIndex.value)),
-    );
+      body:Obx(()=>
+      RefreshIndicator(
+      onRefresh: () async {
+        // Trigger a refresh based on user type
+        if (controller.userType.value == "Lawyer") {
+        await controller.lawyerProfileController.getProfileData();
+        }
+        // Add additional refresh logic if needed
+        },
+
+
+    child:   controller.userType.value =="Lawyer"? controller.lawyerScreen.elementAt(controller.selectedIndex.value):controller.clientScreen.elementAt(controller.selectedIndex.value)),
+    ));
   }
 }

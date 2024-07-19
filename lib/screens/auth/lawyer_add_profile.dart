@@ -20,7 +20,7 @@ class LawyerAddProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: "Lawyer Add Profile"),
+      appBar: const CustomAppBar(title: "Lawyer Add Profile"),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: h25, right: h25),

@@ -335,9 +335,9 @@ data: {
     isLoading(true);
     try {
       dio.Response myTransactionResponse = await ApiService.deleteData(
-          url:   lawyerServiceUrl,
+          url:   lawyerEducationUrl,
           data: {
-            "fee_id":id,
+            "education_id":id,
 
 
 
@@ -348,7 +348,7 @@ data: {
         getLawyerEducationData();
       }else{
         isLoading(false);
-        ConstToast.to.showError("${myTransactionResponse.data['response_code']}");
+        ConstToast.to.showError("${myTransactionResponse.data['message']}");
       }
 
 
@@ -449,7 +449,7 @@ data: {
       dio.Response myTransactionResponse = await ApiService.deleteData(
           url:   lawyerExperienceUrl,
           data: {
-            "fee_id":id,
+            "experience_id":id,
 
 
 

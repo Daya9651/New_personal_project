@@ -182,7 +182,7 @@ RxInt selectedAddressId = 0.obs;
 
 
 
-  Future addAddress({String ?search})async {
+  Future addAddress()async {
     isLoading(true);
     try {
       dio.Response addressResponse = await ApiService.postData(
@@ -202,11 +202,12 @@ RxInt selectedAddressId = 0.obs;
       if(addressResponse.data['response_code']==200){
         isLoading(false);
       ConstToast.to.showSuccess("${addressResponse.data['message']}");
+        getAddressList();
       clrControllers();
       }else{
         isLoading(false);
       ConstToast.to.showError("${addressResponse.data['message']}");
-
+        getAddressList();
       }
 
 
@@ -265,14 +266,14 @@ clrControllers(){
       // amount: int.parse(amountController.value.text),
         amount: amount
     );
-    String? orderID = await _razorpayService.waitForOrderID();
+    // String? orderID = await _razorpayService.waitForOrderID();
 
     // Now call razorPayResponse with the obtained order ID
-    await razorPayResponse(orderID);
+    // await razorPayResponse(orderID);
   }
   //razor pay success response
 
-  Future<void> razorPayResponse(String? orderId) async {
+  Future<void> razorPayResponse( orderId) async {
     if (orderId != null) {
       isLoading(true);
       try {

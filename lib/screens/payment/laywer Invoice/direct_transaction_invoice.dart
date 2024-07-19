@@ -9,7 +9,7 @@ import 'package:likhit/helpers/string_to_date_function.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
-import 'package:open_file/open_file.dart';
+// import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:shimmer/shimmer.dart';
@@ -67,7 +67,7 @@ class _InvoicingState extends State<DirectTransactionInvoice> {
     );
 
     // Open the PDF file after saving
-    OpenFile.open(path);
+    // OpenFile.open(path);
   }  @override
   Widget build(BuildContext context) {
     return Scaffold(

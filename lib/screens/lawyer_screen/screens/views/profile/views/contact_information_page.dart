@@ -74,7 +74,7 @@ class ContactInformationPage extends GetView<LawyerContactInfoController> {
             controller.deleteContact(contactList?.id??0);
 
           },
-          icon: Icon(Icons.delete,color: Colors.redAccent,),
+          icon: const Icon(Icons.delete,color: Colors.redAccent,),
           )
         ),
       );
@@ -102,7 +102,8 @@ class AddContactInfo extends GetView<LawyerContactInfoController> {
 
                 width: double.maxFinite,
                 ConstTextField(
-
+// maxLength: 10,
+                  inputType: TextInputType.number,
                   controller: controller.mobileController.value,
 
                 )),
@@ -122,9 +123,18 @@ class AddContactInfo extends GetView<LawyerContactInfoController> {
 
             )),
             constTextContainer(
-                "Add Contact",onTap: (){
-              controller.addContact();
-            }
+                "Add Contact", onTap: () {
+              controller.addContact().then((_) {
+
+                Future.delayed(const Duration(milliseconds: 2), () {
+                  Get.back();
+                });
+                controller.  getAllContacts();
+              }).catchError((error) {
+                // Handle any errors if necessary
+                debugPrint('Error adding contact: $error');
+              });
+            },
             )
           ],
         ))

@@ -80,6 +80,7 @@ class PaymentRequestOnlyPage extends GetView<PaymentRequestOnlyController> {
             width: double.maxFinite,
             "Expiry time (Max 60 min)",
             ConstTextField(
+              maxLength: 2,
               controller: controller.expiryTimeController.value,
               inputType: TextInputType.number,
             ),

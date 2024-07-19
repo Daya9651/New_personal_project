@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:likhit/common/widget/const_shimmer_effects.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_book_appointment_time_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../common/widget/const_dropdown.dart';
 import '../../common/widget/const_text_field.dart';
@@ -19,18 +21,26 @@ class ClientBookAppointmentTime
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        "inzamam ${controller.clientBookAppointmentPost(serviceID: 36, lawyerID: 16)}");
+    final Map<String, dynamic> args = Get.arguments ?? {};
+    final int lawyerId = args['lawyerId'] ?? 0;
+    final int serviceId = args['serviceId'] ?? 0;
+    final int amount = args['amount'] ?? 0;
+    debugPrint("service id $serviceId lawyer id $lawyerId amount $amount");
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: "Book Appointment",
       ),
-      body: SingleChildScrollView(
+      body:Obx(()=>controller.isLoading.value?Shimmer.fromColors(
+        baseColor: baseColor,
+        highlightColor: highLightColor,
+        child: loadSke(),
+      ) :SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: h25, right: h25, top: h25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              constText12SemiBold(text: "Select Timing"),
               ConstantDropdown(
                 options: const ["30 Min Meeting", '60 Min Meeting'],
                 onChanged: (value) {
@@ -82,11 +92,13 @@ class ClientBookAppointmentTime
               ),
               constText12SemiBold(text: "Email"),
               ConstTextField(
+                inputType: TextInputType.emailAddress,
                 controller: controller.emailController.value,
                 hintText: "Enter Your Email",
               ),
               constText12SemiBold(text: "Phone Number"),
               ConstTextField(
+                maxLength: 10,
                 controller: controller.phoneController.value,
                 hintText: "Enter Your Phone",
                 inputType: TextInputType.number,
@@ -111,15 +123,13 @@ class ClientBookAppointmentTime
                     MyCustomButton(
                       onTap: () {
                         controller.clientBookAppointmentPost(
-                            lawyerID: clientApiController
-                                .lawyerBookDetailListData.value.data?.id,
-                            serviceID: clientApiController
-                                .lawyerBookDetailListData
-                                .value
-                                .data
-                                ?.fees?[0]
-                                .id);
-                        // controller.bookAppointRazorPay();
+                            lawyerID:lawyerId,
+                          serviceID: serviceId,
+                        amount: amount
+                        ).whenComplete((){
+                          // controller.bookAppointRazorPay(amount);
+                        });
+
                       },
                       color: AppColors.info80,
                       text: "Confirm & Pay",
@@ -133,7 +143,7 @@ class ClientBookAppointmentTime
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

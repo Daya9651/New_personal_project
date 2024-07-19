@@ -35,8 +35,6 @@ class UserDataService {
   static Future<void> saveUserType(userTypes) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(userType, userTypes);
-    await prefs.remove(
-      userType,
-    );
+
   }
 }

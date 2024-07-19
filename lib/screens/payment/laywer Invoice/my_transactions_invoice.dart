@@ -138,6 +138,10 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                         controller.getMyTransactionLawyerInvoiceList.value.data?.client!.createdDate
                             .toString() ??
                             ""),
+                    // Text(formatDateTime(DateTime.parse(
+                    //     controller.invoiceList.value.data?.client!.createdDate
+                    //         .toString() ??
+                    //         ""))),
                     const Text('Reference# :'),
                     Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId.toString()}')
                   ],

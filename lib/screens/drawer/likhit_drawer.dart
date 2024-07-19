@@ -18,7 +18,10 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>  controller.bottomNavController.userType.value =="Lawyer"? Drawer(
+    return Obx(() {
+
+      controller.bottomNavController.getUserType();
+      return controller.bottomNavController.userType.value =="Lawyer"? Drawer(
       backgroundColor: Colors.transparent,
       child: Container(
         color: AppColors.white,
@@ -50,6 +53,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
                 subItems: [
                   _buildDrawerSubItem('Direct Transactions', onTap: () {
                     Get.toNamed(ApplicationPages.clientTransaction);
+                  }, icons: Icons.category),_buildDrawerSubItem('Appointment Transactions', onTap: () {
+                    Get.toNamed(ApplicationPages.lawyerAppointmentTransPage);
                   }, icons: Icons.category),
                   _buildDrawerSubItem('Payment Request', onTap: () {
                     Get.toNamed(ApplicationPages.lawyerPaymentRequest);
@@ -164,7 +169,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
           ],
         ),
       ),
-    )
+    );
+    }
 
 
     );

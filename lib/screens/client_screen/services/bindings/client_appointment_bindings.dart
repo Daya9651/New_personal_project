@@ -2,7 +2,10 @@ import 'package:get/get.dart';
 import 'package:likhit/screens/client_screen/services/controller/client_api_controller.dart';
 
 import '../controller/client_appointment_trans_controller.dart';
+import '../controller/client_appointment_trans_controller.dart';
 import '../controller/client_book_appointment_time_controller.dart';
+import '../controller/client_edit_controller.dart';
+import '../controller/client_payments_trans_controller.dart';
 import '../controller/client_payments_trans_controller.dart';
 
 class ClientAppointmentBinding extends Bindings {
@@ -32,5 +35,13 @@ class ClientPaymentsTransBinding extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     Get.lazyPut(() => ClientPaymentsTransController());
+  }
+}
+
+class ClientEditProfileBindings extends Bindings {
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
+    Get.lazyPut(() => ClientEditController());
   }
 }

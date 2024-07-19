@@ -66,7 +66,7 @@ class LawyerEducationPage extends GetView<LawyerProfileController> {
                               icon: Icon(Icons.edit,color: AppColors.primary,),
                             ),
                             IconButton.filledTonal(onPressed: (){
-                              controller.deleteServiceData(serviceList?.id??0);
+                              controller.deleteLawyerEducation(serviceList?.id??0);
 
                             },
                               icon: Icon(Icons.delete,color: Colors.redAccent,),

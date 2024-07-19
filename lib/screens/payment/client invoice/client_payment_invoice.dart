@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/const/const_width.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../common/widget/const_shimmer_effects.dart';
+import '../../../style/color.dart';
 
 class ClientPaymentInvoice extends StatefulWidget {
-  const ClientPaymentInvoice({super.key});
+  const ClientPaymentInvoice({super.key, required int paymentId});
 
   @override
   State<ClientPaymentInvoice> createState() => _InvoicingState();
@@ -23,10 +28,12 @@ class _InvoicingState extends State<ClientPaymentInvoice> {
         appBar: const CustomAppBar(
           title: 'Invoices',
         ),
-        body:Obx(()=> Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
+        body:Obx(()=> controller.isLoading.value?Shimmer.fromColors(
+          baseColor: baseColor,
+          highlightColor: highLightColor,
+          child: loadSke(),):
+        SingleChildScrollView(
+          child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -35,7 +42,7 @@ class _InvoicingState extends State<ClientPaymentInvoice> {
                     Column(
                       children: [
                         Image.asset(logo, width: 70,),
-                        Text('LikhitDe...', style: AppTextStyles.kBody15SemiBoldTextStyle,),
+                        Text('LikhitDe', style: AppTextStyles.kBody15SemiBoldTextStyle,),
                       ],
                     ),
                     Column(
@@ -133,9 +140,9 @@ class _InvoicingState extends State<ClientPaymentInvoice> {
                   ],
                 ),
               ],
-            ),
+            ).paddingAll(w8)
           ),
-        ))
+        )
     );
   }
 }

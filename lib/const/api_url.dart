@@ -1,5 +1,5 @@
-const String baseUrl = "http://192.168.1.71:6768"; //local
-// const String baseUrl = "https://admin1.likhitde.com";
+// const String baseUrl = "http://192.168.1.71:6768"; //local
+const String baseUrl = "https://admin1.likhitde.com";
 //live
 
 const String loginEmailUrl = "$baseUrl/get-otp-api/";

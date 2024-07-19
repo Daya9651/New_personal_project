@@ -76,11 +76,11 @@ class ClientTransaction extends GetView<ClientTransactionController> {
                 ),
                 trailing: IconButton(
                   onPressed: () async {
-
                    await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),
+
               ),
             );
           },

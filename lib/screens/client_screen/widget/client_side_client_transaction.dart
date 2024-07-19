@@ -13,6 +13,7 @@ import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
+import '../../payment/client invoice/client_direct_invoice.dart';
 import '../services/controller/client_side_client_transaction_controller.dart';
 
 class ClientSideClientTransaction extends GetView<ClientSideClientTransactionController> {
@@ -22,7 +23,7 @@ class ClientSideClientTransaction extends GetView<ClientSideClientTransactionCon
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Client Transactions",
+        title: "Direct Transactions",
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(h50),
             child: ConstTextField(
@@ -78,8 +79,7 @@ class ClientSideClientTransaction extends GetView<ClientSideClientTransactionCon
                 ),
                 trailing: IconButton(
                   onPressed: () async {
-
-                    // await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    await Get.to(() =>  ClientDirectInvoice(paymentId: int.parse(transaction.id.toString()),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),
@@ -91,3 +91,5 @@ class ClientSideClientTransaction extends GetView<ClientSideClientTransactionCon
     );
   }
 }
+
+

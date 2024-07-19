@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +6,6 @@ import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
@@ -36,7 +34,6 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
               suffixIcon: IconButton(onPressed: (){
                 controller.searchTransactionController.value.clear();
                 controller.getMyTransactions();
-
               }, icon: const Icon(CupertinoIcons.multiply_circle,color: AppColors.white,)),
             )
         ),
@@ -51,11 +48,9 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
             ),
           );
         }
-
         if (controller.myTransactionList.value.data!.isEmpty) {
           return const Center(child: Text("No transactions found."));
         }
-
         return ListView.builder(
           itemCount: controller.myTransactionList.value.data!.length,
           itemBuilder: (context, index) {
@@ -82,7 +77,7 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    Get.to(() => const MyTransactionsInvoice());
+                    Get.to(() => MyTransactionsInvoice(paymentId: int.parse(transaction.id.toString()),));
 
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),

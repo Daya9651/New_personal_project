@@ -13,6 +13,7 @@ import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
+import '../../payment/client invoice/client_appointment_invoice.dart';
 import '../services/controller/client_appointment_trans_controller.dart';
 import '../services/controller/client_side_client_transaction_controller.dart';
 
@@ -23,7 +24,7 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Client Transactions",
+        title: "Appointment Transactions",
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(h50),
             child: ConstTextField(
@@ -81,7 +82,7 @@ class ClientAppointmentTransaction extends GetView<ClientAppointmentTransControl
                 trailing: IconButton(
                   onPressed: () async {
 
-                    // await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    await Get.to(() =>  ClientAppointmentInvoice(paymentId: int.parse(transaction.id.toString()),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),

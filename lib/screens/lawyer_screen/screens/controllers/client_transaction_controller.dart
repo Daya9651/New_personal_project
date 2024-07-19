@@ -7,8 +7,8 @@ import '../../../auth/controller/account_manage_controller.dart';
 import '../models/client_transaction_model.dart';
 
 class ClientTransactionController extends GetxController{
-
   var clientTransactionList = LawyerClientTransactionsModel().obs;
+  // var clientViewHistory = UserPaymentHistory().obs;
   var searchTransactionController = TextEditingController().obs;
   final AccountManageController controller = Get.put(AccountManageController());
 
@@ -18,9 +18,9 @@ class ClientTransactionController extends GetxController{
     super.onInit();
     ApiService.init();
     getClientDirectTransactions();
+    // getClientViewHistory();
+
   }
-
-
   Future getClientDirectTransactions({String ?search})async {
     try {
       dio.Response clientTransactionResponse = await ApiService.getData(
@@ -35,17 +35,29 @@ class ClientTransactionController extends GetxController{
             clientTransactionList.value = LawyerClientTransactionsModel.fromJson(
                 clientTransactionResponse.data);
           }
-
-
     } catch (e) {
-debugPrint("getClientDirectTransactions error : $e");
+         debugPrint("getClientDirectTransactions error : $e");
     }
   }
 
-
-
-
-
-
-
+  // Future getClientViewHistory({String ?search})async {
+  //   try {
+  //     dio.Response clientTransactionResponse = await ApiService.getData(
+  //         invoiceClientDirectUrl,
+  //         queryParameters: {
+  //           'search': search,
+  //           'page': "1",
+  //         }
+  //     );
+  //     if(clientTransactionResponse.data['respnse_code']==200){
+  //
+  //       clientViewHistory.value = UserPaymentHistory.fromJson(
+  //           clientTransactionResponse.data);
+  //     }
+  //
+  //
+  //   } catch (e) {
+  //     debugPrint("getClientDirectHistory error : $e");
+  //   }
+  // }
 }

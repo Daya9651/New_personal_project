@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/const/const_width.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../common/widget/const_shimmer_effects.dart';
+import '../../../style/color.dart';
 
 class ClientAppointmentInvoice extends StatefulWidget {
-  const ClientAppointmentInvoice({super.key});
+  const ClientAppointmentInvoice({super.key, required int paymentId});
 
   @override
   State<ClientAppointmentInvoice> createState() => _InvoicingState();
@@ -23,10 +28,12 @@ class _InvoicingState extends State<ClientAppointmentInvoice> {
         appBar: const CustomAppBar(
           title: 'Invoices',
         ),
-        body:Obx(()=> Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
+        body:Obx(()=> controller.isLoading.value?Shimmer.fromColors(
+          baseColor: baseColor,
+          highlightColor: highLightColor,
+          child: loadSke(),):
+        SingleChildScrollView(
+          child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -136,9 +143,9 @@ class _InvoicingState extends State<ClientAppointmentInvoice> {
                   ],
                 ),
               ],
-            ),
+            ).paddingAll(w8)
           ),
-        ))
+        )
     );
   }
 }

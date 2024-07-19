@@ -13,6 +13,7 @@ import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
+import '../../payment/client invoice/client_payment_invoice.dart';
 import '../services/controller/client_payments_trans_controller.dart';
 
 class ClientPaymentsRequestTransPage extends GetView<ClientPaymentsTransController> {
@@ -22,7 +23,7 @@ class ClientPaymentsRequestTransPage extends GetView<ClientPaymentsTransControll
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Client Transactions",
+        title: "Payment Request",
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(h50),
             child: ConstTextField(
@@ -79,7 +80,7 @@ class ClientPaymentsRequestTransPage extends GetView<ClientPaymentsTransControll
                 trailing: IconButton(
                   onPressed: () async {
 
-                    // await Get.to(() =>  DirectTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    await Get.to(() =>  ClientPaymentInvoice(paymentId: int.parse(transaction.id.toString()),));
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),

@@ -39,7 +39,7 @@ class PaymentController extends GetxController{
       }
     } catch (e) {
       isLoading(false);
-      debugPrint("invoiceResponse error : $e");
+      debugPrint("getInvoiceData invoiceResponse error : $e");
     }
   }
 
@@ -63,7 +63,7 @@ class PaymentController extends GetxController{
       }
     } catch (e) {
       isLoading(false);
-      debugPrint("invoiceResponse error : $e");
+      debugPrint("getMyTransactionLawyerInvoice invoiceResponse error : $e");
     }
   }
 
@@ -86,7 +86,7 @@ class PaymentController extends GetxController{
       }
     } catch (e) {
       isLoading(false);
-      debugPrint("invoiceResponse error : $e");
+      debugPrint("getPaymentRequestInvoiceData invoiceResponse error : $e");
     }
   }
 
@@ -135,7 +135,7 @@ class PaymentController extends GetxController{
 
     } catch (e) {
       isLoading(false);
-      debugPrint("invoiceDirectResponse error : $e");
+      debugPrint(" app invoiceDirectResponse error : $e");
     }
   }
   Future getPaymentClientRequestInvoiceData(paymentID)async {

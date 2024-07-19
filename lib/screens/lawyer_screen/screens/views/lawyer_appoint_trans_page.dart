@@ -12,6 +12,7 @@ import '../../../../const/const_height.dart';
 import '../../../../const/const_width.dart';
 import '../../../../helpers/string_to_date_function.dart';
 import '../../../../style/color.dart';
+import '../../../payment/laywer Invoice/appointment_transaction_invoice.dart';
 import '../../../payment/laywer Invoice/my_transactions_invoice.dart';
 import '../controllers/lawyer_my_transaction_controller.dart';
 
@@ -78,7 +79,7 @@ class LawyerAppointTransPage extends GetView<LawyerAppointTransController> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    Get.to(() => MyTransactionsInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    Get.to(() => AppointmentTransactionInvoice(paymentId: int.parse(transaction.id.toString()),));
 
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),

@@ -158,12 +158,12 @@ class Lawyer {
   String? about;
   String? gender;
   String? servicesOffered;
-  List<String>? specialties;
+  // List<String>? specialties;
   String? experience;
   String? image;
   String? websiteUrl;
-  List<String>? languageSpoken;
-  List<String>? languageWritten;
+  // List<String>? languageSpoken;
+  // List<String>? languageWritten;
   String? country;
   String? state;
   String? city;
@@ -187,12 +187,12 @@ class Lawyer {
         this.about,
         this.gender,
         this.servicesOffered,
-        this.specialties,
+        // this.specialties,
         this.experience,
         this.image,
         this.websiteUrl,
-        this.languageSpoken,
-        this.languageWritten,
+        // this.languageSpoken,
+        // this.languageWritten,
         this.country,
         this.state,
         this.city,
@@ -216,12 +216,12 @@ class Lawyer {
     about = json['about'];
     gender = json['gender'];
     servicesOffered = json['services_offered'];
-    specialties = json['specialties'].cast<String>();
+    // specialties = json['specialties'].cast<String>();
     experience = json['experience'];
     image = json['image'];
     websiteUrl = json['website_url'];
-    languageSpoken = json['language_spoken'].cast<String>();
-    languageWritten = json['language_written'].cast<String>();
+    // languageSpoken = json['language_spoken'].cast<String>();
+    // languageWritten = json['language_written'].cast<String>();
     country = json['country'];
     state = json['state'];
     city = json['city'];
@@ -247,12 +247,12 @@ class Lawyer {
     data['about'] = about;
     data['gender'] = gender;
     data['services_offered'] = servicesOffered;
-    data['specialties'] = specialties;
+    // data['specialties'] = specialties;
     data['experience'] = experience;
     data['image'] = image;
     data['website_url'] = websiteUrl;
-    data['language_spoken'] = languageSpoken;
-    data['language_written'] = languageWritten;
+    // data['language_spoken'] = languageSpoken;
+    // data['language_written'] = languageWritten;
     data['country'] = country;
     data['state'] = state;
     data['city'] = city;

@@ -4,6 +4,8 @@ import 'package:likhit/const/api_url.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:likhit/screens/payment/model/direct_transactions_model.dart';
 import '../../../common/const_api.dart';
+import '../../client_screen/services/model/client_payment_request_trans_model.dart';
+import '../client invoice/models/client_direct_trans_model.dart';
 import '../model/lawyer_payment_request_model.dart';
 import '../model/my_transactions_invoice_model.dart';
 
@@ -61,7 +63,8 @@ class PaymentController extends GetxController{
     }
   }
 
-  var invoiceDirectList = DirectTransactionInvoiceModel().obs;
+  var invoiceDirectList = ClientDirectTransactionInvoiceModel().obs;
+  var invoicePaymentRequestDirectList = ClientPaymentRequestTransModel().obs;
 
   // Direct Transaction Invoice Api
   Future getDirectInvoiceData(paymentID)async {
@@ -69,14 +72,14 @@ class PaymentController extends GetxController{
     try {
       dio.Response invoiceResponse = await ApiService.getData(
         invoiceDirectUrl,
-        data: {
-          'payment_id' : 39
+        queryParameters: {
+          'payment_id' : paymentID
         }
       );
       if(invoiceResponse.data['respnse_code']==200){
         isLoading(false);
-        invoiceDirectList.value = DirectTransactionInvoiceModel.fromJson(invoiceResponse.data);
-        debugPrint("invoiceDirect : ${invoiceDirectList.value.data?[0].status}");
+        invoiceDirectList.value = ClientDirectTransactionInvoiceModel.fromJson(invoiceResponse.data);
+        // debugPrint("invoiceDirect : ${invoiceDirectList.value.data?[0].status}");
       }else{
         isLoading(false);
       }
@@ -86,5 +89,50 @@ class PaymentController extends GetxController{
       debugPrint("invoiceDirectResponse error : $e");
     }
   }
+  Future getAppointInvoiceData(paymentID)async {
+    isLoading(true);
+    try {
+      dio.Response invoiceResponse = await ApiService.getData(
+          invoiceAppointmentTransUrl,
+        queryParameters: {
+          'payment_id' : paymentID
+        }
+      );
+      if(invoiceResponse.data['respnse_code']==200){
+        isLoading(false);
+        invoiceDirectList.value = ClientDirectTransactionInvoiceModel.fromJson(invoiceResponse.data);
+        // debugPrint("invoiceDirect : ${invoiceDirectList.value.data?[0].status}");
+      }else{
+        isLoading(false);
+      }
+
+    } catch (e) {
+      isLoading(false);
+      debugPrint("invoiceDirectResponse error : $e");
+    }
+  }
+  Future getPaymentClientRequestInvoiceData(paymentID)async {
+    isLoading(true);
+    try {
+      dio.Response invoiceResponse = await ApiService.getData(
+          clientRequestPayTransUrl,
+        queryParameters: {
+          'payment_id' : paymentID
+        }
+      );
+      if(invoiceResponse.data['respnse_code']==200){
+        isLoading(false);
+        invoicePaymentRequestDirectList.value = ClientPaymentRequestTransModel.fromJson(invoiceResponse.data);
+        // debugPrint("invoiceDirect : ${invoiceDirectList.value.data?[0].status}");
+      }else{
+        isLoading(false);
+      }
+
+    } catch (e) {
+      isLoading(false);
+      debugPrint("invoiceDirectResponse error : $e");
+    }
+  }
+
 
 }

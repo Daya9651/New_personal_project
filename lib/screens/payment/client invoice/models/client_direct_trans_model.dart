@@ -1,42 +1,22 @@
-class ClientAppointmentTransModel {
+class ClientDirectTransactionInvoiceModel {
   String? message;
   int? respnseCode;
-  int? count;
-  int? currentPage;
-  int? totalPages;
-  List<Data>? data;
+  Data? data;
 
-  ClientAppointmentTransModel(
-      {this.message,
-        this.respnseCode,
-        this.count,
-        this.currentPage,
-        this.totalPages,
-        this.data});
+  ClientDirectTransactionInvoiceModel({this.message, this.respnseCode, this.data});
 
-  ClientAppointmentTransModel.fromJson(Map<String, dynamic> json) {
+  ClientDirectTransactionInvoiceModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     respnseCode = json['respnse_code'];
-    count = json['count'];
-    currentPage = json['current_page'];
-    totalPages = json['total_pages'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['respnse_code'] = respnseCode;
-    data['count'] = count;
-    data['current_page'] = currentPage;
-    data['total_pages'] = totalPages;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
@@ -44,20 +24,12 @@ class ClientAppointmentTransModel {
 
 class Data {
   int? id;
-  String? lawyerName;
-  String? serviceFee;
-  String? serviceName;
-  String? date;
-  String? time;
-  String? name;
-  String? email;
-  String? content;
-  int? phoneNo;
-  String? status;
   String? paymentNo;
   String? paymentMethod;
+  String? createdDate;
+  String? updatedDate;
+  String? status;
   double? paymentAmount;
-  String? paymentStatus;
   double? likhitDeCommission;
   double? gatewayCommission;
   double? splitCharge;
@@ -71,32 +43,20 @@ class Data {
   double? splitGstAmt;
   double? splitTotalAmtGst;
   double? totalDeductionFromLikhitDe;
-  double? likhitDeNetProfitAmt;
-  double? likhitDeNetProfitGstAmt;
-  double? likhitDeTotalNetProfitAmtGst;
   double? payableAmountToLawyerAfterCharge;
-  String? createdDate;
-  String? updatedDate;
+  String? paymentFor;
   Lawyer? lawyer;
-  Client? client;
   Service? service;
+  Client? client;
 
   Data(
       {this.id,
-        this.lawyerName,
-        this.serviceFee,
-        this.serviceName,
-        this.date,
-        this.time,
-        this.name,
-        this.email,
-        this.content,
-        this.phoneNo,
-        this.status,
         this.paymentNo,
         this.paymentMethod,
+        this.createdDate,
+        this.updatedDate,
+        this.status,
         this.paymentAmount,
-        this.paymentStatus,
         this.likhitDeCommission,
         this.gatewayCommission,
         this.splitCharge,
@@ -110,32 +70,20 @@ class Data {
         this.splitGstAmt,
         this.splitTotalAmtGst,
         this.totalDeductionFromLikhitDe,
-        this.likhitDeNetProfitAmt,
-        this.likhitDeNetProfitGstAmt,
-        this.likhitDeTotalNetProfitAmtGst,
         this.payableAmountToLawyerAfterCharge,
-        this.createdDate,
-        this.updatedDate,
+        this.paymentFor,
         this.lawyer,
-        this.client,
-        this.service});
+        this.service,
+        this.client});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    lawyerName = json['lawyer_name'];
-    serviceFee = json['service_fee'];
-    serviceName = json['service_name'];
-    date = json['date'];
-    time = json['time'];
-    name = json['name'];
-    email = json['email'];
-    content = json['content'];
-    phoneNo = json['phone_no'];
-    status = json['status'];
     paymentNo = json['payment_no'];
     paymentMethod = json['payment_method'];
+    createdDate = json['created_date'];
+    updatedDate = json['updated_date'];
+    status = json['status'];
     paymentAmount = json['payment_amount'];
-    paymentStatus = json['payment_status'];
     likhitDeCommission = json['likhit_de_commission'];
     gatewayCommission = json['gateway_commission'];
     splitCharge = json['split_charge'];
@@ -149,38 +97,26 @@ class Data {
     splitGstAmt = json['split_gst_amt'];
     splitTotalAmtGst = json['split_total_amt_gst'];
     totalDeductionFromLikhitDe = json['total_deduction_from_likhit_de'];
-    likhitDeNetProfitAmt = json['likhit_de_net_profit_amt'];
-    likhitDeNetProfitGstAmt = json['likhit_de_net_profit_gst_amt'];
-    likhitDeTotalNetProfitAmtGst = json['likhit_de_total_net_profit_amt_gst'];
     payableAmountToLawyerAfterCharge =
     json['payable_amount_to_lawyer_after_charge'];
-    createdDate = json['created_date'];
-    updatedDate = json['updated_date'];
+    paymentFor = json['payment_for'];
     lawyer =
     json['lawyer'] != null ? Lawyer.fromJson(json['lawyer']) : null;
-    client =
-    json['client'] != null ? Client.fromJson(json['client']) : null;
     service =
     json['service'] != null ? Service.fromJson(json['service']) : null;
+    client =
+    json['client'] != null ? Client.fromJson(json['client']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['lawyer_name'] = lawyerName;
-    data['service_fee'] = serviceFee;
-    data['service_name'] = serviceName;
-    data['date'] = date;
-    data['time'] = time;
-    data['name'] = name;
-    data['email'] = email;
-    data['content'] = content;
-    data['phone_no'] = phoneNo;
-    data['status'] = status;
     data['payment_no'] = paymentNo;
     data['payment_method'] = paymentMethod;
+    data['created_date'] = createdDate;
+    data['updated_date'] = updatedDate;
+    data['status'] = status;
     data['payment_amount'] = paymentAmount;
-    data['payment_status'] = paymentStatus;
     data['likhit_de_commission'] = likhitDeCommission;
     data['gateway_commission'] = gatewayCommission;
     data['split_charge'] = splitCharge;
@@ -194,22 +130,17 @@ class Data {
     data['split_gst_amt'] = splitGstAmt;
     data['split_total_amt_gst'] = splitTotalAmtGst;
     data['total_deduction_from_likhit_de'] = totalDeductionFromLikhitDe;
-    data['likhit_de_net_profit_amt'] = likhitDeNetProfitAmt;
-    data['likhit_de_net_profit_gst_amt'] = likhitDeNetProfitGstAmt;
-    data['likhit_de_total_net_profit_amt_gst'] =
-        likhitDeTotalNetProfitAmtGst;
     data['payable_amount_to_lawyer_after_charge'] =
         payableAmountToLawyerAfterCharge;
-    data['created_date'] = createdDate;
-    data['updated_date'] = updatedDate;
+    data['payment_for'] = paymentFor;
     if (lawyer != null) {
       data['lawyer'] = lawyer!.toJson();
     }
-    if (client != null) {
-      data['client'] = client!.toJson();
-    }
     if (service != null) {
       data['service'] = service!.toJson();
+    }
+    if (client != null) {
+      data['client'] = client!.toJson();
     }
     return data;
   }
@@ -336,6 +267,34 @@ class Lawyer {
   }
 }
 
+class Service {
+  int? id;
+  String? title;
+  String? subtitle;
+  String? fee;
+  int? lawyer;
+
+  Service({this.id, this.title, this.subtitle, this.fee, this.lawyer});
+
+  Service.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    subtitle = json['subtitle'];
+    fee = json['fee'];
+    lawyer = json['lawyer'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['subtitle'] = subtitle;
+    data['fee'] = fee;
+    data['lawyer'] = lawyer;
+    return data;
+  }
+}
+
 class Client {
   int? id;
   String? createdDate;
@@ -409,34 +368,6 @@ class Client {
     data['is_activate'] = isActivate;
     data['store'] = store;
     data['user'] = user;
-    return data;
-  }
-}
-
-class Service {
-  int? id;
-  String? title;
-  String? subtitle;
-  String? fee;
-  int? lawyer;
-
-  Service({this.id, this.title, this.subtitle, this.fee, this.lawyer});
-
-  Service.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    fee = json['fee'];
-    lawyer = json['lawyer'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['subtitle'] = subtitle;
-    data['fee'] = fee;
-    data['lawyer'] = lawyer;
     return data;
   }
 }

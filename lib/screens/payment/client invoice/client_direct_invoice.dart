@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_shimmer_effects.dart';
+import 'package:likhit/const/const_width.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -25,7 +26,7 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
 
   Future<void> generateInvoicePdf(int paymentId) async {
     // Fetch invoice data using your controller
-    await controller.invoiceList();
+    controller.invoiceDirectList();
 
     // Create a new PDF document
     final pdf = pw.Document();
@@ -42,13 +43,13 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                         fontSize: 20, fontWeight: pw.FontWeight.bold)),
                 pw.SizedBox(height: 20),
                 pw.Text(
-                    'Payment Number: ${controller.invoiceList.value.data?.paymentNo ?? ''}'),
+                    'Payment Number: ${controller.invoiceDirectList.value.data?.paymentNo ?? ''}'),
                 pw.Text(
-                    'Lawyer Name: ${controller.invoiceList.value.data?.lawyer?.name ?? ''}'),
+                    'Lawyer Name: ${controller.invoiceDirectList.value.data?.lawyer?.name ?? ''}'),
                 pw.Text(
-                    'Client Name: ${controller.invoiceList.value.data?.client?.name ?? ''}'),
+                    'Client Name: ${controller.invoiceDirectList.value.data?.client?.name ?? ''}'),
                 pw.Text(
-                    'Total Amount: ${controller.invoiceList.value.data?.paymentAmount ?? ''}'),
+                    'Total Amount: ${controller.invoiceDirectList.value.data?.paymentAmount ?? ''}'),
                 // Add more fields as needed
               ],
             ),
@@ -72,6 +73,13 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    debugPrint("payment id on pdf ${widget.paymentId}");
+    controller.getDirectInvoiceData(widget.paymentId);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
@@ -87,7 +95,6 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
 
                 )
               : SingleChildScrollView(
-                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -114,7 +121,7 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                                 style: AppTextStyles.kBody15SemiBoldTextStyle,
                               ),
                               Text(
-                                '${controller.invoiceList.value.data?.paymentNo}',
+                                '${controller.invoiceDirectList.value.data?.paymentNo}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               )
                             ],
@@ -128,19 +135,19 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Lawyer Name : ${controller.invoiceList.value.data?.lawyer?.name.toString()}',
+                                'Lawyer Name : ${controller.invoiceDirectList.value.data?.lawyer?.name.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
-                                'City : ${controller.invoiceList.value.data?.lawyer?.city.toString()}',
+                                'City : ${controller.invoiceDirectList.value.data?.lawyer?.city.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
-                                'State : ${controller.invoiceList.value.data?.lawyer?.state.toString()}',
+                                'State : ${controller.invoiceDirectList.value.data?.lawyer?.state.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
-                                'Country : ${controller.invoiceList.value.data?.lawyer?.country.toString()}',
+                                'Country : ${controller.invoiceDirectList.value.data?.lawyer?.country.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
@@ -148,11 +155,11 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
-                                'Mob No : ${controller.invoiceList.value.data?.lawyer?.mobile.toString()}',
+                                'Mob No : ${controller.invoiceDirectList.value.data?.lawyer?.mobile.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
-                                'Area : ${controller.invoiceList.value.data?.lawyer?.address.toString()}',
+                                'Area : ${controller.invoiceDirectList.value.data?.lawyer?.address.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                             ],
@@ -177,19 +184,19 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                                 style: AppTextStyles.kBody15SemiBoldTextStyle,
                               ),
                               Text(
-                                'Customer : ${controller.invoiceList.value.data?.client?.name.toString()}',
+                                'Customer : ${controller.invoiceDirectList.value.data?.client?.name.toString()}',
                               ),
                               Text(
-                                'Area :${controller.invoiceList.value.data?.client?.address.toString()}',
+                                'Area :${controller.invoiceDirectList.value.data?.client?.address.toString()}',
                               ),
                               Text(
-                                'City :${controller.invoiceList.value.data?.client?.city.toString()}',
+                                'City :${controller.invoiceDirectList.value.data?.client?.city.toString()}',
                               ),
                               Text(
-                                'State :${controller.invoiceList.value.data?.client?.state.toString()}',
+                                'State :${controller.invoiceDirectList.value.data?.client?.state.toString()}',
                               ),
                               Text(
-                                'Country :${controller.invoiceList.value.data?.client?.country.toString()}',
+                                'Country :${controller.invoiceDirectList.value.data?.client?.country.toString()}',
                               ),
                             ],
                           ),
@@ -201,7 +208,7 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                                 style: AppTextStyles.kSmall10SemiBoldTextStyle,
                               ),
                               Text(
-                                '${controller.invoiceList.value.data?.client?.createdDate.toString()}',
+                                '${controller.invoiceDirectList.value.data?.client?.createdDate.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               ),
                               Text(
@@ -209,7 +216,7 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                                 style: AppTextStyles.kSmall10SemiBoldTextStyle,
                               ),
                               Text(
-                                '${controller.invoiceList.value.data?.paymentNo.toString()}',
+                                '${controller.invoiceDirectList.value.data?.paymentNo.toString()}',
                                 style: AppTextStyles.kSmall10RegularTextStyle,
                               )
                             ],
@@ -243,19 +250,19 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${controller.invoiceList.value.data?.lawyer?.servicesOffered.toString()}',
+                            '${controller.invoiceDirectList.value.data?.lawyer?.servicesOffered.toString()}',
                             style: AppTextStyles.kSmall10RegularTextStyle,
                           ),
                           Text(
-                            '${controller.invoiceList.value.data?.paymentMethod.toString()}',
+                            '${controller.invoiceDirectList.value.data?.paymentMethod.toString()}',
                             style: AppTextStyles.kSmall10RegularTextStyle,
                           ),
                           Text(
-                            '${controller.invoiceList.value.data?.status.toString()}',
+                            '${controller.invoiceDirectList.value.data?.status.toString()}',
                             style: AppTextStyles.kSmall10RegularTextStyle,
                           ),
                           Text(
-                            '${controller.invoiceList.value.data?.paymentAmount.toString()}',
+                            '${controller.invoiceDirectList.value.data?.paymentAmount.toString()}',
                             style: AppTextStyles.kSmall10RegularTextStyle,
                           ),
                         ],
@@ -274,7 +281,7 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                                 style: AppTextStyles.kSmall10SemiBoldTextStyle,
                               ),
                               Text(
-                                '${controller.invoiceList.value.data?.paymentAmount.toString()}',
+                                '${controller.invoiceDirectList.value.data?.paymentAmount.toString()}',
                                 style: AppTextStyles.kSmall8SemiBoldTextStyle,
                               ),
                             ],
@@ -302,7 +309,7 @@ class _ClientDirectInvoiceState extends State<ClientDirectInvoice> {
                         ],
                       ),
                     ],
-                  ).paddingAll(8),
+                  ).paddingAll(w8),
                 ),
         ));
   }

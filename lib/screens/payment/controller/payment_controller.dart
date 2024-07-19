@@ -6,6 +6,7 @@ import 'package:likhit/screens/payment/model/direct_transactions_model.dart';
 import '../../../common/const_api.dart';
 import '../../client_screen/services/model/client_payment_request_trans_model.dart';
 import '../client invoice/models/client_direct_trans_model.dart';
+import '../client invoice/models/client_payment_request_model.dart';
 import '../model/lawyer_payment_request_model.dart';
 import '../model/my_transactions_invoice_model.dart';
 
@@ -19,6 +20,7 @@ class PaymentController extends GetxController{
   }
   var invoiceList = InvoiceModel().obs;
   var invoicePaymentRequestList = PaymentRequestModel().obs;
+
   Future getInvoiceData( paymentID)async {
     isLoading(true);
     try {
@@ -40,6 +42,31 @@ class PaymentController extends GetxController{
       debugPrint("invoiceResponse error : $e");
     }
   }
+
+
+  var getMyTransactionLawyerInvoiceList = ClientPaymentRequestModel().obs;
+  Future getMyTransactionLawyerInvoice( paymentID)async {
+    isLoading(true);
+    try {
+      dio.Response invoiceResponse = await ApiService.getData(
+          invoicePaymentRequestUrl10,
+          queryParameters: {
+            'payment_id': paymentID,
+            // 'invoiceResponse': paymentID,
+          }
+      );
+      if(invoiceResponse.data['response_code']==200){
+        getMyTransactionLawyerInvoiceList.value = ClientPaymentRequestModel.fromJson(invoiceResponse.data);
+        isLoading(false);
+      }else{
+        isLoading(false);
+      }
+    } catch (e) {
+      isLoading(false);
+      debugPrint("invoiceResponse error : $e");
+    }
+  }
+
   Future getPaymentRequestInvoiceData( paymentID)async {
     isLoading(true);
     try {
@@ -64,7 +91,7 @@ class PaymentController extends GetxController{
   }
 
   var invoiceDirectList = ClientDirectTransactionInvoiceModel().obs;
-  var invoicePaymentRequestDirectList = ClientPaymentRequestTransModel().obs;
+  var invoicePaymentRequestDirectList = ClientPaymentRequestModel().obs;
 
   // Direct Transaction Invoice Api
   Future getDirectInvoiceData(paymentID)async {
@@ -122,7 +149,7 @@ class PaymentController extends GetxController{
       );
       if(invoiceResponse.data['respnse_code']==200){
         isLoading(false);
-        invoicePaymentRequestDirectList.value = ClientPaymentRequestTransModel.fromJson(invoiceResponse.data);
+        invoicePaymentRequestDirectList.value = ClientPaymentRequestModel.fromJson(invoiceResponse.data);
         // debugPrint("invoiceDirect : ${invoiceDirectList.value.data?[0].status}");
       }else{
         isLoading(false);

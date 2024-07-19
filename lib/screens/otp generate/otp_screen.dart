@@ -5,6 +5,7 @@ import 'package:likhit/style/color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../common/widget/const_shimmer_effects.dart';
 import '../../common/widget/custom_app_bar.dart';
 import '../../const/const_height.dart';
 import '../../const/image_strings.dart';
@@ -48,8 +49,13 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
               children: [
                 Image.asset(logo, height: 160, width: 160,),
                  SizedBox(height: h30),
-                 const12Text(
-                   'Enter OTP sent to ${widget.email}',
+                 Row(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     const12Text(
+                       'Enter OTP sent to ${widget.email}',
+                     ).marginOnly(bottom: h10),
+                   ],
                  ),
                 SizedBox(height: h3,),
                 PinCodeTextField(
@@ -156,7 +162,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
           ),
         ),
       )),
-    ));
+    );
   }
 }
 

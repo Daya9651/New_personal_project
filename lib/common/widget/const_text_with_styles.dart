@@ -36,7 +36,7 @@ Text const12Text(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kCaption12RegularTextStyle
-        .copyWith(color: textColor, fontSize: h17),
+        .copyWith(color: textColor, fontSize: h15),
   );
 }
 

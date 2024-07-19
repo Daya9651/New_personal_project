@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:likhit/common/widget/const_shimmer_effects.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
-import 'package:likhit/screens/profile/widget/profile_card.dart';
 import 'package:likhit/style/color.dart';
-import 'package:likhit/utils/const_toast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -18,6 +15,7 @@ import '../splash/splash_screen.dart';
 
 class VerifyOtpPage extends StatefulWidget {
   final String email;
+
   // final String ?verifyByOtp;
 
   const VerifyOtpPage({ required this.email, });
@@ -120,33 +118,35 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  height: h40,
+                  height: h50,
+                  width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.indigo
-                  ),
+                      borderRadius: BorderRadius.circular(h10),
+                      color: Colors.indigo),
                   child: CustomButton(
                     color: Colors.white,
                     text: 'Continue',
                     onPressed: () {
-                      debugPrint("sending otp : ${widget.email} ,${otpController.text}");
-                      emailService.verifyByOtp(widget.email??"", otpController.text,context);
+                      debugPrint(
+                          "sending otp : ${widget.email} ,${otpController.text}");
+                      emailService.verifyByOtp(
+                          widget.email ?? "", otpController.text, context);
                       // Manual verification button if needed
-                    //   String enteredOTP = otpController.text.trim();
-                    //   // Perform OTP verification (replace with your actual logic)
-                    //   if (enteredOTP == otpController.text.length) {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const SplashScreen(), // Replace with your next page widget
-                    //       ),
-                    //     );
-                    //   } else if(enteredOTP == otpController.text.isEmpty) {
-                    // ConstToast.to.showError("Please enter the correct OTP.");
-                    //   } else {
-                    //     // Handle incorrect OTP scenario
-                    //     ConstToast.to.showError("Please enter the correct OTP.");
-                    //   }
+                      //   String enteredOTP = otpController.text.trim();
+                      //   // Perform OTP verification (replace with your actual logic)
+                      //   if (enteredOTP == otpController.text.length) {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => const SplashScreen(), // Replace with your next page widget
+                      //       ),
+                      //     );
+                      //   } else if(enteredOTP == otpController.text.isEmpty) {
+                      // ConstToast.to.showError("Please enter the correct OTP.");
+                      //   } else {
+                      //     // Handle incorrect OTP scenario
+                      //     ConstToast.to.showError("Please enter the correct OTP.");
+                      //   }
                     },
                   ),
                 ),
@@ -156,7 +156,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
           ),
         ),
       )),
-    );
+    ));
   }
 }
 

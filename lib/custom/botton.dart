@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:likhit/style/color.dart';
 
+import '../const/const_height.dart';
+
 class CustomButton extends StatelessWidget {
   final String text;
   final double? width;
@@ -15,12 +17,14 @@ class CustomButton extends StatelessWidget {
       required this.onPressed,
       this.color,
       this.backgroundColor,
-      this.backgroundFalse, this.width})
+      this.backgroundFalse,
+      this.width})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: h55,
       width: width,
       child: TextButton(
         onPressed: onPressed,
@@ -29,7 +33,7 @@ class CustomButton extends StatelessWidget {
           // backgroundFalse == false ? AppColors.info80 : backgroundColor,
           // elevation: 4,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         child: Text(

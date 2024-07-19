@@ -5,6 +5,7 @@ import 'package:likhit/const/const_height.dart';
 import 'package:likhit/custom/botton.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
+
 import '../../const/const_width.dart';
 import '../../const/image_strings.dart';
 import '../../service/loginApi.dart';
@@ -43,9 +44,8 @@ class SignInPage extends StatelessWidget {
                 const SizedBox(height: 70,),
                  Text(
                   'Log in or sign up to Likhit De',
-
-                  style: AppTextStyles.kBody15SemiBoldTextStyle,
-                ),
+                  style: AppTextStyles.kSmall10SemiBoldTextStyle,
+                ).marginOnly(bottom: h10, left: h15),
                 const SizedBox(height: 10.0),
                // TextField(
                //    decoration: InputDecoration(
@@ -94,15 +94,19 @@ class SignInPage extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(height:h5),
-                     Container(
-                    height: h40,
-                      margin: EdgeInsets.all(w2),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.indigo
-                      ),
-                      child: Obx(()=> emailService. isLoading.value? Center(child: const CircularProgressIndicator(color: AppColors.white,).paddingAll(w3)):CustomButton(
+                SizedBox(height: h5),
+                Container(
+                  height: h55,
+                  margin: EdgeInsets.all(w2),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.indigo),
+                  child: Obx(() => emailService.isLoading.value
+                      ? Center(
+                          child: const CircularProgressIndicator(
+                          color: AppColors.white,
+                        ).paddingAll(w3))
+                      : CustomButton(
                           text: 'Continue',
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

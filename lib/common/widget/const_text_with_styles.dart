@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../const/const_height.dart';
 import '../../style/color.dart';
 import '../../style/text_style.dart';
 
@@ -8,12 +9,15 @@ Text const17BoldText(String text, {Color textColor = AppColors.white100}) {
     text,
     style: AppTextStyles.kBody17SemiBoldTextStyle.copyWith(color: textColor),
   );
-}Text const17Text(String text, {Color textColor = AppColors.white100}) {
+}
+
+Text const17Text(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kBody17RegularTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const15BoldText(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
@@ -31,7 +35,8 @@ Text const15Text(String text, {Color textColor = AppColors.white100}) {
 Text const12Text(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
-    style: AppTextStyles.kCaption12RegularTextStyle.copyWith(color: textColor),
+    style: AppTextStyles.kCaption12RegularTextStyle
+        .copyWith(color: textColor, fontSize: h17),
   );
 }
 
@@ -41,46 +46,55 @@ Text const12TextBold(String text, {Color textColor = AppColors.white100}) {
     style: AppTextStyles.kCaption12SemiBoldTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const10TextBold(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall10SemiBoldTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const10Text(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall10RegularTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const8Text(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall8RegularTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const8TextBold(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall8SemiBoldTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const6Text(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall6RegularTextStyle.copyWith(color: textColor),
   );
 }
+
 Text const6TextBold(String text, {Color textColor = AppColors.white100}) {
   return Text(
     text,
     style: AppTextStyles.kSmall6SemiBoldTextStyle.copyWith(color: textColor),
   );
 }
-Text const6TextBoldUnderLine(String text, {Color textColor = AppColors.white100}) {
+
+Text const6TextBoldUnderLine(String text,
+    {Color textColor = AppColors.white100}) {
   return Text(
     text,
-    style: AppTextStyles.kSmall6SemiBoldTextStyle.copyWith(color: textColor,decoration: TextDecoration.lineThrough),
+    style: AppTextStyles.kSmall6SemiBoldTextStyle
+        .copyWith(color: textColor, decoration: TextDecoration.lineThrough),
   );
 }
 

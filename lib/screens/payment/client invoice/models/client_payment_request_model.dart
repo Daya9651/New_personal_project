@@ -96,7 +96,7 @@ class Lawyer {
   String? dob;
   String? about;
   String? gender;
-  Null servicesOffered;
+  String? servicesOffered;
   List<String>? specialties;
   String? experience;
   String? image;

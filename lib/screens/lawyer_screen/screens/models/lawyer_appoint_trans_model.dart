@@ -55,7 +55,7 @@ class Data {
   String? paymentMethod;
   double? paymentAmount;
   String? paymentStatus;
-  int? likhitDeCommission;
+  double? likhitDeCommission;
   double? gatewayCommission;
   double? splitCharge;
   double? likhitDeNetAmt;

@@ -53,7 +53,8 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
                 subItems: [
                   _buildDrawerSubItem('Direct Transactions', onTap: () {
                     Get.toNamed(ApplicationPages.clientTransaction);
-                  }, icons: Icons.category),_buildDrawerSubItem('Appointment Transactions', onTap: () {
+                  }, icons: Icons.category),
+                  _buildDrawerSubItem('Appointment Transactions', onTap: () {
                     Get.toNamed(ApplicationPages.lawyerAppointmentTransPage);
                   }, icons: Icons.category),
                   _buildDrawerSubItem('Payment Request', onTap: () {

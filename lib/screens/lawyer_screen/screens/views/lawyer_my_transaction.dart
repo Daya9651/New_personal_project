@@ -77,7 +77,7 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    Get.to(() => MyTransactionsInvoice(paymentId: int.parse(transaction.id.toString()),));
+                    Get.to(() => MyTransactionsInvoice(paymentId:transaction.id??0));
 
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),

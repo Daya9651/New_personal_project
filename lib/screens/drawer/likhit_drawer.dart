@@ -96,9 +96,25 @@ class LikhitDrawer extends GetView<LikhitDrawerController> {
               icon: Icons.logout,
               text: 'Logout',
               onTap: () {
-                UserDataService.removeUser().then((_){
-                  Get.offAllNamed(ApplicationPages.signUpPage);
-                });
+                askDialogForDelete(
+                    context: context,
+                    title: "Do you want to logout?",
+                    doneText: "Yes",
+                    onPressedDone: (){
+
+                      UserDataService.removeUser().then((_){
+                        Get.offAllNamed(ApplicationPages.signUpPage);
+                      });
+
+                      Navigator.pop(context);
+
+                    }
+
+                );
+
+
+
+
                 // Get.toNamed(ApplicationPages.settingPage);
                 // Handle settings navigation
               },

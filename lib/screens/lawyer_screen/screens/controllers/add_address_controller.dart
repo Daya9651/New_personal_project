@@ -40,6 +40,10 @@ RxInt selectedAddressId = 0.obs;
     ApiService.init();
     getAddressList();
     stateGet();
+    final args = Get.arguments;
+    if (args != null && args['addressId'] != null) {
+      // fetchAddressDetails(args['addressId']);
+    }
   }
   @override
   void onClose() {
@@ -48,6 +52,22 @@ RxInt selectedAddressId = 0.obs;
   }
 
   var selectedTitle = 'Home'.obs;
+
+  int getAddressType(String? addressType) {
+    switch (addressType) {
+      case "Home":
+        return 1;
+      case "Office":
+        return 2;
+      case "Other":
+        return 3;
+      default:
+        return 1;
+    }
+  }
+
+
+
 
   void setAddressType(int value, String title){
     addressType.value = value;
@@ -203,7 +223,42 @@ RxInt selectedAddressId = 0.obs;
         isLoading(false);
       ConstToast.to.showSuccess("${addressResponse.data['message']}");
         getAddressList();
-      clrControllers();
+      // clrControllers();
+      }else{
+        isLoading(false);
+      ConstToast.to.showError("${addressResponse.data['message']}");
+        getAddressList();
+      }
+
+
+    } catch (e) {
+      isLoading(false);
+      debugPrint("getAddressList error : $e");
+    }
+  }
+  Future updateAddress(id)async {
+    isLoading(true);
+    try {
+      dio.Response addressResponse = await ApiService.patchData(
+     url:      addressUrl,
+          data: {
+            'delhivery_address_id':id,
+            'address': addressController.value.text,
+            'address_type': selectedTitle.value.toLowerCase(),
+            'mobile_number': phoneController.value.text,
+            'pincode': pinController.value.text,
+            'name': nameController.value.text,
+            'city': city.value,
+            'country': "India",
+            'state': state.value,
+
+          }
+      );
+      if(addressResponse.data['response_code']==200){
+        isLoading(false);
+      ConstToast.to.showSuccess("${addressResponse.data['message']}");
+        getAddressList();
+      // clrControllers();
       }else{
         isLoading(false);
       ConstToast.to.showError("${addressResponse.data['message']}");

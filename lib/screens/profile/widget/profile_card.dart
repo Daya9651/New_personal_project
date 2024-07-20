@@ -264,7 +264,7 @@ Widget clientReview({
                 onTap: dislikeTap,
                 child: Icon(
                   Icons.thumb_down,
-                  color: AppColors.error40,
+                  color: Colors.redAccent,
                 ).marginOnly(right: h5)),
             Text("$dislike" ?? "0")
           ],

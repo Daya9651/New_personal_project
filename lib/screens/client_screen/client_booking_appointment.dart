@@ -343,28 +343,28 @@ class _ClientBookingAppointmentState extends State<ClientBookingAppointment>
                           );
                         }),
 
-                    const SizedBox(height: 10.0),
-                    ConstantContainer(
-                      child: TabBar(
-                          indicatorColor: Colors.white,
-                          labelColor: Colors.blue,
-                          controller: tabController,
-                          isScrollable: true,
-                          tabs: const [
-                            Tab(
-                              text: "Bar Association",
-                            ),
-                          ]),
-                    ),
-                    SizedBox(
-                      height: 300,
-                      child: TabBarView(
-                        controller: tabController,
-                        children: const [
-                          ClientBookingBarAssociation(),
-                        ],
-                      ),
-                    )
+                    // const SizedBox(height: 10.0),
+                    // ConstantContainer(
+                    //   child: TabBar(
+                    //       indicatorColor: Colors.white,
+                    //       labelColor: Colors.blue,
+                    //       controller: tabController,
+                    //       isScrollable: true,
+                    //       tabs: const [
+                    //         Tab(
+                    //           text: "Bar Association",
+                    //         ),
+                    //       ]),
+                    // ),
+                    // SizedBox(
+                    //   height: 300,
+                    //   child: TabBarView(
+                    //     controller: tabController,
+                    //     children: const [
+                    //       ClientBookingBarAssociation(),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),

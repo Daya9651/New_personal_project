@@ -15,6 +15,7 @@ import '../../../../../../common/widget/const_text_for_text_fields.dart';
 import '../../../../../../common/widget/const_text_with_styles.dart';
 import '../../../../../../const/const_width.dart';
 import '../../../../../../style/color.dart';
+import '../../../../../../utils/utils.dart';
 
 class ServiceOfferedPage extends GetView<LawyerProfileController> {
   const ServiceOfferedPage({super.key});
@@ -64,7 +65,19 @@ _addService(context,service: serviceList);
                           icon: const Icon(Icons.edit,color: AppColors.primary,),
                         ),
                         IconButton.filledTonal(onPressed: (){
-                          controller.deleteServiceData(serviceList?.id??0);
+
+                          askDialogForDelete(
+                              context: context,
+                              doneText: "Yes",
+                              onPressedDone: (){
+                                controller.deleteServiceData(serviceList?.id??0);
+
+                                Navigator.pop(context);
+
+                              }
+
+                          );
+
 
                         },
                           icon: const Icon(Icons.delete,color: Colors.redAccent,),

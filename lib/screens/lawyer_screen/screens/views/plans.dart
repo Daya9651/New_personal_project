@@ -40,9 +40,9 @@ class LawyerPlans extends GetView<LawyerPlansController> {
           onTap:controller.selectedPlanId.value != 0?(){
             // Get.toNamed(ApplicationPages.lawyerAllAddress, arguments: {'showSelectionButton': true,'planId': controller.selectedPlanId.value,});
           }:null,
-        "Buy Plan"
+        "Buy Card"
       ):constTextContainer(
-            "Buy Plan", onTap: (){
+            "Buy Card", onTap: (){
           Get.toNamed(ApplicationPages.lawyerAllAddress, arguments: {'showSelectionButton': true,'planId': controller.selectedPlanId.value,});
         }
         );

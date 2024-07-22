@@ -15,6 +15,7 @@ import '../../../../../../common/widget/const_text_for_text_fields.dart';
 import '../../../../../../common/widget/primary_button.dart';
 import '../../../../../../const/const_height.dart';
 import '../../../../../../const/const_width.dart';
+import '../../../../../../utils/utils.dart';
 
 class ContactInformationPage extends GetView<LawyerContactInfoController> {
   const ContactInformationPage({super.key});
@@ -71,7 +72,21 @@ class ContactInformationPage extends GetView<LawyerContactInfoController> {
             ],
           ),
           trailing: IconButton(onPressed: (){
-            controller.deleteContact(contactList?.id??0);
+
+            askDialogForDelete(
+                context: context,
+                doneText: "Yes",
+                onPressedDone: (){
+                  controller.deleteContact(contactList?.id??0);
+                  Navigator.pop(context);
+
+                }
+
+            );
+
+
+
+
 
           },
           icon: const Icon(Icons.delete,color: Colors.redAccent,),
@@ -102,7 +117,7 @@ class AddContactInfo extends GetView<LawyerContactInfoController> {
 
                 width: double.maxFinite,
                 ConstTextField(
-// maxLength: 10,
+              maxLength: 14,
                   inputType: TextInputType.number,
                   controller: controller.mobileController.value,
 

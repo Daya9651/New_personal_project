@@ -68,7 +68,7 @@ class BookAppointmentsPage extends GetView<BookingAppointmentController> {
             children: [
               ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: clientApiController
                       .lawyerBookDetailListData.value.data?.fees?.length,
                   itemBuilder: (context, index) {

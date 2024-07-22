@@ -13,8 +13,7 @@ import '../../const/const_height.dart';
 import '../../style/color.dart';
 import '../profile/widget/profile_card.dart';
 
-class ClientBookAppointmentTime
-    extends GetView<ClientBookAppointmentTimeController> {
+class ClientBookAppointmentTime    extends GetView<ClientBookAppointmentTimeController> {
   ClientBookAppointmentTime({super.key});
 
   ClientApiController clientApiController = Get.put(ClientApiController());
@@ -103,7 +102,7 @@ class ClientBookAppointmentTime
                 hintText: "Enter Your Phone",
                 inputType: TextInputType.number,
               ),
-              constText12SemiBold(text: "What is the call about ?"),
+              constText12SemiBold(text: "What is business about ?"),
               ConstTextField(
                 controller: controller.aboutController.value,
                 maxLine: 2,

@@ -14,6 +14,7 @@ import '../../../../../../common/widget/const_text_with_styles.dart';
 import '../../../../../../common/widget/custom_date_picker.dart';
 import '../../../../../../const/const_width.dart';
 import '../../../../../../style/color.dart';
+import '../../../../../../utils/utils.dart';
 
 class LawyerEducationPage extends GetView<LawyerProfileController> {
   const LawyerEducationPage({super.key});
@@ -66,7 +67,20 @@ class LawyerEducationPage extends GetView<LawyerProfileController> {
                               icon: Icon(Icons.edit,color: AppColors.primary,),
                             ),
                             IconButton.filledTonal(onPressed: (){
-                              controller.deleteLawyerEducation(serviceList?.id??0);
+                              askDialogForDelete(
+                                  context: context,
+                                  doneText: "Yes",
+                                  onPressedDone: (){
+                                    controller.deleteLawyerEducation(serviceList?.id??0);
+
+                                    Navigator.pop(context);
+
+                                  }
+
+                              );
+
+
+
 
                             },
                               icon: Icon(Icons.delete,color: Colors.redAccent,),

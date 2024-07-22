@@ -68,7 +68,7 @@ class LawyerAllAddress extends GetView<AddAddressController> {
           });
           // controller.buySelectedPlan(planId,controller.selectedAddressId.value);
         },
-          "Buy Plan"
+          "Buy Card"
       )
           : null,
 
@@ -116,14 +116,39 @@ class LawyerAllAddress extends GetView<AddAddressController> {
                       const6Text(" ${transaction.address} Pincode: ${transaction.pincode}"),
                       const6Text("City: ${transaction.city}"),
                       const6TextBold("${transaction.addressType}"),
-                      const6TextBold("${transaction.state}"),
+                      const6TextBold("State:${transaction.state}\nCountry:${transaction.country}"),
                       const8TextBold("Mobile : ${transaction.mobileNumber}"),
 
                     ],
                   ),
-                trailing: IconButton(onPressed: (){
-                  controller.deleteAddress(transaction.id);
-                }, icon: const Icon(Icons.delete_rounded,color: AppColors.hoverColor1,)),
+                trailing: SizedBox(
+                  width: w80,
+                  child: Row(
+                    children: [
+                      IconButton(onPressed: (){
+                        Get.toNamed(ApplicationPages.addressLawyerAddress,arguments: {
+                          "addressId":transaction
+                        });
+
+
+                      }, icon: const Icon(Icons.edit_rounded,color: AppColors.info80,)),
+                      IconButton(onPressed: (){
+
+                        askDialogForDelete(
+                            context: context,
+                            doneText: "Yes",
+                            onPressedDone: (){
+                              controller.deleteAddress(transaction.id);
+                              Navigator.pop(context);
+
+                            }
+
+                        );
+
+                      }, icon: const Icon(Icons.delete_rounded,color: AppColors.hoverColor1,)),
+                    ],
+                  ),
+                ),
               ),
             ));
           },
@@ -183,7 +208,7 @@ class LawyerAllAddress extends GetView<AddAddressController> {
                         });
                         Navigator.pop(context); // Close the bottom sheet
                       },
-                     'Buy Plan',
+                     'Buy Card',
                     ),
                   ],
                 ),

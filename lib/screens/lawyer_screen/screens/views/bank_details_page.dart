@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_dropdown.dart';
 import 'package:likhit/common/widget/const_shimmer_effects.dart';
@@ -14,8 +13,10 @@ import 'package:likhit/screens/lawyer_screen/screens/views/profile/controllers/l
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../common/widget/const_container.dart';
+import '../../../../common/widget/multi_select_chip.dart';
 import '../../../../const/const_width.dart';
 import '../../../../style/color.dart';
+import '../../../../utils/utils.dart';
 
 class BankDetailsPage extends GetView<LawyerBankController> {
   const BankDetailsPage({super.key});
@@ -79,13 +80,25 @@ class BankDetailsPage extends GetView<LawyerBankController> {
 
                         ));
                       },
-                        icon: Icon(Icons.edit,color: AppColors.info80,),
+                        icon: const Icon(Icons.edit,color: AppColors.info80,),
                       ),
                       IconButton.filledTonal(onPressed: (){
-                        controller.deleteBank(bankList?.id??0);
+
+                        askDialogForDelete(
+                          context: context,
+                          doneText: "Yes",
+                          onPressedDone: (){
+                            controller.deleteBank(bankList?.id??0);
+                            Navigator.pop(context);
+
+                          }
+
+                        );
+
+
 
                       },
-                        icon: Icon(Icons.delete,color: Colors.redAccent,),
+                        icon: const Icon(Icons.delete,color: Colors.redAccent,),
                       ),
                     ],
                   ),
@@ -158,7 +171,7 @@ class AddBankPage extends GetView<LawyerBankController> {
           ConstWidgets.constTextForTextFields("Account Number",
               width: double.maxFinite,ConstTextField(
             controller: controller.accNoController.value,
-            inputType: TextInputType.number,
+            // inputType: TextInputType.number,
 
           )),
           ConstWidgets.constTextForTextFields("IFSC Code",
@@ -167,17 +180,30 @@ class AddBankPage extends GetView<LawyerBankController> {
 
           )),
           ConstWidgets.constTextForTextFields("Account Type",
-              width: double.maxFinite,ConstantDropdown(
-          options: const [
-            "Current",
-            "Savings",
-            "Other",
-          ],
-            onChanged: (value){
-              controller.isSelectAccType.value = value;
-            },
+              width: double.maxFinite,Obx(()=>     SingleSelectChip(
+              options: const [  "Current",
+                "Savings",
+                "Other",
+              ],
+              selectedOptions: controller.isSelectAccType.value,
+              onSelectionChanged: (value) {
+                controller.selectAccountType(value);
+              },
+            )),),
 
-          )),
+
+          // ConstWidgets.constTextForTextFields("Account Type",
+          //     width: double.maxFinite,ConstantDropdown(
+          // options: const [
+          //   "Current",
+          //   "Savings",
+          //   "Other",
+          // ],
+          //   onChanged: (value){
+          //     controller.isSelectAccType.value = value;
+          //   },
+          //
+          // )),
           ConstWidgets.constTextForTextFields("MICR Code",
               width: double.maxFinite,ConstTextField(
                 inputType: TextInputType.number,

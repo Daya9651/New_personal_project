@@ -76,7 +76,7 @@ class ClientLawyerList extends StatelessWidget {
                       title: listData?.name.toString() ?? '',
                       workspaceText: listData?.specialties?.join(', ') ?? '',
                       languageText: listData?.languageSpoken?.join(', ') ?? '',
-                      expText: listData?.experience.toString() ?? '',
+                      expText: '${listData?.experience.toString()} Year' ?? '',
                       locationText: listData?.address.toString() ?? '');
                 }
               });

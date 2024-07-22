@@ -64,6 +64,10 @@ File? get qrImage => qrImageFile.value;
     }
   }
 
+  void selectAccountType(value){
+    isSelectAccType.value = value;
+  }
+
   Future<void> addBankLawyer() async {
     if (qrImage== null ) {
       ConstToast.to.showError('Qr image is required');

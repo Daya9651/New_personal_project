@@ -13,6 +13,7 @@ class ConstantDropdown extends StatefulWidget {
   final Color? dropdownColor;
   final Color? textColor;
   final String? hint;
+  final String? value;
   final FocusNode? focusNode;
 
   const ConstantDropdown({
@@ -23,7 +24,7 @@ class ConstantDropdown extends StatefulWidget {
     this.dropdownColor,
     this.textColor,
     this.hint,
-    this.focusNode,
+    this.focusNode, this.value,
   });
 
   @override
@@ -78,7 +79,7 @@ class _ConstantDropdownState extends State<ConstantDropdown> {
               return null;
             },
             dropdownColor: widget.dropdownColor ?? AppColors.white,
-            value: null,
+            value:widget.value?? null,
             // value: widget.options.isNotEmpty ? widget.options.first : null,
             // Set default value to "Cash"
             onChanged: widget.onChanged,

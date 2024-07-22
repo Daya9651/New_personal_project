@@ -1,11 +1,16 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:likhit/common/widget/const_shimmer_effects.dart';
+import "package:http/http.dart" as http;
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
 import 'package:likhit/const/const_width.dart';
 import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:printing/printing.dart';
 
 import '../../../common/widget/custom_app_bar.dart';
 import '../../../helpers/string_to_date_function.dart';
@@ -21,19 +26,389 @@ class MyTransactionsInvoice extends StatefulWidget {
 
 class _InvoicingState extends State<MyTransactionsInvoice> {
   PaymentController controller = Get.put(PaymentController());
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    controller.getMyTransactionLawyerInvoice(widget.paymentId);
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller.getMyTransactionLawyerInvoice(widget.paymentId);
+  // }
+
+  Future<void> generateKotKitchenPdf({
+    String invoiceDate = "1",
+    String invoiceNo="1",
+    String customerName="Daya Kumar",
+    List<int> ?quantities ,
+    bool isKitchenBill = true,
+    bool isA4Size = true,
+  }) async {
+    final fontData = await rootBundle.load('assets/fonts/Roboto-Black.ttf');
+    final ttf = pw.Font.ttf(fontData);
+    String? storeQr = "";
+    // String? storeQr = profileStoreController.profile.value?.upiCode;
+
+    if (!storeQr.startsWith('http')) {
+      storeQr = 'https://$storeQr';
+    }
+
+    pw.MemoryImage? image;
+    try {
+      final imageBytes = await http.get(Uri.parse(storeQr));
+      image = pw.MemoryImage(
+        imageBytes.bodyBytes,
+      );
+    } catch (e) {
+      // Use asset image as fallback
+      final placeholderImageData = await rootBundle.load(logo);
+      image = pw.MemoryImage(
+        placeholderImageData.buffer.asUint8List(),
+      );
+    }
+    final pdf = pw.Document();
+    List<pw.Widget> productRows = [];
+    constText(name, {double? fontSize}) {
+      return pw.Text(
+        '$name',
+        style: pw.TextStyle(
+          font: ttf,
+          fontSize: fontSize ?? 10,
+        ),
+      );
+    }
+    constPrintDivider() {
+      return pw.Divider(color: PdfColors.black, thickness: 0.03);
+    }
+
+    productRows.add(
+      pw.Container(
+        decoration: const pw.BoxDecoration(
+          border: pw.Border(
+            bottom: pw.BorderSide(color: PdfColors.black),
+          ),
+        ),
+        padding: const pw.EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        child: pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
+          children: [
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                'Service',
+                maxLines: 1,
+                softWrap: false,
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                'Lawyer\nAmount',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                'LikhitDe\nAmount',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                'Payment\nMethod',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                'Total\nAmount',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    productRows.add(
+      pw.Center(child:pw.Container(
+        padding: const pw.EdgeInsets.symmetric(vertical: 5, horizontal: 5,),
+        child: pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
+          children:  [
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.servicesOffered}',
+                maxLines: 1,
+                softWrap: false,
+
+              ),
+            ),
+
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                "${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}",
+                maxLines: 1,
+                softWrap: false,
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}',
+                maxLines: 1,
+                softWrap: false,
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId}',
+              ),
+            ),
+            pw.Expanded(
+              flex: 1,
+              child: pw.Text(
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}',
+              ),
+            ),
+          ],
+        ),
+      ),
+      ),
+    );
+
+    pw.Divider();
+    pdf.addPage(
+      pw.MultiPage(
+        // pageFormat: pageFormat,
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return <pw.Widget>[
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        "LikhitDe",
+                        style: pw.TextStyle(
+                          fontSize: 20,
+                          fontWeight: pw.FontWeight.bold,
+                          font: ttf,
+                        ),
+                      ),
+                      constText('Lawyer Name: ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.name}', fontSize: 15),
+                      constText('City : ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.city}'),
+                      constText('State : ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.state}'),
+                      constText('Country : ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.country}'),
+                      constText('Mob No : ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.mobile}'),
+                      constText('Area : ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.address}'),
+                    ]
+                ),
+                pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        "Payment Invoice",
+                        style: pw.TextStyle(
+                          fontSize: 20,
+                          fontWeight: pw.FontWeight.bold,
+                          font: ttf,
+                        ),
+                      ),
+                      constText('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId}', fontSize: 12),
+                    ]
+                ),
+              ],
+            ),
+            pw.Divider(),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        "Bill To",
+                        style: pw.TextStyle(
+                          fontSize: 20,
+                          fontWeight: pw.FontWeight.bold,
+                          font: ttf,
+                        ),
+                      ),
+                      constText('Customer :  ${controller.invoiceList.value.data?.client?.name}', fontSize: 15),
+                      constText('Area : ${controller.invoiceList.value.data?.client?.address}'),
+                      constText('City : ${controller.invoiceList.value.data?.client?.city}'),
+                      constText('Country : ${controller.invoiceList.value.data?.client?.country}'),
+                      constText('State : ${controller.invoiceList.value.data?.client?.state}'),
+                    ]
+                ),
+                pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      constText('Invoice Date ', fontSize: 12),
+                      constText('${controller.invoiceList.value.data?.createdDate}', fontSize: 9),
+                      constText('Reference# : ', fontSize: 12),
+                      constText('${controller.invoiceList.value.data?.paymentNo}', fontSize: 9),
+                    ]
+                ),
+              ],
+            ),
+            pw.Divider(),
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: productRows,
+            ),
+            pw.SizedBox(height: 10),
+            constPrintDivider(),
+            pw.Container(
+              margin: const pw.EdgeInsets.only(left: 140),
+              child:pw.Column(
+                children: [
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(
+                        'Split GST',
+                      ),
+                      pw.Text('${controller.invoiceList.value.data?.splitGstAmt?.toStringAsFixed(2)}')
+                    ],
+                  ),
+                  pw.Divider(),
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(
+                        'LikhitDe GST',
+                      ),
+                      pw.Text('${controller.invoiceList.value.data?.likhitGstAmt}')
+                    ],
+                  ),
+                  pw.Divider(
+                    // color: Colors.black,
+                  ),
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text('Gateway Charge'),
+                      pw.Text('${controller.invoiceList.value.data?.getwayAmt.toString()}'),
+                    ],
+                  ),
+                  pw.Divider(),
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(
+                        'LikhitDe Payable Amount',
+                        // style: AppTextStyles.kSmall8SemiBoldTextStyle,
+                      ),
+                      pw.Text(((controller.invoiceList.value.data?.likhitDeNetAmt ?? 0) * 10 / 100).toString()),
+                    ],
+                  ),
+                  pw.Divider(
+                    // color: Colors.black,
+                  ),
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(
+                        'Lawyer Payable Amount',
+                        // style: AppTextStyles.kSmall8SemiBoldTextStyle,
+                      ),
+                      pw.Text('${controller.invoiceList.value.data?.paymentAmount.toString()}'),
+                    ],
+                  ),
+                  pw.Divider(
+                    // color: Colors.black,
+                  ),
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(
+                        'Total Amount',
+                        // style: pw.AppTextStyles.kSmall8SemiBoldTextStyle,
+                      ),
+                      pw.Text('${controller.invoiceList.value.data?.paymentAmount.toString()}',
+                        // style: AppTextStyles.kSmall8SemiBoldTextStyle
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            pw.SizedBox(height: 20),
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              mainAxisAlignment: pw.MainAxisAlignment.start,
+              children: [
+                pw.Text('Terms and Conditions', style: pw.TextStyle(
+                  fontSize: 26,
+                  fontWeight: pw.FontWeight.bold,
+                  font: ttf,
+                ),),
+                pw.Text('Pay according  to Terms and conditions.', style: const pw.TextStyle(
+                  fontSize: 20,
+                ),),
+              ],
+            ),
+          ];
+        },
+      ),
+    );
+
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+    final String path = '$dir/Kot$invoiceNo.pdf';
+    final file = File(path);
+    if (await file.exists()) {
+      await file.delete();
+    }
+    await file.writeAsBytes(await pdf.save());
+    await file.writeAsBytes(await pdf.save());
+    final pdfFile = File(path);
+    await Printing.layoutPdf(onLayout: (_) => pdfFile.readAsBytes());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBar(
-        title: 'Invoices',
+      appBar: CustomAppBar(
+        title: 'Invoices.....Daya',
+        actions: [
+          IconButton(onPressed: ()async {
+            await generateKotKitchenPdf();
+            // Optionally, show a message or perform additional actions after PDF generation
+          },
+              icon: const Icon(Icons.download, color: AppColors.white,)
+          )],
       ),
       body:
       Obx(()
@@ -93,14 +468,6 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                     Text(
                         'Area : ${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.address.toString()}'),
                   ],
-                ),
-                TextButton(
-                  onPressed: () async {
-                    // await generateInvoicePdf(widget.paymentId);
-                    // Optionally, show a message or perform additional actions after PDF generation
-
-                  },
-                  child: const Text('Download'),
                 ),
               ],
             ),

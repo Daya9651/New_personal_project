@@ -146,7 +146,7 @@ class ApplicationPages {
 
     GetPage(
       name: lawyerMyTransaction,
-      page: () =>  const LawyerMyTransaction(),
+      page: () =>   LawyerMyTransaction(),
       binding: LawyerMyTransactionBindings()
     ),
     GetPage(
@@ -162,7 +162,7 @@ class ApplicationPages {
 
     GetPage(
       name: lawyerTransaction,
-      page: () =>  const LawyerMyTransaction(),
+      page: () =>   LawyerMyTransaction(),
       binding: LawyerTransactionBinding()
     ),
     GetPage(

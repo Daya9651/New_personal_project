@@ -5,6 +5,7 @@ import 'package:likhit/common/widget/const_container.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_with_styles.dart';
 import 'package:likhit/common/widget/custom_app_bar.dart';
+import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../common/widget/const_shimmer_effects.dart';
 import '../../../../const/const_height.dart';
@@ -15,7 +16,9 @@ import '../../../payment/laywer Invoice/my_transactions_invoice.dart';
 import '../controllers/lawyer_my_transaction_controller.dart';
 
 class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
-  const LawyerMyTransaction({super.key});
+   LawyerMyTransaction({super.key});
+
+  PaymentController pyController = Get.put(PaymentController());
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +80,9 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    Get.to(() => MyTransactionsInvoice(paymentId:transaction.id??0));
-
+                    pyController.getMyTransactionLawyerInvoice(paymentID: transaction.id??0);
+                    Get.to(() => MyTransactionsInvoice(paymentId:int.parse(transaction.id.toString()),));
+                     debugPrint('DayaID ${transaction.id??0}');
                   },
                   icon: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
                 ),

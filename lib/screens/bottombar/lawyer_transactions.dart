@@ -37,7 +37,7 @@ class LawyerTransactionPage extends GetView<LawyerTransactionControllers> {
         ),
 body:    IndexedStack(
   index: controller.currentIndex.value,
-  children: const [
+  children:  [
     ClientTransaction(),
     LawyerMyTransaction(),
     Text("sds"),

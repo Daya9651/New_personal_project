@@ -9,6 +9,7 @@ import 'package:likhit/style/text_style.dart';
 import '../../const/const_width.dart';
 import '../../const/image_strings.dart';
 import '../../service/loginApi.dart';
+import '../../testing_purpose.dart';
 
 class SignInPage extends StatelessWidget {
 
@@ -113,6 +114,9 @@ class SignInPage extends StatelessWidget {
                               String email = emailController.text.trim();
                               if (email.isNotEmpty) {
                                 emailService.sendOtp(email, context); // Assuming emailService is correctly implemented
+
+                                // generateKotKitchenPdf();
+
                                 // Clear the email field
                                 // Navigate to the VerifyOtpPage after OTP is sent
 

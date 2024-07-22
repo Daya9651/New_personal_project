@@ -45,7 +45,7 @@ class PaymentController extends GetxController{
 
 
   var getMyTransactionLawyerInvoiceList = ClientPaymentRequestModel().obs;
-  Future getMyTransactionLawyerInvoice( paymentID)async {
+  Future getMyTransactionLawyerInvoice({int? paymentID})async {
     isLoading(true);
     try {
       dio.Response invoiceResponse = await ApiService.getData(

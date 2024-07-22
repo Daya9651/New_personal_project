@@ -19,18 +19,18 @@ class BottomNavController extends GetxController {
     const HomePage(),
     const Contracts(),
     const LawyerTransactionPage(),
-    LawyerProfile(),
+    const LawyerProfile(),
   ];
   final clientScreen = [
     Center(child: const12TextBold("Coming Soon")),
-    Center(child: const12TextBold("Coming Soon")),
+    Contracts(),
     Center(child: const12TextBold("Coming Soon")),
     Center(child: const12TextBold("Coming Soon")),
   ];
 
   List<String> titleNames = [
     "Home",
-    "Appointments",
+    "Contracts",
     "Transactions",
     "Profile",
   ];
@@ -39,18 +39,16 @@ class BottomNavController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    lawyerProfileController.getProfileData().then((_){
-
-    getUserType();
+    lawyerProfileController.getProfileData().then((_) {
+      getUserType();
     });
   }
-    refreshData(){
-      lawyerProfileController.   getProfileData();
 
-        getUserType();
+  refreshData() {
+    lawyerProfileController.getProfileData();
 
-    }
-
+    getUserType();
+  }
 
   void onItemTapped(int index) {
     selectedIndex.value = index;

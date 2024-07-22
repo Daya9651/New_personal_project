@@ -59,7 +59,7 @@ Widget contractGridCard({String? text, String? date}) {
             date ?? '',
             style: AppTextStyles.kSmall8RegularTextStyle,
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             children: [
               Container(

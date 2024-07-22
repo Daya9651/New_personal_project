@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:likhit/common/widget/const_dropdown.dart';
 import 'package:likhit/custom/botton.dart';
+import 'package:likhit/routes/routes.dart';
 import 'package:likhit/style/color.dart';
 import 'package:likhit/style/text_style.dart';
 
 import '../../../const/const_height.dart';
 
-class ClientContractDetail extends StatelessWidget {
-  const ClientContractDetail({super.key});
+class LawyerContractDetail extends StatelessWidget {
+  const LawyerContractDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class ClientContractDetail extends StatelessWidget {
                 width: double.maxFinite,
                 child: CustomButton(
                   text: 'BEGIN',
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(ApplicationPages.lawyerPromise);
+                  },
                   color: AppColors.white,
                 ))
           ],

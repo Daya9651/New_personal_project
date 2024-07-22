@@ -8,8 +8,8 @@ import 'package:likhit/style/text_style.dart';
 
 import '../../../const/const_height.dart';
 
-class ClientContracts extends StatelessWidget {
-  const ClientContracts({super.key});
+class LawyerContracts extends StatelessWidget {
+  const LawyerContracts({super.key});
 
   @override
   Widget build(BuildContext context) {

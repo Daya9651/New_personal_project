@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:likhit/screens/client_screen/client_contracts_screen/client_contract_detail.dart';
 import 'package:likhit/screens/client_screen/client_profile.dart';
 import 'package:likhit/screens/client_screen/services/bindings/client_appointment_bindings.dart';
 import 'package:likhit/screens/lawyer_screen/screens/bindings/lawyer_address_bindings.dart';
@@ -27,13 +26,15 @@ import '../screens/bottombar/bindings/lawyer_transaction_binding.dart';
 import '../screens/bottombar/bottombar.dart';
 import '../screens/client_screen/client_appointment_list.dart';
 import '../screens/client_screen/client_book_appointment_time.dart';
-import '../screens/client_screen/client_contracts_screen/client_contracts.dart';
 import '../screens/client_screen/client_edit_profile.dart';
 import '../screens/client_screen/client_lawyer_list.dart';
 import '../screens/client_screen/services/bindings/client_side_client_trans_bindings.dart';
 import '../screens/client_screen/widget/client_appointment_transaction.dart';
 import '../screens/client_screen/widget/client_payments_request_trans_page.dart';
 import '../screens/client_screen/widget/client_side_client_transaction.dart';
+import '../screens/lawyer_screen/lawyer_contracts_screen/lawyer_contract_detail.dart';
+import '../screens/lawyer_screen/lawyer_contracts_screen/lawyer_contracts.dart';
+import '../screens/lawyer_screen/lawyer_contracts_screen/promise_contract.dart';
 import '../screens/lawyer_screen/screens/bindings/client_transaction_binding.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_appointment_bindings.dart';
 import '../screens/lawyer_screen/screens/bindings/lawyer_contact_info_binding.dart';
@@ -75,6 +76,8 @@ class ApplicationPages {
   static const lawyerBankPage = '/lawyerBankPage';
   static const lawyerContactInfoPage = '/lawyerContactInfoPage';
   static const lawyerAppointmentTransPage = '/lawyerAppointmentTransPage';
+
+  static const lawyerPromise = '/lawyerPromise';
 
   //todo pending review
   static const pendingReview = '/pendingReview';
@@ -229,9 +232,11 @@ class ApplicationPages {
             page: () => ClientEditProfile(),
             binding: ClientEditProfileBindings()),
 
-        GetPage(name: clientContract, page: () => const ClientContracts()),
+        GetPage(name: clientContract, page: () => const LawyerContracts()),
         GetPage(
             name: clientContractDetail,
-            page: () => const ClientContractDetail())
+            page: () => const LawyerContractDetail()),
+
+        GetPage(name: lawyerPromise, page: () => const PromiseContract())
       ];
 }

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:likhit/common/widget/const_dropdown.dart';
 import 'package:likhit/common/widget/const_shimmer_effects.dart';
 import 'package:likhit/common/widget/const_text_field.dart';
 import 'package:likhit/common/widget/const_text_for_text_fields.dart';
@@ -24,90 +23,89 @@ class BankDetailsPage extends GetView<LawyerBankController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         title: "Bank Details",
         actions: [
-          constTextContainer("Add Bank",onTap: (){
+          constTextContainer("Add Bank", onTap: () {
             Get.to(const AddBankPage());
           })
         ],
       ),
-      body:Obx(()=>controller.isLoading.value?Shimmer.fromColors(
-        baseColor: baseColor,
-        highlightColor: highLightColor,
-        child: loadSke(),
-      ):ListView.builder(
-
-        itemCount: controller.lawyerBankList.value.data?.length,
-
-          itemBuilder: (context,index){
-
-          var bankList = controller.lawyerBankList.value.data?[index];
-          return  ConstantContainer(
-            radiusBorder: w5,
-            borderColor: AppColors.white50,
-            padding: w3,
-            child: ListTile(
-                    title: const6TextBold("${bankList?.accountHolderName.toString().toUpperCase()}"),
-                    subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const6Text("A/C:${bankList?.accountNumber}"),
-              const6Text("IFSC:${bankList?.ifscCode}"),
-            ],
-                    ),
-
-
-
-                trailing:    SizedBox(
-                  width: w80,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton.filledTonal(onPressed: (){
-                        Get.to(AddBankPage(
-                          id: bankList?.id,
-                          accountNumber: bankList?.accountNumber.toString(),
-                          accountHolderName: bankList?.accountHolderName,
-                          qrImage: bankList?.qrCode,
-                          ifscCode: bankList?.ifscCode,
-                          accountType: bankList?.accountType,
-                          bankName: bankList?.bankName,
-                          micrCode: bankList?.micrCode.toString(),
-                          upiId: bankList?.upiId.toString(),
-
-
-
-                        ));
-                      },
-                        icon: const Icon(Icons.edit,color: AppColors.info80,),
+      body: Obx(() => controller.isLoading.value
+          ? Shimmer.fromColors(
+              baseColor: baseColor,
+              highlightColor: highLightColor,
+              child: loadSke(),
+            )
+          : ListView.builder(
+              itemCount: controller.lawyerBankList.value.data?.length,
+              itemBuilder: (context, index) {
+                var bankList = controller.lawyerBankList.value.data?[index];
+                return ConstantContainer(
+                  radiusBorder: w5,
+                  borderColor: AppColors.white50,
+                  padding: w3,
+                  child: ListTile(
+                      title: const6TextBold(
+                          "${bankList?.accountHolderName.toString().toUpperCase()}"),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const6Text("A/C:${bankList?.accountNumber}"),
+                          const6Text("IFSC:${bankList?.ifscCode}"),
+                        ],
                       ),
-                      IconButton.filledTonal(onPressed: (){
-
-                        askDialogForDelete(
-                          context: context,
-                          doneText: "Yes",
-                          onPressedDone: (){
-                            controller.deleteBank(bankList?.id??0);
-                            Navigator.pop(context);
-
-                          }
-
-                        );
-
-
-
-                      },
-                        icon: const Icon(Icons.delete,color: Colors.redAccent,),
-                      ),
-                    ],
-                  ),
-                )
-                  ),
-          );})),
+                      trailing: SizedBox(
+                        width: w80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            // todo edit button remove
+                            // IconButton.filledTonal(
+                            //   onPressed: () {
+                            //     Get.to(AddBankPage(
+                            //       id: bankList?.id,
+                            //       accountNumber:
+                            //           bankList?.accountNumber.toString(),
+                            //       accountHolderName:
+                            //           bankList?.accountHolderName,
+                            //       qrImage: bankList?.qrCode,
+                            //       ifscCode: bankList?.ifscCode,
+                            //       accountType: bankList?.accountType,
+                            //       bankName: bankList?.bankName,
+                            //       micrCode: bankList?.micrCode.toString(),
+                            //       upiId: bankList?.upiId.toString(),
+                            //     ));
+                            //   },
+                            //   icon: const Icon(
+                            //     Icons.edit,
+                            //     color: AppColors.info80,
+                            //   ),
+                            // ),
+                            IconButton.filledTonal(
+                              onPressed: () {
+                                askDialogForDelete(
+                                    context: context,
+                                    doneText: "Yes",
+                                    onPressedDone: () {
+                                      controller.deleteBank(bankList?.id ?? 0);
+                                      Navigator.pop(context);
+                                    });
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                );
+              })),
     );
   }
 }
+
 class AddBankPage extends GetView<LawyerBankController> {
   final int? id;
   final String? accountHolderName;
@@ -118,6 +116,7 @@ class AddBankPage extends GetView<LawyerBankController> {
   final String? micrCode;
   final String? upiId;
   final String? qrImage;
+
   const AddBankPage({
     super.key,
     this.id,
@@ -145,96 +144,109 @@ class AddBankPage extends GetView<LawyerBankController> {
     }
 
     return Scaffold(
-      appBar:  const CustomAppBar(
-        title: "Bank Details",
-      
-      ),
-      body:Obx(()=> controller.isLoading.value? Center(child: Shimmer.fromColors(
-        baseColor: baseColor,
-        highlightColor: highLightColor,
-        child: loadSke(),
-      ),): ListView(
-        children: [
-          ConstWidgets.constTextForTextFields("Account Holder Name",
+        appBar: const CustomAppBar(
+          title: "Bank Details",
+        ),
+        body: Obx(() => controller.isLoading.value
+            ? Center(
+                child: Shimmer.fromColors(
+                  baseColor: baseColor,
+                  highlightColor: highLightColor,
+                  child: loadSke(),
+                ),
+              )
+            : ListView(
+                children: [
+                  ConstWidgets.constTextForTextFields(
+                      "Account Holder Name",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        controller: controller.nameController.value,
+                      )),
+                  ConstWidgets.constTextForTextFields(
+                      "Bank Name",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        controller: controller.bankNameController.value,
+                        width: double.maxFinite,
+                      )),
+                  ConstWidgets.constTextForTextFields(
+                      "Account Number",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        controller: controller.accNoController.value,
+                        // inputType: TextInputType.number,
+                      )),
+                  ConstWidgets.constTextForTextFields(
+                      "IFSC Code",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        controller: controller.ifscController.value,
+                      )),
+                  ConstWidgets.constTextForTextFields(
+                    "Account Type",
+                    width: double.maxFinite,
+                    Obx(() => SingleSelectChip(
+                          options: const [
+                            "Current",
+                            "Savings",
+                            "Other",
+                          ],
+                          selectedOptions: controller.isSelectAccType.value,
+                          onSelectionChanged: (value) {
+                            controller.selectAccountType(value);
+                          },
+                        )),
+                  ),
 
-              width: double.maxFinite,
-              ConstTextField(
-
-            controller: controller.nameController.value,
-
-          )),
-          ConstWidgets.constTextForTextFields("Bank Name",
-              width: double.maxFinite,ConstTextField(
-            controller: controller.bankNameController.value,
-            width: double.maxFinite,
-          )),
-          ConstWidgets.constTextForTextFields("Account Number",
-              width: double.maxFinite,ConstTextField(
-            controller: controller.accNoController.value,
-            // inputType: TextInputType.number,
-
-          )),
-          ConstWidgets.constTextForTextFields("IFSC Code",
-              width: double.maxFinite,ConstTextField(
-            controller: controller.ifscController.value,
-
-          )),
-          ConstWidgets.constTextForTextFields("Account Type",
-              width: double.maxFinite,Obx(()=>     SingleSelectChip(
-              options: const [  "Current",
-                "Savings",
-                "Other",
-              ],
-              selectedOptions: controller.isSelectAccType.value,
-              onSelectionChanged: (value) {
-                controller.selectAccountType(value);
-              },
-            )),),
-
-
-          // ConstWidgets.constTextForTextFields("Account Type",
-          //     width: double.maxFinite,ConstantDropdown(
-          // options: const [
-          //   "Current",
-          //   "Savings",
-          //   "Other",
-          // ],
-          //   onChanged: (value){
-          //     controller.isSelectAccType.value = value;
-          //   },
-          //
-          // )),
-          ConstWidgets.constTextForTextFields("MICR Code",
-              width: double.maxFinite,ConstTextField(
-                inputType: TextInputType.number,
-            controller: controller.micrController.value,
-
-          )),
-          ConstWidgets.constTextForTextFields("UPI Id",
-              width: double.maxFinite,ConstTextField(
-            controller: controller.upiController.value,
-
-          )), ConstWidgets.constTextForTextFields("QR Image",
-              width: double.maxFinite,ConstTextField(
-            onTap: (){
-              controller.getQrImage();
-            },
-                hintText: controller.qrImage==null?"Select Qr Image":controller.qrImage.toString(),
-            readyOnly: true,
-            controller: TextEditingController(text: '${controller.qrImage??""}'),
-
-          )),
-          constTextContainer(
-              id != null ? "Update Bank" : "Add Bank",
-              onTap: () {
-                if (id != null) {
-                  controller.updateBankDetails(id??0);
-                } else {
-                  controller.addBankLawyer();
-                }
-              })
-        ],
-      ))
-    );
+                  // ConstWidgets.constTextForTextFields("Account Type",
+                  //     width: double.maxFinite,ConstantDropdown(
+                  // options: const [
+                  //   "Current",
+                  //   "Savings",
+                  //   "Other",
+                  // ],
+                  //   onChanged: (value){
+                  //     controller.isSelectAccType.value = value;
+                  //   },
+                  //
+                  // )),
+                  ConstWidgets.constTextForTextFields(
+                      "MICR Code",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        inputType: TextInputType.number,
+                        controller: controller.micrController.value,
+                      )),
+                  ConstWidgets.constTextForTextFields(
+                      "UPI Id",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        controller: controller.upiController.value,
+                      )),
+                  ConstWidgets.constTextForTextFields(
+                      "QR Image",
+                      width: double.maxFinite,
+                      ConstTextField(
+                        onTap: () {
+                          controller.getQrImage();
+                        },
+                        hintText: controller.qrImage == null
+                            ? "Select Qr Image"
+                            : controller.qrImage.toString(),
+                        readyOnly: true,
+                        controller: TextEditingController(
+                            text: '${controller.qrImage ?? ""}'),
+                      )),
+                  constTextContainer(id != null ? "Update Bank" : "Add Bank",
+                      onTap: () {
+                    if (id != null) {
+                      controller.updateBankDetails(id ?? 0);
+                    } else {
+                      controller.addBankLawyer();
+                    }
+                  })
+                ],
+              )));
   }
 }

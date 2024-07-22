@@ -23,7 +23,7 @@ class BottomNavController extends GetxController {
   ];
   final clientScreen = [
     Center(child: const12TextBold("Coming Soon")),
-    Contracts(),
+    const Contracts(),
     Center(child: const12TextBold("Coming Soon")),
     Center(child: const12TextBold("Coming Soon")),
   ];

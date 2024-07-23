@@ -37,6 +37,8 @@ class UserAddProfile extends StatelessWidget {
               ConstTextField(
                 controller: controller.phoneController.value,
                 hintText: "Enter Phone",
+                inputType: TextInputType.number,
+                maxLength: 10,
               ),
               constText12SemiBold(text: "dob"),
               ConstTextField(

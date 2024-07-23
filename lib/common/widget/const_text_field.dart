@@ -12,6 +12,7 @@ class ConstTextField extends StatelessWidget {
   final Color? enableBorderColor;
   final TextEditingController? controller;
   final Widget? suffix;
+  final Widget? prefix;
   final TextInputType? inputType;
   final int? maxLength;
   final int? maxLine;
@@ -80,6 +81,7 @@ class ConstTextField extends StatelessWidget {
     this.borderRadius,
     this.width,
     this.padding,
+    this.prefix,
   });
 
   @override
@@ -120,6 +122,7 @@ class ConstTextField extends StatelessWidget {
           filled: filled,
           fillColor: fillColor,
           hoverColor: AppColors.success100,
+          prefix: prefix,
           suffix: suffix,
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,

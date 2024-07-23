@@ -20,7 +20,7 @@ class _ContractsState extends State<Contracts> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.info80,
         onPressed: () {
-          Get.toNamed(ApplicationPages.clientContract);
+          Get.toNamed(ApplicationPages.lawyerContract);
         },
         child: const Icon(
           Icons.add,

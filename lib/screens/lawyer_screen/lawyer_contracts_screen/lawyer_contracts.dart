@@ -23,7 +23,7 @@ class LawyerContracts extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  Get.toNamed(ApplicationPages.clientContractDetail);
+                  Get.toNamed(ApplicationPages.lawyerContractDetail);
                 },
                 child: contractCard(
                     title: 'Promise',

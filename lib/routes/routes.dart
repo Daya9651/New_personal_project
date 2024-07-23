@@ -88,6 +88,13 @@ class ApplicationPages {
 
   static const clientEditProfile = '/clientEditProfile';
 
+  static const lawyerContract = '/clientContract';
+  static const lawyerContractDetail = '/clientContractDetail';
+  static const lawyerPromise = '/lawyerPromise';
+
+
+
+
   static List<GetPage>? getApplicationPages() => [
 
 
@@ -270,9 +277,9 @@ class ApplicationPages {
             page: () => ClientEditProfile(),
             binding: ClientEditProfileBindings()),
 
-        GetPage(name: clientContract, page: () => const LawyerContracts()),
+        GetPage(name: lawyerContract, page: () => const LawyerContracts()),
         GetPage(
-            name: clientContractDetail,
+            name: lawyerContractDetail,
             page: () => const LawyerContractDetail()),
 
         GetPage(name: lawyerPromise, page: () => const PromiseContract())

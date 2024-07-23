@@ -59,11 +59,11 @@ const String invoiceUrl = "$baseUrl/payment-detail-api/";
 const String invoicePaymentRequestUrl = "$baseUrl/lawyer-request-payment-history-api/";
 // const String invoicePaymentRequestUrl10 = "$baseUrl/lawyer-appointment-payment-recieve-api/";
 const String invoicePaymentRequestUrl10 = "$baseUrl/buy-plan-transaction-history-api/";
-const String invoicePaymentRequestUrl =
-    "$baseUrl/lawyer-request-payment-history-api/";
-const String invoicePaymentRequestUrl10 =
-    "$baseUrl/buy-plan-transaction-history-api/";
-// const String  invoiceDirectUrl = "$baseUrl/buy-plan-transaction-history-api/";
+// const String invoicePaymentRequestUrl =
+//     "$baseUrl/lawyer-request-payment-history-api/";
+// const String invoicePaymentRequestUrl10 =
+//     "$baseUrl/buy-plan-transaction-history-api/";
+// const String  invoiceDirectUrl = "$baseUrl/buy-plan -transaction-history-api/";
 const String  invoiceDirectUrl = "$baseUrl/payment-detail-api/";
 const String  invoiceAppointmentTransUrl = "$baseUrl/user-appointment-payment-history-api/";
 

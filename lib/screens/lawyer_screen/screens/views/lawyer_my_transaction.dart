@@ -91,6 +91,6 @@ class LawyerMyTransaction extends GetView<LawyerMyTransactionController> {
           },
         );
       }),
-    );
+    );                  
   }
 }

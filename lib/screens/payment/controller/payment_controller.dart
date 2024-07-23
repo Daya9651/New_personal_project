@@ -5,6 +5,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:likhit/screens/payment/model/direct_transactions_model.dart';
 import '../../../common/const_api.dart';
 import '../../client_screen/services/model/client_payment_request_trans_model.dart';
+import '../../lawyer_screen/screens/models/my_trans_lawyer_model.dart';
 import '../client invoice/models/client_direct_trans_model.dart';
 import '../client invoice/models/client_payment_request_model.dart';
 import '../model/lawyer_payment_request_model.dart';
@@ -44,7 +45,7 @@ class PaymentController extends GetxController{
   }
 
 
-  var getMyTransactionLawyerInvoiceList = ClientPaymentRequestModel().obs;
+  var getMyTransactionLawyerInvoiceList = MyTransInvoiceModel().obs;
   Future getMyTransactionLawyerInvoice({int? paymentID})async {
     isLoading(true);
     try {
@@ -56,7 +57,7 @@ class PaymentController extends GetxController{
           }
       );
       if(invoiceResponse.data['response_code']==200){
-        getMyTransactionLawyerInvoiceList.value = ClientPaymentRequestModel.fromJson(invoiceResponse.data);
+        getMyTransactionLawyerInvoiceList.value = MyTransInvoiceModel.fromJson(invoiceResponse.data);
         isLoading(false);
       }else{
         isLoading(false);

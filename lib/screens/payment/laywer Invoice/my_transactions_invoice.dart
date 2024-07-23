@@ -11,9 +11,7 @@ import 'package:likhit/const/image_strings.dart';
 import 'package:likhit/screens/payment/controller/payment_controller.dart';
 import 'package:likhit/style/text_style.dart';
 import 'package:printing/printing.dart';
-
 import '../../../common/widget/custom_app_bar.dart';
-import '../../../helpers/string_to_date_function.dart';
 import '../../../style/color.dart';
 
 class MyTransactionsInvoice extends StatefulWidget {
@@ -32,14 +30,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
   //   controller.getMyTransactionLawyerInvoice(widget.paymentId);
   // }
 
-  Future<void> generateKotKitchenPdf({
-    String invoiceDate = "1",
-    String invoiceNo="1",
-    String customerName="Daya Kumar",
-    List<int> ?quantities ,
-    bool isKitchenBill = true,
-    bool isA4Size = true,
-  }) async {
+  Future<void> generateKotKitchenPdf() async {
     final fontData = await rootBundle.load('assets/fonts/Roboto-Black.ttf');
     final ttf = pw.Font.ttf(fontData);
     String? storeQr = "";
@@ -153,7 +144,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
             pw.Expanded(
               flex: 1,
               child: pw.Text(
-                '${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.servicesOffered}',
+                '${controller.getMyTransactionLawyerInvoiceList.value.data}',
                 maxLines: 1,
                 softWrap: false,
 
@@ -163,7 +154,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
             pw.Expanded(
               flex: 1,
               child: pw.Text(
-                "${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}",
+                "${controller.getMyTransactionLawyerInvoiceList.value.data}",
                 maxLines: 1,
                 softWrap: false,
                 style: pw.TextStyle(
@@ -175,7 +166,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
             pw.Expanded(
               flex: 1,
               child: pw.Text(
-                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}',
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.totalPayableAmount}',
                 maxLines: 1,
                 softWrap: false,
               ),
@@ -183,13 +174,13 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
             pw.Expanded(
               flex: 1,
               child: pw.Text(
-                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId}',
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentNo}',
               ),
             ),
             pw.Expanded(
               flex: 1,
               child: pw.Text(
-                '${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}',
+                '${controller.getMyTransactionLawyerInvoiceList.value.data?.totalPayableAmount}',
               ),
             ),
           ],
@@ -241,7 +232,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                           font: ttf,
                         ),
                       ),
-                      constText('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId}', fontSize: 12),
+                      constText('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentNo}', fontSize: 12),
                     ]
                 ),
               ],
@@ -385,7 +376,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
     );
 
     final String dir = (await getApplicationDocumentsDirectory()).path;
-    final String path = '$dir/Kot$invoiceNo.pdf';
+    final String path = '$dir/Kot.pdf';
     final file = File(path);
     if (await file.exists()) {
       await file.delete();
@@ -445,7 +436,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                       'Payment Invoice',
                       style: AppTextStyles.kBody15SemiBoldTextStyle,
                     ),
-                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId.toString()}')
+                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentNo.toString()}')
                   ],
                 ).marginOnly(top: 60),
               ],
@@ -502,7 +493,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                       'Invoice Date :',
                     ),
                     Text(
-                        controller.getMyTransactionLawyerInvoiceList.value.data?.client?.createdDate
+                        controller.getMyTransactionLawyerInvoiceList.value.data?.createdDate
                             .toString() ??
                             ""),
                     // Text(formatDateTime(DateTime.parse(
@@ -510,7 +501,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                     //         .toString() ??
                     //         ""))),
                     const Text('Reference# :'),
-                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentId.toString()??""}')
+                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentNo.toString()??""}')
                   ],
                 )
               ],
@@ -555,8 +546,8 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                 //     ],
                 //   ),
                 // ),
-                Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentFor.toString()}'),
-                Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount.toString()}'),
+                Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.lawyer?.servicesOffered.toString()}'),
+                Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.totalPayableAmount.toString()}'),
               ],
             ),
             const Divider(),
@@ -578,7 +569,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                     const Text(
                       'LikhitDe GST',
                     ),
-                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount}')
+                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.totalPayableAmount}')
                   ],
                 ),
                 const Divider(
@@ -588,7 +579,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Gateway Charge'),
-                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount.toString()}'),
+                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.totalPayableAmount.toString()}'),
                   ],
                 ),
                 const Divider(),
@@ -625,7 +616,7 @@ class _InvoicingState extends State<MyTransactionsInvoice> {
                       'Total Amount',
                       style: AppTextStyles.kSmall8SemiBoldTextStyle,
                     ),
-                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.paymentAmount.toString()}',
+                    Text('${controller.getMyTransactionLawyerInvoiceList.value.data?.totalPayableAmount.toString()}',
                         style: AppTextStyles.kSmall8SemiBoldTextStyle),
                   ],
                 ),
